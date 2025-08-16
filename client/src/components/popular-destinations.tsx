@@ -72,10 +72,8 @@ export default function PopularDestinations() {
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Popular Destinations</h2>
-          <p className="text-xl text-white/90 mb-2">Explore the world's most breathtaking locations</p>
           {selectedDestination && (
-            <p className="text-lg text-white/80 font-medium">
+            <p className="text-lg text-white/80 font-medium mb-4">
               Currently viewing: {selectedDestination.name}
             </p>
           )}
