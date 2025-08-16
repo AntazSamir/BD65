@@ -226,7 +226,7 @@ export class MemStorage implements IStorage {
       name: 'Saint Martin Island',
       country: 'Bangladesh',
       description: 'Small coral island with pristine beaches and clear blue waters',
-      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      imageUrl: '/assets/saint-martin-island.jpg',
       rating: '4.6',
       priceFrom: 5200,
     });
