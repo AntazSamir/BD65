@@ -196,6 +196,15 @@ export class MemStorage implements IStorage {
   private async initializeSampleData() {
     // Initialize sample destinations
     await this.createDestination({
+      name: 'Lalbagh Fort',
+      country: 'Bangladesh',
+      description: 'Historic Mughal fort complex in Old Dhaka with beautiful architecture',
+      imageUrl: '/assets/lalbagh-fort.jpg',
+      rating: '4.2',
+      priceFrom: 500,
+    });
+
+    await this.createDestination({
       name: "Cox's Bazar",
       country: 'Bangladesh',
       description: "World's longest natural sandy sea beach",
@@ -265,15 +274,6 @@ export class MemStorage implements IStorage {
       imageUrl: '/assets/paharpur-buddhist-vihara.jpg',
       rating: '4.3',
       priceFrom: 1800,
-    });
-
-    await this.createDestination({
-      name: 'Lalbagh Fort',
-      country: 'Bangladesh',
-      description: 'Historic Mughal fort complex in Old Dhaka with beautiful architecture',
-      imageUrl: '/assets/lalbagh-fort.jpg',
-      rating: '4.2',
-      priceFrom: 500,
     });
 
     // Initialize sample hotels
