@@ -63,40 +63,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
       
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-end">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
-          {destinations.slice(0, 4).map((destination) => (
-            <div 
-              key={destination.id}
-              className={`relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 transform hover:scale-105 ${
-                selectedDestination?.id === destination.id 
-                  ? 'ring-4 ring-white/50 scale-105' 
-                  : 'hover:shadow-2xl'
-              }`}
-              onClick={() => setSelectedDestination(destination)}
-              data-testid={`card-destination-${destination.id}`}
-            >
-              <img 
-                src={destination.imageUrl} 
-                alt={destination.name} 
-                className="w-full h-32 md:h-48 object-cover transition-transform duration-500"
-                data-testid={`img-destination-${destination.id}`}
-              />
-              {/* Overlay with destination name */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end">
-                <div className="p-3 md:p-4 w-full">
-                  <h3 className="text-white font-semibold text-sm md:text-lg text-center" data-testid={`text-destination-name-${destination.id}`}>
-                    {destination.name}
-                  </h3>
-                </div>
-              </div>
-              {/* Selected indicator */}
-              {selectedDestination?.id === destination.id && (
-                <div className="absolute top-2 right-2 w-3 h-3 bg-white rounded-full shadow-lg"></div>
-              )}
-            </div>
-          ))}
-        </div>
+      {/* Empty space for just the background image */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1">
       </div>
     </section>
   );
