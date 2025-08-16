@@ -1,4 +1,4 @@
-import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
+import { Heart, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import type { Flight } from '@shared/schema';
@@ -8,48 +8,41 @@ export default function FlightDeals() {
     queryKey: ['/api/flights'],
   });
 
-  const handleViewDeal = () => {
+  const handleBookNow = () => {
     alert('This would navigate to the booking page in a real application.');
   };
 
-  const getDealTypeStyle = (dealType: string | null) => {
-    if (!dealType) return 'bg-gray-100 text-gray-800';
-    
-    switch (dealType) {
-      case 'Save 25%':
-      case 'Save 20%':
-        return 'bg-green-100 text-green-800';
-      case 'Hot Deal':
-        return 'bg-orange-100 text-orange-800';
-      case 'Limited':
-        return 'bg-blue-100 text-blue-800';
-      case 'Last Seats':
-        return 'bg-red-100 text-red-800';
-      case 'Best Price':
-        return 'bg-purple-100 text-purple-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
+  // Map flights to destination images
+  const getDestinationImage = (destination: string) => {
+    const imageMap: { [key: string]: string } = {
+      "Cox's Bazar": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+      "Sylhet": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+      "Chittagong": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+      "Jessore": "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+    };
+    return imageMap[destination] || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300";
   };
 
   if (isLoading) {
     return (
-      <section id="flights" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="flights" className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Flight Deals</h2>
-            <p className="text-xl text-gray-600">Discover amazing flight offers for your next journey</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Flight Offer Deals</h2>
+            <p className="text-gray-600">Competitive fares for your route-specific searches.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 shadow-lg animate-pulse">
-                <div className="h-8 bg-gray-200 rounded mb-4"></div>
-                <div className="space-y-2 mb-4">
-                  <div className="h-4 bg-gray-200 rounded"></div>
-                  <div className="h-4 bg-gray-200 rounded"></div>
-                  <div className="h-4 bg-gray-200 rounded"></div>
+              <div key={i} className="bg-white rounded-xl shadow-md animate-pulse">
+                <div className="w-full h-48 bg-gray-200 rounded-t-xl"></div>
+                <div className="p-4">
+                  <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-4"></div>
+                  <div className="flex justify-between items-center">
+                    <div className="h-8 bg-gray-200 rounded w-24"></div>
+                    <div className="h-10 bg-gray-200 rounded w-20"></div>
+                  </div>
                 </div>
-                <div className="h-10 bg-gray-200 rounded"></div>
               </div>
             ))}
           </div>
@@ -60,11 +53,11 @@ export default function FlightDeals() {
 
   if (error) {
     return (
-      <section id="flights" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="flights" className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Flight Deals</h2>
-            <p className="text-xl text-red-600">Failed to load flight deals. Please try again later.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Flight Offer Deals</h2>
+            <p className="text-red-600">Failed to load flight deals. Please try again later.</p>
           </div>
         </div>
       </section>
@@ -72,46 +65,83 @@ export default function FlightDeals() {
   }
 
   return (
-    <section id="flights" className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="flights" className="py-16 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Flight Deals</h2>
-          <p className="text-xl text-gray-600">Discover amazing flight offers for your next journey</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Flight Offer Deals</h2>
+          <p className="text-gray-600">Competitive fares for your route-specific searches.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {flights.map((flight) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
+          {flights.slice(0, 4).map((flight) => (
             <div 
               key={flight.id}
-              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
               data-testid={`card-flight-${flight.id}`}
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="text-2xl font-bold text-primary" data-testid={`text-flight-price-${flight.id}`}>৳{flight.price}</div>
-                <div className={`text-sm px-3 py-1 rounded-full ${getDealTypeStyle(flight.dealType)}`} data-testid={`tag-flight-deal-${flight.id}`}>
-                  {flight.dealType || 'Special Deal'}
-                </div>
+              {/* Image Section */}
+              <div className="relative">
+                <img 
+                  src={getDestinationImage(flight.destination)} 
+                  alt={flight.destination}
+                  className="w-full h-48 object-cover"
+                />
+                <button className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors">
+                  <Heart className="w-4 h-4 text-gray-600" />
+                </button>
               </div>
               
-              <div className="space-y-2 mb-4">
+              {/* Content Section */}
+              <div className="p-4">
+                {/* Date and Route Info */}
+                <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                  <span>📅 {flight.departureDate}</span>
+                  <span>📅 {flight.returnDate || '16 Jun 2024'}</span>
+                </div>
+                
+                {/* Route */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-lg font-semibold text-gray-900">{flight.origin}</div>
+                  <ArrowUpDown className="w-4 h-4 text-gray-400" />
+                  <div className="text-lg font-semibold text-gray-900">{flight.destination}</div>
+                </div>
+                
+                {/* Class and Pricing */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="space-y-1">
+                    <div className="text-xs text-gray-500">Business</div>
+                    <div className="text-lg font-bold text-gray-900">৳{flight.price}</div>
+                  </div>
+                  <div className="space-y-1 text-right">
+                    <div className="text-xs text-gray-500">Business</div>
+                    <div className="text-lg font-bold text-gray-900">৳{flight.price}</div>
+                  </div>
+                </div>
+                
+                {/* Seats Left and Book Button */}
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-600" data-testid={`text-flight-origin-${flight.id}`}>{flight.origin}</span>
-                  <img src={logoImage} alt="Flight" className="w-4 h-4" />
-                  <span className="text-gray-600" data-testid={`text-flight-destination-${flight.id}`}>{flight.destination}</span>
+                  <span className="text-xs text-gray-500">18 Seats left</span>
+                  <Button 
+                    onClick={handleBookNow}
+                    className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+                    data-testid={`button-book-flight-${flight.id}`}
+                  >
+                    Book Now
+                  </Button>
                 </div>
-                <div className="text-sm text-gray-500" data-testid={`text-flight-duration-${flight.id}`}>{flight.duration}</div>
-                <div className="text-sm text-gray-500" data-testid={`text-flight-dates-${flight.id}`}>{flight.departureDate}</div>
               </div>
-              
-              <Button 
-                className="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg transition-colors"
-                onClick={handleViewDeal}
-                data-testid={`button-view-flight-${flight.id}`}
-              >
-                View Deal
-              </Button>
             </div>
           ))}
+        </div>
+        
+        {/* Navigation Arrows */}
+        <div className="flex justify-center space-x-4">
+          <button className="p-2 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
+            <ChevronLeft className="w-5 h-5 text-gray-600" />
+          </button>
+          <button className="p-2 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
+            <ChevronRight className="w-5 h-5 text-gray-600" />
+          </button>
         </div>
       </div>
     </section>
