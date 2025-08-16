@@ -14,6 +14,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Navigation />
       <HeroSection />
+      <div className="py-12"></div>
       <PopularDestinations />
       <RecommendedHotels />
       <FlightDeals />
