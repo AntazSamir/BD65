@@ -182,6 +182,60 @@ export class MemStorage implements IStorage {
       priceFrom: 2800,
     });
 
+    await this.createDestination({
+      name: 'Saint Martin Island',
+      country: 'Bangladesh',
+      description: 'Small coral island with pristine beaches and clear blue waters',
+      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.6',
+      priceFrom: 5200,
+    });
+
+    await this.createDestination({
+      name: 'Chittagong Hill Tracts',
+      country: 'Bangladesh',
+      description: 'Mountainous region with tribal culture, waterfalls and scenic beauty',
+      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.8',
+      priceFrom: 3200,
+    });
+
+    await this.createDestination({
+      name: 'Rangamati',
+      country: 'Bangladesh',
+      description: 'Lake district with hanging bridge, tribal museums and boat rides',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.5',
+      priceFrom: 2900,
+    });
+
+    await this.createDestination({
+      name: 'Kuakata Beach',
+      country: 'Bangladesh',
+      description: 'Unique beach where you can see both sunrise and sunset',
+      imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.4',
+      priceFrom: 2500,
+    });
+
+    await this.createDestination({
+      name: 'Paharpur Buddhist Vihara',
+      country: 'Bangladesh',
+      description: 'UNESCO World Heritage archaeological site with ancient Buddhist ruins',
+      imageUrl: 'https://images.unsplash.com/photo-1587595431973-160d0d94add1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.3',
+      priceFrom: 1800,
+    });
+
+    await this.createDestination({
+      name: 'Lalbagh Fort',
+      country: 'Bangladesh',
+      description: 'Historic Mughal fort complex in Old Dhaka with beautiful architecture',
+      imageUrl: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.2',
+      priceFrom: 500,
+    });
+
     // Initialize sample hotels
     await this.createHotel({
       name: 'Sea Palace Hotel',
@@ -201,6 +255,46 @@ export class MemStorage implements IStorage {
       rating: '4.8',
       pricePerNight: 12500,
       amenities: ['Business Center', 'Gym', 'Pool', 'Multiple Restaurants'],
+    });
+
+    await this.createHotel({
+      name: 'Hotel Agrabad',
+      location: 'Chittagong • Port City • Business Hotel',
+      description: 'Modern hotel in the commercial heart of Chittagong',
+      imageUrl: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.3',
+      pricePerNight: 7800,
+      amenities: ['Conference Hall', 'Restaurant', 'Wi-Fi', 'Airport Shuttle'],
+    });
+
+    await this.createHotel({
+      name: 'Hotel Supreme',
+      location: 'Sylhet • City Center • Premium',
+      description: 'Elegant hotel with mountain views and tea garden access',
+      imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.4',
+      pricePerNight: 6500,
+      amenities: ['Garden View', 'Traditional Cuisine', 'Cultural Tours'],
+    });
+
+    await this.createHotel({
+      name: 'Kuakata Guest House',
+      location: 'Kuakata • Beachfront • Eco-Resort',
+      description: 'Sustainable beachfront accommodation with sunrise/sunset views',
+      imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.1',
+      pricePerNight: 4200,
+      amenities: ['Beach Access', 'Fishing Trips', 'Local Cuisine'],
+    });
+
+    await this.createHotel({
+      name: 'Rangamati Water Resort',
+      location: 'Rangamati • Lakeside • Resort',
+      description: 'Floating resort with panoramic lake views and boat facilities',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.5',
+      pricePerNight: 5800,
+      amenities: ['Lake View', 'Boat Rides', 'Tribal Cultural Shows'],
     });
 
     // Initialize sample flights
@@ -226,6 +320,61 @@ export class MemStorage implements IStorage {
       dealType: 'Hot Deal',
     });
 
+    await this.createFlight({
+      origin: 'Dhaka',
+      destination: 'Chittagong',
+      price: 4200,
+      duration: 'Round trip • Direct',
+      stops: 'Direct',
+      departureDate: 'Feb 5 - Feb 15',
+      returnDate: 'Feb 15',
+      dealType: 'Limited Seats',
+    });
+
+    await this.createFlight({
+      origin: 'Chittagong',
+      destination: 'Cox\'s Bazar',
+      price: 2800,
+      duration: 'Round trip • Direct',
+      stops: 'Direct',
+      departureDate: 'Mar 1 - Mar 10',
+      returnDate: 'Mar 10',
+      dealType: 'Best Price',
+    });
+
+    await this.createFlight({
+      origin: 'Dhaka',
+      destination: 'Jessore',
+      price: 3200,
+      duration: 'Round trip • Direct',
+      stops: 'Direct',
+      departureDate: 'Apr 15 - Apr 25',
+      returnDate: 'Apr 25',
+      dealType: 'Early Bird',
+    });
+
+    await this.createFlight({
+      origin: 'Sylhet',
+      destination: 'Cox\'s Bazar',
+      price: 5500,
+      duration: 'Round trip • 1 Stop',
+      stops: '1 Stop in Dhaka',
+      departureDate: 'May 20 - May 30',
+      returnDate: 'May 30',
+      dealType: 'Weekend Special',
+    });
+
+    await this.createFlight({
+      origin: 'Dhaka',
+      destination: 'Barisal',
+      price: 2900,
+      duration: 'Round trip • Direct',
+      stops: 'Direct',
+      departureDate: 'Jun 10 - Jun 20',
+      returnDate: 'Jun 20',
+      dealType: 'Summer Deal',
+    });
+
     // Initialize sample travel packages
     await this.createTravelPackage({
       name: "Cox's Bazar Beach Getaway",
@@ -235,6 +384,36 @@ export class MemStorage implements IStorage {
       rating: '4.8',
       price: 15500,
       includes: ['Round-trip flights included', 'Sea-view hotel accommodation', 'Beach activities & water sports'],
+    });
+
+    await this.createTravelPackage({
+      name: 'Sundarbans Wildlife Safari',
+      description: 'Explore the mangrove forests and spot Royal Bengal Tigers',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      duration: '4 Days',
+      rating: '4.9',
+      price: 18500,
+      includes: ['Professional wildlife guide', 'Boat safari through mangroves', 'Eco-lodge accommodation'],
+    });
+
+    await this.createTravelPackage({
+      name: 'Chittagong Hill Adventure',
+      description: 'Experience tribal culture and pristine hill station beauty',
+      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      duration: '6 Days',
+      rating: '4.6',
+      price: 16200,
+      includes: ['Tribal village visits', 'Waterfall trekking', 'Mountain resort accommodation'],
+    });
+
+    await this.createTravelPackage({
+      name: 'Rangamati Lake District Tour',
+      description: 'Discover the lake district with hanging bridge and cultural experiences',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      duration: '3 Days',
+      rating: '4.4',
+      price: 12800,
+      includes: ['Lake boat rides', 'Tribal museum visits', 'Traditional handicraft shopping'],
     });
     
     console.log('Storage initialized successfully with sample data');
