@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
-import { Plane, User, Menu, X } from 'lucide-react';
+import { User, Menu, X } from 'lucide-react';
+import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,9 +11,16 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center">
-            <div className="text-2xl font-bold text-primary">
-              <Plane className="inline w-6 h-6 text-accent mr-2" />
-              Bangladesh Explorer
+            <div className="flex items-center">
+              <img 
+                src={logoImage} 
+                alt="Bangladesh Explorer Logo" 
+                className="w-10 h-10 mr-3"
+                data-testid="logo-image"
+              />
+              <div className="text-2xl font-bold text-primary">
+                Bangladesh Explorer
+              </div>
             </div>
           </Link>
           
