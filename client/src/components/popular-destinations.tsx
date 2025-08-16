@@ -52,7 +52,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   return (
     <section 
       id="destinations" 
-      className="relative py-24 min-h-[600px] bg-gray-900"
+      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -63,10 +63,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
       
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-end">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
           {destinations.slice(0, 4).map((destination) => (
             <div 
               key={destination.id}
@@ -81,7 +79,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               <img 
                 src={destination.imageUrl} 
                 alt={destination.name} 
-                className="w-full h-40 md:h-64 object-cover transition-transform duration-500"
+                className="w-full h-48 md:h-80 object-cover transition-transform duration-500"
                 data-testid={`img-destination-${destination.id}`}
               />
               {/* Overlay with destination name */}
