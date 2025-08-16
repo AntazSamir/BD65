@@ -1,5 +1,5 @@
 import { 
-  type User, type InsertUser,
+  type User, type InsertUser, type UpdateUser, type LoginCredentials,
   type Destination, type InsertDestination,
   type Hotel, type InsertHotel,
   type Flight, type InsertFlight,
@@ -13,8 +13,11 @@ import { randomUUID } from "crypto";
 export interface IStorage {
   // User operations
   getUser(id: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  updateUser(id: string, user: UpdateUser): Promise<User | undefined>;
+  validateUser(email: string, password: string): Promise<User | undefined>;
   
   // Destination operations
   getDestinations(): Promise<Destination[]>;
@@ -60,6 +63,12 @@ export class MemStorage implements IStorage {
     return this.users.get(id);
   }
 
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(
+      (user) => user.email === email,
+    );
+  }
+
   async getUserByUsername(username: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find(
       (user) => user.username === username,
@@ -68,9 +77,40 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
+    const now = new Date().toISOString();
+    const user: User = { 
+      ...insertUser, 
+      id,
+      phone: insertUser.phone || null,
+      dateOfBirth: insertUser.dateOfBirth || null,
+      nationality: insertUser.nationality || null,
+      profileImageUrl: insertUser.profileImageUrl || null,
+      createdAt: now,
+      updatedAt: now
+    };
     this.users.set(id, user);
     return user;
+  }
+
+  async updateUser(id: string, updateData: UpdateUser): Promise<User | undefined> {
+    const user = this.users.get(id);
+    if (!user) return undefined;
+    
+    const updatedUser: User = {
+      ...user,
+      ...updateData,
+      updatedAt: new Date().toISOString()
+    };
+    this.users.set(id, updatedUser);
+    return updatedUser;
+  }
+
+  async validateUser(email: string, password: string): Promise<User | undefined> {
+    const user = await this.getUserByEmail(email);
+    if (user && user.password === password) {
+      return user;
+    }
+    return undefined;
   }
   
   // Destination operations

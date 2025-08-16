@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
-import { User, Menu, X } from 'lucide-react';
+import { User, Menu, X, LogOut, UserIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useAuth } from '@/hooks/useAuth';
 import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isAuthenticated, signOut, isSigningOut } = useAuth();
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -33,9 +38,55 @@ export default function Navigation() {
           </div>
           
           <div className="flex items-center space-x-4">
-            <button className="text-neutral hover:text-primary transition-colors">
-              <User className="w-5 h-5" />
-            </button>
+            {isAuthenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={user?.profileImageUrl || ""} alt={user?.firstName} />
+                      <AvatarFallback>
+                        {user?.firstName?.[0]}{user?.lastName?.[0]}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <div className="flex items-center justify-start gap-2 p-2">
+                    <div className="flex flex-col space-y-1 leading-none">
+                      <p className="font-medium">{user?.firstName} {user?.lastName}</p>
+                      <p className="w-[200px] truncate text-sm text-muted-foreground">
+                        {user?.email}
+                      </p>
+                    </div>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile" className="cursor-pointer">
+                      <UserIcon className="mr-2 h-4 w-4" />
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem 
+                    className="cursor-pointer"
+                    onClick={() => signOut()}
+                    disabled={isSigningOut}
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    {isSigningOut ? "Signing out..." : "Sign out"}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="hidden md:flex items-center space-x-2">
+                <Button variant="ghost" asChild>
+                  <Link href="/sign-in">Sign In</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/sign-up">Sign Up</Link>
+                </Button>
+              </div>
+            )}
             <button 
               className="md:hidden text-neutral"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -54,6 +105,24 @@ export default function Navigation() {
               <a href="#hotels" className="text-neutral hover:text-primary transition-colors">Hotels</a>
               <a href="#flights" className="text-neutral hover:text-primary transition-colors">Flights</a>
               <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
+              
+              {isAuthenticated ? (
+                <>
+                  <Link href="/profile" className="text-neutral hover:text-primary transition-colors">Profile</Link>
+                  <button 
+                    onClick={() => signOut()}
+                    disabled={isSigningOut}
+                    className="text-left text-neutral hover:text-primary transition-colors"
+                  >
+                    {isSigningOut ? "Signing out..." : "Sign out"}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/sign-in" className="text-neutral hover:text-primary transition-colors">Sign In</Link>
+                  <Link href="/sign-up" className="text-neutral hover:text-primary transition-colors">Sign Up</Link>
+                </>
+              )}
             </div>
           </div>
         )}

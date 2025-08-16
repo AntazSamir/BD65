@@ -1,7 +1,11 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { getSession, isAuthenticated } from "./auth";
 import { 
+  insertUserSchema,
+  loginSchema,
+  updateUserSchema,
   insertDestinationSchema,
   insertHotelSchema,
   insertFlightSchema,
@@ -10,6 +14,104 @@ import {
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Session middleware
+  app.use(getSession());
+
+  // Auth routes
+  app.post("/api/auth/signup", async (req, res) => {
+    try {
+      const validatedData = insertUserSchema.parse(req.body);
+      
+      // Check if user already exists
+      const existingUser = await storage.getUserByEmail(validatedData.email);
+      if (existingUser) {
+        return res.status(400).json({ message: "User already exists with this email" });
+      }
+
+      const existingUsername = await storage.getUserByUsername(validatedData.username);
+      if (existingUsername) {
+        return res.status(400).json({ message: "Username already taken" });
+      }
+
+      const user = await storage.createUser(validatedData);
+      req.session.userId = user.id;
+      req.session.user = user;
+      
+      const { password, ...userWithoutPassword } = user;
+      res.status(201).json(userWithoutPassword);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create user" });
+    }
+  });
+
+  app.post("/api/auth/signin", async (req, res) => {
+    try {
+      const validatedData = loginSchema.parse(req.body);
+      const user = await storage.validateUser(validatedData.email, validatedData.password);
+      
+      if (!user) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+
+      req.session.userId = user.id;
+      req.session.user = user;
+      
+      const { password, ...userWithoutPassword } = user;
+      res.json(userWithoutPassword);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to sign in" });
+    }
+  });
+
+  app.post("/api/auth/signout", (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ message: "Failed to sign out" });
+      }
+      res.json({ message: "Signed out successfully" });
+    });
+  });
+
+  app.get("/api/auth/me", isAuthenticated, async (req, res) => {
+    try {
+      const user = await storage.getUser(req.session.userId!);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const { password, ...userWithoutPassword } = user;
+      res.json(userWithoutPassword);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch user" });
+    }
+  });
+
+  // Profile routes
+  app.put("/api/profile", isAuthenticated, async (req, res) => {
+    try {
+      const validatedData = updateUserSchema.parse(req.body);
+      const user = await storage.updateUser(req.session.userId!, validatedData);
+      
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      req.session.user = user;
+      const { password, ...userWithoutPassword } = user;
+      res.json(userWithoutPassword);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to update profile" });
+    }
+  });
+
   // Destinations routes
   app.get("/api/destinations", async (req, res) => {
     try {
