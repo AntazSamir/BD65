@@ -1,5 +1,6 @@
-import { Star } from 'lucide-react';
+import { Star, ArrowRight } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'wouter';
 import type { Destination } from '@shared/schema';
 
 export default function PopularDestinations() {
@@ -54,10 +55,18 @@ export default function PopularDestinations() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Popular Destinations</h2>
           <p className="text-xl text-gray-600">Explore the world's most breathtaking locations</p>
+          <div className="mt-6">
+            <Link href="/destinations">
+              <button className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium">
+                View All Destinations
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </button>
+            </Link>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {destinations.map((destination) => (
+          {destinations.slice(0, 4).map((destination) => (
             <div 
               key={destination.id}
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"

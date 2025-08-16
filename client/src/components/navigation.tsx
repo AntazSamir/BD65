@@ -17,7 +17,7 @@ export default function Navigation() {
           </Link>
           
           <div className="hidden md:flex space-x-8">
-            <a href="#destinations" className="text-neutral hover:text-primary transition-colors">Destinations</a>
+            <Link href="/destinations" className="text-neutral hover:text-primary transition-colors">Destinations</Link>
             <a href="#hotels" className="text-neutral hover:text-primary transition-colors">Hotels</a>
             <a href="#flights" className="text-neutral hover:text-primary transition-colors">Flights</a>
             <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
@@ -40,7 +40,7 @@ export default function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4">
             <div className="flex flex-col space-y-4">
-              <a href="#destinations" className="text-neutral hover:text-primary transition-colors">Destinations</a>
+              <Link href="/destinations" className="text-neutral hover:text-primary transition-colors">Destinations</Link>
               <a href="#hotels" className="text-neutral hover:text-primary transition-colors">Hotels</a>
               <a href="#flights" className="text-neutral hover:text-primary transition-colors">Flights</a>
               <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
