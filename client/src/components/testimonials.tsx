@@ -36,8 +36,11 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div 
               key={testimonial.id} 
-              className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+              className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
               data-testid={`card-testimonial-${testimonial.id}`}
+              style={{
+                animationDelay: `${index * 0.2}s`
+              }}
             >
               {/* Quote icon */}
               <div className="absolute -top-4 left-8">
