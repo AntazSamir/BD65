@@ -1,4 +1,4 @@
-import { Plane } from 'lucide-react';
+import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import type { Flight } from '@shared/schema';
@@ -96,7 +96,7 @@ export default function FlightDeals() {
               <div className="space-y-2 mb-4">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-600" data-testid={`text-flight-origin-${flight.id}`}>{flight.origin}</span>
-                  <Plane className="w-4 h-4 text-gray-400" />
+                  <img src={logoImage} alt="Flight" className="w-4 h-4" />
                   <span className="text-gray-600" data-testid={`text-flight-destination-${flight.id}`}>{flight.destination}</span>
                 </div>
                 <div className="text-sm text-gray-500" data-testid={`text-flight-duration-${flight.id}`}>{flight.duration}</div>

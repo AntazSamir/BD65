@@ -1,4 +1,5 @@
 import { Star, Plane, Hotel, Utensils, MapPin, Train, Camera, Mountain, TreePine, Tent } from 'lucide-react';
+import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import type { TravelPackage } from '@shared/schema';
@@ -13,7 +14,7 @@ export default function TravelPackages() {
   };
 
   const getIncludeIcon = (include: string) => {
-    if (include.includes('flight')) return Plane;
+    if (include.includes('flight')) return () => <img src={logoImage} alt="Flight" className="w-4 h-4" />;
     if (include.includes('resort') || include.includes('hotel')) return Hotel;
     if (include.includes('meal') || include.includes('drink')) return Utensils;
     if (include.includes('countries') || include.includes('cities')) return MapPin;

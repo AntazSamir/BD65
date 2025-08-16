@@ -1,4 +1,5 @@
-import { Plane, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 
 export default function Footer() {
   return (
@@ -6,8 +7,12 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <div className="text-2xl font-bold mb-4">
-              <Plane className="inline w-6 h-6 text-accent mr-2" />
+            <div className="flex items-center text-2xl font-bold mb-4">
+              <img 
+                src={logoImage} 
+                alt="Bangladesh Explorer Logo" 
+                className="w-8 h-8 mr-3"
+              />
               Bangladesh Explorer
             </div>
             <p className="text-gray-300 mb-4">
@@ -61,7 +66,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-          <p>&copy; 2024 TravelHub. All rights reserved.</p>
+          <p>&copy; 2024 Bangladesh Explorer. All rights reserved.</p>
         </div>
       </div>
     </footer>
