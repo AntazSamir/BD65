@@ -37,44 +37,82 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Illustrations */}
-          <div className="relative">
-            {/* Main illustration placeholder */}
-            <div className="relative bg-white rounded-xl p-8 shadow-lg mb-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Users className="w-8 h-8 text-blue-600" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-gray-900">+01 235 568</div>
-                  <div className="text-sm text-gray-600">Happy Customers</div>
+          <div className="relative h-96">
+            {/* Main family/customer circle image */}
+            <div className="absolute top-4 left-8">
+              <div className="w-48 h-48 rounded-full overflow-hidden shadow-lg">
+                <img 
+                  src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" 
+                  alt="Happy family travelers"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Customer Service bubble */}
+              <div className="absolute -top-2 -right-4 bg-white rounded-2xl px-4 py-2 shadow-lg">
+                <div className="text-xs text-orange-500 font-medium">Customer Service</div>
+                <div className="text-lg font-bold text-gray-900">+01 235 368</div>
+              </div>
+            </div>
+
+            {/* Customer support circular image */}
+            <div className="absolute top-16 right-4">
+              <div className="w-24 h-24 rounded-full overflow-hidden shadow-md bg-teal-100 p-2">
+                <div className="w-full h-full rounded-full overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200" 
+                    alt="Customer support"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
-            
-            {/* Flight Tickets illustration */}
-            <div className="absolute -left-8 top-20 bg-white rounded-lg p-4 shadow-md">
+
+            {/* Flight Tickets bubble */}
+            <div className="absolute bottom-32 left-4 bg-white rounded-2xl px-4 py-2 shadow-md">
               <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 bg-green-100 rounded flex items-center justify-center">
-                  <span className="text-xs">✈️</span>
+                <div className="w-8 h-8 rounded-full overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
+                    alt="Flight"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <span className="text-sm font-medium">Flight Tickets</span>
+                <span className="text-sm font-medium text-gray-900">Flight Tickets</span>
               </div>
             </div>
-            
-            {/* Top Deals illustration */}
-            <div className="absolute -right-4 top-12 bg-white rounded-lg p-3 shadow-md">
-              <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 bg-purple-100 rounded flex items-center justify-center">
-                  <span className="text-xs">🏷️</span>
-                </div>
-                <span className="text-sm font-medium">Top Deals</span>
-              </div>
+
+            {/* Tour Guide bubble */}
+            <div className="absolute bottom-24 right-8 bg-white rounded-2xl px-4 py-2 shadow-md">
+              <span className="text-sm font-medium text-gray-900">Tour Guide</span>
             </div>
-            
-            {/* Luggage illustration */}
-            <div className="w-32 h-24 bg-gradient-to-br from-orange-200 to-orange-300 rounded-lg mx-auto mt-8 relative">
-              <div className="absolute inset-2 bg-orange-400 rounded-md"></div>
-              <div className="absolute top-1 right-1 w-4 h-2 bg-green-400 rounded-full"></div>
+
+            {/* Luggage with plant illustration */}
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
+              <div className="relative">
+                {/* Luggage base */}
+                <div className="w-28 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg shadow-lg relative">
+                  {/* Luggage handle */}
+                  <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-gray-600 rounded-full"></div>
+                  {/* Luggage corners */}
+                  <div className="absolute inset-1 border-2 border-orange-700 rounded-md"></div>
+                </div>
+                
+                {/* Hat on luggage */}
+                <div className="absolute -top-3 right-2">
+                  <div className="w-8 h-6 bg-gradient-to-br from-amber-200 to-amber-400 rounded-full shadow-sm"></div>
+                  <div className="absolute top-1 left-1/2 transform -translate-x-1/2 w-6 h-4 bg-amber-300 rounded-full"></div>
+                </div>
+                
+                {/* Plant decoration */}
+                <div className="absolute -top-4 -left-4">
+                  <div className="w-12 h-16 relative">
+                    {/* Plant pot/leaves */}
+                    <div className="absolute bottom-0 w-3 h-8 bg-green-500 rounded-full transform rotate-12"></div>
+                    <div className="absolute bottom-0 left-2 w-3 h-10 bg-green-400 rounded-full transform -rotate-12"></div>
+                    <div className="absolute bottom-0 left-4 w-3 h-6 bg-green-600 rounded-full transform rotate-45"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
