@@ -52,7 +52,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   return (
     <section 
       id="destinations" 
-      className="relative py-16 min-h-[600px] bg-gray-900 flex flex-col"
+      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
