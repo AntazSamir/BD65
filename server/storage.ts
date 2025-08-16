@@ -208,7 +208,7 @@ export class MemStorage implements IStorage {
       name: 'Sundarbans',
       country: 'Bangladesh',
       description: 'Largest mangrove forest and Royal Bengal Tiger habitat',
-      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      imageUrl: '/assets/sundarbans.jpg',
       rating: '4.9',
       priceFrom: 4500,
     });
