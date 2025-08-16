@@ -154,9 +154,90 @@ export class MemStorage implements IStorage {
   }
   
   private async initializeSampleData() {
-    // Skip initialization for now to avoid type issues
-    // The API endpoints work properly even without sample data
-    console.log('Storage initialized successfully');
+    // Initialize sample destinations
+    await this.createDestination({
+      name: "Cox's Bazar",
+      country: 'Bangladesh',
+      description: "World's longest natural sandy sea beach",
+      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.8',
+      priceFrom: 3500,
+    });
+    
+    await this.createDestination({
+      name: 'Sundarbans',
+      country: 'Bangladesh',
+      description: 'Largest mangrove forest and Royal Bengal Tiger habitat',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.9',
+      priceFrom: 4500,
+    });
+    
+    await this.createDestination({
+      name: 'Sylhet Tea Gardens',
+      country: 'Bangladesh',
+      description: 'Rolling green hills covered with tea plantations',
+      imageUrl: 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.7',
+      priceFrom: 2800,
+    });
+
+    // Initialize sample hotels
+    await this.createHotel({
+      name: 'Sea Palace Hotel',
+      location: "Cox's Bazar • Sea View • Premium Resort",
+      description: 'Luxury beachfront hotel overlooking the Bay of Bengal',
+      imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.7',
+      pricePerNight: 8500,
+      amenities: ['Sea View', 'Pool', 'Spa', 'Restaurant'],
+    });
+    
+    await this.createHotel({
+      name: 'Pan Pacific Sonargaon',
+      location: 'Dhaka • Business District • 5-Star',
+      description: 'Premier luxury hotel in the heart of Dhaka',
+      imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.8',
+      pricePerNight: 12500,
+      amenities: ['Business Center', 'Gym', 'Pool', 'Multiple Restaurants'],
+    });
+
+    // Initialize sample flights
+    await this.createFlight({
+      origin: 'Dhaka',
+      destination: "Cox's Bazar",
+      price: 4500,
+      duration: 'Round trip • Direct',
+      stops: 'Direct',
+      departureDate: 'Dec 15 - Dec 22',
+      returnDate: 'Dec 22',
+      dealType: 'Save 20%',
+    });
+    
+    await this.createFlight({
+      origin: 'Dhaka',
+      destination: 'Sylhet',
+      price: 3800,
+      duration: 'Round trip • Direct',
+      stops: 'Direct',
+      departureDate: 'Jan 10 - Jan 20',
+      returnDate: 'Jan 20',
+      dealType: 'Hot Deal',
+    });
+
+    // Initialize sample travel packages
+    await this.createTravelPackage({
+      name: "Cox's Bazar Beach Getaway",
+      description: 'Relax at the world\'s longest natural beach with sunset views',
+      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      duration: '5 Days',
+      rating: '4.8',
+      price: 15500,
+      includes: ['Round-trip flights included', 'Sea-view hotel accommodation', 'Beach activities & water sports'],
+    });
+    
+    console.log('Storage initialized successfully with sample data');
   }
 }
 
