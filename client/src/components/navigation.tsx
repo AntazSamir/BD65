@@ -12,7 +12,7 @@ export default function Navigation() {
           <Link href="/" className="flex items-center">
             <div className="text-2xl font-bold text-primary">
               <Plane className="inline w-6 h-6 text-accent mr-2" />
-              TravelHub
+              Bangladesh Explorer
             </div>
           </Link>
           

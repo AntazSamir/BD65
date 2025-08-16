@@ -37,7 +37,7 @@ export default function RecommendedHotels() {
                 <p className="text-gray-600 mb-4">{hotel.location}</p>
                 <div className="flex items-center justify-between">
                   <div className="text-2xl font-bold text-primary">
-                    ${hotel.pricePerNight}
+                    ৳{hotel.pricePerNight}
                     <span className="text-sm text-gray-600 font-normal">/night</span>
                   </div>
                   <Button 

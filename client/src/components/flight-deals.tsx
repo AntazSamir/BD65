@@ -37,7 +37,7 @@ export default function FlightDeals() {
               className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-4">
-                <div className="text-2xl font-bold text-primary">${flight.price}</div>
+                <div className="text-2xl font-bold text-primary">৳{flight.price}</div>
                 <div className={`text-sm px-3 py-1 rounded-full ${getDealTypeStyle(flight.dealType)}`}>
                   {flight.dealType}
                 </div>

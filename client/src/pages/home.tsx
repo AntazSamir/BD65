@@ -6,6 +6,7 @@ import FlightDeals from '../components/flight-deals';
 import WhyChooseUs from '../components/why-choose-us';
 import TravelPackages from '../components/travel-packages';
 import Testimonials from '../components/testimonials';
+import FAQ from '../components/faq';
 import Newsletter from '../components/newsletter';
 import Footer from '../components/footer';
 
@@ -20,6 +21,7 @@ export default function Home() {
       <WhyChooseUs />
       <TravelPackages />
       <Testimonials />
+      <FAQ />
       <Newsletter />
       <Footer />
     </div>

@@ -27,11 +27,11 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Best Destinations for <br />
-              <span className="text-accent">Your Next Adventure</span>
+              Discover Beautiful <br />
+              <span className="text-accent">Bangladesh</span>
             </h1>
             <p className="text-xl mb-8 opacity-90">
-              Discover amazing places around the world with our curated travel experiences and unbeatable deals.
+              Explore Bangladesh's stunning natural beauty, rich culture, and heritage sites with our authentic travel experiences.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -98,7 +98,7 @@ export default function HeroSection() {
                     <MapPin className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                     <Input 
                       type="text" 
-                      placeholder="New York" 
+                      placeholder="Dhaka" 
                       className="pl-10 focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
                   </div>
@@ -109,7 +109,7 @@ export default function HeroSection() {
                     <MapPin className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                     <Input 
                       type="text" 
-                      placeholder="Paris" 
+                      placeholder="Cox's Bazar" 
                       className="pl-10 focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
                   </div>

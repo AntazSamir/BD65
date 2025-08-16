@@ -64,7 +64,7 @@ export default function TravelPackages() {
                 
                 <div className="flex items-center justify-between">
                   <div className="text-2xl font-bold text-primary">
-                    ${pkg.price}
+                    ৳{pkg.price}
                     <span className="text-sm text-gray-600 font-normal">/person</span>
                   </div>
                   <Button 

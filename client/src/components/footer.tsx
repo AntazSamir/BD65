@@ -8,10 +8,10 @@ export default function Footer() {
           <div>
             <div className="text-2xl font-bold mb-4">
               <Plane className="inline w-6 h-6 text-accent mr-2" />
-              TravelHub
+              Bangladesh Explorer
             </div>
             <p className="text-gray-300 mb-4">
-              Your trusted partner for unforgettable travel experiences around the world.
+              Your trusted partner for discovering Bangladesh's hidden gems and authentic travel experiences.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-300 hover:text-accent transition-colors">

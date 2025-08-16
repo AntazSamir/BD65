@@ -12,7 +12,7 @@ export default function Newsletter() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Never Miss a Deal</h2>
         <p className="text-xl mb-8 opacity-90">
-          Subscribe to our newsletter and get exclusive travel offers delivered to your inbox
+          Subscribe to our newsletter and get exclusive Bangladesh travel deals and local insights delivered to your inbox
         </p>
         
         <form className="flex flex-col md:flex-row gap-4 max-w-md mx-auto" onSubmit={handleSubmit}>

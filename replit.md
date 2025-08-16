@@ -1,12 +1,24 @@
-# TravelHub - Full-Stack Travel Booking Platform
+# Bangladesh Explorer - Full-Stack Travel Booking Platform
 
 ## Overview
 
-TravelHub is a modern full-stack travel booking platform built with React, TypeScript, and Express.js. The application provides users with a comprehensive travel planning experience, allowing them to browse destinations, hotels, flights, and travel packages. The platform features a responsive design with a modern UI built using shadcn/ui components and Tailwind CSS.
+Bangladesh Explorer is a modern full-stack travel booking platform built with React, TypeScript, and Express.js, specifically focused on Bangladesh tourism. The application provides users with a comprehensive travel planning experience, allowing them to browse Bangladesh's destinations, hotels, domestic flights, and travel packages. The platform features a responsive design with a modern UI built using shadcn/ui components and Tailwind CSS, showcasing authentic Bangladesh tourist spots and experiences.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Project Focus: Bangladesh tourism and travel destinations.
+
+## Recent Changes
+
+- Updated all travel data to showcase authentic Bangladesh tourist destinations including Cox's Bazar, Sundarbans, Sylhet Tea Gardens, Saint Martin Island, Bandarban Hills, and Paharpur Buddhist Vihara
+- Changed pricing format from USD ($) to Bangladeshi Taka (৳) throughout the application
+- Updated branding from "TravelHub" to "Bangladesh Explorer" 
+- Modified flight routes to show domestic Bangladesh destinations (Dhaka, Cox's Bazar, Sylhet, Chittagong, Jessore)
+- Updated hotel listings to feature authentic Bangladesh accommodations
+- Created Bangladesh-specific travel packages and testimonials
+- Added comprehensive FAQ section about Bangladesh travel
+- Updated hero section messaging to focus on discovering Bangladesh
 
 ## System Architecture
 

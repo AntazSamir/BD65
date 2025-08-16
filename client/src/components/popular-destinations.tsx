@@ -29,7 +29,7 @@ export default function PopularDestinations() {
                     <Star className="w-4 h-4 text-yellow-400 mr-1" />
                     <span className="text-sm font-medium">{destination.rating}</span>
                   </div>
-                  <div className="text-primary font-semibold">From ${destination.priceFrom}</div>
+                  <div className="text-primary font-semibold">From ৳{destination.priceFrom}</div>
                 </div>
               </div>
             </div>
