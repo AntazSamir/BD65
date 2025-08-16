@@ -15,7 +15,7 @@ export const destinations = pgTable("destinations", {
   country: text("country").notNull(),
   description: text("description").notNull(),
   imageUrl: text("image_url").notNull(),
-  rating: decimal("rating", { precision: 2, scale: 1 }).notNull(),
+  rating: text("rating").notNull(),
   priceFrom: integer("price_from").notNull(),
 });
 
@@ -25,9 +25,9 @@ export const hotels = pgTable("hotels", {
   location: text("location").notNull(),
   description: text("description").notNull(),
   imageUrl: text("image_url").notNull(),
-  rating: decimal("rating", { precision: 2, scale: 1 }).notNull(),
+  rating: text("rating").notNull(),
   pricePerNight: integer("price_per_night").notNull(),
-  amenities: text("amenities").array(),
+  amenities: text("amenities").array().notNull().default([]),
 });
 
 export const flights = pgTable("flights", {
@@ -35,11 +35,11 @@ export const flights = pgTable("flights", {
   origin: text("origin").notNull(),
   destination: text("destination").notNull(),
   price: integer("price").notNull(),
-  duration: text("duration"),
-  stops: text("stops"),
-  departureDate: text("departure_date"),
-  returnDate: text("return_date"),
-  dealType: text("deal_type"),
+  duration: text("duration").notNull().default(''),
+  stops: text("stops").notNull().default(''),
+  departureDate: text("departure_date").notNull().default(''),
+  returnDate: text("return_date").notNull().default(''),
+  dealType: text("deal_type").notNull().default(''),
 });
 
 export const travelPackages = pgTable("travel_packages", {
@@ -48,9 +48,9 @@ export const travelPackages = pgTable("travel_packages", {
   description: text("description").notNull(),
   imageUrl: text("image_url").notNull(),
   duration: text("duration").notNull(),
-  rating: decimal("rating", { precision: 2, scale: 1 }).notNull(),
+  rating: text("rating").notNull(),
   price: integer("price").notNull(),
-  includes: text("includes").array(),
+  includes: text("includes").array().notNull().default([]),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({
@@ -75,6 +75,10 @@ export const insertTravelPackageSchema = createInsertSchema(travelPackages).omit
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
+export type InsertDestination = z.infer<typeof insertDestinationSchema>;
+export type InsertHotel = z.infer<typeof insertHotelSchema>;
+export type InsertFlight = z.infer<typeof insertFlightSchema>;
+export type InsertTravelPackage = z.infer<typeof insertTravelPackageSchema>;
 export type User = typeof users.$inferSelect;
 export type Destination = typeof destinations.$inferSelect;
 export type Hotel = typeof hotels.$inferSelect;

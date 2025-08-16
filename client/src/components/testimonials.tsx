@@ -12,7 +12,7 @@ export default function Testimonials() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white rounded-2xl p-8 shadow-lg">
+            <div key={testimonial.id} className="bg-white rounded-2xl p-8 shadow-lg" data-testid={`card-testimonial-${testimonial.id}`}>
               <div className="flex items-center mb-4">
                 <div className="flex text-yellow-400">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -20,16 +20,17 @@ export default function Testimonials() {
                   ))}
                 </div>
               </div>
-              <p className="text-gray-600 mb-6">"{testimonial.comment}"</p>
+              <p className="text-gray-600 mb-6" data-testid={`text-testimonial-comment-${testimonial.id}`}>"{testimonial.comment}"</p>
               <div className="flex items-center">
                 <img 
                   src={testimonial.avatar} 
                   alt={testimonial.name} 
                   className="w-12 h-12 rounded-full object-cover mr-4"
+                  data-testid={`img-testimonial-avatar-${testimonial.id}`}
                 />
                 <div>
-                  <div className="font-semibold">{testimonial.name}</div>
-                  <div className="text-sm text-gray-500">{testimonial.location}</div>
+                  <div className="font-semibold" data-testid={`text-testimonial-name-${testimonial.id}`}>{testimonial.name}</div>
+                  <div className="text-sm text-gray-500" data-testid={`text-testimonial-location-${testimonial.id}`}>{testimonial.location}</div>
                 </div>
               </div>
             </div>

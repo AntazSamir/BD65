@@ -1,11 +1,57 @@
 import { Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { hotels } from '../data/travel-data';
+import { useQuery } from '@tanstack/react-query';
+import type { Hotel } from '@shared/schema';
 
 export default function RecommendedHotels() {
+  const { data: hotels = [], isLoading, error } = useQuery<Hotel[]>({
+    queryKey: ['/api/hotels'],
+  });
+
   const handleBooking = () => {
     alert('This would navigate to the booking page in a real application.');
   };
+
+  if (isLoading) {
+    return (
+      <section id="hotels" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Recommended Hotels</h2>
+            <p className="text-xl text-gray-600">Stay at the world's finest accommodations</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse">
+                <div className="w-full h-56 bg-gray-200"></div>
+                <div className="p-6">
+                  <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-4"></div>
+                  <div className="flex items-center justify-between">
+                    <div className="h-8 bg-gray-200 rounded w-24"></div>
+                    <div className="h-10 bg-gray-200 rounded w-20"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="hotels" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Recommended Hotels</h2>
+            <p className="text-xl text-red-600">Failed to load hotels. Please try again later.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="hotels" className="py-16">
@@ -20,29 +66,32 @@ export default function RecommendedHotels() {
             <div 
               key={hotel.id}
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              data-testid={`card-hotel-${hotel.id}`}
             >
               <img 
                 src={hotel.imageUrl} 
                 alt={hotel.name} 
                 className="w-full h-56 object-cover"
+                data-testid={`img-hotel-${hotel.id}`}
               />
               <div className="p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-semibold">{hotel.name}</h3>
+                  <h3 className="text-xl font-semibold" data-testid={`text-hotel-name-${hotel.id}`}>{hotel.name}</h3>
                   <div className="flex items-center">
                     <Star className="w-4 h-4 text-yellow-400 mr-1" />
-                    <span className="text-sm font-medium">{hotel.rating}</span>
+                    <span className="text-sm font-medium" data-testid={`text-hotel-rating-${hotel.id}`}>{hotel.rating}</span>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-4">{hotel.location}</p>
+                <p className="text-gray-600 mb-4" data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</p>
                 <div className="flex items-center justify-between">
-                  <div className="text-2xl font-bold text-primary">
+                  <div className="text-2xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
                     ৳{hotel.pricePerNight}
                     <span className="text-sm text-gray-600 font-normal">/night</span>
                   </div>
                   <Button 
                     className="bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg transition-colors"
                     onClick={handleBooking}
+                    data-testid={`button-book-hotel-${hotel.id}`}
                   >
                     Book Now
                   </Button>
