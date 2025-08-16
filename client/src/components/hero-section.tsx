@@ -96,22 +96,22 @@ export default function HeroSection() {
                 <div>
                   <label className="block text-sm font-medium text-white mb-2">From</label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+                    <MapPin className="absolute left-3 top-3 w-4 h-4 text-white text-opacity-70" />
                     <Input 
                       type="text" 
                       placeholder="Dhaka" 
-                      className="pl-10 focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="pl-10 bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-white mb-2">To</label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+                    <MapPin className="absolute left-3 top-3 w-4 h-4 text-white text-opacity-70" />
                     <Input 
                       type="text" 
                       placeholder="Cox's Bazar" 
-                      className="pl-10 focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="pl-10 bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -122,14 +122,14 @@ export default function HeroSection() {
                   <label className="block text-sm font-medium text-white mb-2">Departure</label>
                   <Input 
                     type="date" 
-                    className="focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-white mb-2">Return</label>
                   <Input 
                     type="date" 
-                    className="focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function HeroSection() {
               <div>
                 <label className="block text-sm font-medium text-white mb-2">Passengers</label>
                 <Select>
-                  <SelectTrigger className="focus:ring-2 focus:ring-primary focus:border-transparent">
+                  <SelectTrigger className="bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white focus:ring-2 focus:ring-primary focus:border-transparent">
                     <SelectValue placeholder="1 Adult" />
                   </SelectTrigger>
                   <SelectContent>
