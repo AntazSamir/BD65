@@ -1,22 +1,15 @@
-import { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'wouter';
 import type { Destination } from '@shared/schema';
 
-export default function PopularDestinations() {
+interface PopularDestinationsProps {
+  selectedDestination: Destination | null;
+  setSelectedDestination: React.Dispatch<React.SetStateAction<Destination | null>>;
+}
+
+export default function PopularDestinations({ selectedDestination, setSelectedDestination }: PopularDestinationsProps) {
   const { data: destinations = [], isLoading, error } = useQuery<Destination[]>({
     queryKey: ['/api/destinations'],
   });
-
-  const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
-
-  // Set first destination as default background when data loads
-  useEffect(() => {
-    if (destinations.length > 0 && !selectedDestination) {
-      setSelectedDestination(destinations[0]);
-    }
-  }, [destinations, selectedDestination]);
 
   if (isLoading) {
     return (
@@ -71,21 +64,7 @@ export default function PopularDestinations() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          {selectedDestination && (
-            <p className="text-lg text-white/80 font-medium mb-4">
-              Currently viewing: {selectedDestination.name}
-            </p>
-          )}
-          <div className="mt-6">
-            <Link href="/destinations">
-              <button className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30 transition-all duration-300 font-medium border border-white/30">
-                View All Destinations
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-            </Link>
-          </div>
-        </div>
+
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {destinations.slice(0, 4).map((destination) => (
