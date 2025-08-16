@@ -48,7 +48,7 @@ export default function HeroSection() {
           </div>
           
           {/* Booking Form */}
-          <div className="bg-white rounded-2xl p-8 shadow-2xl text-gray-800">
+          <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-8 shadow-2xl text-white border border-white border-opacity-30">
             <div className="flex space-x-2 mb-6">
               <Button
                 type="button"
@@ -56,7 +56,7 @@ export default function HeroSection() {
                 className={`flex-1 py-2 px-4 rounded-lg font-medium ${
                   activeTab === 'flights' 
                     ? 'bg-primary text-white hover:bg-primary/90' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    : 'bg-white bg-opacity-20 text-white hover:bg-opacity-30 border border-white border-opacity-30'
                 }`}
                 onClick={() => setActiveTab('flights')}
               >
@@ -69,7 +69,7 @@ export default function HeroSection() {
                 className={`flex-1 py-2 px-4 rounded-lg font-medium ${
                   activeTab === 'hotels' 
                     ? 'bg-primary text-white hover:bg-primary/90' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    : 'bg-white bg-opacity-20 text-white hover:bg-opacity-30 border border-white border-opacity-30'
                 }`}
                 onClick={() => setActiveTab('hotels')}
               >
@@ -82,7 +82,7 @@ export default function HeroSection() {
                 className={`flex-1 py-2 px-4 rounded-lg font-medium ${
                   activeTab === 'cars' 
                     ? 'bg-primary text-white hover:bg-primary/90' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    : 'bg-white bg-opacity-20 text-white hover:bg-opacity-30 border border-white border-opacity-30'
                 }`}
                 onClick={() => setActiveTab('cars')}
               >
@@ -94,7 +94,7 @@ export default function HeroSection() {
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">From</label>
+                  <label className="block text-sm font-medium text-white mb-2">From</label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                     <Input 
@@ -105,7 +105,7 @@ export default function HeroSection() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">To</label>
+                  <label className="block text-sm font-medium text-white mb-2">To</label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                     <Input 
@@ -119,14 +119,14 @@ export default function HeroSection() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Departure</label>
+                  <label className="block text-sm font-medium text-white mb-2">Departure</label>
                   <Input 
                     type="date" 
                     className="focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Return</label>
+                  <label className="block text-sm font-medium text-white mb-2">Return</label>
                   <Input 
                     type="date" 
                     className="focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -135,7 +135,7 @@ export default function HeroSection() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Passengers</label>
+                <label className="block text-sm font-medium text-white mb-2">Passengers</label>
                 <Select>
                   <SelectTrigger className="focus:ring-2 focus:ring-primary focus:border-transparent">
                     <SelectValue placeholder="1 Adult" />
