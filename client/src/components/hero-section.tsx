@@ -48,7 +48,7 @@ export default function HeroSection() {
           </div>
           
           {/* Booking Form */}
-          <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-8 shadow-2xl text-white border border-white border-opacity-30">
+          <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-8 shadow-2xl text-white border border-white border-opacity-30 glass-form">
             <div className="flex space-x-2 mb-6">
               <Button
                 type="button"
@@ -138,7 +138,7 @@ export default function HeroSection() {
                 <label className="block text-sm font-medium text-white mb-2">Passengers</label>
                 <Select>
                   <SelectTrigger className="bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white focus:ring-2 focus:ring-primary focus:border-transparent">
-                    <SelectValue placeholder="1 Adult" />
+                    <SelectValue placeholder="1 Adult" className="text-white placeholder:text-white placeholder:opacity-70" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="1-adult">1 Adult</SelectItem>
