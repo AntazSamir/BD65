@@ -271,7 +271,7 @@ export class MemStorage implements IStorage {
       name: 'Lalbagh Fort',
       country: 'Bangladesh',
       description: 'Historic Mughal fort complex in Old Dhaka with beautiful architecture',
-      imageUrl: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      imageUrl: '/assets/lalbagh-fort.jpg',
       rating: '4.2',
       priceFrom: 500,
     });
