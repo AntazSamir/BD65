@@ -244,7 +244,7 @@ export class MemStorage implements IStorage {
       name: 'Rangamati',
       country: 'Bangladesh',
       description: 'Lake district with hanging bridge, tribal museums and boat rides',
-      imageUrl: '/assets/rangamati.jpg',
+      imageUrl: '/assets/rangamati-bridge.jpg',
       rating: '4.5',
       priceFrom: 2900,
     });
