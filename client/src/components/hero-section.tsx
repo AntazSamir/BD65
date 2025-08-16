@@ -3,6 +3,7 @@ import { Plane, Hotel, Car, MapPin, Search, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import heroImage from '@assets/1781002652_1755358586408.jpg';
 
 export default function HeroSection() {
   const [activeTab, setActiveTab] = useState('flights');
@@ -17,9 +18,9 @@ export default function HeroSection() {
     <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-32 min-h-screen flex items-center">
       {/* Background overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-20" 
+        className="absolute inset-0 bg-cover bg-center opacity-30" 
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
+          backgroundImage: `url(${heroImage})`
         }}
       />
       
