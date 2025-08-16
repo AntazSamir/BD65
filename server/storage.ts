@@ -217,7 +217,7 @@ export class MemStorage implements IStorage {
       name: 'Sylhet Tea Gardens',
       country: 'Bangladesh',
       description: 'Rolling green hills covered with tea plantations',
-      imageUrl: 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      imageUrl: '/assets/sylhet-tea-gardens.jpg',
       rating: '4.7',
       priceFrom: 2800,
     });
