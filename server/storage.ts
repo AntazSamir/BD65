@@ -262,7 +262,7 @@ export class MemStorage implements IStorage {
       name: 'Paharpur Buddhist Vihara',
       country: 'Bangladesh',
       description: 'UNESCO World Heritage archaeological site with ancient Buddhist ruins',
-      imageUrl: 'https://images.unsplash.com/photo-1587595431973-160d0d94add1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      imageUrl: '/assets/paharpur-buddhist-vihara.jpg',
       rating: '4.3',
       priceFrom: 1800,
     });
