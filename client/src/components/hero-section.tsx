@@ -14,7 +14,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-20">
+    <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-32 min-h-screen flex items-center">
       {/* Background overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-20" 
