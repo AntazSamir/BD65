@@ -20,8 +20,7 @@ export default function Navigation() {
             <a href="#destinations" className="text-neutral hover:text-primary transition-colors">Destinations</a>
             <a href="#hotels" className="text-neutral hover:text-primary transition-colors">Hotels</a>
             <a href="#flights" className="text-neutral hover:text-primary transition-colors">Flights</a>
-            <a href="#packages" className="text-neutral hover:text-primary transition-colors">Packages</a>
-            <a href="#about" className="text-neutral hover:text-primary transition-colors">About</a>
+            <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
           </div>
           
           <div className="flex items-center space-x-4">
@@ -44,8 +43,7 @@ export default function Navigation() {
               <a href="#destinations" className="text-neutral hover:text-primary transition-colors">Destinations</a>
               <a href="#hotels" className="text-neutral hover:text-primary transition-colors">Hotels</a>
               <a href="#flights" className="text-neutral hover:text-primary transition-colors">Flights</a>
-              <a href="#packages" className="text-neutral hover:text-primary transition-colors">Packages</a>
-              <a href="#about" className="text-neutral hover:text-primary transition-colors">About</a>
+              <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
             </div>
           </div>
         )}

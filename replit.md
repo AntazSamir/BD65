@@ -16,9 +16,12 @@ Project Focus: Bangladesh tourism and travel destinations.
 - Updated branding from "TravelHub" to "Bangladesh Explorer" 
 - Modified flight routes to show domestic Bangladesh destinations (Dhaka, Cox's Bazar, Sylhet, Chittagong, Jessore)
 - Updated hotel listings to feature authentic Bangladesh accommodations
-- Created Bangladesh-specific travel packages and testimonials
+- Created Bangladesh-specific testimonials
 - Added comprehensive FAQ section about Bangladesh travel
 - Updated hero section messaging to focus on discovering Bangladesh
+- Removed travel packages section from home page per user request
+- Created comprehensive About page with company story, team, values, mission, and statistics
+- Updated navigation to link to the new About page (/about route)
 
 ## System Architecture
 

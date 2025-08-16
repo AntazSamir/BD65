@@ -4,7 +4,6 @@ import PopularDestinations from '../components/popular-destinations';
 import RecommendedHotels from '../components/recommended-hotels';
 import FlightDeals from '../components/flight-deals';
 import WhyChooseUs from '../components/why-choose-us';
-import TravelPackages from '../components/travel-packages';
 import Testimonials from '../components/testimonials';
 import FAQ from '../components/faq';
 import Newsletter from '../components/newsletter';
@@ -19,7 +18,6 @@ export default function Home() {
       <RecommendedHotels />
       <FlightDeals />
       <WhyChooseUs />
-      <TravelPackages />
       <Testimonials />
       <FAQ />
       <Newsletter />
