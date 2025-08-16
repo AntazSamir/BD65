@@ -235,7 +235,7 @@ export class MemStorage implements IStorage {
       name: 'Chittagong Hill Tracts',
       country: 'Bangladesh',
       description: 'Mountainous region with tribal culture, waterfalls and scenic beauty',
-      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      imageUrl: '/assets/chittagong-hill-tracts.jpg',
       rating: '4.8',
       priceFrom: 3200,
     });
