@@ -79,7 +79,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               <img 
                 src={destination.imageUrl} 
                 alt={destination.name} 
-                className="w-full h-48 md:h-80 object-cover transition-transform duration-500"
+                className="w-full h-32 md:h-48 object-cover transition-transform duration-500"
                 data-testid={`img-destination-${destination.id}`}
               />
               {/* Overlay with destination name */}
