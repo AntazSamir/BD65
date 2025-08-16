@@ -253,7 +253,7 @@ export class MemStorage implements IStorage {
       name: 'Kuakata Beach',
       country: 'Bangladesh',
       description: 'Unique beach where you can see both sunrise and sunset',
-      imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      imageUrl: '/assets/kuakata-beach.jpg',
       rating: '4.4',
       priceFrom: 2500,
     });
