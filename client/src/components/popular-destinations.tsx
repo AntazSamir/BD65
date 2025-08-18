@@ -153,7 +153,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Spacer to push cards to bottom */}
       <div className="flex-1"></div>
       {/* Carousel section */}
-      <div className="relative z-10 pb-12">
+      <div className="relative z-10 pb-12 mt-[-223px] mb-[-223px]">
         <div className="max-w-7xl mx-auto px-4">
           {/* Navigation arrows */}
           <button
