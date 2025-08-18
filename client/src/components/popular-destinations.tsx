@@ -150,14 +150,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Carousel section */}
       <div className="relative z-10 mt-[-134px] mb-[-134px] pt-[34px] pb-[34px] pl-[0px] pr-[0px] ml-[-13px] mr-[-13px]">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Navigation arrows */}
-          <button
-            onClick={goToNext}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-300"
-            data-testid="button-carousel-next"
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
+          
 
           {/* Cards container */}
           <div className="flex justify-center items-end space-x-2 px-16">
