@@ -112,11 +112,7 @@ export default function Destinations() {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Animated Badge */}
-          <div className="inline-flex items-center bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-full px-6 py-3 mb-8 animate-pulse">
-            <Globe className="w-5 h-5 text-green-400 mr-2" />
-            <span className="text-green-200 font-medium">Discover Bangladesh's Hidden Gems</span>
-          </div>
+          
 
           {/* Main Title with Animation */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
