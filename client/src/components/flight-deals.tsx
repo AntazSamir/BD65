@@ -66,7 +66,7 @@ export default function FlightDeals() {
 
   return (
     <section id="flights" className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-168px] mb-[-168px]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Flight Offer Deals</h2>
           <p className="text-gray-600">Competitive fares for your route-specific searches.</p>
