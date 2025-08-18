@@ -1,7 +1,6 @@
 import Navigation from '../components/navigation';
 import HeroSection from '../components/hero-section';
 import PopularDestinations from '../components/popular-destinations';
-import DestinationCards from '../components/destination-cards';
 import RecommendedHotels from '../components/recommended-hotels';
 import FlightDeals from '../components/flight-deals';
 import WhyChooseUs from '../components/why-choose-us';
@@ -52,7 +51,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <DestinationCards selectedDestination={selectedDestination} setSelectedDestination={setSelectedDestination} />
       <PopularDestinations selectedDestination={selectedDestination} setSelectedDestination={setSelectedDestination} />
       
       
