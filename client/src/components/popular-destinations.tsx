@@ -17,6 +17,18 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   const [isAutoSliding, setIsAutoSliding] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Set initial index to Mahasthangarh when destinations are loaded
+  useEffect(() => {
+    if (destinations.length > 0) {
+      const mahasthangarhIndex = destinations.findIndex(dest => 
+        dest.name.toLowerCase().includes('mahasthangarh')
+      );
+      if (mahasthangarhIndex !== -1) {
+        setCurrentIndex(mahasthangarhIndex);
+      }
+    }
+  }, [destinations]);
+
   // Auto-sliding functionality
   useEffect(() => {
     if (isAutoSliding && destinations.length > 0) {
@@ -139,7 +151,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Header section */}
       <div className="relative z-10 text-center mb-12 pt-8">
         {selectedDestination && (
-          <div className="mt-6 max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto mt-[-124px] mb-[-124px]">
             <h3 className="font-semibold text-white mb-2 text-[40px]">{selectedDestination.name}</h3>
             <p className="text-white/80 text-lg">{selectedDestination.description}</p>
             <div className="flex items-center justify-center mt-4 space-x-4">
