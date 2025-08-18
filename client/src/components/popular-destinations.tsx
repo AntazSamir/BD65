@@ -136,7 +136,6 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     >
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
-
       {/* Spacer to push cards to bottom */}
       <div className="flex-1"></div>
       {/* Carousel section */}
@@ -160,7 +159,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
           </button>
 
           {/* Cards container */}
-          <div className="flex justify-center items-end space-x-4 px-20">
+          <div className="flex justify-center items-end space-x-4 px-20 mt-[-84px] mb-[-84px]">
             {visibleCards.map(({ destination, position, index }) => {
               const isCenterCard = position === 0;
               const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : 'scale-85';
