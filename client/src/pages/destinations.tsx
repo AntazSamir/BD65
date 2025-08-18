@@ -95,7 +95,7 @@ export default function Destinations() {
       <Navigation />
       
       {/* Enhanced Hero Section */}
-      <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+      <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Dynamic Background Carousel */}
         <div className="absolute inset-0">
           {heroBackgrounds.map((bg, index) => (
