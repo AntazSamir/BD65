@@ -285,6 +285,96 @@ export class MemStorage implements IStorage {
       priceFrom: 1800,
     });
 
+    await this.createDestination({
+      name: 'Bagerhat Mosque City',
+      country: 'Bangladesh',
+      district: 'Bagerhat',
+      description: 'Historic mosque city with 60 domed mosques and ancient Islamic architecture',
+      imageUrl: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.4',
+      priceFrom: 2200,
+    });
+
+    await this.createDestination({
+      name: 'Sajek Valley',
+      country: 'Bangladesh',
+      district: 'Rangamati',
+      description: 'Queen of hills with clouds touching mountain peaks and tribal culture',
+      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.7',
+      priceFrom: 3800,
+    });
+
+    await this.createDestination({
+      name: 'Jaflong',
+      country: 'Bangladesh',
+      district: 'Sylhet',
+      description: 'Stone collection area with crystal clear river and scenic mountain views',
+      imageUrl: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.5',
+      priceFrom: 2400,
+    });
+
+    await this.createDestination({
+      name: 'Srimangal',
+      country: 'Bangladesh',
+      district: 'Moulvibazar',
+      description: 'Tea capital of Bangladesh with seven-layer tea and rainforest',
+      imageUrl: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.6',
+      priceFrom: 2600,
+    });
+
+    await this.createDestination({
+      name: 'Nilgiri Hills',
+      country: 'Bangladesh',
+      district: 'Bandarban',
+      description: 'Highest hills in Bangladesh with cloud kissing peaks and scenic beauty',
+      imageUrl: 'https://images.unsplash.com/photo-1464822759844-d150baec4ba5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.8',
+      priceFrom: 4200,
+    });
+
+    await this.createDestination({
+      name: 'Nafakhum Waterfall',
+      country: 'Bangladesh',
+      district: 'Bandarban',
+      description: 'Largest waterfall in Bangladesh surrounded by hills and natural beauty',
+      imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.9',
+      priceFrom: 4800,
+    });
+
+    await this.createDestination({
+      name: 'Mahasthangarh',
+      country: 'Bangladesh',
+      district: 'Bogra',
+      description: 'Ancient archaeological site with ruins of the earliest urban settlement',
+      imageUrl: 'https://images.unsplash.com/photo-1539650116574-75c0c6d6d4ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.2',
+      priceFrom: 1600,
+    });
+
+    await this.createDestination({
+      name: 'Ratargul Swamp Forest',
+      country: 'Bangladesh',
+      district: 'Sylhet',
+      description: 'Freshwater swamp forest with boat rides through submerged trees',
+      imageUrl: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.5',
+      priceFrom: 2300,
+    });
+
+    await this.createDestination({
+      name: 'Bandarban',
+      country: 'Bangladesh',
+      district: 'Bandarban',
+      description: 'Hill district with tribal culture, natural beauty and adventure activities',
+      imageUrl: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      rating: '4.7',
+      priceFrom: 3500,
+    });
+
     // Initialize sample hotels
     await this.createHotel({
       name: 'Sea Palace Hotel',

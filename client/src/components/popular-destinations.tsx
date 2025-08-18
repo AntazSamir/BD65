@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect, useRef } from 'react';
 import type { Destination } from '@shared/schema';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PopularDestinationsProps {
   selectedDestination: Destination | null;
@@ -11,19 +13,90 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     queryKey: ['/api/destinations'],
   });
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoSliding, setIsAutoSliding] = useState(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-sliding functionality
+  useEffect(() => {
+    if (isAutoSliding && destinations.length > 0) {
+      intervalRef.current = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
+      }, 3000); // Change slide every 3 seconds
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isAutoSliding, destinations.length]);
+
+  // Update background when current index changes
+  useEffect(() => {
+    if (destinations.length > 0) {
+      setSelectedDestination(destinations[currentIndex]);
+    }
+  }, [currentIndex, destinations, setSelectedDestination]);
+
+  // Manual navigation functions
+  const goToPrevious = () => {
+    setIsAutoSliding(false);
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? destinations.length - 1 : prevIndex - 1
+    );
+    // Resume auto-sliding after 10 seconds
+    setTimeout(() => setIsAutoSliding(true), 10000);
+  };
+
+  const goToNext = () => {
+    setIsAutoSliding(false);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
+    // Resume auto-sliding after 10 seconds
+    setTimeout(() => setIsAutoSliding(true), 10000);
+  };
+
+  const goToSlide = (index: number) => {
+    setIsAutoSliding(false);
+    setCurrentIndex(index);
+    setSelectedDestination(destinations[index]);
+    // Resume auto-sliding after 10 seconds
+    setTimeout(() => setIsAutoSliding(true), 10000);
+  };
+
+  // Get visible cards (5 cards with center one highlighted)
+  const getVisibleCards = () => {
+    if (destinations.length === 0) return [];
+    
+    const visibleCards = [];
+    const totalCards = Math.min(5, destinations.length);
+    const startOffset = Math.floor(totalCards / 2);
+    
+    for (let i = 0; i < totalCards; i++) {
+      const index = (currentIndex - startOffset + i + destinations.length) % destinations.length;
+      visibleCards.push({
+        destination: destinations[index],
+        position: i - startOffset, // -2, -1, 0, 1, 2
+        index: index
+      });
+    }
+    
+    return visibleCards;
+  };
+
   if (isLoading) {
     return (
-      <section id="destinations" className="relative py-24 min-h-[600px] bg-gray-50">
+      <section id="destinations" className="relative py-24 min-h-[800px] bg-gray-50">
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Popular Destinations</h2>
             <p className="text-xl text-white/90">Explore the world's most breathtaking locations</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => (
+          <div className="flex justify-center items-center space-x-4">
+            {[...Array(5)].map((_, i) => (
               <div key={i} className="rounded-2xl overflow-hidden shadow-lg animate-pulse">
-                <div className="w-full h-64 bg-gray-300"></div>
+                <div className="w-48 h-64 bg-gray-300"></div>
               </div>
             ))}
           </div>
@@ -34,7 +107,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
 
   if (error) {
     return (
-      <section id="destinations" className="relative py-24 min-h-[600px] bg-gray-50">
+      <section id="destinations" className="relative py-24 min-h-[800px] bg-gray-50">
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -46,13 +119,14 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     );
   }
 
-  // Set default background if none selected
+  // Set background image from the center card
   const backgroundImage = selectedDestination?.imageUrl || destinations[0]?.imageUrl || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080';
+  const visibleCards = getVisibleCards();
 
   return (
     <section 
       id="destinations" 
-      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col"
+      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col transition-all duration-1000 ease-in-out"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -63,43 +137,107 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
       
+      {/* Header section */}
+      <div className="relative z-10 text-center mb-12 pt-8">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Popular Destinations</h2>
+        <p className="text-xl text-white/90">Discover Bangladesh's most breathtaking locations</p>
+        {selectedDestination && (
+          <div className="mt-6 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-semibold text-white mb-2">{selectedDestination.name}</h3>
+            <p className="text-white/80 text-lg">{selectedDestination.description}</p>
+            <div className="flex items-center justify-center mt-4 space-x-4">
+              <span className="text-yellow-400 text-lg">★ {selectedDestination.rating}</span>
+              <span className="text-white/60">•</span>
+              <span className="text-white text-lg">From ৳{selectedDestination.priceFrom}</span>
+            </div>
+          </div>
+        )}
+      </div>
+      
       {/* Spacer to push cards to bottom */}
       <div className="flex-1"></div>
       
-      {/* Destination cards positioned at the bottom */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {destinations.slice(0, 4).map((destination) => (
-            <div 
-              key={destination.id}
-              className={`relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 transform hover:scale-105 ${
-                selectedDestination?.id === destination.id 
-                  ? 'ring-4 ring-primary/50 scale-105' 
-                  : 'hover:shadow-2xl'
-              }`}
-              onClick={() => setSelectedDestination(destination)}
-              data-testid={`card-destination-${destination.id}`}
-            >
-              <img 
-                src={destination.imageUrl} 
-                alt={destination.name} 
-                className="w-full h-32 md:h-48 object-cover transition-transform duration-500"
-                data-testid={`img-destination-${destination.id}`}
-              />
-              {/* Overlay with destination name */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end">
-                <div className="p-3 md:p-4 w-full">
-                  <h3 className="text-white font-semibold text-sm md:text-lg text-center" data-testid={`text-destination-name-${destination.id}`}>
-                    {destination.name}
-                  </h3>
+      {/* Carousel section */}
+      <div className="relative z-10 pb-12">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Navigation arrows */}
+          <button
+            onClick={goToPrevious}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-300"
+            data-testid="button-carousel-prev"
+          >
+            <ChevronLeft className="w-6 h-6 text-white" />
+          </button>
+          
+          <button
+            onClick={goToNext}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-300"
+            data-testid="button-carousel-next"
+          >
+            <ChevronRight className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Cards container */}
+          <div className="flex justify-center items-end space-x-4 px-20">
+            {visibleCards.map(({ destination, position, index }) => {
+              const isCenterCard = position === 0;
+              const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : 'scale-85';
+              const cardOpacity = isCenterCard ? 'opacity-100' : Math.abs(position) === 1 ? 'opacity-80' : 'opacity-60';
+              const cardHeight = isCenterCard ? 'h-80' : Math.abs(position) === 1 ? 'h-72' : 'h-64';
+              const cardWidth = isCenterCard ? 'w-64' : 'w-56';
+              
+              return (
+                <div
+                  key={destination.id}
+                  className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-700 transform ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${
+                    isCenterCard ? 'ring-4 ring-white/50 z-10' : 'hover:scale-100 hover:opacity-90'
+                  }`}
+                  onClick={() => goToSlide(index)}
+                  data-testid={`card-destination-${destination.id}`}
+                >
+                  <img 
+                    src={destination.imageUrl} 
+                    alt={destination.name} 
+                    className="w-full h-full object-cover transition-transform duration-700"
+                    data-testid={`img-destination-${destination.id}`}
+                  />
+                  
+                  {/* Overlay with destination name */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end">
+                    <div className="p-4 w-full">
+                      <h3 className="text-white font-semibold text-lg text-center" data-testid={`text-destination-name-${destination.id}`}>
+                        {destination.name}
+                      </h3>
+                      {isCenterCard && (
+                        <p className="text-white/80 text-sm text-center mt-1">{destination.district}</p>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Center card indicator */}
+                  {isCenterCard && (
+                    <div className="absolute top-4 right-4 w-4 h-4 bg-white rounded-full shadow-lg"></div>
+                  )}
                 </div>
-              </div>
-              {/* Selected indicator */}
-              {selectedDestination?.id === destination.id && (
-                <div className="absolute top-2 right-2 w-3 h-3 bg-primary rounded-full shadow-lg"></div>
-              )}
-            </div>
-          ))}
+              );
+            })}
+          </div>
+
+          {/* Dots indicator */}
+          <div className="flex justify-center space-x-2 mt-8">
+            {destinations.slice(0, Math.min(10, destinations.length)).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-white scale-125' 
+                    : 'bg-white/40 hover:bg-white/60'
+                }`}
+                data-testid={`dot-indicator-${index}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

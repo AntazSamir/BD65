@@ -34,6 +34,15 @@ Project Focus: Bangladesh tourism and travel destinations.
 - Completely redesigned destinations page hero section with dynamic carousel backgrounds, interactive search, stats display, and engaging CTAs (August 2025)
 - Added functional search and filtering capabilities for destinations with real-time results
 - Enhanced visual hierarchy with backdrop blur effects, gradient text, and animated elements
+- **Auto-sliding Carousel Implementation (August 2025)**: 
+  - Added 9 new destinations with high-quality Unsplash images (total now 18 destinations)
+  - Implemented auto-sliding carousel showing 5 cards with center focus
+  - Auto-slides every 3 seconds with smooth transitions
+  - Manual navigation with left/right arrows and dot indicators
+  - Center card displays larger with white ring indicator
+  - Background changes to match center card image with smooth transitions
+  - Auto-sliding pauses for 10 seconds when user interacts manually
+  - Enhanced destination details display in header with rating and pricing
 
 ## System Architecture
 
