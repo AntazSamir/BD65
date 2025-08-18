@@ -52,8 +52,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <PopularDestinations selectedDestination={selectedDestination} setSelectedDestination={setSelectedDestination} />
       <DestinationCards selectedDestination={selectedDestination} setSelectedDestination={setSelectedDestination} />
+      <PopularDestinations selectedDestination={selectedDestination} setSelectedDestination={setSelectedDestination} />
       
       
       
