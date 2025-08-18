@@ -136,7 +136,6 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     >
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
-      
       {/* Title section */}
       <div className="relative z-10 text-center mb-16 pt-16">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" data-testid="title-popular-destinations">
@@ -146,11 +145,10 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
           Discover Bangladesh's most breathtaking locations and hidden gems
         </p>
       </div>
-      
       {/* Spacer to push cards to bottom */}
       <div className="flex-1"></div>
       {/* Carousel section */}
-      <div className="relative z-10 pb-12">
+      <div className="relative z-10 mt-[-134px] mb-[-134px] pt-[34px] pb-[34px] pl-[0px] pr-[0px] ml-[-13px] mr-[-13px]">
         <div className="max-w-7xl mx-auto px-4">
           {/* Navigation arrows */}
           <button
