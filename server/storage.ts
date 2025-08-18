@@ -356,7 +356,7 @@ export class MemStorage implements IStorage {
     });
 
     await this.createDestination({
-      name: 'Ratargul Swamp Forest',
+      name: 'Rangamati',
       country: 'Bangladesh',
       district: 'Sylhet',
       description: 'Freshwater swamp forest with boat rides through submerged trees',
