@@ -173,8 +173,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               const isCenterCard = position === 0;
               const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : 'scale-85';
               const cardOpacity = isCenterCard ? 'opacity-100' : Math.abs(position) === 1 ? 'opacity-80' : 'opacity-60';
-              const cardHeight = isCenterCard ? 'h-64' : Math.abs(position) === 1 ? 'h-56' : 'h-48';
-              const cardWidth = isCenterCard ? 'w-48' : 'w-40';
+              const cardHeight = isCenterCard ? 'h-56' : Math.abs(position) === 1 ? 'h-48' : 'h-40';
+              const cardWidth = isCenterCard ? 'w-40' : 'w-32';
               
               return (
                 <div
