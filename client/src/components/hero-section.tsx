@@ -19,7 +19,7 @@ export default function HeroSection() {
     <section className="relative bg-black text-white py-32 min-h-screen flex items-center overflow-hidden">
       {/* Background overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-70 transition-transform duration-[20s] ease-in-out animate-float" 
+        className="absolute inset-0 bg-cover bg-center opacity-70" 
         style={{
           backgroundImage: `url(${heroImage})`
         }}
