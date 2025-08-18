@@ -1,13 +1,39 @@
-import { Star, MapPin } from 'lucide-react';
+import { Star, MapPin, Search, Filter, ArrowRight, Globe, Camera, Heart, Users } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import type { Destination } from '@shared/schema';
 import Navigation from '../components/navigation';
 import Footer from '../components/footer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export default function Destinations() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeHeroIndex, setActiveHeroIndex] = useState(0);
+  
   const { data: destinations = [], isLoading, error } = useQuery<Destination[]>({
     queryKey: ['/api/destinations'],
   });
+
+  const filteredDestinations = destinations.filter(destination =>
+    destination.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    destination.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Hero background carousel
+  const heroBackgrounds = [
+    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+    'https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+    'https://images.unsplash.com/photo-1501436513145-30f24e19fcc4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveHeroIndex((prev) => (prev + 1) % heroBackgrounds.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [heroBackgrounds.length]);
 
   if (isLoading) {
     return (
@@ -62,28 +88,168 @@ export default function Destinations() {
     <div className="min-h-screen bg-white">
       <Navigation />
       
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary to-secondary py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Explore Bangladesh
+      {/* Enhanced Hero Section */}
+      <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Dynamic Background Carousel */}
+        <div className="absolute inset-0">
+          {heroBackgrounds.map((bg, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+                index === activeHeroIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{ backgroundImage: `url(${bg})` }}
+            />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Animated Badge */}
+          <div className="inline-flex items-center bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-full px-6 py-3 mb-8 animate-pulse">
+            <Globe className="w-5 h-5 text-green-400 mr-2" />
+            <span className="text-green-200 font-medium">Discover Bangladesh's Hidden Gems</span>
+          </div>
+
+          {/* Main Title with Animation */}
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+              Explore
+            </span>
+            <br />
+            <span className="text-yellow-400">Bangladesh</span>
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
+
+          <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed">
             Discover the natural beauty, rich culture, and historic treasures of Bangladesh. 
             From pristine beaches to ancient ruins, adventure awaits at every corner.
           </p>
-          <div className="flex items-center justify-center text-white/80">
-            <MapPin className="w-5 h-5 mr-2" />
-            <span className="text-lg">{destinations.length} Amazing Destinations</span>
+
+          {/* Interactive Search Bar */}
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Search className="h-5 w-5 text-gray-400" />
+              </div>
+              <Input
+                type="text"
+                placeholder="Search destinations, experiences, or activities..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-12 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              />
+              <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
+                <Button
+                  size="sm"
+                  className="bg-primary hover:bg-primary/90 text-white rounded-full px-6"
+                >
+                  <Filter className="h-4 w-4 mr-2" />
+                  Filter
+                </Button>
+              </div>
+            </div>
           </div>
+
+          {/* Stats Row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <div className="flex items-center justify-center mb-3">
+                <MapPin className="w-8 h-8 text-blue-400" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">{destinations.length}</div>
+              <div className="text-sm text-gray-300">Destinations</div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <div className="flex items-center justify-center mb-3">
+                <Users className="w-8 h-8 text-green-400" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">50K+</div>
+              <div className="text-sm text-gray-300">Happy Travelers</div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <div className="flex items-center justify-center mb-3">
+                <Camera className="w-8 h-8 text-yellow-400" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">500+</div>
+              <div className="text-sm text-gray-300">Experiences</div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <div className="flex items-center justify-center mb-3">
+                <Heart className="w-8 h-8 text-red-400" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">4.8/5</div>
+              <div className="text-sm text-gray-300">Rating</div>
+            </div>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+            >
+              Start Your Journey
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300"
+            >
+              Watch Video
+            </Button>
+          </div>
+        </div>
+
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {heroBackgrounds.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === activeHeroIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/70'
+              }`}
+              onClick={() => setActiveHeroIndex(index)}
+            />
+          ))}
         </div>
       </div>
 
       {/* Destinations Grid */}
-      <div className="py-16">
+      <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {searchQuery ? 'Search Results' : 'All Destinations'}
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              {searchQuery 
+                ? `Discover amazing places that match your search`
+                : 'Explore our curated collection of amazing destinations across Bangladesh'
+              }
+            </p>
+          </div>
+          {/* Search Results Info */}
+          {searchQuery && (
+            <div className="mb-8">
+              <p className="text-lg text-gray-600">
+                Found <span className="font-semibold text-primary">{filteredDestinations.length}</span> destinations
+                {searchQuery && (
+                  <>
+                    {' '}matching "<span className="font-medium">{searchQuery}</span>"
+                  </>
+                )}
+              </p>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {destinations.map((destination) => (
+            {filteredDestinations.map((destination) => (
               <div 
                 key={destination.id}
                 className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
