@@ -277,23 +277,24 @@ export default function Destinations() {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredDestinations.map((destination) => (
+            {filteredDestinations.map((destination, index) => (
               <div 
                 key={destination.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-3 hover:scale-[1.02] group cursor-pointer"
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover-lift transition-butter group cursor-pointer animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
                 data-testid={`card-destination-${destination.id}`}
               >
                 <div className="relative">
                   <img 
                     src={destination.imageUrl} 
                     alt={destination.name} 
-                    className="w-full h-64 object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    className="w-full h-64 object-cover transition-butter group-hover:scale-110"
                     data-testid={`img-destination-${destination.id}`}
                   />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 transition-all duration-300 ease-out group-hover:bg-white group-hover:shadow-lg">
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-full px-3 py-1 transition-butter group-hover:bg-white group-hover:shadow-lg hover-glow">
                     <div className="flex items-center">
-                      <Star className="w-4 h-4 text-yellow-400 mr-1 transition-transform duration-300 group-hover:scale-110" />
-                      <span className="text-sm font-medium text-gray-800 transition-colors duration-300" data-testid={`text-destination-rating-${destination.id}`}>
+                      <Star className="w-4 h-4 text-yellow-400 mr-1 transition-elastic group-hover:scale-110 group-hover:rotate-12" />
+                      <span className="text-sm font-medium text-gray-800 transition-butter" data-testid={`text-destination-rating-${destination.id}`}>
                         {destination.rating}
                       </span>
                     </div>
@@ -322,7 +323,7 @@ export default function Destinations() {
                       </p>
                     </div>
                     <button 
-                      className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-all duration-300 ease-out font-medium hover:shadow-lg hover:scale-105 transform"
+                      className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-elastic font-medium hover:shadow-xl hover:scale-110 transform hover-glow"
                       data-testid={`button-explore-destination-${destination.id}`}
                     >
                       Explore

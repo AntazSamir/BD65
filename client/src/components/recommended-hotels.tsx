@@ -62,16 +62,17 @@ export default function RecommendedHotels() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {hotels.map((hotel) => (
+          {hotels.map((hotel, index) => (
             <div 
               key={hotel.id}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover-lift transition-butter animate-fade-in group"
+              style={{ animationDelay: `${index * 0.1}s` }}
               data-testid={`card-hotel-${hotel.id}`}
             >
               <img 
                 src={hotel.imageUrl} 
                 alt={hotel.name} 
-                className="w-full h-56 object-cover"
+                className="w-full h-56 object-cover transition-butter group-hover:scale-110"
                 data-testid={`img-hotel-${hotel.id}`}
               />
               <div className="p-6">

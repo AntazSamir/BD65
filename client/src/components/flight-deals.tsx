@@ -73,10 +73,11 @@ export default function FlightDeals() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
-          {flights.slice(0, 4).map((flight) => (
+          {flights.slice(0, 4).map((flight, index) => (
             <div 
               key={flight.id}
-              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+              className="bg-white rounded-xl shadow-md hover-lift transition-butter overflow-hidden animate-fade-in group"
+              style={{ animationDelay: `${index * 0.1}s` }}
               data-testid={`card-flight-${flight.id}`}
             >
               {/* Image Section */}
@@ -84,10 +85,10 @@ export default function FlightDeals() {
                 <img 
                   src={getDestinationImage(flight.destination)} 
                   alt={flight.destination}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover transition-butter group-hover:scale-110"
                 />
-                <button className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors">
-                  <Heart className="w-4 h-4 text-gray-600" />
+                <button className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-butter hover-glow">
+                  <Heart className="w-4 h-4 text-gray-600 transition-elastic hover:scale-110 hover:text-red-500" />
                 </button>
               </div>
               

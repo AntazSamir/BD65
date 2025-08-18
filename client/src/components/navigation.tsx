@@ -12,7 +12,7 @@ export default function Navigation() {
   const { user, isAuthenticated, signOut, isSigningOut } = useAuth();
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
+    <nav className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100 transition-butter">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center">
@@ -30,8 +30,8 @@ export default function Navigation() {
           </Link>
           
           <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-neutral hover:text-primary transition-colors">Home</Link>
-            <Link href="/destinations" className="text-neutral hover:text-primary transition-colors">Destinations</Link>
+            <Link href="/" className="text-neutral hover:text-primary transition-butter hover:scale-105">Home</Link>
+            <Link href="/destinations" className="text-neutral hover:text-primary transition-butter hover:scale-105">Destinations</Link>
             <a 
               href="#hotels" 
               className="text-neutral hover:text-primary transition-colors cursor-pointer"
