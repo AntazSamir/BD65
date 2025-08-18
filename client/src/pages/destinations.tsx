@@ -158,10 +158,18 @@ export default function Destinations() {
               
               {/* District Filter */}
               <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
-                <SelectTrigger className="w-56 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full focus:ring-2 focus:ring-blue-400 py-4 [&>span]:text-white/80">
-                  <div className="flex items-center">
+                <SelectTrigger 
+                  className="w-56 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full focus:ring-2 focus:ring-blue-400 py-4"
+                  style={{
+                    color: 'white'
+                  } as React.CSSProperties}
+                >
+                  <div className="flex items-center text-white">
                     <Filter className="h-4 w-4 mr-2 text-white/60" />
-                    <SelectValue placeholder="Filter by District" className="text-white/80 placeholder:text-white/80" />
+                    <SelectValue 
+                      placeholder="Filter by District" 
+                      style={{ color: 'white' } as React.CSSProperties}
+                    />
                   </div>
                 </SelectTrigger>
                 <SelectContent className="bg-white/95 backdrop-blur-md border border-gray-200">
