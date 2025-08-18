@@ -55,41 +55,7 @@ export default function Home() {
       <PopularDestinations selectedDestination={selectedDestination} setSelectedDestination={setSelectedDestination} />
       <DestinationCards selectedDestination={selectedDestination} setSelectedDestination={setSelectedDestination} />
       
-      {/* Image Gallery Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              <img 
-                src="/assets/sundarbans.jpg" 
-                alt="Sundarbans Mangrove Forest" 
-                className="w-full h-48 md:h-64 object-cover rounded-xl shadow-lg hover-lift transition-butter cursor-pointer"
-              />
-            </div>
-            <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <img 
-                src="/assets/coxs-bazar.jpg" 
-                alt="Cox's Bazar Beach" 
-                className="w-full h-48 md:h-64 object-cover rounded-xl shadow-lg hover-lift transition-butter cursor-pointer"
-              />
-            </div>
-            <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              <img 
-                src="/assets/sylhet-tea-gardens.jpg" 
-                alt="Sylhet Tea Gardens" 
-                className="w-full h-48 md:h-64 object-cover rounded-xl shadow-lg hover-lift transition-butter cursor-pointer"
-              />
-            </div>
-            <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <img 
-                src="/assets/paharpur-buddhist-vihara.jpg" 
-                alt="Paharpur Buddhist Vihara" 
-                className="w-full h-48 md:h-64 object-cover rounded-xl shadow-lg hover-lift transition-butter cursor-pointer"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      
       
       <RecommendedHotels />
       <FlightDeals />
