@@ -135,30 +135,30 @@ export default function Destinations() {
             From pristine beaches to ancient ruins, adventure awaits at every corner.
           </p>
 
-          {/* Interactive Search and Filter */}
-          <div className="max-w-4xl mx-auto mb-8 space-y-4">
-            {/* Search Bar */}
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-white/60" />
+          {/* Interactive Search and Filter Row */}
+          <div className="max-w-5xl mx-auto mb-8">
+            <div className="flex gap-4 items-center">
+              {/* Search Bar */}
+              <div className="relative flex-1">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-white/60" />
+                </div>
+                <Input
+                  type="text"
+                  placeholder="Search destinations, experiences, or activities..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent !text-white"
+                  style={{ 
+                    color: 'white',
+                    '--tw-placeholder-color': 'rgba(255, 255, 255, 0.8)'
+                  } as React.CSSProperties}
+                />
               </div>
-              <Input
-                type="text"
-                placeholder="Search destinations, experiences, or activities..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent !text-white"
-                style={{ 
-                  color: 'white',
-                  '--tw-placeholder-color': 'rgba(255, 255, 255, 0.8)'
-                } as React.CSSProperties}
-              />
-            </div>
-            
-            {/* District Filter */}
-            <div className="flex justify-center">
+              
+              {/* District Filter */}
               <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
-                <SelectTrigger className="w-64 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full focus:ring-2 focus:ring-blue-400">
+                <SelectTrigger className="w-56 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full focus:ring-2 focus:ring-blue-400 py-4">
                   <div className="flex items-center">
                     <Filter className="h-4 w-4 mr-2 text-white/60" />
                     <SelectValue placeholder="Filter by District" />
@@ -173,6 +173,12 @@ export default function Destinations() {
                   ))}
                 </SelectContent>
               </Select>
+
+              {/* Filter Button */}
+              <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-6 py-4 h-auto whitespace-nowrap">
+                <Filter className="h-4 w-4 mr-2" />
+                Filter
+              </Button>
             </div>
           </div>
 
