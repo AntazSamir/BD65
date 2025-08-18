@@ -107,9 +107,9 @@ export default function Destinations() {
         <div className="absolute inset-0">
           {heroBackgrounds.map((bg, index) => (
             <div
-              key={index}
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-                index === activeHeroIndex ? 'opacity-100' : 'opacity-0'
+              key={`hero-bg-${index}`}
+              className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out ${
+                index === activeHeroIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
               }`}
               style={{ backgroundImage: `url(${bg})` }}
             />
@@ -183,8 +183,8 @@ export default function Destinations() {
               </Select>
 
               {/* Filter Button */}
-              <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-6 py-4 h-auto whitespace-nowrap">
-                <Filter className="h-4 w-4 mr-2" />
+              <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-6 py-4 h-auto whitespace-nowrap transition-all duration-300 ease-out hover:shadow-lg hover:scale-105 transform">
+                <Filter className="h-4 w-4 mr-2 transition-transform duration-300 hover:rotate-180" />
                 Filter
               </Button>
             </div>
@@ -232,9 +232,9 @@ export default function Destinations() {
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {heroBackgrounds.map((_, index) => (
             <button
-              key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === activeHeroIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/70'
+              key={`hero-indicator-${index}`}
+              className={`w-3 h-3 rounded-full transition-all duration-500 ease-out hover:scale-110 ${
+                index === activeHeroIndex ? 'bg-white scale-125 shadow-lg' : 'bg-white/50 hover:bg-white/80'
               }`}
               onClick={() => setActiveHeroIndex(index)}
             />
@@ -280,20 +280,20 @@ export default function Destinations() {
             {filteredDestinations.map((destination) => (
               <div 
                 key={destination.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-3 hover:scale-[1.02] group cursor-pointer"
                 data-testid={`card-destination-${destination.id}`}
               >
                 <div className="relative">
                   <img 
                     src={destination.imageUrl} 
                     alt={destination.name} 
-                    className="w-full h-64 object-cover"
+                    className="w-full h-64 object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                     data-testid={`img-destination-${destination.id}`}
                   />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 transition-all duration-300 ease-out group-hover:bg-white group-hover:shadow-lg">
                     <div className="flex items-center">
-                      <Star className="w-4 h-4 text-yellow-400 mr-1" />
-                      <span className="text-sm font-medium text-gray-800" data-testid={`text-destination-rating-${destination.id}`}>
+                      <Star className="w-4 h-4 text-yellow-400 mr-1 transition-transform duration-300 group-hover:scale-110" />
+                      <span className="text-sm font-medium text-gray-800 transition-colors duration-300" data-testid={`text-destination-rating-${destination.id}`}>
                         {destination.rating}
                       </span>
                     </div>
@@ -322,7 +322,7 @@ export default function Destinations() {
                       </p>
                     </div>
                     <button 
-                      className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-colors font-medium"
+                      className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-all duration-300 ease-out font-medium hover:shadow-lg hover:scale-105 transform"
                       data-testid={`button-explore-destination-${destination.id}`}
                     >
                       Explore
