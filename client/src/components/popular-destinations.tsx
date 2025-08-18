@@ -152,14 +152,6 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
         <div className="max-w-7xl mx-auto px-4">
           {/* Navigation arrows */}
           <button
-            onClick={goToPrevious}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-300"
-            data-testid="button-carousel-prev"
-          >
-            <ChevronLeft className="w-6 h-6 text-white" />
-          </button>
-          
-          <button
             onClick={goToNext}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-300"
             data-testid="button-carousel-next"
