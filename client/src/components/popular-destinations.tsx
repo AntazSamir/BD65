@@ -137,25 +137,27 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
       
-      {/* Header section */}
-      <div className="relative z-10 text-center mb-12 pt-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Popular Destinations</h2>
-        <p className="text-xl text-white/90">Discover Bangladesh's most breathtaking locations</p>
-        {selectedDestination && (
-          <div className="mt-6 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-semibold text-white mb-2">{selectedDestination.name}</h3>
-            <p className="text-white/80 text-lg">{selectedDestination.description}</p>
-            <div className="flex items-center justify-center mt-4 space-x-4">
-              <span className="text-yellow-400 text-lg">★ {selectedDestination.rating}</span>
-              <span className="text-white/60">•</span>
-              <span className="text-white text-lg">From ৳{selectedDestination.priceFrom}</span>
-            </div>
-          </div>
-        )}
-      </div>
-      
-      {/* Spacer to push cards to bottom */}
+      {/* Spacer to push content down */}
       <div className="flex-1"></div>
+      
+      {/* Header section - positioned above cards */}
+      <div className="relative z-10 text-center mb-16 px-4">
+        <div className="bg-black/40 backdrop-blur-md rounded-3xl p-8 max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Popular Destinations</h2>
+          <p className="text-xl text-white/90 mb-6">Discover Bangladesh's most breathtaking locations</p>
+          {selectedDestination && (
+            <div className="border-t border-white/20 pt-6">
+              <h3 className="text-2xl font-semibold text-white mb-3">{selectedDestination.name}</h3>
+              <p className="text-white/80 text-lg mb-4 max-w-2xl mx-auto">{selectedDestination.description}</p>
+              <div className="flex items-center justify-center space-x-4">
+                <span className="text-yellow-400 text-lg font-semibold">★ {selectedDestination.rating}</span>
+                <span className="text-white/60">•</span>
+                <span className="text-white text-lg font-semibold">From ৳{selectedDestination.priceFrom}</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
       
       {/* Carousel section */}
       <div className="relative z-10 pb-12">
