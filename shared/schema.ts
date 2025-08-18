@@ -22,6 +22,7 @@ export const destinations = pgTable("destinations", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   country: text("country").notNull(),
+  district: text("district").notNull(),
   description: text("description").notNull(),
   imageUrl: text("image_url").notNull(),
   rating: text("rating").notNull(),

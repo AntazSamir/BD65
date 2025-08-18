@@ -1,4 +1,4 @@
-import { Star, MapPin, Search, Filter, ArrowRight, Globe, Camera, Heart, Users } from 'lucide-react';
+import { Star, MapPin, Search, Filter, ArrowRight, Globe, Camera, Heart, Users, ChevronDown } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import type { Destination } from '@shared/schema';
@@ -6,6 +6,7 @@ import Navigation from '../components/navigation';
 import Footer from '../components/footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import sundarbansImage from '@assets/বিষ্ময়কর_সুন্দরবন_1755535540494.jpg';
 import valleyImage from '@assets/Tourist-Places-in-Bangladesh_1755535540494.jpg';
 import boatsImage from '@assets/penedo3_1755535540495.png';
@@ -14,16 +15,22 @@ import sajekImage from '@assets/Sajek_Valley_1755535989228.jpg';
 
 export default function Destinations() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDistrict, setSelectedDistrict] = useState('all');
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
   
   const { data: destinations = [], isLoading, error } = useQuery<Destination[]>({
     queryKey: ['/api/destinations'],
   });
 
-  const filteredDestinations = destinations.filter(destination =>
-    destination.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    destination.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredDestinations = destinations.filter(destination => {
+    const matchesSearch = destination.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      destination.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesDistrict = selectedDistrict === 'all' || destination.district === selectedDistrict;
+    return matchesSearch && matchesDistrict;
+  });
+
+  // Get unique districts for filter dropdown
+  const uniqueDistricts = Array.from(new Set(destinations.map(d => d.district))).sort();
 
   // Hero background carousel with authentic Bangladesh images
   const heroBackgrounds = [
@@ -128,8 +135,9 @@ export default function Destinations() {
             From pristine beaches to ancient ruins, adventure awaits at every corner.
           </p>
 
-          {/* Interactive Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
+          {/* Interactive Search and Filter */}
+          <div className="max-w-4xl mx-auto mb-8 space-y-4">
+            {/* Search Bar */}
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-white/60" />
@@ -139,21 +147,32 @@ export default function Destinations() {
                 placeholder="Search destinations, experiences, or activities..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-12 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent !text-white"
+                className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent !text-white"
                 style={{ 
                   color: 'white',
                   '--tw-placeholder-color': 'rgba(255, 255, 255, 0.8)'
                 } as React.CSSProperties}
               />
-              <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                <Button
-                  size="sm"
-                  className="bg-primary hover:bg-primary/90 text-white rounded-full px-6"
-                >
-                  <Filter className="h-4 w-4 mr-2" />
-                  Filter
-                </Button>
-              </div>
+            </div>
+            
+            {/* District Filter */}
+            <div className="flex justify-center">
+              <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
+                <SelectTrigger className="w-64 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full focus:ring-2 focus:ring-blue-400">
+                  <div className="flex items-center">
+                    <Filter className="h-4 w-4 mr-2 text-white/60" />
+                    <SelectValue placeholder="Filter by District" />
+                  </div>
+                </SelectTrigger>
+                <SelectContent className="bg-white/95 backdrop-blur-md border border-gray-200">
+                  <SelectItem value="all">All Districts</SelectItem>
+                  {uniqueDistricts.map((district) => (
+                    <SelectItem key={district} value={district}>
+                      {district}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
@@ -225,13 +244,18 @@ export default function Destinations() {
             </p>
           </div>
           {/* Search Results Info */}
-          {searchQuery && (
+          {(searchQuery || selectedDistrict !== 'all') && (
             <div className="mb-8">
               <p className="text-lg text-gray-600">
                 Found <span className="font-semibold text-primary">{filteredDestinations.length}</span> destinations
                 {searchQuery && (
                   <>
                     {' '}matching "<span className="font-medium">{searchQuery}</span>"
+                  </>
+                )}
+                {selectedDistrict !== 'all' && (
+                  <>
+                    {searchQuery ? ' and' : ''} in <span className="font-medium">{selectedDistrict}</span> district
                   </>
                 )}
               </p>
@@ -265,7 +289,7 @@ export default function Destinations() {
                 <div className="p-6">
                   <div className="flex items-center mb-2">
                     <MapPin className="w-4 h-4 text-gray-400 mr-1" />
-                    <span className="text-sm text-gray-500">{destination.country}</span>
+                    <span className="text-sm text-gray-500">{destination.district}, {destination.country}</span>
                   </div>
                   
                   <h3 className="text-2xl font-bold mb-3 text-gray-800" data-testid={`text-destination-name-${destination.id}`}>
