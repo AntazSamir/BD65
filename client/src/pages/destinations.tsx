@@ -143,8 +143,11 @@ export default function Destinations() {
                 placeholder="Search destinations, experiences, or activities..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-12 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder-white/60 focus:ring-2 focus:ring-blue-400 focus:border-transparent !text-white"
-                style={{ color: 'white' }}
+                className="w-full pl-12 pr-12 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent !text-white"
+                style={{ 
+                  color: 'white',
+                  '--tw-placeholder-color': 'rgba(255, 255, 255, 0.8)'
+                } as React.CSSProperties}
               />
               <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
                 <Button
