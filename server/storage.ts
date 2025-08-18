@@ -290,7 +290,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Bagerhat',
       description: 'Historic mosque city with 60 domed mosques and ancient Islamic architecture',
-      imageUrl: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      imageUrl: '/assets/Sixty_Dome_Mosque,Bagerhat_1755544692073.jpg',
       rating: '4.4',
       priceFrom: 2200,
     });
