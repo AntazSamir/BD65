@@ -64,19 +64,19 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     setTimeout(() => setIsAutoSliding(true), 10000);
   };
 
-  // Get visible cards (5 cards with center one highlighted)
+  // Get visible cards (7 cards with center one highlighted)
   const getVisibleCards = () => {
     if (destinations.length === 0) return [];
     
     const visibleCards = [];
-    const totalCards = Math.min(5, destinations.length);
+    const totalCards = Math.min(7, destinations.length);
     const startOffset = Math.floor(totalCards / 2);
     
     for (let i = 0; i < totalCards; i++) {
       const index = (currentIndex - startOffset + i + destinations.length) % destinations.length;
       visibleCards.push({
         destination: destinations[index],
-        position: i - startOffset, // -2, -1, 0, 1, 2
+        position: i - startOffset, // -3, -2, -1, 0, 1, 2, 3
         index: index
       });
     }
@@ -168,13 +168,13 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
           </button>
 
           {/* Cards container */}
-          <div className="flex justify-center items-end space-x-4 px-20">
+          <div className="flex justify-center items-end space-x-2 px-16">
             {visibleCards.map(({ destination, position, index }) => {
               const isCenterCard = position === 0;
-              const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : 'scale-85';
-              const cardOpacity = isCenterCard ? 'opacity-100' : Math.abs(position) === 1 ? 'opacity-80' : 'opacity-60';
-              const cardHeight = isCenterCard ? 'h-56' : Math.abs(position) === 1 ? 'h-48' : 'h-40';
-              const cardWidth = isCenterCard ? 'w-40' : 'w-32';
+              const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : Math.abs(position) === 2 ? 'scale-85' : 'scale-75';
+              const cardOpacity = isCenterCard ? 'opacity-100' : Math.abs(position) === 1 ? 'opacity-80' : Math.abs(position) === 2 ? 'opacity-60' : 'opacity-40';
+              const cardHeight = isCenterCard ? 'h-56' : Math.abs(position) === 1 ? 'h-48' : Math.abs(position) === 2 ? 'h-40' : 'h-32';
+              const cardWidth = isCenterCard ? 'w-40' : Math.abs(position) === 1 ? 'w-32' : Math.abs(position) === 2 ? 'w-28' : 'w-24';
               
               return (
                 <div
