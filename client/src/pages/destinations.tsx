@@ -6,6 +6,11 @@ import Navigation from '../components/navigation';
 import Footer from '../components/footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import sundarbansImage from '@assets/বিষ্ময়কর_সুন্দরবন_1755535540494.jpg';
+import valleyImage from '@assets/Tourist-Places-in-Bangladesh_1755535540494.jpg';
+import boatsImage from '@assets/penedo3_1755535540495.png';
+import aerialImage from '@assets/2_1755535540495.jpg';
+import sajekImage from '@assets/Sajek_Valley_1755535989228.jpg';
 
 export default function Destinations() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,12 +25,13 @@ export default function Destinations() {
     destination.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Hero background carousel
+  // Hero background carousel with authentic Bangladesh images
   const heroBackgrounds = [
-    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-    'https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-    'https://images.unsplash.com/photo-1501436513145-30f24e19fcc4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080'
+    sundarbansImage, // Sundarbans wildlife - spotted deer in mangrove forest
+    valleyImage,     // Scenic valley with mountains and lake reflection
+    boatsImage,      // Traditional boats in crystal clear water
+    aerialImage,     // Aerial view of winding rivers through mangroves
+    sajekImage       // Sajek Valley sunset with mountains and grass
   ];
 
   useEffect(() => {
