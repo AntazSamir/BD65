@@ -136,20 +136,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     >
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
-      {/* Header section */}
-      <div className="relative z-10 text-center pt-8 mt-[-114px] mb-[-114px]">
-        {selectedDestination && (
-          <div className="mt-6 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-semibold text-white mb-2">{selectedDestination.name}</h3>
-            <p className="text-white/80 text-lg">{selectedDestination.description}</p>
-            <div className="flex items-center justify-center mt-4 space-x-4">
-              <span className="text-yellow-400 text-lg">★ {selectedDestination.rating}</span>
-              <span className="text-white/60">•</span>
-              <span className="text-white text-lg">From ৳{selectedDestination.priceFrom}</span>
-            </div>
-          </div>
-        )}
-      </div>
+
       {/* Spacer to push cards to bottom */}
       <div className="flex-1"></div>
       {/* Carousel section */}

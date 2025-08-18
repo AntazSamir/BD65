@@ -124,7 +124,7 @@ export default function FlightDeals() {
                   <span className="text-xs text-gray-500">18 Seats left</span>
                   <Button 
                     onClick={handleBookNow}
-                    className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
                     data-testid={`button-book-flight-${flight.id}`}
                   >
                     Book Now
