@@ -136,14 +136,14 @@ export default function Destinations() {
           <div className="max-w-2xl mx-auto mb-8">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
+                <Search className="h-5 w-5 text-white/60" />
               </div>
               <Input
                 type="text"
                 placeholder="Search destinations, experiences, or activities..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-12 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                className="w-full pl-12 pr-12 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder-white/60 focus:ring-2 focus:ring-blue-400 focus:border-transparent"
               />
               <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
                 <Button
