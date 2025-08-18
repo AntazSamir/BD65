@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import buddhaImage from '@assets/Buddha_Dhatu_Jadi_06_1755534311265.jpg';
 
 export default function Newsletter() {
   const handleSubmit = (e: React.FormEvent) => {
@@ -49,7 +50,7 @@ export default function Newsletter() {
               <div 
                 className="absolute inset-0 bg-cover bg-center rounded-r-3xl lg:rounded-r-3xl"
                 style={{
-                  backgroundImage: "url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600')"
+                  backgroundImage: `url(${buddhaImage})`
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-blue-100/20"></div>
