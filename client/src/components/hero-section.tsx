@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Hotel, Car, MapPin, Search, Star, Users } from 'lucide-react';
+import { Hotel, Car, MapPin, Search, Star, Users, Plane } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -61,7 +61,7 @@ export default function HeroSection() {
                 }`}
                 onClick={() => setActiveTab('flights')}
               >
-                <img src={logoImage} alt="Flight" className="w-4 h-4 mr-2" />
+                <Plane className="w-4 h-4 mr-2" />
                 Flights
               </Button>
               <Button

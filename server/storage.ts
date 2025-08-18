@@ -198,6 +198,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: 'Lalbagh Fort',
       country: 'Bangladesh',
+      district: 'Dhaka',
       description: 'Historic Mughal fort complex in Old Dhaka with beautiful architecture',
       imageUrl: '/assets/lalbagh-fort.jpg',
       rating: '4.2',
@@ -207,6 +208,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: "Cox's Bazar",
       country: 'Bangladesh',
+      district: "Cox's Bazar",
       description: "World's longest natural sandy sea beach",
       imageUrl: '/assets/coxs-bazar.jpg',
       rating: '4.8',
@@ -216,6 +218,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: 'Sundarbans',
       country: 'Bangladesh',
+      district: 'Khulna',
       description: 'Largest mangrove forest and Royal Bengal Tiger habitat',
       imageUrl: '/assets/sundarbans.jpg',
       rating: '4.9',
@@ -225,6 +228,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: 'Sylhet Tea Gardens',
       country: 'Bangladesh',
+      district: 'Sylhet',
       description: 'Rolling green hills covered with tea plantations',
       imageUrl: '/assets/sylhet-tea-gardens.jpg',
       rating: '4.7',
@@ -234,6 +238,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: 'Saint Martin Island',
       country: 'Bangladesh',
+      district: "Cox's Bazar",
       description: 'Small coral island with pristine beaches and clear blue waters',
       imageUrl: '/assets/saint-martin-island.jpg',
       rating: '4.6',
@@ -243,6 +248,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: 'Chittagong Hill Tracts',
       country: 'Bangladesh',
+      district: 'Chittagong Hill Tracts',
       description: 'Mountainous region with tribal culture, waterfalls and scenic beauty',
       imageUrl: '/assets/chittagong-hill-tracts.jpg',
       rating: '4.8',
@@ -252,6 +258,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: 'Rangamati',
       country: 'Bangladesh',
+      district: 'Chittagong Hill Tracts',
       description: 'Lake district with hanging bridge, tribal museums and boat rides',
       imageUrl: '/assets/rangamati-bridge.jpg',
       rating: '4.5',
@@ -261,6 +268,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: 'Kuakata Beach',
       country: 'Bangladesh',
+      district: 'Patuakhali',
       description: 'Unique beach where you can see both sunrise and sunset',
       imageUrl: '/assets/kuakata-beach.jpg',
       rating: '4.4',
@@ -270,6 +278,7 @@ export class MemStorage implements IStorage {
     await this.createDestination({
       name: 'Paharpur Buddhist Vihara',
       country: 'Bangladesh',
+      district: 'Naogaon',
       description: 'UNESCO World Heritage archaeological site with ancient Buddhist ruins',
       imageUrl: '/assets/paharpur-buddhist-vihara.jpg',
       rating: '4.3',

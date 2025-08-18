@@ -32,8 +32,32 @@ export default function Navigation() {
           <div className="hidden md:flex space-x-8">
             <Link href="/" className="text-neutral hover:text-primary transition-colors">Home</Link>
             <Link href="/destinations" className="text-neutral hover:text-primary transition-colors">Destinations</Link>
-            <a href="#hotels" className="text-neutral hover:text-primary transition-colors">Hotels</a>
-            <a href="#flights" className="text-neutral hover:text-primary transition-colors">Flights</a>
+            <a 
+              href="#hotels" 
+              className="text-neutral hover:text-primary transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById('hotels');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Hotels
+            </a>
+            <a 
+              href="#flights" 
+              className="text-neutral hover:text-primary transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById('flights');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Flights
+            </a>
             <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
           </div>
           
@@ -102,8 +126,34 @@ export default function Navigation() {
             <div className="flex flex-col space-y-4">
               <Link href="/" className="text-neutral hover:text-primary transition-colors">Home</Link>
               <Link href="/destinations" className="text-neutral hover:text-primary transition-colors">Destinations</Link>
-              <a href="#hotels" className="text-neutral hover:text-primary transition-colors">Hotels</a>
-              <a href="#flights" className="text-neutral hover:text-primary transition-colors">Flights</a>
+              <a 
+                href="#hotels" 
+                className="text-neutral hover:text-primary transition-colors cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  const element = document.getElementById('hotels');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                Hotels
+              </a>
+              <a 
+                href="#flights" 
+                className="text-neutral hover:text-primary transition-colors cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  const element = document.getElementById('flights');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                Flights
+              </a>
               <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
               
               {isAuthenticated ? (
