@@ -200,7 +200,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Dhaka',
       description: 'Historic Mughal fort complex in Old Dhaka with beautiful architecture',
-      imageUrl: '/assets/lalbagh-fort.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1582718471137-c3967ffb1c42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.2',
       priceFrom: 500,
     });
@@ -210,7 +210,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: "Cox's Bazar",
       description: "World's longest natural sandy sea beach",
-      imageUrl: '/assets/coxs-bazar.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.8',
       priceFrom: 3500,
     });
@@ -220,7 +220,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Khulna',
       description: 'Largest mangrove forest and Royal Bengal Tiger habitat',
-      imageUrl: '/assets/sundarbans.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.9',
       priceFrom: 4500,
     });
@@ -230,7 +230,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Sylhet',
       description: 'Rolling green hills covered with tea plantations',
-      imageUrl: '/assets/sylhet-tea-gardens.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.7',
       priceFrom: 2800,
     });
@@ -240,7 +240,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: "Cox's Bazar",
       description: 'Small coral island with pristine beaches and clear blue waters',
-      imageUrl: '/assets/saint-martin-island.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.6',
       priceFrom: 5200,
     });
@@ -250,7 +250,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Chittagong Hill Tracts',
       description: 'Mountainous region with tribal culture, waterfalls and scenic beauty',
-      imageUrl: '/assets/chittagong-hill-tracts.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.8',
       priceFrom: 3200,
     });
@@ -260,7 +260,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Chittagong Hill Tracts',
       description: 'Lake district with hanging bridge, tribal museums and boat rides',
-      imageUrl: '/assets/rangamati-bridge.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.5',
       priceFrom: 2900,
     });
@@ -270,7 +270,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Patuakhali',
       description: 'Unique beach where you can see both sunrise and sunset',
-      imageUrl: '/assets/kuakata-beach.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.4',
       priceFrom: 2500,
     });
@@ -280,7 +280,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Naogaon',
       description: 'UNESCO World Heritage archaeological site with ancient Buddhist ruins',
-      imageUrl: '/assets/paharpur-buddhist-vihara.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1580500550469-d2bb0ebe3d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
       rating: '4.3',
       priceFrom: 1800,
     });

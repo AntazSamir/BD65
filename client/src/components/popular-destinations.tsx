@@ -136,10 +136,21 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     >
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
+      
+      {/* Title section */}
+      <div className="relative z-10 text-center mb-16 pt-16">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" data-testid="title-popular-destinations">
+          Popular Destinations
+        </h2>
+        <p className="text-xl text-white/90 max-w-2xl mx-auto" data-testid="subtitle-popular-destinations">
+          Discover Bangladesh's most breathtaking locations and hidden gems
+        </p>
+      </div>
+      
       {/* Spacer to push cards to bottom */}
       <div className="flex-1"></div>
       {/* Carousel section */}
-      <div className="relative z-10 pb-12 mt-[-223px] mb-[-223px]">
+      <div className="relative z-10 pb-12">
         <div className="max-w-7xl mx-auto px-4">
           {/* Navigation arrows */}
           <button
@@ -159,7 +170,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
           </button>
 
           {/* Cards container */}
-          <div className="flex justify-center items-end space-x-4 px-20 mt-[-84px] mb-[-84px]">
+          <div className="flex justify-center items-end space-x-4 px-20">
             {visibleCards.map(({ destination, position, index }) => {
               const isCenterCard = position === 0;
               const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : 'scale-85';
@@ -181,6 +192,10 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                     alt={destination.name} 
                     className="w-full h-full object-cover transition-transform duration-700"
                     data-testid={`img-destination-${destination.id}`}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080';
+                    }}
                   />
                   
                   {/* Overlay with destination name */}
