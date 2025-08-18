@@ -139,7 +139,6 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       
       {/* Header section */}
       <div className="relative z-10 text-center mb-12 pt-8">
-        <p className="text-xl text-white/90">Discover Bangladesh's most breathtaking locations</p>
         {selectedDestination && (
           <div className="mt-6 max-w-2xl mx-auto">
             <h3 className="text-2xl font-semibold text-white mb-2">{selectedDestination.name}</h3>
