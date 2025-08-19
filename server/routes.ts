@@ -351,9 +351,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/bookings", async (req, res) => {
     try {
       const userId = req.session?.userId;
+      console.log('Fetching bookings for user:', userId);
       const bookings = userId ? await storage.getBookings(userId) : [];
+      console.log('Found bookings:', bookings.length);
       res.json(bookings);
     } catch (error) {
+      console.error('Error fetching bookings:', error);
       res.status(500).json({ message: "Failed to fetch bookings" });
     }
   });
@@ -361,11 +364,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/bookings", async (req, res) => {
     try {
       const userId = req.session?.userId;
+      console.log('Creating booking for user:', userId);
+      console.log('Request body:', JSON.stringify(req.body, null, 2));
       
       const validatedData = insertBookingSchema.parse(req.body);
+      console.log('Validated data:', JSON.stringify(validatedData, null, 2));
+      
       const booking = await storage.createBooking({ ...validatedData, userId: userId || null });
+      console.log('Created booking:', JSON.stringify(booking, null, 2));
+      
       res.status(201).json(booking);
     } catch (error) {
+      console.error('Booking creation error:', error);
       if (error instanceof z.ZodError) {
         return res.status(400).json({ message: "Invalid data", errors: error.errors });
       }
