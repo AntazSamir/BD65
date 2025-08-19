@@ -54,7 +54,7 @@ export default function About() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <section className="relative py-20 bg-blue-50">
         {/* Simple Illustrations */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 text-blue-200">
@@ -237,7 +237,7 @@ export default function About() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-500 to-teal-500 text-white">
+      <section className="py-16 bg-blue-500 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-6">
             <Compass className="w-8 h-8 text-white" />
