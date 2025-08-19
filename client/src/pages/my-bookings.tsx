@@ -50,65 +50,152 @@ export default function MyBookings() {
 
   const downloadReceipt = (booking: Booking) => {
     const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
     
-    // Header
-    doc.setFontSize(20);
-    doc.setTextColor(0, 102, 204);
-    doc.text('Bangladesh Explorer', 20, 20);
-    doc.setFontSize(16);
+    // Header with background color
+    doc.setFillColor(0, 102, 204);
+    doc.rect(0, 0, pageWidth, 40, 'F');
+    
+    // Company name in header
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(24);
+    doc.text('Bangladesh Explorer', pageWidth / 2, 20, { align: 'center' });
+    doc.setFontSize(14);
+    doc.text('Your Gateway to Beautiful Bangladesh', pageWidth / 2, 30, { align: 'center' });
+    
+    // Receipt title
     doc.setTextColor(0, 0, 0);
-    doc.text('Booking Receipt', 20, 35);
+    doc.setFontSize(18);
+    doc.text('BOOKING RECEIPT', pageWidth / 2, 55, { align: 'center' });
     
-    // Booking details
+    // Draw a line under title
+    doc.setDrawColor(200, 200, 200);
+    doc.line(20, 65, pageWidth - 20, 65);
+    
+    let y = 80;
+    
+    // Confirmation details box
+    doc.setFillColor(245, 245, 245);
+    doc.roundedRect(20, y, pageWidth - 40, 25, 3, 3, 'F');
+    doc.setTextColor(0, 102, 204);
+    doc.setFontSize(14);
+    doc.text(`Confirmation: ${booking.confirmationNumber}`, 25, y + 10);
+    doc.text(`Status: ${booking.status.toUpperCase()}`, 25, y + 20);
+    doc.text(`Booking Type: ${booking.bookingType ? booking.bookingType.charAt(0).toUpperCase() + booking.bookingType.slice(1) : 'N/A'}`, pageWidth / 2 + 10, y + 10);
+    doc.text(`Date: ${new Date(booking.createdAt).toLocaleDateString('en-GB')}`, pageWidth / 2 + 10, y + 20);
+    
+    y += 40;
+    
+    // Property Information Section
+    doc.setTextColor(0, 102, 204);
+    doc.setFontSize(16);
+    doc.text('Property Information', 20, y);
+    doc.setDrawColor(0, 102, 204);
+    doc.line(20, y + 3, 120, y + 3);
+    
+    y += 15;
+    doc.setTextColor(0, 0, 0);
     doc.setFontSize(12);
-    doc.text(`Confirmation Number: ${booking.confirmationNumber}`, 20, 55);
-    doc.text(`Booking Type: ${booking.bookingType.charAt(0).toUpperCase() + booking.bookingType.slice(1)}`, 20, 70);
-    doc.text(`Property: ${booking.propertyName}`, 20, 85);
-    doc.text(`Location: ${booking.propertyLocation}`, 20, 100);
-    doc.text(`Customer: ${booking.customerName}`, 20, 115);
-    doc.text(`Email: ${booking.email}`, 20, 130);
-    doc.text(`Phone: ${booking.phone}`, 20, 145);
-    doc.text(`Status: ${booking.status.toUpperCase()}`, 20, 160);
+    doc.text(`Name: ${booking.propertyName}`, 25, y);
+    y += 10;
+    doc.text(`Location: ${booking.propertyLocation}`, 25, y);
+    y += 10;
+    doc.text(`Phone: ${booking.propertyPhone}`, 25, y);
     
-    // Type-specific details
-    let yPosition = 180;
+    y += 20;
+    
+    // Customer Information Section
+    doc.setTextColor(0, 102, 204);
+    doc.setFontSize(16);
+    doc.text('Customer Information', 20, y);
+    doc.setDrawColor(0, 102, 204);
+    doc.line(20, y + 3, 120, y + 3);
+    
+    y += 15;
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(12);
+    doc.text(`Name: ${booking.customerName}`, 25, y);
+    y += 10;
+    doc.text(`Email: ${booking.email}`, 25, y);
+    y += 10;
+    doc.text(`Phone: ${booking.phone}`, 25, y);
+    
+    y += 20;
+    
+    // Booking Details Section
+    doc.setTextColor(0, 102, 204);
+    doc.setFontSize(16);
+    doc.text('Booking Details', 20, y);
+    doc.setDrawColor(0, 102, 204);
+    doc.line(20, y + 3, 110, y + 3);
+    
+    y += 15;
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(12);
     
     if (booking.bookingType === 'hotel') {
-      doc.text(`Room Type: ${booking.roomType || 'N/A'}`, 20, yPosition);
-      doc.text(`Check-in: ${booking.checkIn || 'N/A'}`, 20, yPosition + 15);
-      doc.text(`Check-out: ${booking.checkOut || 'N/A'}`, 20, yPosition + 30);
-      doc.text(`Nights: ${booking.nights || 'N/A'}`, 20, yPosition + 45);
-      doc.text(`Guests: ${booking.guests || 'N/A'}`, 20, yPosition + 60);
-      yPosition += 75;
+      doc.text(`Room Type: ${booking.roomType || 'Standard'}`, 25, y);
+      y += 10;
+      doc.text(`Check-in Date: ${booking.checkIn ? new Date(booking.checkIn).toLocaleDateString('en-GB') : 'N/A'}`, 25, y);
+      y += 10;
+      doc.text(`Check-out Date: ${booking.checkOut ? new Date(booking.checkOut).toLocaleDateString('en-GB') : 'N/A'}`, 25, y);
+      y += 10;
+      doc.text(`Number of Nights: ${booking.nights || 1}`, 25, y);
+      y += 10;
+      doc.text(`Number of Guests: ${booking.guests || 1}`, 25, y);
     } else if (booking.bookingType === 'restaurant') {
-      doc.text(`Date: ${booking.reservationDate || 'N/A'}`, 20, yPosition);
-      doc.text(`Time: ${booking.reservationTime || 'N/A'}`, 20, yPosition + 15);
-      doc.text(`Party Size: ${booking.partySize || 'N/A'}`, 20, yPosition + 30);
-      doc.text(`Cuisine: ${booking.cuisine || 'N/A'}`, 20, yPosition + 45);
-      yPosition += 60;
+      doc.text(`Reservation Date: ${booking.reservationDate ? new Date(booking.reservationDate).toLocaleDateString('en-GB') : 'N/A'}`, 25, y);
+      y += 10;
+      doc.text(`Reservation Time: ${booking.reservationTime || 'N/A'}`, 25, y);
+      y += 10;
+      doc.text(`Party Size: ${booking.partySize || 1} people`, 25, y);
+      y += 10;
+      doc.text(`Cuisine Type: ${booking.cuisine || 'Mixed'}`, 25, y);
     } else if (booking.bookingType === 'car' || booking.bookingType === 'bus') {
-      doc.text(`Travel Date: ${booking.travelDate || 'N/A'}`, 20, yPosition);
-      doc.text(`Passengers: ${booking.passengers || 'N/A'}`, 20, yPosition + 15);
-      yPosition += 30;
+      doc.text(`Travel Date: ${booking.travelDate ? new Date(booking.travelDate).toLocaleDateString('en-GB') : 'N/A'}`, 25, y);
+      y += 10;
+      doc.text(`Number of Passengers: ${booking.passengers || 1}`, 25, y);
+      if (booking.specialRequests) {
+        y += 10;
+        doc.text(`Special Requests: ${booking.specialRequests}`, 25, y);
+      }
     }
     
-    // Total amount
-    doc.setFontSize(14);
-    doc.setTextColor(0, 102, 0);
-    doc.text(`Total Amount: ৳${booking.totalAmount?.toLocaleString() || '0'}`, 20, yPosition + 15);
+    y += 25;
+    
+    // Payment Summary Box
+    doc.setFillColor(240, 248, 255);
+    doc.roundedRect(20, y, pageWidth - 40, 30, 3, 3, 'F');
+    doc.setDrawColor(0, 102, 204);
+    doc.roundedRect(20, y, pageWidth - 40, 30, 3, 3, 'S');
+    
+    doc.setTextColor(0, 102, 204);
+    doc.setFontSize(16);
+    doc.text('Payment Summary', pageWidth / 2, y + 12, { align: 'center' });
+    
+    doc.setTextColor(0, 100, 0);
+    doc.setFontSize(20);
+    doc.text(`৳${booking.totalAmount?.toLocaleString() || '0'}`, pageWidth / 2, y + 25, { align: 'center' });
+    
+    y += 50;
     
     // Footer
+    doc.setDrawColor(200, 200, 200);
+    doc.line(20, y, pageWidth - 20, y);
+    
+    y += 15;
+    doc.setTextColor(100, 100, 100);
     doc.setFontSize(10);
-    doc.setTextColor(128, 128, 128);
-    doc.text('Thank you for choosing Bangladesh Explorer!', 20, yPosition + 40);
-    doc.text(`Generated on: ${new Date().toLocaleDateString('en-GB')}`, 20, yPosition + 55);
+    doc.text('Thank you for choosing Bangladesh Explorer!', pageWidth / 2, y, { align: 'center' });
+    doc.text('Discover the beauty and culture of Bangladesh with us.', pageWidth / 2, y + 10, { align: 'center' });
+    doc.text(`Receipt generated on ${new Date().toLocaleDateString('en-GB')} at ${new Date().toLocaleTimeString('en-US')}`, pageWidth / 2, y + 25, { align: 'center' });
     
     // Download the PDF
     doc.save(`Bangladesh-Explorer-Receipt-${booking.confirmationNumber}.pdf`);
     
     toast({
       title: "Receipt Downloaded",
-      description: `Receipt for ${booking.propertyName} has been downloaded.`,
+      description: `Professional receipt for ${booking.propertyName} has been downloaded.`,
     });
   };
 
