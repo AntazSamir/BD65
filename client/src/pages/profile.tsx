@@ -17,8 +17,9 @@ import { useProfile } from "@/hooks/useProfile";
 import { apiRequest } from "@/lib/queryClient";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import { User, Save, LogOut, Calendar, MapPin, X, CheckCircle, AlertTriangle, Users, Phone, Clock, Utensils } from "lucide-react";
+import { User, Save, LogOut, Calendar, MapPin, X, CheckCircle, AlertTriangle, Users, Phone, Clock, Utensils, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import jsPDF from 'jspdf';
 
 export default function Profile() {
   const { user, signOut, isSigningOut, isAuthenticated } = useAuth();
@@ -130,6 +131,70 @@ export default function Profile() {
         variant: "destructive",
       });
     }
+  };
+
+  const downloadReceipt = (booking: Booking) => {
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(20);
+    doc.setTextColor(0, 102, 204);
+    doc.text('Bangladesh Explorer', 20, 20);
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Booking Receipt', 20, 35);
+    
+    // Booking details
+    doc.setFontSize(12);
+    doc.text(`Confirmation Number: ${booking.confirmationNumber}`, 20, 55);
+    doc.text(`Booking Type: ${booking.bookingType.charAt(0).toUpperCase() + booking.bookingType.slice(1)}`, 20, 70);
+    doc.text(`Property: ${booking.propertyName}`, 20, 85);
+    doc.text(`Location: ${booking.propertyLocation}`, 20, 100);
+    doc.text(`Customer: ${booking.customerName}`, 20, 115);
+    doc.text(`Email: ${booking.email}`, 20, 130);
+    doc.text(`Phone: ${booking.phone}`, 20, 145);
+    doc.text(`Status: ${booking.status.toUpperCase()}`, 20, 160);
+    
+    // Type-specific details
+    let yPosition = 180;
+    
+    if (booking.bookingType === 'hotel') {
+      doc.text(`Room Type: ${booking.roomType || 'N/A'}`, 20, yPosition);
+      doc.text(`Check-in: ${booking.checkIn || 'N/A'}`, 20, yPosition + 15);
+      doc.text(`Check-out: ${booking.checkOut || 'N/A'}`, 20, yPosition + 30);
+      doc.text(`Nights: ${booking.nights || 'N/A'}`, 20, yPosition + 45);
+      doc.text(`Guests: ${booking.guests || 'N/A'}`, 20, yPosition + 60);
+      yPosition += 75;
+    } else if (booking.bookingType === 'restaurant') {
+      doc.text(`Date: ${booking.reservationDate || 'N/A'}`, 20, yPosition);
+      doc.text(`Time: ${booking.reservationTime || 'N/A'}`, 20, yPosition + 15);
+      doc.text(`Party Size: ${booking.partySize || 'N/A'}`, 20, yPosition + 30);
+      doc.text(`Cuisine: ${booking.cuisine || 'N/A'}`, 20, yPosition + 45);
+      yPosition += 60;
+    } else if (booking.bookingType === 'car' || booking.bookingType === 'bus') {
+      doc.text(`Travel Date: ${booking.travelDate || 'N/A'}`, 20, yPosition);
+      doc.text(`Passengers: ${booking.passengers || 'N/A'}`, 20, yPosition + 15);
+      yPosition += 30;
+    }
+    
+    // Total amount
+    doc.setFontSize(14);
+    doc.setTextColor(0, 102, 0);
+    doc.text(`Total Amount: ৳${booking.totalAmount?.toLocaleString() || '0'}`, 20, yPosition + 15);
+    
+    // Footer
+    doc.setFontSize(10);
+    doc.setTextColor(128, 128, 128);
+    doc.text('Thank you for choosing Bangladesh Explorer!', 20, yPosition + 40);
+    doc.text(`Generated on: ${new Date().toLocaleDateString('en-GB')}`, 20, yPosition + 55);
+    
+    // Download the PDF
+    doc.save(`Bangladesh-Explorer-Receipt-${booking.confirmationNumber}.pdf`);
+    
+    toast({
+      title: "Receipt Downloaded",
+      description: `Receipt for ${booking.propertyName} has been downloaded.`,
+    });
   };
 
   if (!user) {
@@ -410,6 +475,15 @@ export default function Profile() {
                             )}
                             {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
                           </Badge>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => downloadReceipt(booking)}
+                            data-testid={`profile-download-${booking.id}`}
+                          >
+                            <Download className="w-3 h-3 mr-1" />
+                            Receipt
+                          </Button>
                           {booking.status === 'confirmed' && (
                             <Button
                               variant="destructive"
