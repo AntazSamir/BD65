@@ -50,7 +50,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen section-bg-cool">
       <Navigation />
       
       {/* Hero Section */}
@@ -90,9 +90,14 @@ export default function About() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 section-bg-soft">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
+            <div className="flex justify-center mb-4">
+              <div className="icon-bg-green">
+                <Award className="w-6 h-6" />
+              </div>
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Impact</h2>
             <p className="text-xl text-gray-600">Making a difference in Bangladesh tourism</p>
           </div>
@@ -101,7 +106,7 @@ export default function About() {
             {stats.map((stat, index) => {
               const IconComponent = stat.icon;
               return (
-                <div key={index} className="text-center">
+                <div key={index} className="text-center elegant-card p-6 hover-lift transition-butter">
                   <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
@@ -115,9 +120,14 @@ export default function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-16">
+      <section className="py-16 section-bg-warm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
+            <div className="flex justify-center mb-4">
+              <div className="icon-bg-purple">
+                <Heart className="w-6 h-6" />
+              </div>
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Values</h2>
             <p className="text-xl text-gray-600">What drives us every day</p>
           </div>
@@ -126,7 +136,7 @@ export default function About() {
             {values.map((value, index) => {
               const IconComponent = value.icon;
               return (
-                <div key={index} className="text-center">
+                <div key={index} className="text-center elegant-card p-6 hover-lift transition-butter">
                   <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
@@ -140,16 +150,21 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 section-bg-cool">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
+            <div className="flex justify-center mb-4">
+              <div className="icon-bg-orange">
+                <Users className="w-6 h-6" />
+              </div>
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Meet Our Team</h2>
             <p className="text-xl text-gray-600">The passionate people behind Bangladesh Explorer</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg text-center">
+              <div key={index} className="elegant-card p-8 text-center hover-lift transition-butter">
                 <img 
                   src={member.image} 
                   alt={member.name} 

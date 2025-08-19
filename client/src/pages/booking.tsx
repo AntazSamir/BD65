@@ -373,7 +373,7 @@ For support, contact us at support@bangladeshexplorer.com
   if (!currentItem) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen section-bg-soft">
       <Navigation />
       
       <div className="pt-24 pb-16">

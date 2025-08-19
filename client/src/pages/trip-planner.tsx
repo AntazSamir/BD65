@@ -62,13 +62,18 @@ export default function TripPlannerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen section-bg-soft">
       <Navigation />
       
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
+            <div className="flex justify-center mb-4">
+              <div className="bg-white/20 rounded-xl w-12 h-12 flex items-center justify-center">
+                <Plane className="w-6 h-6 text-white" />
+              </div>
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Trip Planner</h1>
             <p className="text-xl opacity-90">Compare and choose the best transportation option for your journey</p>
           </div>
@@ -153,7 +158,7 @@ export default function TripPlannerPage() {
             {isLoading ? (
               <div className="grid gap-4">
                 {[...Array(3)].map((_, i) => (
-                  <Card key={i} className="animate-pulse">
+                  <Card key={i} className="elegant-card animate-pulse">
                     <CardContent className="p-6">
                       <div className="h-6 bg-gray-200 rounded mb-4"></div>
                       <div className="h-4 bg-gray-200 rounded mb-2"></div>
@@ -165,7 +170,7 @@ export default function TripPlannerPage() {
             ) : (
               <div className="grid gap-4">
                 {tripPlanners.map((flight) => (
-                  <Card key={flight.id} className="hover:shadow-md transition-shadow">
+                  <Card key={flight.id} className="elegant-card hover-lift transition-butter">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center space-x-4">
@@ -226,7 +231,7 @@ export default function TripPlannerPage() {
 
             <div className="grid gap-4">
               {buses.map((bus) => (
-                <Card key={bus.id} className="hover:shadow-md transition-shadow">
+                <Card key={bus.id} className="elegant-card hover-lift transition-butter">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-4">
@@ -296,7 +301,7 @@ export default function TripPlannerPage() {
 
             <div className="grid gap-4">
               {privateCars.map((car) => (
-                <Card key={car.id} className="hover:shadow-md transition-shadow">
+                <Card key={car.id} className="elegant-card hover-lift transition-butter">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-4">

@@ -262,13 +262,18 @@ export default function Hotels() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen section-bg-soft">
       <Navigation />
       
       {/* Header Section */}
-      <div className="pt-24 pb-8 bg-white">
+      <div className="pt-24 pb-8 section-bg-cool">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
+            <div className="flex justify-center mb-4">
+              <div className="icon-bg-blue">
+                {showRestaurants ? <Utensils className="w-6 h-6" /> : <Building2 className="w-6 h-6" />}
+              </div>
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               {showRestaurants ? 'Find Amazing Restaurants' : 'Find Your Perfect Stay'}
             </h1>
@@ -298,7 +303,7 @@ export default function Hotels() {
           </div>
 
           {/* Search and Filter Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 border">
+          <div className="elegant-card p-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
               {/* Search Input */}
               <div className="md:col-span-2">
@@ -391,7 +396,7 @@ export default function Hotels() {
                 filteredAndSortedRestaurants.map((restaurant) => (
                   <div
                     key={restaurant.id}
-                    className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-all duration-300 p-6 group cursor-pointer"
+                    className="elegant-card p-6 group cursor-pointer hover-lift transition-butter"
                     onClick={() => handleRestaurantClick(restaurant)}
                     data-testid={`card-restaurant-${restaurant.id}`}
                   >
@@ -463,7 +468,7 @@ export default function Hotels() {
                 filteredAndSortedHotels.map((hotel) => (
                   <div
                     key={hotel.id}
-                    className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-all duration-300 p-6 group cursor-pointer"
+                    className="elegant-card p-6 group cursor-pointer hover-lift transition-butter"
                     onClick={() => handleHotelClick(hotel)}
                     data-testid={`card-hotel-${hotel.id}`}
                   >

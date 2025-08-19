@@ -56,15 +56,20 @@ export default function Destinations() {
     return (
       <div className="min-h-screen bg-white">
         <Navigation />
-        <div className="py-16">
+        <div className="py-16 section-bg-cool">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
+              <div className="flex justify-center mb-4">
+                <div className="icon-bg-blue">
+                  <MapPin className="w-6 h-6" />
+                </div>
+              </div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Explore Bangladesh</h1>
               <p className="text-xl text-gray-600">Discover amazing destinations across Bangladesh</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse">
+                <div key={i} className="elegant-card overflow-hidden animate-pulse">
                   <div className="w-full h-64 bg-gray-200"></div>
                   <div className="p-6">
                     <div className="h-6 bg-gray-200 rounded mb-2"></div>
@@ -247,7 +252,7 @@ export default function Destinations() {
       </div>
 
       {/* Destinations Grid */}
-      <div className="py-16 bg-gray-50">
+      <div className="py-16 section-bg-warm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-12">
@@ -284,7 +289,7 @@ export default function Destinations() {
             {filteredDestinations.map((destination, index) => (
               <div 
                 key={destination.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover-lift transition-butter group cursor-pointer animate-fade-in"
+                className="elegant-card overflow-hidden hover-lift transition-butter group cursor-pointer animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
                 data-testid={`card-destination-${destination.id}`}
               >
