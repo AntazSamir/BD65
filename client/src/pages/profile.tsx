@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
+import Navigation from "@/components/navigation";
 import { User, Save, LogOut } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -90,8 +91,10 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <Navigation />
+      <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Profile</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
@@ -290,6 +293,7 @@ export default function Profile() {
               </form>
             </CardContent>
           </Card>
+        </div>
         </div>
       </div>
     </div>
