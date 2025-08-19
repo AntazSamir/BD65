@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
+import BookingDialog from '@/components/booking-dialog';
 import type { TripPlanner, Bus as BusType, PrivateCar } from '@shared/schema';
 
 export default function TripPlannerPage() {
@@ -16,6 +17,17 @@ export default function TripPlannerPage() {
   const [destination, setDestination] = useState('');
   const [departureDate, setDepartureDate] = useState('');
   const [passengers, setPassengers] = useState('1');
+  
+  // Booking dialog state
+  const [bookingDialog, setBookingDialog] = useState<{
+    isOpen: boolean;
+    item: TripPlanner | BusType | PrivateCar | null;
+    type: 'flight' | 'bus' | 'car';
+  }>({
+    isOpen: false,
+    item: null,
+    type: 'flight',
+  });
 
   const { data: tripPlanners = [], isLoading } = useQuery<TripPlanner[]>({
     queryKey: ['/api/trip-planners'],
@@ -31,6 +43,22 @@ export default function TripPlannerPage() {
 
   const handleSearch = () => {
     console.log('Searching for:', { origin, destination, departureDate, passengers });
+  };
+
+  const openBookingDialog = (item: TripPlanner | BusType | PrivateCar, type: 'flight' | 'bus' | 'car') => {
+    setBookingDialog({
+      isOpen: true,
+      item,
+      type,
+    });
+  };
+
+  const closeBookingDialog = () => {
+    setBookingDialog({
+      isOpen: false,
+      item: null,
+      type: 'flight',
+    });
   };
 
   return (
@@ -174,7 +202,10 @@ export default function TripPlannerPage() {
                           <Star className="w-4 h-4 text-yellow-400 fill-current" />
                           <span className="text-sm">4.5</span>
                         </div>
-                        <Button className="bg-blue-600 hover:bg-blue-700">
+                        <Button 
+                          className="bg-blue-600 hover:bg-blue-700"
+                          onClick={() => openBookingDialog(flight, 'flight')}
+                        >
                           Select Flight
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
@@ -242,7 +273,10 @@ export default function TripPlannerPage() {
                     </div>
 
                     <div className="flex justify-end">
-                      <Button className="bg-green-600 hover:bg-green-700">
+                      <Button 
+                        className="bg-green-600 hover:bg-green-700"
+                        onClick={() => openBookingDialog(bus, 'bus')}
+                      >
                         Select Bus
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
@@ -309,7 +343,10 @@ export default function TripPlannerPage() {
                     </div>
 
                     <div className="flex justify-end">
-                      <Button className="bg-purple-600 hover:bg-purple-700">
+                      <Button 
+                        className="bg-purple-600 hover:bg-purple-700"
+                        onClick={() => openBookingDialog(car, 'car')}
+                      >
                         Select Car
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
@@ -323,6 +360,14 @@ export default function TripPlannerPage() {
       </div>
 
       <Footer />
+      
+      {/* Booking Dialog */}
+      <BookingDialog
+        isOpen={bookingDialog.isOpen}
+        onClose={closeBookingDialog}
+        item={bookingDialog.item}
+        type={bookingDialog.type}
+      />
     </div>
   );
 }

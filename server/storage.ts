@@ -307,6 +307,10 @@ export class MemStorage implements IStorage {
       id,
       status: insertBooking.status || 'confirmed',
       // Handle nullable fields by converting undefined to null
+      userId: insertBooking.userId || null,
+      passengers: insertBooking.passengers || null,
+      specialRequests: insertBooking.specialRequests || null,
+      travelDate: insertBooking.travelDate || null,
       roomType: insertBooking.roomType || null,
       checkIn: insertBooking.checkIn || null,
       checkOut: insertBooking.checkOut || null,

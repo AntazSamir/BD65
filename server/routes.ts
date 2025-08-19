@@ -348,29 +348,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Booking routes
-  app.get("/api/bookings", isAuthenticated, async (req, res) => {
+  app.get("/api/bookings", async (req, res) => {
     try {
-      const userId = req.session.userId;
-      if (!userId) {
-        return res.status(401).json({ message: "No user session found" });
-      }
-      
-      const bookings = await storage.getBookings(userId);
+      const userId = req.session?.userId;
+      const bookings = userId ? await storage.getBookings(userId) : [];
       res.json(bookings);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch bookings" });
     }
   });
 
-  app.post("/api/bookings", isAuthenticated, async (req, res) => {
+  app.post("/api/bookings", async (req, res) => {
     try {
-      const userId = req.session.userId;
-      if (!userId) {
-        return res.status(401).json({ message: "No user session found" });
-      }
+      const userId = req.session?.userId;
       
-      const validatedData = insertBookingSchema.parse({ ...req.body, userId });
-      const booking = await storage.createBooking(validatedData);
+      const validatedData = insertBookingSchema.parse(req.body);
+      const booking = await storage.createBooking({ ...validatedData, userId: userId || null });
       res.status(201).json(booking);
     } catch (error) {
       if (error instanceof z.ZodError) {

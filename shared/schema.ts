@@ -104,18 +104,16 @@ export const restaurants = pgTable("restaurants", {
 
 export const bookings = pgTable("bookings", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  userId: varchar("user_id").notNull().references(() => users.id),
-  confirmationNumber: text("confirmation_number").notNull().unique(),
-  bookingType: text("booking_type").notNull(), // 'hotel' or 'restaurant'
-  propertyId: varchar("property_id").notNull(), // hotel or restaurant ID
-  propertyName: text("property_name").notNull(),
-  propertyLocation: text("property_location").notNull(),
-  propertyImageUrl: text("property_image_url").notNull(),
-  propertyPhone: text("property_phone").notNull(),
+  userId: varchar("user_id"),
+  itemId: varchar("item_id").notNull(),
+  itemType: text("item_type").notNull(), // 'hotel', 'restaurant', 'flight', 'bus', 'car'
   customerName: text("customer_name").notNull(),
-  customerEmail: text("customer_email").notNull(),
-  customerPhone: text("customer_phone").notNull(),
-  status: text("status").notNull().default('confirmed'), // 'confirmed', 'cancelled'
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  passengers: integer("passengers"),
+  specialRequests: text("special_requests"),
+  travelDate: text("travel_date"),
+  status: text("status").notNull().default('confirmed'), // 'confirmed', 'cancelled', 'pending'
   // Hotel specific fields
   roomType: text("room_type"),
   checkIn: text("check_in"),
