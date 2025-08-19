@@ -141,10 +141,14 @@ export default function Profile() {
     doc.setFillColor(0, 102, 204);
     doc.rect(0, 0, pageWidth, 50, 'F');
     
-    // Company logo (simplified text-based logo)
+    // Company logo (text-based logo with border)
     doc.setTextColor(255, 255, 255);
+    doc.setDrawColor(255, 255, 255);
+    doc.roundedRect(15, 8, 35, 14, 2, 2, 'S');
+    doc.setFontSize(10);
+    doc.text('BANGLADESH', 32.5, 13, { align: 'center' });
     doc.setFontSize(8);
-    doc.text('🇧🇩', 25, 15);
+    doc.text('EXPLORER', 32.5, 19, { align: 'center' });
     
     // Company name in header
     doc.setFontSize(26);
@@ -152,7 +156,7 @@ export default function Profile() {
     doc.setFontSize(12);
     doc.text('Your Gateway to Beautiful Bangladesh', pageWidth / 2, 35, { align: 'center' });
     doc.setFontSize(10);
-    doc.text('📞 +880-2-123-4567  |  ✉️ info@bangladeshexplorer.com  |  🌐 www.bangladeshexplorer.com', pageWidth / 2, 45, { align: 'center' });
+    doc.text('+880-2-123-4567  |  info@bangladeshexplorer.com  |  www.bangladeshexplorer.com', pageWidth / 2, 45, { align: 'center' });
     
     // Receipt title
     doc.setTextColor(0, 0, 0);
@@ -262,11 +266,12 @@ export default function Profile() {
     
     doc.setTextColor(0, 102, 204);
     doc.setFontSize(16);
-    doc.text('💰 TOTAL AMOUNT PAID', pageWidth / 2, y + 15, { align: 'center' });
+    doc.text('TOTAL AMOUNT PAID', pageWidth / 2, y + 15, { align: 'center' });
     
     doc.setTextColor(0, 120, 0);
     doc.setFontSize(24);
-    const formattedAmount = `৳ ${(booking.totalAmount || 0).toLocaleString('en-BD')}`;
+    const amount = booking.totalAmount || 0;
+    const formattedAmount = `BDT ${amount.toLocaleString('en-US')}`;
     doc.text(formattedAmount, pageWidth / 2, y + 30, { align: 'center' });
     
     y += 55;
@@ -278,7 +283,7 @@ export default function Profile() {
     y += 15;
     doc.setTextColor(0, 102, 204);
     doc.setFontSize(12);
-    doc.text('🙏 Thank you for choosing Bangladesh Explorer!', pageWidth / 2, y, { align: 'center' });
+    doc.text('Thank you for choosing Bangladesh Explorer!', pageWidth / 2, y, { align: 'center' });
     doc.setTextColor(100, 100, 100);
     doc.setFontSize(10);
     doc.text('Discover the beauty and culture of Bangladesh with us.', pageWidth / 2, y + 10, { align: 'center' });
