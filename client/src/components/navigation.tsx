@@ -12,7 +12,7 @@ export default function Navigation() {
   const { user, isAuthenticated, signOut, isSigningOut } = useAuth();
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100">
+    <nav className="bg-white/95 soft-blur shadow-sm sticky top-0 z-50 border-b border-white/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center">
@@ -23,23 +23,23 @@ export default function Navigation() {
                 className="w-10 h-10 mr-3"
                 data-testid="logo-image"
               />
-              <div className="text-2xl font-bold text-primary">
+              <div className="text-2xl font-bold gradient-text-warm">
                 Bangladesh Explorer
               </div>
             </div>
           </Link>
           
           <div className="hidden md:flex space-x-8">
-            <Link href="/" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Home</Link>
-            <Link href="/destinations" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Destinations</Link>
-            <Link href="/hotels" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Hotels</Link>
+            <Link href="/" className="relative text-neutral hover:gradient-text-warm after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:gradient-soft-warm after:transition-all after:duration-300">Home</Link>
+            <Link href="/destinations" className="relative text-neutral hover:gradient-text-warm after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:gradient-soft-warm after:transition-all after:duration-300">Destinations</Link>
+            <Link href="/hotels" className="relative text-neutral hover:gradient-text-warm after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:gradient-soft-warm after:transition-all after:duration-300">Hotels</Link>
             <Link 
               href="/trip-planner" 
-              className="relative text-neutral hover:text-primary cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+              className="relative text-neutral hover:gradient-text-warm cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:gradient-soft-warm after:transition-all after:duration-300"
             >
               Trip Planner
             </Link>
-            <Link href="/about" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">About</Link>
+            <Link href="/about" className="relative text-neutral hover:gradient-text-warm after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:gradient-soft-warm after:transition-all after:duration-300">About</Link>
           </div>
           
           <div className="flex items-center space-x-4">

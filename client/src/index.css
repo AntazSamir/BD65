@@ -3,55 +3,125 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(210, 25%, 7.8431%);
-  --card: hsl(180, 6.6667%, 97.0588%);
-  --card-foreground: hsl(210, 25%, 7.8431%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(210, 25%, 7.8431%);
-  --primary: hsl(218, 87%, 38%);
+  /* Soft Color Palette inspired by Bangladesh gradient */
+  --background: hsl(30, 50%, 98%);
+  --foreground: hsl(210, 25%, 15%);
+  --card: hsl(28, 40%, 96%);
+  --card-foreground: hsl(210, 25%, 20%);
+  --popover: hsl(30, 50%, 98%);
+  --popover-foreground: hsl(210, 25%, 15%);
+  
+  /* Primary: Soft blue-purple gradient base */
+  --primary: hsl(240, 60%, 65%);
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(218, 87%, 58%);
+  --secondary: hsl(260, 50%, 75%);
   --secondary-foreground: hsl(0, 0%, 100%);
-  --accent: hsl(21, 92%, 53%);
+  
+  /* Accent: Warm coral-orange (from Bangladesh gradient) */
+  --accent: hsl(21, 85%, 60%);
   --accent-foreground: hsl(0, 0%, 100%);
-  --neutral: hsl(212, 26%, 40%);
+  
+  /* Neutral: Soft gray-blue */
+  --neutral: hsl(220, 15%, 55%);
   --neutral-foreground: hsl(0, 0%, 100%);
-  --light-gray: hsl(210, 40%, 98%);
-  --muted: hsl(240, 1.9608%, 90%);
-  --muted-foreground: hsl(210, 25%, 7.8431%);
-  --destructive: hsl(356.3033, 90.5579%, 54.3137%);
+  
+  /* Additional soft colors */
+  --soft-pink: hsl(340, 60%, 85%);
+  --soft-peach: hsl(25, 70%, 80%);
+  --soft-lavender: hsl(280, 40%, 85%);
+  --soft-mint: hsl(150, 40%, 80%);
+  --soft-sky: hsl(200, 50%, 80%);
+  
+  --light-gray: hsl(30, 30%, 97%);
+  --muted: hsl(28, 20%, 92%);
+  --muted-foreground: hsl(210, 15%, 45%);
+  --destructive: hsl(0, 70%, 65%);
   --destructive-foreground: hsl(0, 0%, 100%);
-  --border: hsl(201.4286, 30.4348%, 90.9804%);
-  --input: hsl(200, 23.0769%, 97.4510%);
-  --ring: hsl(202.8169, 89.1213%, 53.1373%);
-  --chart-1: hsl(203.8863, 88.2845%, 53.1373%);
-  --chart-2: hsl(159.7826, 100%, 36.0784%);
-  --chart-3: hsl(42.0290, 92.8251%, 56.2745%);
-  --chart-4: hsl(147.1429, 78.5047%, 41.9608%);
-  --chart-5: hsl(341.4894, 75.2000%, 50.9804%);
-  --sidebar: hsl(180, 6.6667%, 97.0588%);
-  --sidebar-foreground: hsl(210, 25%, 7.8431%);
-  --sidebar-primary: hsl(203.8863, 88.2845%, 53.1373%);
+  --border: hsl(28, 25%, 88%);
+  --input: hsl(30, 30%, 95%);
+  --ring: hsl(240, 60%, 65%);
+  
+  /* Chart colors: soft gradient palette */
+  --chart-1: hsl(240, 60%, 75%);
+  --chart-2: hsl(150, 50%, 70%);
+  --chart-3: hsl(45, 80%, 75%);
+  --chart-4: hsl(20, 75%, 70%);
+  --chart-5: hsl(310, 60%, 75%);
+  
+  --sidebar: hsl(28, 40%, 96%);
+  --sidebar-foreground: hsl(210, 25%, 20%);
+  --sidebar-primary: hsl(240, 60%, 65%);
   --sidebar-primary-foreground: hsl(0, 0%, 100%);
-  --sidebar-accent: hsl(211.5789, 51.3514%, 92.7451%);
-  --sidebar-accent-foreground: hsl(203.8863, 88.2845%, 53.1373%);
-  --sidebar-border: hsl(205.0000, 25.0000%, 90.5882%);
-  --sidebar-ring: hsl(202.8169, 89.1213%, 53.1373%);
+  --sidebar-accent: hsl(28, 30%, 90%);
+  --sidebar-accent-foreground: hsl(240, 60%, 65%);
+  --sidebar-border: hsl(28, 25%, 85%);
+  --sidebar-ring: hsl(240, 60%, 65%);
+  
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Menlo, monospace;
   --radius: 1.3rem;
-  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
-  --shadow-xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
-  --shadow-sm: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
-  --shadow: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
-  --shadow-md: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 2px 4px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
-  --shadow-lg: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 4px 6px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
-  --shadow-xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 8px 10px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
-  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  
+  /* Soft shadows */
+  --shadow-2xs: 0px 1px 2px 0px hsl(240, 60%, 65%, 0.08);
+  --shadow-xs: 0px 2px 4px 0px hsl(240, 60%, 65%, 0.08);
+  --shadow-sm: 0px 2px 6px 0px hsl(240, 60%, 65%, 0.10), 0px 1px 2px -1px hsl(240, 60%, 65%, 0.06);
+  --shadow: 0px 4px 8px 0px hsl(240, 60%, 65%, 0.10), 0px 2px 4px -1px hsl(240, 60%, 65%, 0.06);
+  --shadow-md: 0px 6px 12px 0px hsl(240, 60%, 65%, 0.12), 0px 2px 4px -1px hsl(240, 60%, 65%, 0.08);
+  --shadow-lg: 0px 8px 16px 0px hsl(240, 60%, 65%, 0.14), 0px 4px 6px -1px hsl(240, 60%, 65%, 0.10);
+  --shadow-xl: 0px 12px 24px 0px hsl(240, 60%, 65%, 0.16), 0px 8px 10px -1px hsl(240, 60%, 65%, 0.12);
+  --shadow-2xl: 0px 16px 32px 0px hsl(240, 60%, 65%, 0.18);
+  
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+}
+
+/* Soft gradient utilities */
+.gradient-soft-primary {
+  background: linear-gradient(135deg, hsl(240, 60%, 75%) 0%, hsl(260, 50%, 80%) 100%);
+}
+
+.gradient-soft-warm {
+  background: linear-gradient(135deg, hsl(21, 85%, 70%) 0%, hsl(45, 80%, 75%) 100%);
+}
+
+.gradient-soft-cool {
+  background: linear-gradient(135deg, hsl(200, 50%, 80%) 0%, hsl(280, 40%, 85%) 100%);
+}
+
+.gradient-soft-nature {
+  background: linear-gradient(135deg, hsl(150, 40%, 80%) 0%, hsl(180, 45%, 75%) 100%);
+}
+
+.gradient-soft-sunset {
+  background: linear-gradient(135deg, hsl(340, 60%, 85%) 0%, hsl(25, 70%, 80%) 100%);
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, hsl(21, 85%, 60%) 0%, hsl(45, 80%, 65%) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-cool {
+  background: linear-gradient(135deg, hsl(240, 60%, 65%) 0%, hsl(280, 50%, 70%) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.soft-blur {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.soft-shadow {
+  box-shadow: 0 8px 32px rgba(100, 100, 255, 0.15);
+}
+
+.soft-border {
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Glass form input styling */

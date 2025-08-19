@@ -65,18 +65,18 @@ export default function TripPlannerDeals() {
   }
 
   return (
-    <section id="trip-planners" className="py-16 bg-white">
+    <section id="trip-planners" className="py-16 gradient-soft-cool">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trip Planner Deals</h2>
-          <p className="text-gray-600">Plan your perfect journey with our curated travel packages.</p>
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text-warm mb-4">Trip Planner Deals</h2>
+          <p className="text-gray-700">Plan your perfect journey with our curated travel packages.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
           {tripPlanners.slice(0, 4).map((tripPlanner, index) => (
             <div 
               key={tripPlanner.id}
-              className="bg-white rounded-xl shadow-md hover-lift transition-butter overflow-hidden animate-fade-in group"
+              className="bg-white/90 soft-blur rounded-xl soft-shadow hover-lift transition-butter overflow-hidden animate-fade-in group soft-border"
               style={{ animationDelay: `${index * 0.1}s` }}
               data-testid={`card-trip-planner-${tripPlanner.id}`}
             >
