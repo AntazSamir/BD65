@@ -1,4 +1,4 @@
-import { Star, MapPin, ArrowLeft, Users, Calendar, DollarSign, Utensils, Building2, MessageCircle, Camera, Clock, Map, Info } from 'lucide-react';
+import { Star, MapPin, ArrowLeft, Users, Calendar, DollarSign, Utensils, Building2, MessageCircle, Camera, Clock, Map, Info, ShoppingBag, UtensilsCrossed, Landmark, Camera as CameraIcon, Heart, Music } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useLocation } from 'wouter';
 import { Link } from 'wouter';
@@ -103,12 +103,12 @@ export default function DestinationDetail() {
         : "October to April provides the most comfortable weather conditions for sightseeing and outdoor activities.",
       
       thingsToDo: [
-        'Explore local markets and traditional crafts',
-        'Experience authentic Bengali cuisine',
-        'Visit historical landmarks and monuments',
-        'Take scenic photographs of the landscape',
-        'Interact with friendly local communities',
-        'Enjoy cultural performances and festivals'
+        { activity: 'Explore local markets and traditional crafts', icon: ShoppingBag, color: 'bg-purple-100 text-purple-600' },
+        { activity: 'Experience authentic Bengali cuisine', icon: UtensilsCrossed, color: 'bg-orange-100 text-orange-600' },
+        { activity: 'Visit historical landmarks and monuments', icon: Landmark, color: 'bg-blue-100 text-blue-600' },
+        { activity: 'Take scenic photographs of the landscape', icon: CameraIcon, color: 'bg-green-100 text-green-600' },
+        { activity: 'Interact with friendly local communities', icon: Heart, color: 'bg-red-100 text-red-600' },
+        { activity: 'Enjoy cultural performances and festivals', icon: Music, color: 'bg-yellow-100 text-yellow-600' }
       ],
       
       travelTips: [
@@ -224,12 +224,17 @@ export default function DestinationDetail() {
                 <h3 className="text-2xl font-bold text-gray-800">Things to Do</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {destinationDetails.thingsToDo.map((activity, index) => (
-                  <div key={index} className="flex items-center p-3 bg-gray-50 rounded-lg">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    <span className="text-gray-700">{activity}</span>
-                  </div>
-                ))}
+                {destinationDetails.thingsToDo.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <div key={index} className="flex items-center p-4 bg-gradient-to-r from-white to-gray-50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 border border-gray-100">
+                      <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center mr-4 shadow-sm`}>
+                        <IconComponent className="w-6 h-6" />
+                      </div>
+                      <span className="text-gray-700 font-medium leading-relaxed">{item.activity}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
