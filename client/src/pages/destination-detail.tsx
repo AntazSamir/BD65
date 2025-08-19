@@ -1,4 +1,4 @@
-import { Star, MapPin, ArrowLeft, Users, Calendar, DollarSign, Utensils, Building2, MessageCircle } from 'lucide-react';
+import { Star, MapPin, ArrowLeft, Users, Calendar, DollarSign, Utensils, Building2, MessageCircle, Camera, Clock, Map, Info } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useLocation } from 'wouter';
 import { Link } from 'wouter';
@@ -78,6 +78,63 @@ export default function DestinationDetail() {
     restaurant.location.toLowerCase().includes(destination.name.toLowerCase())
   ).slice(0, 6);
 
+  // Generate additional images for gallery based on destination type
+  const getDestinationImages = (destination: Destination) => {
+    const baseImages = [
+      destination.imageUrl,
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080'
+    ];
+    return baseImages;
+  };
+
+  // Get detailed information based on destination
+  const getDestinationDetails = (destination: Destination) => {
+    const details = {
+      history: `${destination.name} has a rich history spanning centuries. This magnificent destination showcases the cultural heritage and natural beauty that Bangladesh is renowned for. From ancient architectural marvels to pristine natural landscapes, this location offers visitors a glimpse into the country's diverse cultural tapestry.`,
+      
+      bestTime: destination.name.toLowerCase().includes('beach') || destination.name.toLowerCase().includes('sea') 
+        ? "October to March is the ideal time to visit, with pleasant weather and calm seas perfect for beach activities."
+        : destination.name.toLowerCase().includes('hill') || destination.name.toLowerCase().includes('valley')
+        ? "November to February offers the best weather with clear skies and comfortable temperatures for trekking."
+        : "October to April provides the most comfortable weather conditions for sightseeing and outdoor activities.",
+      
+      thingsToDo: [
+        'Explore local markets and traditional crafts',
+        'Experience authentic Bengali cuisine',
+        'Visit historical landmarks and monuments',
+        'Take scenic photographs of the landscape',
+        'Interact with friendly local communities',
+        'Enjoy cultural performances and festivals'
+      ],
+      
+      travelTips: [
+        'Carry local currency (Bangladeshi Taka) for small purchases',
+        'Respect local customs and dress modestly',
+        'Try local street food from reputable vendors',
+        'Learn basic Bengali phrases for better interaction',
+        'Book accommodations in advance during peak season',
+        'Keep emergency contacts and travel documents handy'
+      ],
+      
+      quickFacts: {
+        district: destination.district,
+        country: destination.country,
+        rating: destination.rating,
+        priceFrom: destination.priceFrom,
+        bestMonths: destination.name.toLowerCase().includes('beach') ? 'Nov-Mar' : 'Oct-Apr',
+        duration: '2-3 days recommended'
+      }
+    };
+    return details;
+  };
+
+  const destinationImages = getDestinationImages(destination);
+  const destinationDetails = getDestinationDetails(destination);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
@@ -122,12 +179,126 @@ export default function DestinationDetail() {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Description */}
+        {/* Image Gallery */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">About {destination.name}</h2>
-          <p className="text-lg text-gray-600 leading-relaxed" data-testid="text-destination-description">
-            {destination.description}
-          </p>
+          <div className="flex items-center mb-6">
+            <Camera className="w-8 h-8 text-primary mr-3" />
+            <h2 className="text-3xl font-bold text-gray-800">Photo Gallery</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {destinationImages.map((image, index) => (
+              <div 
+                key={index} 
+                className="relative overflow-hidden rounded-xl aspect-video group cursor-pointer"
+                data-testid={`img-gallery-${index}`}
+              >
+                <img 
+                  src={image} 
+                  alt={`${destination.name} view ${index + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080';
+                  }}
+                />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Camera className="w-8 h-8 text-white" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Description & Details */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          {/* Main Description */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">About {destination.name}</h2>
+              <p className="text-lg text-gray-600 leading-relaxed mb-6" data-testid="text-destination-description">
+                {destination.description}
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                {destinationDetails.history}
+              </p>
+            </div>
+
+            {/* Things to Do */}
+            <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+              <div className="flex items-center mb-6">
+                <Map className="w-6 h-6 text-primary mr-3" />
+                <h3 className="text-2xl font-bold text-gray-800">Things to Do</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {destinationDetails.thingsToDo.map((activity, index) => (
+                  <div key={index} className="flex items-center p-3 bg-gray-50 rounded-lg">
+                    <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                    <span className="text-gray-700">{activity}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Travel Tips */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <div className="flex items-center mb-6">
+                <Info className="w-6 h-6 text-primary mr-3" />
+                <h3 className="text-2xl font-bold text-gray-800">Travel Tips</h3>
+              </div>
+              <div className="space-y-3">
+                {destinationDetails.travelTips.map((tip, index) => (
+                  <div key={index} className="flex items-start">
+                    <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">
+                      {index + 1}
+                    </div>
+                    <span className="text-gray-700">{tip}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Sidebar Info */}
+          <div className="space-y-8">
+            {/* Quick Facts */}
+            <div className="bg-white rounded-2xl shadow-lg p-6">
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Quick Facts</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Location</span>
+                  <span className="font-semibold">{destinationDetails.quickFacts.district}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Rating</span>
+                  <div className="flex items-center">
+                    <Star className="w-4 h-4 text-yellow-400 mr-1" />
+                    <span className="font-semibold">{destinationDetails.quickFacts.rating}</span>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Starting Price</span>
+                  <span className="font-semibold text-primary">৳{destinationDetails.quickFacts.priceFrom}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Best Time</span>
+                  <span className="font-semibold">{destinationDetails.quickFacts.bestMonths}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Duration</span>
+                  <span className="font-semibold">{destinationDetails.quickFacts.duration}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Best Time to Visit */}
+            <div className="bg-white rounded-2xl shadow-lg p-6">
+              <div className="flex items-center mb-4">
+                <Clock className="w-5 h-5 text-primary mr-2" />
+                <h3 className="text-xl font-bold text-gray-800">Best Time to Visit</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">{destinationDetails.bestTime}</p>
+            </div>
+          </div>
         </div>
 
         {/* Hotels Section */}
