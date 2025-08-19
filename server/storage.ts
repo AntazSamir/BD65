@@ -290,9 +290,16 @@ export class MemStorage implements IStorage {
 
   // Booking operations
   async getBookings(userId: string): Promise<Booking[]> {
-    return Array.from(this.bookings.values()).filter(
-      (booking) => booking.userId === userId
-    );
+    console.log('Storage getBookings called for userId:', userId);
+    console.log('Total bookings in storage:', this.bookings.size);
+    
+    const allBookings = Array.from(this.bookings.values());
+    console.log('All bookings:', allBookings.map(b => ({ id: b.id, userId: b.userId, propertyName: b.propertyName })));
+    
+    const userBookings = allBookings.filter((booking) => booking.userId === userId);
+    console.log('User bookings found:', userBookings.length);
+    
+    return userBookings;
   }
 
   async getBooking(id: string): Promise<Booking | undefined> {
