@@ -434,22 +434,23 @@ export default function Hotels() {
                             <p className="text-gray-700 text-sm mb-3 line-clamp-2" data-testid={`text-restaurant-description-${restaurant.id}`}>
                               {restaurant.description}
                             </p>
+                            
+                            <div className="mb-3">
+                              <span className="text-lg font-bold text-gray-900" data-testid={`text-price-${restaurant.id}`}>
+                                {restaurant.priceRange}
+                              </span>
+                              <span className="text-gray-600 text-sm ml-1">per person</span>
+                            </div>
                           </div>
                         </div>
                         
-                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                          <div>
-                            <span className="text-lg font-bold text-gray-900" data-testid={`text-price-${restaurant.id}`}>
-                              {restaurant.priceRange}
-                            </span>
-                            <span className="text-gray-600 text-sm ml-1">per person</span>
-                          </div>
+                        <div className="pt-3 border-t border-gray-100">
                           <Button
                             onClick={(e) => {
                               e.stopPropagation();
                               handleBooking(restaurant.id, 'restaurant');
                             }}
-                            className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
+                            className="bg-primary hover:bg-primary/90 text-white px-6 py-2 w-full"
                             data-testid={`button-book-${restaurant.id}`}
                           >
                             Book Table
@@ -526,22 +527,23 @@ export default function Hotels() {
                                 </div>
                               </div>
                             )}
+                            
+                            <div className="mb-3">
+                              <span className="text-2xl font-bold text-gray-900" data-testid={`text-price-${hotel.id}`}>
+                                ৳{hotel.pricePerNight.toLocaleString()}
+                              </span>
+                              <span className="text-gray-600 text-sm">/night</span>
+                            </div>
                           </div>
                         </div>
                         
-                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                          <div>
-                            <span className="text-2xl font-bold text-gray-900" data-testid={`text-price-${hotel.id}`}>
-                              ৳{hotel.pricePerNight.toLocaleString()}
-                            </span>
-                            <span className="text-gray-600 text-sm">/night</span>
-                          </div>
+                        <div className="pt-3 border-t border-gray-100">
                           <Button
                             onClick={(e) => {
                               e.stopPropagation();
                               handleBooking(hotel.id, 'hotel');
                             }}
-                            className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
+                            className="bg-primary hover:bg-primary/90 text-white px-6 py-2 w-full"
                             data-testid={`button-book-${hotel.id}`}
                           >
                             Book Now
