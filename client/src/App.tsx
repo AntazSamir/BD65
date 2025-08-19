@@ -7,6 +7,7 @@ import Home from "@/pages/home";
 import About from "@/pages/about";
 import Destinations from "@/pages/destinations";
 import DestinationDetail from "@/pages/destination-detail";
+import Hotels from "@/pages/hotels";
 import SignIn from "@/pages/sign-in";
 import SignUp from "@/pages/sign-up";
 import Profile from "@/pages/profile";
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/destinations" component={Destinations} />
       <Route path="/destinations/:id" component={DestinationDetail} />
+      <Route path="/hotels" component={Hotels} />
       <Route path="/about" component={About} />
       <Route path="/sign-in" component={SignIn} />
       <Route path="/sign-up" component={SignUp} />
