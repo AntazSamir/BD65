@@ -20,6 +20,8 @@ export default function Destinations() {
   
   const { data: destinations = [], isLoading, error } = useQuery<Destination[]>({
     queryKey: ['/api/destinations'],
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnWindowFocus: false,
   });
 
   const filteredDestinations = destinations.filter(destination => {

@@ -13,14 +13,19 @@ export default function DestinationDetail() {
 
   const { data: destination, isLoading: destinationLoading, error: destinationError } = useQuery<Destination>({
     queryKey: ['/api/destinations', id],
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
   const { data: hotels = [], isLoading: hotelsLoading } = useQuery<Hotel[]>({
     queryKey: ['/api/hotels'],
+    staleTime: 10 * 60 * 1000, // 10 minutes
+    enabled: !!destination, // Only fetch when destination is loaded
   });
 
   const { data: restaurants = [], isLoading: restaurantsLoading } = useQuery<Restaurant[]>({
     queryKey: ['/api/restaurants'],
+    staleTime: 10 * 60 * 1000, // 10 minutes
+    enabled: !!destination, // Only fetch when destination is loaded
   });
 
   if (destinationLoading) {
@@ -29,18 +34,10 @@ export default function DestinationDetail() {
         <Navigation />
         <div className="pt-24 pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="animate-pulse space-y-8">
-              <div className="h-96 bg-gray-200 rounded-2xl"></div>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 space-y-6">
-                  <div className="h-8 bg-gray-200 rounded"></div>
-                  <div className="h-24 bg-gray-200 rounded"></div>
-                </div>
-                <div className="space-y-4">
-                  <div className="h-6 bg-gray-200 rounded"></div>
-                  <div className="h-32 bg-gray-200 rounded"></div>
-                </div>
-              </div>
+            <div className="animate-pulse space-y-4">
+              <div className="h-48 bg-gray-200 rounded-xl"></div>
+              <div className="h-8 bg-gray-200 rounded w-1/2"></div>
+              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
             </div>
           </div>
         </div>
@@ -94,11 +91,9 @@ export default function DestinationDetail() {
   const getDestinationImages = (destination: Destination) => {
     const baseImages = [
       destination.imageUrl,
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-      'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-      'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080'
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600'
     ];
     return baseImages;
   };
@@ -321,17 +316,13 @@ export default function DestinationDetail() {
             </div>
             
             {hotelsLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse">
-                    <div className="w-full h-56 bg-gray-200"></div>
-                    <div className="p-6">
-                      <div className="h-6 bg-gray-200 rounded mb-2"></div>
-                      <div className="h-4 bg-gray-200 rounded mb-4"></div>
-                      <div className="flex items-center justify-between">
-                        <div className="h-8 bg-gray-200 rounded w-24"></div>
-                        <div className="h-10 bg-gray-200 rounded w-20"></div>
-                      </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(2)].map((_, i) => (
+                  <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm animate-pulse">
+                    <div className="w-full h-32 bg-gray-200"></div>
+                    <div className="p-4">
+                      <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                      <div className="h-3 bg-gray-200 rounded w-3/4"></div>
                     </div>
                   </div>
                 ))}
@@ -413,17 +404,13 @@ export default function DestinationDetail() {
           </div>
           
           {restaurantsLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse">
-                  <div className="w-full h-56 bg-gray-200"></div>
-                  <div className="p-6">
-                    <div className="h-6 bg-gray-200 rounded mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-4"></div>
-                    <div className="space-y-2">
-                      <div className="h-4 bg-gray-200 rounded"></div>
-                      <div className="h-4 bg-gray-200 rounded"></div>
-                    </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm animate-pulse">
+                  <div className="w-full h-32 bg-gray-200"></div>
+                  <div className="p-4">
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-2/3"></div>
                   </div>
                 </div>
               ))}
