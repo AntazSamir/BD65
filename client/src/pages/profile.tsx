@@ -134,6 +134,9 @@ export default function Profile() {
   };
 
   const downloadReceipt = (booking: Booking) => {
+    console.log('Booking data for receipt:', booking);
+    console.log('Total amount:', booking.totalAmount);
+    
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     
