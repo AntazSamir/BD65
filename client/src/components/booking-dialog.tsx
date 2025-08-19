@@ -118,12 +118,12 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
         passengers: parseInt(data.passengers),
         specialRequests: data.specialRequests || '',
         travelDate: data.travelDate,
-        totalAmount: item ? getItemPrice() : 0,
+        totalAmount: item?.price || 0,
         status: 'confirmed',
         confirmationNumber: `BDE${Math.random().toString(36).substr(2, 8).toUpperCase()}`,
-        propertyName: getItemName(),
-        propertyLocation: getItemLocation(),
-        propertyPhone: getItemPhone(),
+        propertyName: type === 'bus' ? (item as Bus)?.operator : (type === 'flight' ? (item as TripPlanner)?.origin + ' → ' + (item as TripPlanner)?.destination : (item as PrivateCar)?.type) || '',
+        propertyLocation: type === 'bus' ? (item as Bus)?.operator + ' Service' : (type === 'flight' ? (item as TripPlanner)?.origin + ' to ' + (item as TripPlanner)?.destination : 'Private Car Service'),
+        propertyPhone: type === 'bus' ? '+880-1800-BUS' : (type === 'flight' ? '+880-1800-FLIGHT' : '+880-1800-CAR'),
         bookingType: type,
         ...(type === 'bus' && { selectedSeats }),
       };
@@ -177,60 +177,7 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
     }
   };
 
-  const getItemName = () => {
-    if (!item) return '';
-    
-    switch (type) {
-      case 'flight':
-        const flight = item as TripPlanner;
-        return `${flight.origin} → ${flight.destination}`;
-      case 'bus':
-        const bus = item as Bus;
-        return `${bus.operator} - ${bus.type}`;
-      case 'car':
-        const car = item as PrivateCar;
-        return `${car.type} (${car.category})`;
-      default:
-        return '';
-    }
-  };
 
-  const getItemPrice = () => {
-    if (!item) return 0;
-    return item.price;
-  };
-
-  const getItemLocation = () => {
-    if (!item) return '';
-    
-    switch (type) {
-      case 'flight':
-        const flight = item as TripPlanner;
-        return `${flight.origin} to ${flight.destination}`;
-      case 'bus':
-        const bus = item as Bus;
-        return `${bus.operator} Service`;
-      case 'car':
-        return 'Private Car Service';
-      default:
-        return '';
-    }
-  };
-
-  const getItemPhone = () => {
-    if (!item) return '';
-    
-    switch (type) {
-      case 'flight':
-        return '+880-1800-FLIGHT';
-      case 'bus':
-        return '+880-1800-BUS';
-      case 'car':
-        return '+880-1800-CAR';
-      default:
-        return '';
-    }
-  };
 
   const getItemDetails = () => {
     if (!item) return [];
@@ -295,7 +242,11 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
         <div className="space-y-6">
           {/* Booking Summary */}
           <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="font-semibold text-lg mb-3">{getItemName()}</h3>
+            <h3 className="font-semibold text-lg mb-3">
+              {type === 'bus' ? `${(item as Bus)?.operator} - ${(item as Bus)?.type}` : 
+               type === 'flight' ? `${(item as TripPlanner)?.origin} → ${(item as TripPlanner)?.destination}` :
+               `${(item as PrivateCar)?.type} (${(item as PrivateCar)?.category})`}
+            </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {getItemDetails().map((detail, index) => {
@@ -330,7 +281,7 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
             <div className="flex justify-between items-center">
               <span className="text-lg font-semibold">Total Amount:</span>
               <span className="text-2xl font-bold text-green-600">
-                ৳{getItemPrice().toLocaleString()}
+                ৳{(item?.price || 0).toLocaleString()}
               </span>
             </div>
           </div>
