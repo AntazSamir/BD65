@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useLocation } from 'wouter';
 import { Search, MapPin, Star, Wifi, Car, Coffee, Users, X, Calendar, CreditCard, Utensils, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,6 +15,7 @@ import Footer from '@/components/footer';
 import type { Hotel, Restaurant } from '@shared/schema';
 
 export default function Hotels() {
+  const [, navigate] = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('rating');
   const [priceRange, setPriceRange] = useState('all');
@@ -134,8 +136,8 @@ export default function Hotels() {
     return filtered;
   }, [restaurants, searchQuery, sortBy, priceRange]);
 
-  const handleBooking = (hotelId: string) => {
-    alert(`Booking hotel ${hotelId} - This would navigate to booking page in a real application.`);
+  const handleBooking = (itemId: string, type: 'hotel' | 'restaurant') => {
+    navigate(`/booking/${type}/${itemId}`);
   };
 
   const handleHotelClick = (hotel: Hotel) => {
@@ -436,7 +438,7 @@ export default function Hotels() {
                         <Button
                           onClick={(e) => {
                             e.stopPropagation();
-                            alert(`Booking table at ${restaurant.name} - This would navigate to booking page in a real application.`);
+                            handleBooking(restaurant.id, 'restaurant');
                           }}
                           className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
                           data-testid={`button-book-${restaurant.id}`}
@@ -521,7 +523,7 @@ export default function Hotels() {
                         <Button
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleBooking(hotel.id);
+                            handleBooking(hotel.id, 'hotel');
                           }}
                           className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
                           data-testid={`button-book-${hotel.id}`}
@@ -652,7 +654,7 @@ export default function Hotels() {
                               size="sm" 
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleBooking(selectedHotel.id);
+                                handleBooking(selectedHotel.id, 'hotel');
                               }}
                               data-testid={`dialog-book-room-${selectedHotel.id}-${index}`}
                             >
@@ -696,7 +698,7 @@ export default function Hotels() {
                     <div className="flex space-x-3">
                       <Button 
                         className="flex-1" 
-                        onClick={() => handleBooking(selectedHotel.id)}
+                        onClick={() => handleBooking(selectedHotel.id, 'hotel')}
                         data-testid={`dialog-book-now-${selectedHotel.id}`}
                       >
                         <Calendar className="w-4 h-4 mr-2" />
@@ -826,7 +828,7 @@ export default function Hotels() {
                     <div className="flex space-x-3">
                       <Button 
                         className="flex-1" 
-                        onClick={() => alert(`Booking table at ${selectedRestaurant.name} - This would navigate to booking page in a real application.`)}
+                        onClick={() => handleBooking(selectedRestaurant.id, 'restaurant')}
                         data-testid={`dialog-book-now-${selectedRestaurant.id}`}
                       >
                         <Calendar className="w-4 h-4 mr-2" />
