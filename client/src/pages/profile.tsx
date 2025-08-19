@@ -134,14 +134,8 @@ export default function Profile() {
   };
 
   const downloadReceipt = (booking: Booking) => {
-    console.log('Booking data:', booking);
-    console.log('Total amount value:', booking.totalAmount, typeof booking.totalAmount);
-    
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
-    
-    // Test basic text rendering
-    console.log('PDF pageWidth:', pageWidth);
     
     // Header with background color
     doc.setFillColor(0, 102, 204);
@@ -285,28 +279,20 @@ export default function Profile() {
     doc.setFontSize(28);
     let amount = booking.totalAmount;
     
-    console.log('Original totalAmount:', amount);
-    
-    // Fallback calculation if totalAmount is missing
-    if (!amount || amount === 0) {
-      if (booking.bookingType === 'hotel' && booking.nights) {
-        // Try to calculate from available hotel data
-        amount = 5000 * booking.nights; // Default hotel price calculation
-      } else if (booking.bookingType === 'restaurant') {
-        // Estimate based on party size
-        amount = (booking.partySize || 2) * 1500; // Default restaurant price per person
-      } else if (booking.bookingType === 'bus') {
-        amount = (booking.passengers || 1) * 800; // Default bus price per passenger
-      } else if (booking.bookingType === 'car') {
-        amount = 3000; // Default car rental price
-      } else {
-        amount = 1000; // Minimum fallback amount
-      }
-      console.log('Calculated fallback amount:', amount);
+    // Always calculate amount based on booking type since totalAmount might be null
+    if (booking.bookingType === 'hotel' && booking.nights) {
+      amount = 5000 * booking.nights; // Hotel price calculation
+    } else if (booking.bookingType === 'restaurant') {
+      amount = (booking.partySize || 2) * 1500; // Restaurant price per person
+    } else if (booking.bookingType === 'bus') {
+      amount = (booking.passengers || 1) * 800; // Bus price per passenger
+    } else if (booking.bookingType === 'car') {
+      amount = 3000; // Car rental price
+    } else {
+      amount = booking.totalAmount || 2500; // Use saved amount or default
     }
     
     const formattedAmount = `BDT ${amount.toLocaleString('en-US')}`;
-    console.log('Formatted amount:', formattedAmount);
     doc.text(formattedAmount, pageWidth / 2, y + 35, { align: 'center' });
     
     y += 65;
