@@ -250,12 +250,36 @@ export default function Profile() {
       doc.text(`Party Size: ${booking.partySize || 1} people`, 25, y);
       y += 10;
       doc.text(`Cuisine Type: ${booking.cuisine || 'Mixed'}`, 25, y);
-    } else if (booking.bookingType === 'car' || booking.bookingType === 'bus') {
+    } else if (booking.bookingType === 'bus') {
       doc.text(`Travel Date: ${booking.travelDate ? new Date(booking.travelDate).toLocaleDateString('en-GB') : 'N/A'}`, 25, y);
       y += 10;
       doc.text(`Number of Passengers: ${booking.passengers || 1}`, 25, y);
-      if (booking.specialRequests) {
+      y += 10;
+      if (booking.selectedSeats && booking.selectedSeats.length > 0) {
+        doc.text(`Selected Seats: ${booking.selectedSeats.join(', ')}`, 25, y);
         y += 10;
+      }
+      if (booking.specialRequests) {
+        doc.text(`Special Requests: ${booking.specialRequests}`, 25, y);
+        y += 10;
+      }
+    } else if (booking.bookingType === 'car') {
+      doc.text(`Travel Date: ${booking.travelDate ? new Date(booking.travelDate).toLocaleDateString('en-GB') : 'N/A'}`, 25, y);
+      y += 10;
+      doc.text(`Number of Passengers: ${booking.passengers || 1}`, 25, y);
+      y += 10;
+      doc.text(`Service Type: Private Car Rental`, 25, y);
+      y += 10;
+      if (booking.specialRequests) {
+        doc.text(`Special Requests: ${booking.specialRequests}`, 25, y);
+        y += 10;
+      }
+    } else if (booking.bookingType === 'flight') {
+      doc.text(`Travel Date: ${booking.travelDate ? new Date(booking.travelDate).toLocaleDateString('en-GB') : 'N/A'}`, 25, y);
+      y += 10;
+      doc.text(`Number of Passengers: ${booking.passengers || 1}`, 25, y);
+      y += 10;
+      if (booking.specialRequests) {
         doc.text(`Special Requests: ${booking.specialRequests}`, 25, y);
       }
     }
