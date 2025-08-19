@@ -649,6 +649,71 @@ export class MemStorage implements IStorage {
       priceRange: '৳৳',
       reviews: ['Sustainable and delicious', 'Beautiful nature views while dining', 'Supporting local communities']
     });
+
+    // Add more location-specific hotels for better filtering
+    await this.createHotel({
+      name: 'Dhaka Regency Hotel',
+      location: 'Dhaka • Gulshan • Business District',
+      description: 'Modern business hotel in the heart of Dhaka with executive facilities',
+      imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.5',
+      pricePerNight: 9500,
+      amenities: ['Business Center', 'Rooftop Pool', 'Airport Transfer', 'Conference Rooms'],
+    });
+
+    await this.createHotel({
+      name: 'Sundarbans Eco Lodge',
+      location: 'Khulna • Sundarbans • Eco Resort',
+      description: 'Sustainable eco-lodge offering wildlife viewing and nature experiences',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.2',
+      pricePerNight: 6800,
+      amenities: ['Wildlife Tours', 'Boat Trips', 'Nature Walks', 'Bird Watching'],
+    });
+
+    await this.createHotel({
+      name: 'Hill View Resort',
+      location: 'Bandarban • Hill District • Mountain Resort',
+      description: 'Mountain resort with panoramic valley views and adventure activities',
+      imageUrl: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.6',
+      pricePerNight: 7200,
+      amenities: ['Mountain Views', 'Trekking Guide', 'Tribal Cultural Shows', 'Adventure Sports'],
+    });
+
+    // Add more location-specific restaurants
+    await this.createRestaurant({
+      name: 'Old Dhaka Biriyani House',
+      location: 'Dhaka • Old Town • Traditional',
+      description: 'Famous for authentic Dhaka-style biriyani and traditional Bengali dishes',
+      imageUrl: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.7',
+      cuisine: 'Traditional Bengali',
+      priceRange: '৳৳',
+      reviews: ['Best biriyani in Old Dhaka!', 'Authentic flavors passed down generations', 'Must-try for biriyani lovers']
+    });
+
+    await this.createRestaurant({
+      name: 'Khulna Riverside Grill',
+      location: 'Khulna • Riverfront • Seafood',
+      description: 'Fresh river fish and traditional Khulna cuisine with riverside dining',
+      imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.4',
+      cuisine: 'River Fish & Bengali',
+      priceRange: '৳৳',
+      reviews: ['Fresh river fish preparations', 'Beautiful riverside setting', 'Authentic Khulna flavors']
+    });
+
+    await this.createRestaurant({
+      name: 'Patuakhali Beach Shack',
+      location: 'Patuakhali • Kuakata Beach • Coastal',
+      description: 'Beachside restaurant specializing in fresh seafood and coastal delicacies',
+      imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.3',
+      cuisine: 'Coastal Seafood',
+      priceRange: '৳৳',
+      reviews: ['Fresh crab and prawns', 'Perfect sunset dining', 'Authentic coastal flavors']
+    });
     
     console.log('Storage initialized successfully with sample data');
   }

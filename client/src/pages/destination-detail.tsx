@@ -68,15 +68,27 @@ export default function DestinationDetail() {
   }
 
   // Filter hotels and restaurants relevant to this destination
-  const relevantHotels = hotels.filter(hotel => 
-    hotel.location.toLowerCase().includes(destination.district.toLowerCase()) ||
-    hotel.location.toLowerCase().includes(destination.name.toLowerCase())
-  ).slice(0, 6);
+  const relevantHotels = hotels.filter(hotel => {
+    const hotelLocation = hotel.location.toLowerCase();
+    const destinationDistrict = destination.district.toLowerCase();
+    const destinationName = destination.name.toLowerCase();
+    
+    return hotelLocation.includes(destinationDistrict) ||
+           hotelLocation.includes(destinationName) ||
+           destinationDistrict.includes(hotelLocation.split(' •')[0]?.toLowerCase() || '') ||
+           destinationName.includes(hotelLocation.split(' •')[0]?.toLowerCase() || '');
+  }).slice(0, 6);
 
-  const relevantRestaurants = restaurants.filter(restaurant => 
-    restaurant.location.toLowerCase().includes(destination.district.toLowerCase()) ||
-    restaurant.location.toLowerCase().includes(destination.name.toLowerCase())
-  ).slice(0, 6);
+  const relevantRestaurants = restaurants.filter(restaurant => {
+    const restaurantLocation = restaurant.location.toLowerCase();
+    const destinationDistrict = destination.district.toLowerCase();
+    const destinationName = destination.name.toLowerCase();
+    
+    return restaurantLocation.includes(destinationDistrict) ||
+           restaurantLocation.includes(destinationName) ||
+           destinationDistrict.includes(restaurantLocation.split(' •')[0]?.toLowerCase() || '') ||
+           destinationName.includes(restaurantLocation.split(' •')[0]?.toLowerCase() || '');
+  }).slice(0, 6);
 
   // Generate additional images for gallery based on destination type
   const getDestinationImages = (destination: Destination) => {
@@ -300,107 +312,104 @@ export default function DestinationDetail() {
           </div>
         </div>
 
-        {/* Hotels Section */}
-        <section className="mb-16">
-          <div className="flex items-center mb-8">
-            <Building2 className="w-8 h-8 text-primary mr-3" />
-            <h2 className="text-3xl font-bold text-gray-800">Hotels & Accommodations</h2>
-          </div>
-          
-          {hotelsLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse">
-                  <div className="w-full h-56 bg-gray-200"></div>
-                  <div className="p-6">
-                    <div className="h-6 bg-gray-200 rounded mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-4"></div>
-                    <div className="flex items-center justify-between">
-                      <div className="h-8 bg-gray-200 rounded w-24"></div>
-                      <div className="h-10 bg-gray-200 rounded w-20"></div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+        {/* Hotels Section - Only show if there are relevant hotels */}
+        {(hotelsLoading || relevantHotels.length > 0) && (
+          <section className="mb-16">
+            <div className="flex items-center mb-8">
+              <Building2 className="w-8 h-8 text-primary mr-3" />
+              <h2 className="text-3xl font-bold text-gray-800">Hotels & Accommodations in {destination.district}</h2>
             </div>
-          ) : relevantHotels.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {relevantHotels.map((hotel) => (
-                <div 
-                  key={hotel.id} 
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                  data-testid={`card-hotel-${hotel.id}`}
-                >
-                  <div className="relative">
-                    <img 
-                      src={hotel.imageUrl} 
-                      alt={hotel.name} 
-                      className="w-full h-56 object-cover"
-                    />
-                    <div className="absolute top-4 right-4 bg-white/90 rounded-full px-3 py-1">
-                      <div className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-400 mr-1" />
-                        <span className="text-sm font-semibold">{hotel.rating}</span>
+            
+            {hotelsLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse">
+                    <div className="w-full h-56 bg-gray-200"></div>
+                    <div className="p-6">
+                      <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded mb-4"></div>
+                      <div className="flex items-center justify-between">
+                        <div className="h-8 bg-gray-200 rounded w-24"></div>
+                        <div className="h-10 bg-gray-200 rounded w-20"></div>
                       </div>
                     </div>
                   </div>
-                  
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 text-gray-800" data-testid={`text-hotel-name-${hotel.id}`}>
-                      {hotel.name}
-                    </h3>
-                    
-                    <div className="flex items-center mb-3">
-                      <MapPin className="w-4 h-4 text-gray-400 mr-1" />
-                      <span className="text-sm text-gray-500">{hotel.location}</span>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {relevantHotels.map((hotel) => (
+                  <div 
+                    key={hotel.id} 
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    data-testid={`card-hotel-${hotel.id}`}
+                  >
+                    <div className="relative">
+                      <img 
+                        src={hotel.imageUrl} 
+                        alt={hotel.name} 
+                        className="w-full h-56 object-cover"
+                      />
+                      <div className="absolute top-4 right-4 bg-white/90 rounded-full px-3 py-1">
+                        <div className="flex items-center">
+                          <Star className="w-4 h-4 text-yellow-400 mr-1" />
+                          <span className="text-sm font-semibold">{hotel.rating}</span>
+                        </div>
+                      </div>
                     </div>
                     
-                    <p className="text-gray-600 mb-4 line-clamp-2" data-testid={`text-hotel-description-${hotel.id}`}>
-                      {hotel.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {hotel.amenities.slice(0, 3).map((amenity, index) => (
-                        <span 
-                          key={index} 
-                          className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs"
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-2 text-gray-800" data-testid={`text-hotel-name-${hotel.id}`}>
+                        {hotel.name}
+                      </h3>
+                      
+                      <div className="flex items-center mb-3">
+                        <MapPin className="w-4 h-4 text-gray-400 mr-1" />
+                        <span className="text-sm text-gray-500">{hotel.location}</span>
+                      </div>
+                      
+                      <p className="text-gray-600 mb-4 line-clamp-2" data-testid={`text-hotel-description-${hotel.id}`}>
+                        {hotel.description}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {hotel.amenities.slice(0, 3).map((amenity, index) => (
+                          <span 
+                            key={index} 
+                            className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs"
+                          >
+                            {amenity}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                        <div>
+                          <p className="text-sm text-gray-500">Per night</p>
+                          <p className="text-2xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
+                            ৳{hotel.pricePerNight}
+                          </p>
+                        </div>
+                        <Button 
+                          className="bg-primary hover:bg-primary/90"
+                          data-testid={`button-book-hotel-${hotel.id}`}
                         >
-                          {amenity}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                      <div>
-                        <p className="text-sm text-gray-500">Per night</p>
-                        <p className="text-2xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
-                          ৳{hotel.pricePerNight}
-                        </p>
+                          Book Now
+                        </Button>
                       </div>
-                      <Button 
-                        className="bg-primary hover:bg-primary/90"
-                        data-testid={`button-book-hotel-${hotel.id}`}
-                      >
-                        Book Now
-                      </Button>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <Building2 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-lg text-gray-500">No hotels available for this destination</p>
-            </div>
-          )}
-        </section>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
 
         {/* Restaurants Section */}
         <section>
           <div className="flex items-center mb-8">
             <Utensils className="w-8 h-8 text-primary mr-3" />
-            <h2 className="text-3xl font-bold text-gray-800">Restaurants & Dining</h2>
+            <h2 className="text-3xl font-bold text-gray-800">Restaurants & Dining in {destination.district}</h2>
           </div>
           
           {restaurantsLoading ? (
