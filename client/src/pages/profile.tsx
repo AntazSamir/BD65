@@ -147,22 +147,26 @@ export default function Profile() {
     doc.setFillColor(0, 102, 204);
     doc.rect(0, 0, pageWidth, 50, 'F');
     
-    // Company logo (text-based logo with border)
+    // Company logo (more visible text-based logo)
     doc.setTextColor(255, 255, 255);
     doc.setDrawColor(255, 255, 255);
-    doc.roundedRect(15, 8, 35, 14, 2, 2, 'S');
+    doc.setLineWidth(2);
+    doc.rect(15, 8, 50, 20, 'S');
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('BANGLADESH', 40, 16, { align: 'center' });
     doc.setFontSize(10);
-    doc.text('BANGLADESH', 32.5, 13, { align: 'center' });
-    doc.setFontSize(8);
-    doc.text('EXPLORER', 32.5, 19, { align: 'center' });
+    doc.text('EXPLORER', 40, 24, { align: 'center' });
     
     // Company name in header
-    doc.setFontSize(26);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(24);
     doc.text('Bangladesh Explorer', pageWidth / 2, 22, { align: 'center' });
-    doc.setFontSize(12);
-    doc.text('Your Gateway to Beautiful Bangladesh', pageWidth / 2, 35, { align: 'center' });
-    doc.setFontSize(10);
-    doc.text('+880-2-123-4567  |  info@bangladeshexplorer.com  |  www.bangladeshexplorer.com', pageWidth / 2, 45, { align: 'center' });
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    doc.text('Your Gateway to Beautiful Bangladesh', pageWidth / 2, 32, { align: 'center' });
+    doc.setFontSize(9);
+    doc.text('+880-2-123-4567  |  info@bangladeshexplorer.com  |  www.bangladeshexplorer.com', pageWidth / 2, 42, { align: 'center' });
     
     // Receipt title
     doc.setTextColor(0, 0, 0);
@@ -262,21 +266,26 @@ export default function Profile() {
       }
     }
     
-    y += 25;
+    y += 30;
     
-    // Payment Summary Box
+    // Payment Summary Box - make it more prominent
     doc.setFillColor(240, 248, 255);
-    doc.roundedRect(20, y, pageWidth - 40, 35, 3, 3, 'F');
+    doc.roundedRect(20, y, pageWidth - 40, 45, 5, 5, 'F');
     doc.setDrawColor(0, 102, 204);
-    doc.roundedRect(20, y, pageWidth - 40, 35, 3, 3, 'S');
+    doc.setLineWidth(2);
+    doc.roundedRect(20, y, pageWidth - 40, 45, 5, 5, 'S');
     
     doc.setTextColor(0, 102, 204);
-    doc.setFontSize(16);
-    doc.text('TOTAL AMOUNT PAID', pageWidth / 2, y + 15, { align: 'center' });
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.text('TOTAL AMOUNT PAID', pageWidth / 2, y + 18, { align: 'center' });
     
     doc.setTextColor(0, 120, 0);
-    doc.setFontSize(24);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(28);
     let amount = booking.totalAmount;
+    
+    console.log('Original totalAmount:', amount);
     
     // Fallback calculation if totalAmount is missing
     if (!amount || amount === 0) {
@@ -293,15 +302,18 @@ export default function Profile() {
       } else {
         amount = 1000; // Minimum fallback amount
       }
+      console.log('Calculated fallback amount:', amount);
     }
     
     const formattedAmount = `BDT ${amount.toLocaleString('en-US')}`;
-    doc.text(formattedAmount, pageWidth / 2, y + 30, { align: 'center' });
+    console.log('Formatted amount:', formattedAmount);
+    doc.text(formattedAmount, pageWidth / 2, y + 35, { align: 'center' });
     
-    y += 55;
+    y += 65;
     
     // Footer section
     doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(1);
     doc.line(20, y, pageWidth - 20, y);
     
     y += 15;
