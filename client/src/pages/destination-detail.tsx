@@ -150,12 +150,6 @@ export default function DestinationDetail() {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white max-w-4xl px-4">
               <div className="flex items-center justify-center mb-4">
-                <Link href="/destinations">
-                  <Button variant="ghost" className="text-white hover:bg-white/20 mr-4" data-testid="button-back-destinations">
-                    <ArrowLeft className="w-5 h-5 mr-2" />
-                    Back to Destinations
-                  </Button>
-                </Link>
               </div>
               <h1 className="text-5xl font-bold mb-4" data-testid="text-destination-title">{destination.name}</h1>
               <div className="flex items-center justify-center mb-4">
