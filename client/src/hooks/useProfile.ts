@@ -7,7 +7,8 @@ export function useProfile() {
 
   const updateProfileMutation = useMutation({
     mutationFn: async (profileData: UpdateUser) => {
-      return await apiRequest("PUT", "/api/profile", profileData);
+      const response = await apiRequest("PUT", "/api/profile", profileData);
+      return await response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });

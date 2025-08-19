@@ -1,18 +1,20 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, getQueryFn } from "@/lib/queryClient";
 import type { User, LoginCredentials, InsertUser } from "@shared/schema";
 
 export function useAuth() {
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useQuery<User>({
+  const { data: user, isLoading } = useQuery<User | null>({
     queryKey: ["/api/auth/me"],
+    queryFn: getQueryFn({ on401: "returnNull" }),
     retry: false,
   });
 
   const signInMutation = useMutation({
     mutationFn: async (credentials: LoginCredentials) => {
-      return await apiRequest("POST", "/api/auth/signin", credentials);
+      const response = await apiRequest("POST", "/api/auth/signin", credentials);
+      return await response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
@@ -21,7 +23,8 @@ export function useAuth() {
 
   const signUpMutation = useMutation({
     mutationFn: async (userData: InsertUser) => {
-      return await apiRequest("POST", "/api/auth/signup", userData);
+      const response = await apiRequest("POST", "/api/auth/signup", userData);
+      return await response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
@@ -30,7 +33,8 @@ export function useAuth() {
 
   const signOutMutation = useMutation({
     mutationFn: async () => {
-      return await apiRequest("POST", "/api/auth/signout");
+      const response = await apiRequest("POST", "/api/auth/signout");
+      return await response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
