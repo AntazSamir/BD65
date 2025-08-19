@@ -139,17 +139,20 @@ export default function Booking() {
       
       // Prepare booking data for both API and local display
       const bookingRequestData = {
-        confirmationNumber,
-        bookingType,
-        propertyId: currentItem.id,
+        // Required fields
+        itemId: currentItem.id,
+        itemType: bookingType,
+        customerName,
+        email: customerEmail,
+        phone: customerPhone,
+        status: 'confirmed',
+        // Property information
         propertyName: currentItem.name,
         propertyLocation: currentItem.location,
         propertyImageUrl: currentItem.imageUrl,
         propertyPhone: currentItem.phone,
-        customerName,
-        customerEmail,
-        customerPhone,
-        status: 'confirmed',
+        confirmationNumber,
+        bookingType,
         ...(bookingType === 'hotel' && selectedHotel && {
           roomType: getRoomTypes(selectedHotel).find(r => r.id === selectedRoom)?.type,
           checkIn: checkIn,
