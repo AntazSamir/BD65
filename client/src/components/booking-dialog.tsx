@@ -200,6 +200,38 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
     return item.price;
   };
 
+  const getItemLocation = () => {
+    if (!item) return '';
+    
+    switch (type) {
+      case 'flight':
+        const flight = item as TripPlanner;
+        return `${flight.origin} to ${flight.destination}`;
+      case 'bus':
+        const bus = item as Bus;
+        return `${bus.operator} Service`;
+      case 'car':
+        return 'Private Car Service';
+      default:
+        return '';
+    }
+  };
+
+  const getItemPhone = () => {
+    if (!item) return '';
+    
+    switch (type) {
+      case 'flight':
+        return '+880-1800-FLIGHT';
+      case 'bus':
+        return '+880-1800-BUS';
+      case 'car':
+        return '+880-1800-CAR';
+      default:
+        return '';
+    }
+  };
+
   const getItemDetails = () => {
     if (!item) return [];
 
@@ -404,6 +436,21 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
                   </div>
                   
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                    <div className="flex justify-center gap-6 mb-4 text-sm">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded"></div>
+                        <span>Available</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-green-500 border-2 border-green-600 rounded"></div>
+                        <span>Selected</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-red-500 border-2 border-red-600 rounded"></div>
+                        <span>Booked</span>
+                      </div>
+                    </div>
+                    
                     <div className="flex justify-center mb-4">
                       <div className="bg-gray-300 dark:bg-gray-600 px-4 py-2 rounded text-sm font-medium">
                         Driver
@@ -436,21 +483,6 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
                           </button>
                         );
                       })}
-                    </div>
-                    
-                    <div className="flex justify-center gap-6 mt-4 text-sm">
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded"></div>
-                        <span>Available</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 bg-green-500 border-2 border-green-600 rounded"></div>
-                        <span>Selected</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 bg-red-500 border-2 border-red-600 rounded"></div>
-                        <span>Booked</span>
-                      </div>
                     </div>
                   </div>
                 </div>
