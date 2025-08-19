@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation, useRoute, Link } from 'wouter';
-import { Calendar, Clock, Users, MapPin, Star, CreditCard, ArrowLeft, Check, Phone } from 'lucide-react';
+import { Calendar, Clock, Users, MapPin, Star, CreditCard, ArrowLeft, Check, Phone, Download, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
@@ -30,6 +31,8 @@ export default function Booking() {
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState<any>(null);
 
   const bookingType = params?.type; // 'hotel' or 'restaurant'
   const itemId = params?.id;
@@ -121,17 +124,42 @@ export default function Booking() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      toast({
-        title: "Booking Confirmed!",
-        description: bookingType === 'hotel' 
-          ? `Your hotel reservation at ${selectedHotel?.name} has been confirmed.`
-          : `Your table reservation at ${selectedRestaurant?.name} has been confirmed.`,
-      });
+      // Create booking confirmation details
+      const confirmationNumber = `BDE${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
+      const bookingData = {
+        confirmationNumber,
+        bookingType,
+        property: currentItem,
+        customer: {
+          name: customerName,
+          email: customerEmail,
+          phone: customerPhone,
+        },
+        bookingDate: new Date().toLocaleDateString(),
+        bookingTime: new Date().toLocaleTimeString(),
+        ...(bookingType === 'hotel' && selectedHotel && {
+          hotel: {
+            roomType: getRoomTypes(selectedHotel).find(r => r.id === selectedRoom)?.type,
+            checkIn: checkIn,
+            checkOut: checkOut,
+            nights: getNights(),
+            guests: parseInt(guests),
+            total: calculateTotal(),
+          }
+        }),
+        ...(bookingType === 'restaurant' && selectedRestaurant && {
+          restaurant: {
+            date: bookingDate,
+            time: bookingTime,
+            partySize: parseInt(partySize),
+            cuisine: selectedRestaurant.cuisine,
+            priceRange: selectedRestaurant.priceRange,
+          }
+        })
+      };
 
-      // Reset form after successful booking
-      setCustomerName('');
-      setCustomerEmail('');
-      setCustomerPhone('');
+      setBookingDetails(bookingData);
+      setShowSuccessDialog(true);
       
     } catch (error) {
       toast({
@@ -166,6 +194,75 @@ export default function Booking() {
       return Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
     }
     return 0;
+  };
+
+  const downloadReceipt = () => {
+    if (!bookingDetails) return;
+
+    const receiptContent = `
+Bangladesh Explorer - Booking Receipt
+=====================================
+
+Confirmation Number: ${bookingDetails.confirmationNumber}
+Booking Date: ${bookingDetails.bookingDate} at ${bookingDetails.bookingTime}
+
+Property Details:
+- Name: ${bookingDetails.property.name}
+- Location: ${bookingDetails.property.location}
+- Rating: ${bookingDetails.property.rating}/5
+- Phone: ${bookingDetails.property.phone}
+
+Customer Information:
+- Name: ${bookingDetails.customer.name}
+- Email: ${bookingDetails.customer.email}
+- Phone: ${bookingDetails.customer.phone}
+
+${bookingDetails.bookingType === 'hotel' ? `
+Hotel Booking Details:
+- Room Type: ${bookingDetails.hotel?.roomType}
+- Check-in: ${new Date(bookingDetails.hotel?.checkIn || '').toLocaleDateString()}
+- Check-out: ${new Date(bookingDetails.hotel?.checkOut || '').toLocaleDateString()}
+- Number of Nights: ${bookingDetails.hotel?.nights}
+- Number of Guests: ${bookingDetails.hotel?.guests}
+- Total Amount: ৳${bookingDetails.hotel?.total?.toLocaleString()}
+` : `
+Restaurant Reservation Details:
+- Date: ${new Date(bookingDetails.restaurant?.date || '').toLocaleDateString()}
+- Time: ${bookingDetails.restaurant?.time ? new Date(`2000-01-01T${bookingDetails.restaurant.time}`).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) : ''}
+- Party Size: ${bookingDetails.restaurant?.partySize} people
+- Cuisine: ${bookingDetails.restaurant?.cuisine}
+- Price Range: ${bookingDetails.restaurant?.priceRange}
+`}
+
+Thank you for choosing Bangladesh Explorer!
+For support, contact us at support@bangladeshexplorer.com
+
+=====================================
+    `;
+
+    const blob = new Blob([receiptContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Bangladesh-Explorer-Receipt-${bookingDetails.confirmationNumber}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDialogClose = () => {
+    setShowSuccessDialog(false);
+    setBookingDetails(null);
+    // Reset form after successful booking
+    setCustomerName('');
+    setCustomerEmail('');
+    setCustomerPhone('');
+    if (bookingType === 'hotel') {
+      setSelectedRoom('');
+    } else {
+      setBookingTime('');
+    }
   };
 
   if (!bookingType || !itemId) {
@@ -612,6 +709,188 @@ export default function Booking() {
           </div>
         </div>
       </div>
+
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={handleDialogClose}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto" data-testid="success-dialog">
+          <DialogHeader>
+            <DialogTitle className="flex items-center text-green-600 text-2xl">
+              <Check className="w-6 h-6 mr-2" />
+              Booking Confirmed!
+            </DialogTitle>
+          </DialogHeader>
+          
+          {bookingDetails && (
+            <div className="space-y-6">
+              {/* Confirmation Number */}
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className="text-center">
+                  <p className="text-lg font-semibold text-gray-900 mb-2">Your confirmation number is:</p>
+                  <p className="text-3xl font-bold text-green-600" data-testid="confirmation-number">
+                    {bookingDetails.confirmationNumber}
+                  </p>
+                </div>
+              </div>
+
+              {/* Property Details */}
+              <div className="flex space-x-3">
+                <img
+                  src={bookingDetails.property.imageUrl}
+                  alt={bookingDetails.property.name}
+                  className="w-20 h-20 rounded-lg object-cover"
+                />
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-gray-900" data-testid="dialog-property-name">
+                    {bookingDetails.property.name}
+                  </h3>
+                  <div className="flex items-center text-gray-600 text-sm mt-1">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    <span>{bookingDetails.property.location}</span>
+                  </div>
+                  <div className="flex items-center text-yellow-600 text-sm mt-1">
+                    <Star className="w-4 h-4 mr-1 fill-current" />
+                    <span>{bookingDetails.property.rating}</span>
+                  </div>
+                  <div className="flex items-center text-gray-600 text-sm mt-1">
+                    <Phone className="w-4 h-4 mr-1" />
+                    <span>{bookingDetails.property.phone}</span>
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Customer Information */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">Customer Information</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="font-medium text-gray-700">Name:</span>
+                    <p className="text-gray-600" data-testid="dialog-customer-name">{bookingDetails.customer.name}</p>
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-700">Email:</span>
+                    <p className="text-gray-600" data-testid="dialog-customer-email">{bookingDetails.customer.email}</p>
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-700">Phone:</span>
+                    <p className="text-gray-600" data-testid="dialog-customer-phone">{bookingDetails.customer.phone}</p>
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Booking Details */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                  {bookingDetails.bookingType === 'hotel' ? 'Hotel Booking Details' : 'Restaurant Reservation Details'}
+                </h4>
+                
+                {bookingDetails.bookingType === 'hotel' && bookingDetails.hotel && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span className="font-medium text-gray-700">Room Type:</span>
+                      <p className="text-gray-600" data-testid="dialog-room-type">{bookingDetails.hotel.roomType}</p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Check-in:</span>
+                      <p className="text-gray-600" data-testid="dialog-checkin">
+                        {new Date(bookingDetails.hotel.checkIn).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Check-out:</span>
+                      <p className="text-gray-600" data-testid="dialog-checkout">
+                        {new Date(bookingDetails.hotel.checkOut).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Number of Nights:</span>
+                      <p className="text-gray-600" data-testid="dialog-nights">{bookingDetails.hotel.nights}</p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Number of Guests:</span>
+                      <p className="text-gray-600" data-testid="dialog-guests">{bookingDetails.hotel.guests}</p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Total Amount:</span>
+                      <p className="text-xl font-bold text-green-600" data-testid="dialog-total">
+                        ৳{bookingDetails.hotel.total.toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {bookingDetails.bookingType === 'restaurant' && bookingDetails.restaurant && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span className="font-medium text-gray-700">Date:</span>
+                      <p className="text-gray-600" data-testid="dialog-booking-date">
+                        {new Date(bookingDetails.restaurant.date).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Time:</span>
+                      <p className="text-gray-600" data-testid="dialog-booking-time">
+                        {new Date(`2000-01-01T${bookingDetails.restaurant.time}`).toLocaleTimeString('en-US', {
+                          hour: 'numeric',
+                          minute: '2-digit',
+                          hour12: true
+                        })}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Party Size:</span>
+                      <p className="text-gray-600" data-testid="dialog-party-size">{bookingDetails.restaurant.partySize} people</p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Cuisine:</span>
+                      <p className="text-gray-600" data-testid="dialog-cuisine">{bookingDetails.restaurant.cuisine}</p>
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-700">Price Range:</span>
+                      <p className="text-gray-600" data-testid="dialog-price-range">{bookingDetails.restaurant.priceRange}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <Separator />
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                <Button 
+                  onClick={downloadReceipt}
+                  className="flex items-center justify-center"
+                  data-testid="button-download-receipt"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download Receipt
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={handleDialogClose}
+                  className="flex items-center justify-center"
+                  data-testid="button-close-dialog"
+                >
+                  <X className="w-4 h-4 mr-2" />
+                  Close
+                </Button>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+                <p className="text-sm text-blue-800">
+                  A confirmation email has been sent to <strong>{bookingDetails.customer.email}</strong>
+                </p>
+                <p className="text-xs text-blue-600 mt-1">
+                  For any queries, please contact us at support@bangladeshexplorer.com
+                </p>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>
