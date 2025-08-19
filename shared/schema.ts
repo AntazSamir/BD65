@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, integer, decimal, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, decimal, boolean, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -77,6 +77,37 @@ export const restaurants = pgTable("restaurants", {
   reviews: text("reviews").array().notNull().default([]),
 });
 
+export const bookings = pgTable("bookings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  confirmationNumber: text("confirmation_number").notNull().unique(),
+  bookingType: text("booking_type").notNull(), // 'hotel' or 'restaurant'
+  propertyId: varchar("property_id").notNull(), // hotel or restaurant ID
+  propertyName: text("property_name").notNull(),
+  propertyLocation: text("property_location").notNull(),
+  propertyImageUrl: text("property_image_url").notNull(),
+  propertyPhone: text("property_phone").notNull(),
+  customerName: text("customer_name").notNull(),
+  customerEmail: text("customer_email").notNull(),
+  customerPhone: text("customer_phone").notNull(),
+  status: text("status").notNull().default('confirmed'), // 'confirmed', 'cancelled'
+  // Hotel specific fields
+  roomType: text("room_type"),
+  checkIn: text("check_in"),
+  checkOut: text("check_out"),
+  nights: integer("nights"),
+  guests: integer("guests"),
+  totalAmount: integer("total_amount"),
+  // Restaurant specific fields
+  reservationDate: text("reservation_date"),
+  reservationTime: text("reservation_time"),
+  partySize: integer("party_size"),
+  cuisine: text("cuisine"),
+  priceRange: text("price_range"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).omit({
   id: true,
   createdAt: true,
@@ -119,6 +150,15 @@ export const insertRestaurantSchema = createInsertSchema(restaurants).omit({
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type UpdateUser = z.infer<typeof updateUserSchema>;
 export type LoginCredentials = z.infer<typeof loginSchema>;
+
+export const insertBookingSchema = createInsertSchema(bookings).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertBooking = z.infer<typeof insertBookingSchema>;
+export type Booking = typeof bookings.$inferSelect;
 export type InsertDestination = z.infer<typeof insertDestinationSchema>;
 export type InsertHotel = z.infer<typeof insertHotelSchema>;
 export type InsertFlight = z.infer<typeof insertFlightSchema>;

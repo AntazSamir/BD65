@@ -4,7 +4,8 @@ import {
   type Hotel, type InsertHotel,
   type Flight, type InsertFlight,
   type TravelPackage, type InsertTravelPackage,
-  type Restaurant, type InsertRestaurant
+  type Restaurant, type InsertRestaurant,
+  type Booking, type InsertBooking
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -44,6 +45,12 @@ export interface IStorage {
   getRestaurants(): Promise<Restaurant[]>;
   getRestaurant(id: string): Promise<Restaurant | undefined>;
   createRestaurant(restaurant: InsertRestaurant): Promise<Restaurant>;
+  
+  // Booking operations
+  getBookings(userId: string): Promise<Booking[]>;
+  getBooking(id: string): Promise<Booking | undefined>;
+  createBooking(booking: InsertBooking): Promise<Booking>;
+  updateBookingStatus(id: string, status: string): Promise<Booking | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -53,6 +60,7 @@ export class MemStorage implements IStorage {
   private flights: Map<string, Flight>;
   private travelPackages: Map<string, TravelPackage>;
   private restaurants: Map<string, Restaurant>;
+  private bookings: Map<string, Booking>;
 
   constructor() {
     this.users = new Map();
@@ -61,6 +69,7 @@ export class MemStorage implements IStorage {
     this.flights = new Map();
     this.travelPackages = new Map();
     this.restaurants = new Map();
+    this.bookings = new Map();
     
     // Initialize with sample data
     this.initializeSampleData().catch((error) => {
@@ -221,6 +230,53 @@ export class MemStorage implements IStorage {
     };
     this.restaurants.set(id, restaurant);
     return restaurant;
+  }
+
+  // Booking operations
+  async getBookings(userId: string): Promise<Booking[]> {
+    return Array.from(this.bookings.values()).filter(
+      (booking) => booking.userId === userId
+    );
+  }
+
+  async getBooking(id: string): Promise<Booking | undefined> {
+    return this.bookings.get(id);
+  }
+
+  async createBooking(insertBooking: InsertBooking): Promise<Booking> {
+    const id = randomUUID();
+    const now = new Date();
+    const booking: Booking = { 
+      ...insertBooking,
+      id,
+      status: insertBooking.status || 'confirmed',
+      // Handle nullable fields by converting undefined to null
+      roomType: insertBooking.roomType || null,
+      checkIn: insertBooking.checkIn || null,
+      checkOut: insertBooking.checkOut || null,
+      nights: insertBooking.nights || null,
+      guests: insertBooking.guests || null,
+      totalAmount: insertBooking.totalAmount || null,
+      reservationDate: insertBooking.reservationDate || null,
+      reservationTime: insertBooking.reservationTime || null,
+      partySize: insertBooking.partySize || null,
+      cuisine: insertBooking.cuisine || null,
+      priceRange: insertBooking.priceRange || null,
+      createdAt: now,
+      updatedAt: now
+    };
+    this.bookings.set(id, booking);
+    return booking;
+  }
+
+  async updateBookingStatus(id: string, status: string): Promise<Booking | undefined> {
+    const booking = this.bookings.get(id);
+    if (booking) {
+      const updatedBooking = { ...booking, status, updatedAt: new Date() };
+      this.bookings.set(id, updatedBooking);
+      return updatedBooking;
+    }
+    return undefined;
   }
   
   private async initializeSampleData() {

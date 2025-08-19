@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
-import { User, Menu, X, LogOut, UserIcon } from 'lucide-react';
+import { User, Menu, X, LogOut, UserIcon, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -76,6 +76,12 @@ export default function Navigation() {
                     <Link href="/profile" className="cursor-pointer">
                       <UserIcon className="mr-2 h-4 w-4" />
                       Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/my-bookings" className="cursor-pointer" data-testid="nav-my-bookings">
+                      <Calendar className="mr-2 h-4 w-4" />
+                      My Bookings
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />

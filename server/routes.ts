@@ -10,7 +10,8 @@ import {
   insertHotelSchema,
   insertFlightSchema,
   insertTravelPackageSchema,
-  insertRestaurantSchema
+  insertRestaurantSchema,
+  insertBookingSchema
 } from "@shared/schema";
 import { z } from "zod";
 
@@ -295,6 +296,64 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid data", errors: error.errors });
       }
       res.status(500).json({ message: "Failed to create restaurant" });
+    }
+  });
+
+  // Booking routes
+  app.get("/api/bookings", isAuthenticated, async (req, res) => {
+    try {
+      const userId = req.session.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "No user session found" });
+      }
+      
+      const bookings = await storage.getBookings(userId);
+      res.json(bookings);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch bookings" });
+    }
+  });
+
+  app.post("/api/bookings", isAuthenticated, async (req, res) => {
+    try {
+      const userId = req.session.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "No user session found" });
+      }
+      
+      const validatedData = insertBookingSchema.parse({ ...req.body, userId });
+      const booking = await storage.createBooking(validatedData);
+      res.status(201).json(booking);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create booking" });
+    }
+  });
+
+  app.put("/api/bookings/:id/cancel", isAuthenticated, async (req, res) => {
+    try {
+      const userId = req.session.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "No user session found" });
+      }
+      
+      const bookingId = req.params.id;
+      const booking = await storage.getBooking(bookingId);
+      
+      if (!booking) {
+        return res.status(404).json({ message: "Booking not found" });
+      }
+      
+      if (booking.userId !== userId) {
+        return res.status(403).json({ message: "Unauthorized to cancel this booking" });
+      }
+      
+      const updatedBooking = await storage.updateBookingStatus(bookingId, 'cancelled');
+      res.json(updatedBooking);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to cancel booking" });
     }
   });
 

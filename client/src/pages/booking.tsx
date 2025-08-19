@@ -11,6 +11,8 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/useAuth';
+import { apiRequest } from '@/lib/queryClient';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import type { Hotel, Restaurant } from '@shared/schema';
@@ -18,6 +20,7 @@ import type { Hotel, Restaurant } from '@shared/schema';
 export default function Booking() {
   const [, params] = useRoute('/booking/:type/:id');
   const { toast } = useToast();
+  const { user, isAuthenticated } = useAuth();
   
   // Booking form state
   const [selectedRoom, setSelectedRoom] = useState<string>('');
@@ -97,7 +100,7 @@ export default function Booking() {
     return slots;
   };
 
-  // Set default dates
+  // Set default dates and user data
   useEffect(() => {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -114,18 +117,62 @@ export default function Booking() {
     } else {
       setBookingDate(todayStr);
     }
-  }, [bookingType]);
+
+    // Pre-fill form if user is authenticated
+    if (user && isAuthenticated) {
+      setCustomerName(`${user.firstName} ${user.lastName}`);
+      setCustomerEmail(user.email);
+      setCustomerPhone(user.phone || '');
+    }
+  }, [bookingType, user, isAuthenticated]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // Create booking confirmation details
+      if (!currentItem) {
+        throw new Error('Property information not found');
+      }
+      
       const confirmationNumber = `BDE${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
+      
+      // Prepare booking data for both API and local display
+      const bookingRequestData = {
+        confirmationNumber,
+        bookingType,
+        propertyId: currentItem.id,
+        propertyName: currentItem.name,
+        propertyLocation: currentItem.location,
+        propertyImageUrl: currentItem.imageUrl,
+        propertyPhone: currentItem.phone,
+        customerName,
+        customerEmail,
+        customerPhone,
+        status: 'confirmed',
+        ...(bookingType === 'hotel' && selectedHotel && {
+          roomType: getRoomTypes(selectedHotel).find(r => r.id === selectedRoom)?.type,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          nights: getNights(),
+          guests: parseInt(guests),
+          totalAmount: calculateTotal(),
+        }),
+        ...(bookingType === 'restaurant' && selectedRestaurant && {
+          reservationDate: bookingDate,
+          reservationTime: bookingTime,
+          partySize: parseInt(partySize),
+          cuisine: selectedRestaurant.cuisine,
+          priceRange: selectedRestaurant.priceRange,
+        })
+      };
+
+      // Save booking to database if user is authenticated
+      if (isAuthenticated) {
+        await apiRequest('POST', '/api/bookings', bookingRequestData);
+      }
+
+      // Create display data for dialog
       const bookingData = {
         confirmationNumber,
         bookingType,
@@ -161,10 +208,10 @@ export default function Booking() {
       setBookingDetails(bookingData);
       setShowSuccessDialog(true);
       
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: "Booking Failed",
-        description: "There was an error processing your booking. Please try again.",
+        description: error.message || "There was an error processing your booking. Please try again.",
         variant: "destructive",
       });
     } finally {
