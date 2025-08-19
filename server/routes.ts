@@ -361,13 +361,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/bookings", async (req, res) => {
     try {
       const userId = req.session?.userId;
+      console.log("Booking request body:", JSON.stringify(req.body, null, 2));
       const validatedData = insertBookingSchema.parse(req.body);
+      console.log("Validated data:", JSON.stringify(validatedData, null, 2));
       const booking = await storage.createBooking({ ...validatedData, userId: userId || null });
+      console.log("Created booking:", JSON.stringify(booking, null, 2));
       res.status(201).json(booking);
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.log("Validation errors:", error.errors);
         return res.status(400).json({ message: "Invalid data", errors: error.errors });
       }
+      console.error("Booking creation error:", error);
       res.status(500).json({ message: "Failed to create booking" });
     }
   });
