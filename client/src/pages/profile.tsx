@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
 import { User, Save, LogOut } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -296,6 +297,7 @@ export default function Profile() {
         </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
