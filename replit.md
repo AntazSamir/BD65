@@ -44,6 +44,12 @@ Project Focus: Bangladesh tourism and travel destinations.
   - Auto-sliding pauses for 10 seconds when user interacts manually
   - Enhanced destination details display in header with rating and pricing
 
+### Bug Fixes and Code Quality Improvements (August 2025)
+- **Authentication System**: Fixed auth hook to properly handle 401 responses without throwing errors
+- **API Response Handling**: Fixed sign in, sign up, sign out, and profile update functions to properly parse JSON responses
+- **Code Cleanup**: Removed debugging console.log statements from production booking API routes
+- **Trip Planner UI**: Reduced trip planner card image height from h-48 to h-36 for more compact display
+
 ## System Architecture
 
 ### Frontend Architecture

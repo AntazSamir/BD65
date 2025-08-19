@@ -85,7 +85,7 @@ export default function TripPlannerDeals() {
                 <img 
                   src={getDestinationImage(tripPlanner.destination)} 
                   alt={tripPlanner.destination}
-                  className="w-full h-48 object-cover transition-butter group-hover:scale-110"
+                  className="w-full h-36 object-cover transition-butter group-hover:scale-110"
                 />
                 <button className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-butter hover-glow">
                   <Heart className="w-4 h-4 text-gray-600 transition-elastic hover:scale-110 hover:text-red-500" />
