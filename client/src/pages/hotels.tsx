@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation } from 'wouter';
-import { Search, MapPin, Star, Wifi, Car, Coffee, Users, X, Calendar, CreditCard, Utensils, Building2 } from 'lucide-react';
+import { Search, MapPin, Star, Wifi, Car, Coffee, Users, X, Calendar, CreditCard, Utensils, Building2, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -422,6 +422,10 @@ export default function Hotels() {
                           <Utensils className="w-4 h-4 mr-1" />
                           <span data-testid={`text-restaurant-cuisine-${restaurant.id}`}>{restaurant.cuisine}</span>
                         </div>
+                        <div className="flex items-center text-gray-600 text-sm">
+                          <Phone className="w-4 h-4 mr-1" />
+                          <span data-testid={`text-restaurant-phone-${restaurant.id}`}>{restaurant.phone}</span>
+                        </div>
                       </div>
 
                       <p className="text-gray-700 text-sm mb-4 line-clamp-2" data-testid={`text-restaurant-description-${restaurant.id}`}>
@@ -479,9 +483,13 @@ export default function Hotels() {
                         <h3 className="text-xl font-semibold text-gray-900 mb-1" data-testid={`text-hotel-name-${hotel.id}`}>
                           {hotel.name}
                         </h3>
-                        <div className="flex items-center text-gray-600 text-sm">
+                        <div className="flex items-center text-gray-600 text-sm mb-1">
                           <MapPin className="w-4 h-4 mr-1" />
                           <span data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</span>
+                        </div>
+                        <div className="flex items-center text-gray-600 text-sm">
+                          <Phone className="w-4 h-4 mr-1" />
+                          <span data-testid={`text-hotel-phone-${hotel.id}`}>{hotel.phone}</span>
                         </div>
                       </div>
 
@@ -595,9 +603,14 @@ export default function Hotels() {
                   
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">About This Hotel</h3>
-                    <p className="text-gray-700" data-testid={`dialog-description-${selectedHotel.id}`}>
+                    <p className="text-gray-700 mb-4" data-testid={`dialog-description-${selectedHotel.id}`}>
                       {selectedHotel.description}
                     </p>
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <Phone className="w-4 h-4 mr-2" />
+                      <span className="font-medium mr-2">Phone:</span>
+                      <span data-testid={`dialog-phone-${selectedHotel.id}`}>{selectedHotel.phone}</span>
+                    </div>
                   </div>
 
                   {/* Amenities */}
@@ -767,6 +780,10 @@ export default function Hotels() {
                       <div>
                         <span className="font-medium text-gray-700">Price Range:</span>
                         <p className="text-gray-600">{selectedRestaurant.priceRange}</p>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Phone:</span>
+                        <p className="text-gray-600" data-testid={`dialog-phone-${selectedRestaurant.id}`}>{selectedRestaurant.phone}</p>
                       </div>
                     </div>
                   </div>

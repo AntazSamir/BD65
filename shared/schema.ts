@@ -37,6 +37,7 @@ export const hotels = pgTable("hotels", {
   imageUrl: text("image_url").notNull(),
   rating: text("rating").notNull(),
   pricePerNight: integer("price_per_night").notNull(),
+  phone: text("phone").notNull(),
   amenities: text("amenities").array().notNull().default([]),
 });
 
@@ -72,6 +73,7 @@ export const restaurants = pgTable("restaurants", {
   rating: text("rating").notNull(),
   cuisine: text("cuisine").notNull(),
   priceRange: text("price_range").notNull(),
+  phone: text("phone").notNull(),
   reviews: text("reviews").array().notNull().default([]),
 });
 

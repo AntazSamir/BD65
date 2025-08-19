@@ -413,6 +413,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.7',
       pricePerNight: 8500,
+      phone: '+880-341-64521',
       amenities: ['Sea View', 'Pool', 'Spa', 'Restaurant'],
     });
     
@@ -423,6 +424,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.8',
       pricePerNight: 12500,
+      phone: '+880-2-8833221',
       amenities: ['Business Center', 'Gym', 'Pool', 'Multiple Restaurants'],
     });
 
@@ -433,6 +435,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.3',
       pricePerNight: 7800,
+      phone: '+880-31-726543',
       amenities: ['Conference Hall', 'Restaurant', 'Wi-Fi', 'Airport Shuttle'],
     });
 
@@ -443,6 +446,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.4',
       pricePerNight: 6500,
+      phone: '+880-821-719832',
       amenities: ['Garden View', 'Traditional Cuisine', 'Cultural Tours'],
     });
 
@@ -453,6 +457,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.1',
       pricePerNight: 4200,
+      phone: '+880-441-56789',
       amenities: ['Beach Access', 'Fishing Trips', 'Local Cuisine'],
     });
 
@@ -463,6 +468,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.5',
       pricePerNight: 5800,
+      phone: '+880-351-62456',
       amenities: ['Lake View', 'Boat Rides', 'Tribal Cultural Shows'],
     });
 
@@ -594,6 +600,7 @@ export class MemStorage implements IStorage {
       rating: '4.6',
       cuisine: 'Bengali Seafood',
       priceRange: '৳৳৳',
+      phone: '+880-341-65432',
       reviews: ['Amazing fresh fish and prawns!', 'Best beachfront dining experience', 'Authentic Bengali flavors with sea view']
     });
 
@@ -605,6 +612,7 @@ export class MemStorage implements IStorage {
       rating: '4.8',
       cuisine: 'Bangladeshi & Indian',
       priceRange: '৳৳৳৳',
+      phone: '+880-2-9661234',
       reviews: ['Excellent biryani and kebabs', 'Elegant atmosphere for special occasions', 'Outstanding service and food quality']
     });
 
@@ -616,6 +624,7 @@ export class MemStorage implements IStorage {
       rating: '4.5',
       cuisine: 'Chittagonian',
       priceRange: '৳৳',
+      phone: '+880-31-654987',
       reviews: ['Authentic mezbani beef curry', 'Must-try Chittagonian specialties', 'Rich flavors and generous portions']
     });
 
@@ -627,6 +636,7 @@ export class MemStorage implements IStorage {
       rating: '4.4',
       cuisine: 'Local & Continental',
       priceRange: '৳৳',
+      phone: '+880-821-567234',
       reviews: ['Beautiful garden setting', 'Fresh organic ingredients', 'Perfect spot for tea lovers']
     });
 
@@ -638,6 +648,7 @@ export class MemStorage implements IStorage {
       rating: '4.7',
       cuisine: 'Tribal & Indigenous',
       priceRange: '৳৳',
+      phone: '+880-361-23456',
       reviews: ['Unique bamboo shoot dishes', 'Cultural dining experience', 'Incredible hill station atmosphere']
     });
 
@@ -649,6 +660,7 @@ export class MemStorage implements IStorage {
       rating: '4.3',
       cuisine: 'Eco-Local',
       priceRange: '৳৳',
+      phone: '+880-41-789123',
       reviews: ['Sustainable and delicious', 'Beautiful nature views while dining', 'Supporting local communities']
     });
 
@@ -660,6 +672,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.5',
       pricePerNight: 9500,
+      phone: '+880-2-8821456',
       amenities: ['Business Center', 'Rooftop Pool', 'Airport Transfer', 'Conference Rooms'],
     });
 
@@ -670,6 +683,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.2',
       pricePerNight: 6800,
+      phone: '+880-41-567890',
       amenities: ['Wildlife Tours', 'Boat Trips', 'Nature Walks', 'Bird Watching'],
     });
 
@@ -680,6 +694,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.6',
       pricePerNight: 7200,
+      phone: '+880-361-78912',
       amenities: ['Mountain Views', 'Trekking Guide', 'Tribal Cultural Shows', 'Adventure Sports'],
     });
 
@@ -692,6 +707,7 @@ export class MemStorage implements IStorage {
       rating: '4.7',
       cuisine: 'Traditional Bengali',
       priceRange: '৳৳',
+      phone: '+880-2-7312456',
       reviews: ['Best biriyani in Old Dhaka!', 'Authentic flavors passed down generations', 'Must-try for biriyani lovers']
     });
 
@@ -703,6 +719,7 @@ export class MemStorage implements IStorage {
       rating: '4.4',
       cuisine: 'River Fish & Bengali',
       priceRange: '৳৳',
+      phone: '+880-41-234567',
       reviews: ['Fresh river fish preparations', 'Beautiful riverside setting', 'Authentic Khulna flavors']
     });
 
@@ -714,6 +731,7 @@ export class MemStorage implements IStorage {
       rating: '4.3',
       cuisine: 'Coastal Seafood',
       priceRange: '৳৳',
+      phone: '+880-441-34567',
       reviews: ['Fresh crab and prawns', 'Perfect sunset dining', 'Authentic coastal flavors']
     });
 
@@ -725,6 +743,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.1',
       pricePerNight: 4500,
+      phone: '+880-468-23456',
       amenities: ['Mosque View', 'Traditional Architecture', 'Cultural Tours', 'Free WiFi'],
     });
 
@@ -735,6 +754,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.3',
       pricePerNight: 5800,
+      phone: '+880-468-56789',
       amenities: ['Heritage Tours', 'Restaurant', 'Garden Views', 'Airport Transfer'],
     });
 
@@ -745,6 +765,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '3.9',
       pricePerNight: 2800,
+      phone: '+880-468-12345',
       amenities: ['Heritage Site Access', 'Local Guide Service', 'Traditional Breakfast', 'Bicycle Rental'],
     });
 
@@ -756,6 +777,7 @@ export class MemStorage implements IStorage {
       rating: '4.2',
       cuisine: 'Traditional Bengali',
       priceRange: '৳৳',
+      phone: '+880-468-98765',
       reviews: ['Authentic local flavors', 'Historic atmosphere', 'Great traditional fish curry']
     });
 
@@ -767,6 +789,7 @@ export class MemStorage implements IStorage {
       rating: '4.4',
       cuisine: 'Regional Bengali',
       priceRange: '৳৳',
+      phone: '+880-468-45678',
       reviews: ['Amazing river fish preparations', 'Warm hospitality', 'Must-try local specialties']
     });
 
@@ -777,6 +800,7 @@ export class MemStorage implements IStorage {
       imageUrl: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
       rating: '4.0',
       cuisine: 'Cafe & Snacks',
+      phone: '+880-468-87654',
       priceRange: '৳',
       reviews: ['Perfect for history lovers', 'Great tea and pastries', 'Beautiful dome views']
     });

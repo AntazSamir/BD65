@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation, useRoute, Link } from 'wouter';
-import { Calendar, Clock, Users, MapPin, Star, CreditCard, ArrowLeft, Check } from 'lucide-react';
+import { Calendar, Clock, Users, MapPin, Star, CreditCard, ArrowLeft, Check, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -494,6 +494,10 @@ export default function Booking() {
                       <div className="flex items-center text-yellow-600 text-sm mt-1">
                         <Star className="w-4 h-4 mr-1 fill-current" />
                         <span data-testid="summary-rating">{currentItem.rating}</span>
+                      </div>
+                      <div className="flex items-center text-gray-600 text-sm mt-1">
+                        <Phone className="w-4 h-4 mr-1" />
+                        <span data-testid="summary-phone">{currentItem.phone}</span>
                       </div>
                     </div>
                   </div>
