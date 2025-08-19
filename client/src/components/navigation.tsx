@@ -34,17 +34,17 @@ export default function Navigation() {
             <Link href="/destinations" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Destinations</Link>
             <Link href="/hotels" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Hotels</Link>
             <a 
-              href="#flights" 
+              href="#trip-planners" 
               className="relative text-neutral hover:text-primary cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
               onClick={(e) => {
                 e.preventDefault();
-                const element = document.getElementById('flights');
+                const element = document.getElementById('trip-planners');
                 if (element) {
                   element.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
             >
-              Flights
+              Trip Planner
             </a>
             <Link href="/about" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">About</Link>
           </div>
@@ -128,18 +128,18 @@ export default function Navigation() {
                 Hotels
               </Link>
               <a 
-                href="#flights" 
+                href="#trip-planners" 
                 className="relative text-neutral hover:text-primary cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMenuOpen(false);
-                  const element = document.getElementById('flights');
+                  const element = document.getElementById('trip-planners');
                   if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
               >
-                Flights
+                Trip Planner
               </a>
               <Link href="/about" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">About</Link>
               

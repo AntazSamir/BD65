@@ -8,7 +8,7 @@ import {
   updateUserSchema,
   insertDestinationSchema,
   insertHotelSchema,
-  insertFlightSchema,
+  insertTripPlannerSchema,
   insertTravelPackageSchema,
   insertRestaurantSchema,
   insertBookingSchema
@@ -194,38 +194,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Flights routes
-  app.get("/api/flights", async (req, res) => {
+  // Trip Planner routes
+  app.get("/api/trip-planners", async (req, res) => {
     try {
-      const flights = await storage.getFlights();
-      res.json(flights);
+      const tripPlanners = await storage.getTripPlanners();
+      res.json(tripPlanners);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch flights" });
+      res.status(500).json({ message: "Failed to fetch trip planners" });
     }
   });
 
-  app.get("/api/flights/:id", async (req, res) => {
+  app.get("/api/trip-planners/:id", async (req, res) => {
     try {
-      const flight = await storage.getFlight(req.params.id);
-      if (!flight) {
-        return res.status(404).json({ message: "Flight not found" });
+      const tripPlanner = await storage.getTripPlanner(req.params.id);
+      if (!tripPlanner) {
+        return res.status(404).json({ message: "Trip planner not found" });
       }
-      res.json(flight);
+      res.json(tripPlanner);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch flight" });
+      res.status(500).json({ message: "Failed to fetch trip planner" });
     }
   });
 
-  app.post("/api/flights", async (req, res) => {
+  app.post("/api/trip-planners", async (req, res) => {
     try {
-      const validatedData = insertFlightSchema.parse(req.body);
-      const flight = await storage.createFlight(validatedData);
-      res.status(201).json(flight);
+      const validatedData = insertTripPlannerSchema.parse(req.body);
+      const tripPlanner = await storage.createTripPlanner(validatedData);
+      res.status(201).json(tripPlanner);
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({ message: "Invalid data", errors: error.errors });
       }
-      res.status(500).json({ message: "Failed to create flight" });
+      res.status(500).json({ message: "Failed to create trip planner" });
     }
   });
 

@@ -1,18 +1,18 @@
 import { Heart, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
-import type { Flight } from '@shared/schema';
+import type { TripPlanner } from '@shared/schema';
 
-export default function FlightDeals() {
-  const { data: flights = [], isLoading, error } = useQuery<Flight[]>({
-    queryKey: ['/api/flights'],
+export default function TripPlannerDeals() {
+  const { data: tripPlanners = [], isLoading, error } = useQuery<TripPlanner[]>({
+    queryKey: ['/api/trip-planners'],
   });
 
   const handleBookNow = () => {
     alert('This would navigate to the booking page in a real application.');
   };
 
-  // Map flights to destination images
+  // Map trip planners to destination images
   const getDestinationImage = (destination: string) => {
     const imageMap: { [key: string]: string } = {
       "Cox's Bazar": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
@@ -25,11 +25,11 @@ export default function FlightDeals() {
 
   if (isLoading) {
     return (
-      <section id="flights" className="py-16 bg-white">
+      <section id="trip-planners" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Flight Offer Deals</h2>
-            <p className="text-gray-600">Competitive fares for your route-specific searches.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trip Planner Deals</h2>
+            <p className="text-gray-600">Plan your perfect journey with our curated travel packages.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {[...Array(4)].map((_, i) => (
@@ -53,11 +53,11 @@ export default function FlightDeals() {
 
   if (error) {
     return (
-      <section id="flights" className="py-16 bg-white">
+      <section id="trip-planners" className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Flight Offer Deals</h2>
-            <p className="text-red-600">Failed to load flight deals. Please try again later.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trip Planner Deals</h2>
+            <p className="text-red-600">Failed to load trip planner deals. Please try again later.</p>
           </div>
         </div>
       </section>
@@ -65,26 +65,26 @@ export default function FlightDeals() {
   }
 
   return (
-    <section id="flights" className="py-16 bg-white">
+    <section id="trip-planners" className="py-16 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Flight Offer Deals</h2>
-          <p className="text-gray-600">Competitive fares for your route-specific searches.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trip Planner Deals</h2>
+          <p className="text-gray-600">Plan your perfect journey with our curated travel packages.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
-          {flights.slice(0, 4).map((flight, index) => (
+          {tripPlanners.slice(0, 4).map((tripPlanner, index) => (
             <div 
-              key={flight.id}
+              key={tripPlanner.id}
               className="bg-white rounded-xl shadow-md hover-lift transition-butter overflow-hidden animate-fade-in group"
               style={{ animationDelay: `${index * 0.1}s` }}
-              data-testid={`card-flight-${flight.id}`}
+              data-testid={`card-trip-planner-${tripPlanner.id}`}
             >
               {/* Image Section */}
               <div className="relative">
                 <img 
-                  src={getDestinationImage(flight.destination)} 
-                  alt={flight.destination}
+                  src={getDestinationImage(tripPlanner.destination)} 
+                  alt={tripPlanner.destination}
                   className="w-full h-48 object-cover transition-butter group-hover:scale-110"
                 />
                 <button className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-butter hover-glow">
@@ -96,38 +96,38 @@ export default function FlightDeals() {
               <div className="p-4">
                 {/* Date and Route Info */}
                 <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                  <span>📅 {flight.departureDate}</span>
-                  <span>📅 {flight.returnDate || '16 Jun 2024'}</span>
+                  <span>📅 {tripPlanner.departureDate}</span>
+                  <span>📅 {tripPlanner.returnDate || '16 Jun 2024'}</span>
                 </div>
                 
                 {/* Route */}
                 <div className="flex items-center justify-between mb-3">
-                  <div className="text-lg font-semibold text-gray-900">{flight.origin}</div>
+                  <div className="text-lg font-semibold text-gray-900">{tripPlanner.origin}</div>
                   <ArrowUpDown className="w-4 h-4 text-gray-400" />
-                  <div className="text-lg font-semibold text-gray-900">{flight.destination}</div>
+                  <div className="text-lg font-semibold text-gray-900">{tripPlanner.destination}</div>
                 </div>
                 
                 {/* Class and Pricing */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="space-y-1">
-                    <div className="text-xs text-gray-500">Business</div>
-                    <div className="text-lg font-bold text-gray-900">৳{flight.price}</div>
+                    <div className="text-xs text-gray-500">Standard</div>
+                    <div className="text-lg font-bold text-gray-900">৳{tripPlanner.price}</div>
                   </div>
                   <div className="space-y-1 text-right">
-                    <div className="text-xs text-gray-500">Business</div>
-                    <div className="text-lg font-bold text-gray-900">৳{flight.price}</div>
+                    <div className="text-xs text-gray-500">Premium</div>
+                    <div className="text-lg font-bold text-gray-900">৳{tripPlanner.price + 500}</div>
                   </div>
                 </div>
                 
-                {/* Seats Left and Book Button */}
+                {/* Availability and Book Button */}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">18 Seats left</span>
+                  <span className="text-xs text-gray-500">Limited availability</span>
                   <Button 
                     onClick={handleBookNow}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
-                    data-testid={`button-book-flight-${flight.id}`}
+                    data-testid={`button-book-trip-planner-${tripPlanner.id}`}
                   >
-                    Book Now
+                    Plan Trip
                   </Button>
                 </div>
               </div>

@@ -2,7 +2,7 @@ import Navigation from '../components/navigation';
 import HeroSection from '../components/hero-section';
 import PopularDestinations from '../components/popular-destinations';
 import RecommendedHotels from '../components/recommended-hotels';
-import FlightDeals from '../components/flight-deals';
+import TripPlannerDeals from '../components/trip-planner-deals';
 import WhyChooseUs from '../components/why-choose-us';
 import Testimonials from '../components/testimonials';
 import FAQ from '../components/faq';
@@ -56,7 +56,7 @@ export default function Home() {
       
       
       <RecommendedHotels />
-      <FlightDeals />
+      <TripPlannerDeals />
       <WhyChooseUs />
       <Testimonials />
       <FAQ />

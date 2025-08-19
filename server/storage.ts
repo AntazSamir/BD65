@@ -2,7 +2,7 @@ import {
   type User, type InsertUser, type UpdateUser, type LoginCredentials,
   type Destination, type InsertDestination,
   type Hotel, type InsertHotel,
-  type Flight, type InsertFlight,
+  type TripPlanner, type InsertTripPlanner,
   type TravelPackage, type InsertTravelPackage,
   type Restaurant, type InsertRestaurant,
   type Booking, type InsertBooking
@@ -31,10 +31,10 @@ export interface IStorage {
   getHotel(id: string): Promise<Hotel | undefined>;
   createHotel(hotel: InsertHotel): Promise<Hotel>;
   
-  // Flight operations
-  getFlights(): Promise<Flight[]>;
-  getFlight(id: string): Promise<Flight | undefined>;
-  createFlight(flight: InsertFlight): Promise<Flight>;
+  // Trip Planner operations
+  getTripPlanners(): Promise<TripPlanner[]>;
+  getTripPlanner(id: string): Promise<TripPlanner | undefined>;
+  createTripPlanner(tripPlanner: InsertTripPlanner): Promise<TripPlanner>;
   
   // Travel Package operations
   getTravelPackages(): Promise<TravelPackage[]>;
@@ -57,7 +57,7 @@ export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private destinations: Map<string, Destination>;
   private hotels: Map<string, Hotel>;
-  private flights: Map<string, Flight>;
+  private tripPlanners: Map<string, TripPlanner>;
   private travelPackages: Map<string, TravelPackage>;
   private restaurants: Map<string, Restaurant>;
   private bookings: Map<string, Booking>;
@@ -66,7 +66,7 @@ export class MemStorage implements IStorage {
     this.users = new Map();
     this.destinations = new Map();
     this.hotels = new Map();
-    this.flights = new Map();
+    this.tripPlanners = new Map();
     this.travelPackages = new Map();
     this.restaurants = new Map();
     this.bookings = new Map();
@@ -168,28 +168,28 @@ export class MemStorage implements IStorage {
     return hotel;
   }
   
-  // Flight operations
-  async getFlights(): Promise<Flight[]> {
-    return Array.from(this.flights.values());
+  // Trip Planner operations
+  async getTripPlanners(): Promise<TripPlanner[]> {
+    return Array.from(this.tripPlanners.values());
   }
   
-  async getFlight(id: string): Promise<Flight | undefined> {
-    return this.flights.get(id);
+  async getTripPlanner(id: string): Promise<TripPlanner | undefined> {
+    return this.tripPlanners.get(id);
   }
   
-  async createFlight(insertFlight: InsertFlight): Promise<Flight> {
+  async createTripPlanner(insertTripPlanner: InsertTripPlanner): Promise<TripPlanner> {
     const id = randomUUID();
-    const flight: Flight = { 
-      ...insertFlight, 
+    const tripPlanner: TripPlanner = { 
+      ...insertTripPlanner, 
       id,
-      duration: insertFlight.duration || '',
-      stops: insertFlight.stops || '',
-      departureDate: insertFlight.departureDate || '',
-      returnDate: insertFlight.returnDate || '',
-      dealType: insertFlight.dealType || ''
+      duration: insertTripPlanner.duration || '',
+      stops: insertTripPlanner.stops || '',
+      departureDate: insertTripPlanner.departureDate || '',
+      returnDate: insertTripPlanner.returnDate || '',
+      dealType: insertTripPlanner.dealType || ''
     };
-    this.flights.set(id, flight);
-    return flight;
+    this.tripPlanners.set(id, tripPlanner);
+    return tripPlanner;
   }
   
   // Travel Package operations
@@ -528,8 +528,8 @@ export class MemStorage implements IStorage {
       amenities: ['Lake View', 'Boat Rides', 'Tribal Cultural Shows'],
     });
 
-    // Initialize sample flights
-    await this.createFlight({
+    // Initialize sample trip planners
+    await this.createTripPlanner({
       origin: 'Dhaka',
       destination: "Cox's Bazar",
       price: 4500,
@@ -540,7 +540,7 @@ export class MemStorage implements IStorage {
       dealType: 'Save 20%',
     });
     
-    await this.createFlight({
+    await this.createTripPlanner({
       origin: 'Dhaka',
       destination: 'Sylhet',
       price: 3800,
@@ -551,7 +551,7 @@ export class MemStorage implements IStorage {
       dealType: 'Hot Deal',
     });
 
-    await this.createFlight({
+    await this.createTripPlanner({
       origin: 'Dhaka',
       destination: 'Chittagong',
       price: 4200,
@@ -562,7 +562,7 @@ export class MemStorage implements IStorage {
       dealType: 'Limited Seats',
     });
 
-    await this.createFlight({
+    await this.createTripPlanner({
       origin: 'Chittagong',
       destination: 'Cox\'s Bazar',
       price: 2800,
@@ -573,7 +573,7 @@ export class MemStorage implements IStorage {
       dealType: 'Best Price',
     });
 
-    await this.createFlight({
+    await this.createTripPlanner({
       origin: 'Dhaka',
       destination: 'Jessore',
       price: 3200,
@@ -584,7 +584,7 @@ export class MemStorage implements IStorage {
       dealType: 'Early Bird',
     });
 
-    await this.createFlight({
+    await this.createTripPlanner({
       origin: 'Sylhet',
       destination: 'Cox\'s Bazar',
       price: 5500,
@@ -595,7 +595,7 @@ export class MemStorage implements IStorage {
       dealType: 'Weekend Special',
     });
 
-    await this.createFlight({
+    await this.createTripPlanner({
       origin: 'Dhaka',
       destination: 'Barisal',
       price: 2900,
