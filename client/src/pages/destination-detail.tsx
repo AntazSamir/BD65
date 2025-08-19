@@ -1,14 +1,14 @@
 import { Star, MapPin, ArrowLeft, Users, Calendar, DollarSign, Utensils, Building2, MessageCircle, Camera, Clock, Map, Info, ShoppingBag, UtensilsCrossed, Landmark, Camera as CameraIcon, Heart, Music } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { useParams, useLocation } from 'wouter';
-import { Link } from 'wouter';
+import { useRoute, useLocation, Link } from 'wouter';
 import type { Destination, Hotel, Restaurant } from '@shared/schema';
 import Navigation from '../components/navigation';
 import Footer from '../components/footer';
 import { Button } from '@/components/ui/button';
 
 export default function DestinationDetail() {
-  const { id } = useParams();
+  const [, params] = useRoute('/destinations/:id');
+  const id = params?.id;
   const [, setLocation] = useLocation();
 
   const { data: destination, isLoading: destinationLoading, error: destinationError } = useQuery<Destination>({
