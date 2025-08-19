@@ -9,6 +9,8 @@ import {
   insertDestinationSchema,
   insertHotelSchema,
   insertTripPlannerSchema,
+  insertBusSchema,
+  insertPrivateCarSchema,
   insertTravelPackageSchema,
   insertRestaurantSchema,
   insertBookingSchema
@@ -226,6 +228,52 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid data", errors: error.errors });
       }
       res.status(500).json({ message: "Failed to create trip planner" });
+    }
+  });
+
+  // Bus routes
+  app.get("/api/buses", async (req, res) => {
+    try {
+      const buses = await storage.getBuses();
+      res.json(buses);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch buses" });
+    }
+  });
+
+  app.post("/api/buses", async (req, res) => {
+    try {
+      const validatedData = insertBusSchema.parse(req.body);
+      const bus = await storage.createBus(validatedData);
+      res.status(201).json(bus);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create bus" });
+    }
+  });
+
+  // Private Car routes
+  app.get("/api/private-cars", async (req, res) => {
+    try {
+      const privateCars = await storage.getPrivateCars();
+      res.json(privateCars);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch private cars" });
+    }
+  });
+
+  app.post("/api/private-cars", async (req, res) => {
+    try {
+      const validatedData = insertPrivateCarSchema.parse(req.body);
+      const privateCar = await storage.createPrivateCar(validatedData);
+      res.status(201).json(privateCar);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create private car" });
     }
   });
 

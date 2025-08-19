@@ -53,6 +53,31 @@ export const tripPlanners = pgTable("trip_planners", {
   dealType: text("deal_type").notNull().default(''),
 });
 
+export const buses = pgTable("buses", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  operator: text("operator").notNull(),
+  type: text("type").notNull(),
+  departure: text("departure").notNull(),
+  arrival: text("arrival").notNull(),
+  duration: text("duration").notNull(),
+  price: integer("price").notNull(),
+  seats: integer("seats").notNull(),
+  amenities: text("amenities").array().notNull().default([]),
+  rating: text("rating").notNull(),
+});
+
+export const privateCars = pgTable("private_cars", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  type: text("type").notNull(),
+  category: text("category").notNull(),
+  capacity: integer("capacity").notNull(),
+  duration: text("duration").notNull(),
+  price: integer("price").notNull(),
+  driver: text("driver").notNull(),
+  features: text("features").array().notNull().default([]),
+  rating: text("rating").notNull(),
+});
+
 export const travelPackages = pgTable("travel_packages", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
@@ -139,6 +164,14 @@ export const insertTripPlannerSchema = createInsertSchema(tripPlanners).omit({
   id: true,
 });
 
+export const insertBusSchema = createInsertSchema(buses).omit({
+  id: true,
+});
+
+export const insertPrivateCarSchema = createInsertSchema(privateCars).omit({
+  id: true,
+});
+
 export const insertTravelPackageSchema = createInsertSchema(travelPackages).omit({
   id: true,
 });
@@ -162,11 +195,15 @@ export type Booking = typeof bookings.$inferSelect;
 export type InsertDestination = z.infer<typeof insertDestinationSchema>;
 export type InsertHotel = z.infer<typeof insertHotelSchema>;
 export type InsertTripPlanner = z.infer<typeof insertTripPlannerSchema>;
+export type InsertBus = z.infer<typeof insertBusSchema>;
+export type InsertPrivateCar = z.infer<typeof insertPrivateCarSchema>;
 export type InsertTravelPackage = z.infer<typeof insertTravelPackageSchema>;
 export type InsertRestaurant = z.infer<typeof insertRestaurantSchema>;
 export type User = typeof users.$inferSelect;
 export type Destination = typeof destinations.$inferSelect;
 export type Hotel = typeof hotels.$inferSelect;
 export type TripPlanner = typeof tripPlanners.$inferSelect;
+export type Bus = typeof buses.$inferSelect;
+export type PrivateCar = typeof privateCars.$inferSelect;
 export type TravelPackage = typeof travelPackages.$inferSelect;
 export type Restaurant = typeof restaurants.$inferSelect;

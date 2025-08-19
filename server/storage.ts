@@ -3,6 +3,8 @@ import {
   type Destination, type InsertDestination,
   type Hotel, type InsertHotel,
   type TripPlanner, type InsertTripPlanner,
+  type Bus, type InsertBus,
+  type PrivateCar, type InsertPrivateCar,
   type TravelPackage, type InsertTravelPackage,
   type Restaurant, type InsertRestaurant,
   type Booking, type InsertBooking
@@ -36,6 +38,16 @@ export interface IStorage {
   getTripPlanner(id: string): Promise<TripPlanner | undefined>;
   createTripPlanner(tripPlanner: InsertTripPlanner): Promise<TripPlanner>;
   
+  // Bus operations
+  getBuses(): Promise<Bus[]>;
+  getBus(id: string): Promise<Bus | undefined>;
+  createBus(bus: InsertBus): Promise<Bus>;
+  
+  // Private Car operations
+  getPrivateCars(): Promise<PrivateCar[]>;
+  getPrivateCar(id: string): Promise<PrivateCar | undefined>;
+  createPrivateCar(privateCar: InsertPrivateCar): Promise<PrivateCar>;
+  
   // Travel Package operations
   getTravelPackages(): Promise<TravelPackage[]>;
   getTravelPackage(id: string): Promise<TravelPackage | undefined>;
@@ -58,6 +70,8 @@ export class MemStorage implements IStorage {
   private destinations: Map<string, Destination>;
   private hotels: Map<string, Hotel>;
   private tripPlanners: Map<string, TripPlanner>;
+  private buses: Map<string, Bus>;
+  private privateCars: Map<string, PrivateCar>;
   private travelPackages: Map<string, TravelPackage>;
   private restaurants: Map<string, Restaurant>;
   private bookings: Map<string, Booking>;
@@ -67,6 +81,8 @@ export class MemStorage implements IStorage {
     this.destinations = new Map();
     this.hotels = new Map();
     this.tripPlanners = new Map();
+    this.buses = new Map();
+    this.privateCars = new Map();
     this.travelPackages = new Map();
     this.restaurants = new Map();
     this.bookings = new Map();
@@ -190,6 +206,46 @@ export class MemStorage implements IStorage {
     };
     this.tripPlanners.set(id, tripPlanner);
     return tripPlanner;
+  }
+  
+  // Bus operations
+  async getBuses(): Promise<Bus[]> {
+    return Array.from(this.buses.values());
+  }
+  
+  async getBus(id: string): Promise<Bus | undefined> {
+    return this.buses.get(id);
+  }
+  
+  async createBus(insertBus: InsertBus): Promise<Bus> {
+    const id = randomUUID();
+    const bus: Bus = { 
+      ...insertBus, 
+      id,
+      amenities: insertBus.amenities || []
+    };
+    this.buses.set(id, bus);
+    return bus;
+  }
+  
+  // Private Car operations
+  async getPrivateCars(): Promise<PrivateCar[]> {
+    return Array.from(this.privateCars.values());
+  }
+  
+  async getPrivateCar(id: string): Promise<PrivateCar | undefined> {
+    return this.privateCars.get(id);
+  }
+  
+  async createPrivateCar(insertPrivateCar: InsertPrivateCar): Promise<PrivateCar> {
+    const id = randomUUID();
+    const privateCar: PrivateCar = { 
+      ...insertPrivateCar, 
+      id,
+      features: insertPrivateCar.features || []
+    };
+    this.privateCars.set(id, privateCar);
+    return privateCar;
   }
   
   // Travel Package operations
@@ -604,6 +660,100 @@ export class MemStorage implements IStorage {
       departureDate: 'Jun 10 - Jun 20',
       returnDate: 'Jun 20',
       dealType: 'Summer Deal',
+    });
+
+    // Initialize sample buses
+    await this.createBus({
+      operator: 'Green Line Paribahan',
+      type: 'AC Bus',
+      departure: '07:00 AM',
+      arrival: '03:00 PM',
+      duration: '8h 0m',
+      price: 1200,
+      seats: 45,
+      amenities: ['AC', 'WiFi', 'TV', 'Refreshments'],
+      rating: '4.5'
+    });
+
+    await this.createBus({
+      operator: 'Shohagh Paribahan',
+      type: 'Non-AC Bus',
+      departure: '09:30 AM',
+      arrival: '05:30 PM',
+      duration: '8h 0m',
+      price: 800,
+      seats: 52,
+      amenities: ['TV', 'Refreshments'],
+      rating: '4.2'
+    });
+
+    await this.createBus({
+      operator: 'Hanif Enterprise',
+      type: 'Sleeper Coach',
+      departure: '10:00 PM',
+      arrival: '06:00 AM',
+      duration: '8h 0m',
+      price: 1500,
+      seats: 32,
+      amenities: ['AC', 'WiFi', 'Sleeper Berth', 'Blanket'],
+      rating: '4.7'
+    });
+
+    await this.createBus({
+      operator: 'Ena Transport',
+      type: 'Deluxe Bus',
+      departure: '06:00 AM',
+      arrival: '02:00 PM',
+      duration: '8h 0m',
+      price: 1000,
+      seats: 40,
+      amenities: ['AC', 'TV', 'Refreshments'],
+      rating: '4.3'
+    });
+
+    // Initialize sample private cars
+    await this.createPrivateCar({
+      type: 'Toyota Premio',
+      category: 'Sedan',
+      capacity: 4,
+      duration: '5h 30m',
+      price: 8500,
+      driver: 'Included',
+      features: ['AC', 'GPS', 'Professional Driver', 'Fuel Included'],
+      rating: '4.8'
+    });
+
+    await this.createPrivateCar({
+      type: 'Toyota Hiace',
+      category: 'Microbus',
+      capacity: 12,
+      duration: '6h 0m',
+      price: 12000,
+      driver: 'Included',
+      features: ['AC', 'GPS', 'Professional Driver', 'Fuel Included', 'Extra Space'],
+      rating: '4.6'
+    });
+
+    await this.createPrivateCar({
+      type: 'Mitsubishi Pajero',
+      category: 'SUV',
+      capacity: 7,
+      duration: '5h 45m',
+      price: 15000,
+      driver: 'Included',
+      features: ['AC', 'GPS', '4WD', 'Professional Driver', 'Fuel Included', 'Luxury Interior'],
+      rating: '4.9'
+    });
+
+    await this.createPrivateCar({
+      type: 'Honda CRV',
+      category: 'SUV',
+      capacity: 5,
+      duration: '5h 15m',
+      price: 10500,
+      driver: 'Included',
+      features: ['AC', 'GPS', 'Professional Driver', 'Fuel Included', 'Comfortable Interior'],
+      rating: '4.7'
     });
 
     // Initialize sample travel packages
