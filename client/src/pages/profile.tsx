@@ -134,8 +134,14 @@ export default function Profile() {
   };
 
   const downloadReceipt = (booking: Booking) => {
+    console.log('Booking data:', booking);
+    console.log('Total amount value:', booking.totalAmount, typeof booking.totalAmount);
+    
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
+    
+    // Test basic text rendering
+    console.log('PDF pageWidth:', pageWidth);
     
     // Header with background color
     doc.setFillColor(0, 102, 204);
