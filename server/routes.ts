@@ -397,6 +397,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get booked seats for a specific bus and travel date
+  app.get("/api/bookings/seats", async (req, res) => {
+    try {
+      const { busId, travelDate } = req.query;
+      
+      if (!busId || !travelDate) {
+        return res.status(400).json({ message: "Bus ID and travel date are required" });
+      }
+      
+      const bookedSeats = await storage.getBookedSeats(busId as string, travelDate as string);
+      res.json({ bookedSeats });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch booked seats" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

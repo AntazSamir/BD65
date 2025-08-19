@@ -63,6 +63,7 @@ export interface IStorage {
   getBooking(id: string): Promise<Booking | undefined>;
   createBooking(booking: InsertBooking): Promise<Booking>;
   updateBookingStatus(id: string, status: string): Promise<Booking | undefined>;
+  getBookedSeats(busId: string, travelDate: string): Promise<string[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -331,6 +332,8 @@ export class MemStorage implements IStorage {
       partySize: insertBooking.partySize || null,
       cuisine: insertBooking.cuisine || null,
       priceRange: insertBooking.priceRange || null,
+      // Bus specific fields
+      selectedSeats: insertBooking.selectedSeats || null,
       createdAt: now,
       updatedAt: now
     };
@@ -346,6 +349,25 @@ export class MemStorage implements IStorage {
       return updatedBooking;
     }
     return undefined;
+  }
+
+  async getBookedSeats(busId: string, travelDate: string): Promise<string[]> {
+    const busBookings = Array.from(this.bookings.values()).filter(
+      (booking) => 
+        booking.itemId === busId && 
+        booking.travelDate === travelDate && 
+        booking.status === 'confirmed' &&
+        booking.selectedSeats
+    );
+    
+    const bookedSeats: string[] = [];
+    busBookings.forEach(booking => {
+      if (booking.selectedSeats) {
+        bookedSeats.push(...booking.selectedSeats);
+      }
+    });
+    
+    return bookedSeats;
   }
   
   private async initializeSampleData() {

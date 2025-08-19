@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -26,7 +26,7 @@ import { Separator } from '@/components/ui/separator';
 import { Calendar, Clock, Users, MapPin, CreditCard, User, Mail, Phone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import type { TripPlanner, Bus, PrivateCar } from '@shared/schema';
+import type { TripPlanner, Bus, PrivateCar, Booking } from '@shared/schema';
 
 const bookingSchema = z.object({
   customerName: z.string().min(2, 'Name must be at least 2 characters'),
@@ -48,6 +48,7 @@ interface BookingDialogProps {
 
 export default function BookingDialog({ isOpen, onClose, item, type }: BookingDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -63,6 +64,49 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
     },
   });
 
+  // Fetch booked seats for this bus and travel date
+  const { data: bookedSeats = [] } = useQuery<string[]>({
+    queryKey: ['/api/bookings/seats', item?.id, form.watch('travelDate')],
+    enabled: type === 'bus' && !!item?.id && !!form.watch('travelDate'),
+    queryFn: async () => {
+      const response = await fetch(`/api/bookings/seats?busId=${item?.id}&travelDate=${form.watch('travelDate')}`);
+      if (!response.ok) return [];
+      const data = await response.json();
+      return data.bookedSeats || [];
+    },
+  });
+
+  // Reset selected seats when dialog opens or item changes
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedSeats([]);
+    }
+  }, [isOpen, item?.id]);
+
+  // Generate seat layout for bus
+  const generateSeatLayout = (bus: Bus) => {
+    const totalSeats = bus.seats;
+    const seats = [];
+    for (let i = 1; i <= totalSeats; i++) {
+      seats.push(`${Math.ceil(i / 4)}${String.fromCharCode(64 + ((i - 1) % 4) + 1)}`);
+    }
+    return seats;
+  };
+
+  const handleSeatClick = (seatNumber: string) => {
+    if (bookedSeats.includes(seatNumber)) return; // Can't select booked seats
+    
+    setSelectedSeats(prev => {
+      const maxSeats = parseInt(form.watch('passengers')) || 1;
+      if (prev.includes(seatNumber)) {
+        return prev.filter(seat => seat !== seatNumber);
+      } else if (prev.length < maxSeats) {
+        return [...prev, seatNumber];
+      }
+      return prev;
+    });
+  };
+
   const bookingMutation = useMutation({
     mutationFn: async (data: BookingFormData) => {
       const bookingData = {
@@ -76,6 +120,12 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
         travelDate: data.travelDate,
         totalAmount: item ? getItemPrice() : 0,
         status: 'confirmed',
+        confirmationNumber: `BDE${Math.random().toString(36).substr(2, 8).toUpperCase()}`,
+        propertyName: getItemName(),
+        propertyLocation: getItemLocation(),
+        propertyPhone: getItemPhone(),
+        bookingType: type,
+        ...(type === 'bus' && { selectedSeats }),
       };
 
       const response = await fetch('/api/bookings', {
@@ -109,6 +159,16 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
   });
 
   const onSubmit = async (data: BookingFormData) => {
+    // Validate seat selection for buses
+    if (type === 'bus' && selectedSeats.length !== parseInt(data.passengers)) {
+      toast({
+        title: 'Seat Selection Required',
+        description: `Please select ${data.passengers} seat(s) for your booking.`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       await bookingMutation.mutateAsync(data);
@@ -332,6 +392,69 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
                   </FormItem>
                 )}
               />
+
+              {/* Seat Selection for Bus Bookings */}
+              {type === 'bus' && item && form.watch('travelDate') && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold">Select Your Seats</h3>
+                    <Badge variant="outline">
+                      {selectedSeats.length} of {form.watch('passengers')} selected
+                    </Badge>
+                  </div>
+                  
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                    <div className="flex justify-center mb-4">
+                      <div className="bg-gray-300 dark:bg-gray-600 px-4 py-2 rounded text-sm font-medium">
+                        Driver
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-4 gap-2 max-w-md mx-auto">
+                      {generateSeatLayout(item as Bus).map((seatNumber) => {
+                        const isBooked = bookedSeats.includes(seatNumber);
+                        const isSelected = selectedSeats.includes(seatNumber);
+                        
+                        return (
+                          <button
+                            key={seatNumber}
+                            type="button"
+                            onClick={() => handleSeatClick(seatNumber)}
+                            disabled={isBooked}
+                            data-testid={`seat-${seatNumber}`}
+                            className={`
+                              aspect-square rounded-lg border-2 text-sm font-medium transition-all
+                              ${isBooked 
+                                ? 'bg-red-500 border-red-600 text-white cursor-not-allowed opacity-75' 
+                                : isSelected
+                                ? 'bg-green-500 border-green-600 text-white shadow-lg'
+                                : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-900/20'
+                              }
+                            `}
+                          >
+                            {seatNumber}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    
+                    <div className="flex justify-center gap-6 mt-4 text-sm">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded"></div>
+                        <span>Available</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-green-500 border-2 border-green-600 rounded"></div>
+                        <span>Selected</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-red-500 border-2 border-red-600 rounded"></div>
+                        <span>Booked</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <FormField
                 control={form.control}

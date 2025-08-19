@@ -134,6 +134,8 @@ export const bookings = pgTable("bookings", {
   partySize: integer("party_size"),
   cuisine: text("cuisine"),
   priceRange: text("price_range"),
+  // Bus specific fields
+  selectedSeats: text("selected_seats").array(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
