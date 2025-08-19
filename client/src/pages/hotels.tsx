@@ -217,16 +217,19 @@ export default function Hotels() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="animate-pulse space-y-8">
               <div className="h-12 bg-gray-200 rounded-lg w-1/3"></div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="space-y-4">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-xl shadow-sm border animate-pulse">
-                    <div className="w-full h-48 bg-gray-200 rounded-t-xl"></div>
-                    <div className="p-6">
-                      <div className="h-6 bg-gray-200 rounded mb-2"></div>
-                      <div className="h-4 bg-gray-200 rounded mb-4"></div>
-                      <div className="flex justify-between items-center">
-                        <div className="h-8 bg-gray-200 rounded w-24"></div>
-                        <div className="h-10 bg-gray-200 rounded w-20"></div>
+                  <div key={i} className="bg-white rounded-lg shadow-sm border p-6 animate-pulse">
+                    <div className="flex space-x-4">
+                      <div className="w-32 h-24 bg-gray-200 rounded-lg flex-shrink-0"></div>
+                      <div className="flex-1 space-y-3">
+                        <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                        <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                        <div className="flex justify-between items-center pt-2">
+                          <div className="h-8 bg-gray-200 rounded w-24"></div>
+                          <div className="h-10 bg-gray-200 rounded w-20"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -381,74 +384,77 @@ export default function Hotels() {
             </p>
           </div>
 
-          {/* Hotels/Restaurants Grid */}
+          {/* Hotels/Restaurants List */}
           {(showRestaurants ? filteredAndSortedRestaurants.length > 0 : filteredAndSortedHotels.length > 0) ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="space-y-4">
               {showRestaurants ? (
                 filteredAndSortedRestaurants.map((restaurant) => (
                   <div
                     key={restaurant.id}
-                    className="bg-white rounded-xl shadow-sm border hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer"
+                    className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-all duration-300 p-6 group cursor-pointer"
                     onClick={() => handleRestaurantClick(restaurant)}
                     data-testid={`card-restaurant-${restaurant.id}`}
                   >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={restaurant.imageUrl}
-                        alt={restaurant.name}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                        data-testid={`img-restaurant-${restaurant.id}`}
-                      />
-                      <div className="absolute top-4 right-4">
-                        <div className="bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center space-x-1">
-                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="text-sm font-medium text-gray-700" data-testid={`text-rating-${restaurant.id}`}>
-                            {restaurant.rating}
-                          </span>
-                        </div>
+                    <div className="flex space-x-4">
+                      <div className="flex-shrink-0">
+                        <img
+                          src={restaurant.imageUrl}
+                          alt={restaurant.name}
+                          className="w-32 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                          data-testid={`img-restaurant-${restaurant.id}`}
+                        />
                       </div>
-                    </div>
-
-                    <div className="p-6">
-                      <div className="mb-3">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-1" data-testid={`text-restaurant-name-${restaurant.id}`}>
-                          {restaurant.name}
-                        </h3>
-                        <div className="flex items-center text-gray-600 text-sm mb-1">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          <span data-testid={`text-restaurant-location-${restaurant.id}`}>{restaurant.location}</span>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h3 className="text-xl font-semibold text-gray-900 mb-2" data-testid={`text-restaurant-name-${restaurant.id}`}>
+                              {restaurant.name}
+                            </h3>
+                            
+                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-2">
+                              <div className="flex items-center">
+                                <MapPin className="w-4 h-4 mr-1" />
+                                <span data-testid={`text-restaurant-location-${restaurant.id}`}>{restaurant.location}</span>
+                              </div>
+                              <div className="flex items-center">
+                                <Utensils className="w-4 h-4 mr-1" />
+                                <span data-testid={`text-restaurant-cuisine-${restaurant.id}`}>{restaurant.cuisine}</span>
+                              </div>
+                              <div className="flex items-center">
+                                <Phone className="w-4 h-4 mr-1" />
+                                <span data-testid={`text-restaurant-phone-${restaurant.id}`}>{restaurant.phone}</span>
+                              </div>
+                              <div className="flex items-center">
+                                <Star className="w-4 h-4 mr-1 text-yellow-400 fill-current" />
+                                <span data-testid={`text-rating-${restaurant.id}`}>{restaurant.rating}</span>
+                              </div>
+                            </div>
+                            
+                            <p className="text-gray-700 text-sm mb-3 line-clamp-2" data-testid={`text-restaurant-description-${restaurant.id}`}>
+                              {restaurant.description}
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex items-center text-gray-600 text-sm">
-                          <Utensils className="w-4 h-4 mr-1" />
-                          <span data-testid={`text-restaurant-cuisine-${restaurant.id}`}>{restaurant.cuisine}</span>
+                        
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div>
+                            <span className="text-lg font-bold text-gray-900" data-testid={`text-price-${restaurant.id}`}>
+                              {restaurant.priceRange}
+                            </span>
+                            <span className="text-gray-600 text-sm ml-1">per person</span>
+                          </div>
+                          <Button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleBooking(restaurant.id, 'restaurant');
+                            }}
+                            className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
+                            data-testid={`button-book-${restaurant.id}`}
+                          >
+                            Book Table
+                          </Button>
                         </div>
-                        <div className="flex items-center text-gray-600 text-sm">
-                          <Phone className="w-4 h-4 mr-1" />
-                          <span data-testid={`text-restaurant-phone-${restaurant.id}`}>{restaurant.phone}</span>
-                        </div>
-                      </div>
-
-                      <p className="text-gray-700 text-sm mb-4 line-clamp-2" data-testid={`text-restaurant-description-${restaurant.id}`}>
-                        {restaurant.description}
-                      </p>
-
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <div>
-                          <span className="text-lg font-bold text-gray-900" data-testid={`text-price-${restaurant.id}`}>
-                            {restaurant.priceRange}
-                          </span>
-                          <span className="text-gray-600 text-sm ml-1">per person</span>
-                        </div>
-                        <Button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleBooking(restaurant.id, 'restaurant');
-                          }}
-                          className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
-                          data-testid={`button-book-${restaurant.id}`}
-                        >
-                          Book Table
-                        </Button>
                       </div>
                     </div>
                   </div>
@@ -457,87 +463,90 @@ export default function Hotels() {
                 filteredAndSortedHotels.map((hotel) => (
                   <div
                     key={hotel.id}
-                    className="bg-white rounded-xl shadow-sm border hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer"
+                    className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-all duration-300 p-6 group cursor-pointer"
                     onClick={() => handleHotelClick(hotel)}
                     data-testid={`card-hotel-${hotel.id}`}
                   >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={hotel.imageUrl}
-                        alt={hotel.name}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                        data-testid={`img-hotel-${hotel.id}`}
-                      />
-                      <div className="absolute top-4 right-4">
-                        <div className="bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center space-x-1">
-                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="text-sm font-medium text-gray-700" data-testid={`text-rating-${hotel.id}`}>
-                            {hotel.rating}
-                          </span>
-                        </div>
+                    <div className="flex space-x-4">
+                      <div className="flex-shrink-0">
+                        <img
+                          src={hotel.imageUrl}
+                          alt={hotel.name}
+                          className="w-32 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                          data-testid={`img-hotel-${hotel.id}`}
+                        />
                       </div>
-                    </div>
-
-                    <div className="p-6">
-                      <div className="mb-3">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-1" data-testid={`text-hotel-name-${hotel.id}`}>
-                          {hotel.name}
-                        </h3>
-                        <div className="flex items-center text-gray-600 text-sm mb-1">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          <span data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</span>
-                        </div>
-                        <div className="flex items-center text-gray-600 text-sm">
-                          <Phone className="w-4 h-4 mr-1" />
-                          <span data-testid={`text-hotel-phone-${hotel.id}`}>{hotel.phone}</span>
-                        </div>
-                      </div>
-
-                      <p className="text-gray-700 text-sm mb-4 line-clamp-2" data-testid={`text-hotel-description-${hotel.id}`}>
-                        {hotel.description}
-                      </p>
-
-                      {/* Amenities */}
-                      {hotel.amenities && hotel.amenities.length > 0 && (
-                        <div className="mb-4">
-                          <div className="flex flex-wrap gap-2">
-                            {hotel.amenities.slice(0, 3).map((amenity, index) => (
-                              <Badge 
-                                key={index} 
-                                variant="secondary" 
-                                className="flex items-center space-x-1 text-xs"
-                                data-testid={`badge-amenity-${hotel.id}-${index}`}
-                              >
-                                {getAmenityIcon(amenity)}
-                                <span>{amenity}</span>
-                              </Badge>
-                            ))}
-                            {hotel.amenities.length > 3 && (
-                              <Badge variant="outline" className="text-xs">
-                                +{hotel.amenities.length - 3} more
-                              </Badge>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h3 className="text-xl font-semibold text-gray-900 mb-2" data-testid={`text-hotel-name-${hotel.id}`}>
+                              {hotel.name}
+                            </h3>
+                            
+                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-2">
+                              <div className="flex items-center">
+                                <MapPin className="w-4 h-4 mr-1" />
+                                <span data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</span>
+                              </div>
+                              <div className="flex items-center">
+                                <Phone className="w-4 h-4 mr-1" />
+                                <span data-testid={`text-hotel-phone-${hotel.id}`}>{hotel.phone}</span>
+                              </div>
+                              <div className="flex items-center">
+                                <Star className="w-4 h-4 mr-1 text-yellow-400 fill-current" />
+                                <span data-testid={`text-rating-${hotel.id}`}>{hotel.rating}</span>
+                              </div>
+                            </div>
+                            
+                            <p className="text-gray-700 text-sm mb-3 line-clamp-2" data-testid={`text-hotel-description-${hotel.id}`}>
+                              {hotel.description}
+                            </p>
+                            
+                            {/* Amenities */}
+                            {hotel.amenities && hotel.amenities.length > 0 && (
+                              <div className="mb-3">
+                                <div className="flex flex-wrap gap-2">
+                                  {hotel.amenities.slice(0, 4).map((amenity, index) => (
+                                    <Badge 
+                                      key={index} 
+                                      variant="secondary" 
+                                      className="flex items-center space-x-1 text-xs"
+                                      data-testid={`badge-amenity-${hotel.id}-${index}`}
+                                    >
+                                      {getAmenityIcon(amenity)}
+                                      <span>{amenity}</span>
+                                    </Badge>
+                                  ))}
+                                  {hotel.amenities.length > 4 && (
+                                    <Badge variant="outline" className="text-xs">
+                                      +{hotel.amenities.length - 4} more
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
                             )}
                           </div>
                         </div>
-                      )}
-
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <div>
-                          <span className="text-2xl font-bold text-gray-900" data-testid={`text-price-${hotel.id}`}>
-                            ৳{hotel.pricePerNight.toLocaleString()}
-                          </span>
-                          <span className="text-gray-600 text-sm">/night</span>
+                        
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div>
+                            <span className="text-2xl font-bold text-gray-900" data-testid={`text-price-${hotel.id}`}>
+                              ৳{hotel.pricePerNight.toLocaleString()}
+                            </span>
+                            <span className="text-gray-600 text-sm">/night</span>
+                          </div>
+                          <Button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleBooking(hotel.id, 'hotel');
+                            }}
+                            className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
+                            data-testid={`button-book-${hotel.id}`}
+                          >
+                            Book Now
+                          </Button>
                         </div>
-                        <Button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleBooking(hotel.id, 'hotel');
-                          }}
-                          className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
-                          data-testid={`button-book-${hotel.id}`}
-                        >
-                          Book Now
-                        </Button>
                       </div>
                     </div>
                   </div>
