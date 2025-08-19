@@ -65,9 +65,16 @@ export default function TripPlannerDeals() {
   }
 
   return (
-    <section id="trip-planners" className="py-16 bg-white">
+    <section id="trip-planners" className="py-16 section-bg-warm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <div className="flex justify-center mb-4">
+            <div className="icon-bg-orange">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+            </div>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trip Planner Deals</h2>
           <p className="text-gray-600">Plan your perfect journey with our curated travel packages.</p>
         </div>
@@ -76,7 +83,7 @@ export default function TripPlannerDeals() {
           {tripPlanners.slice(0, 4).map((tripPlanner, index) => (
             <div 
               key={tripPlanner.id}
-              className="bg-white rounded-xl shadow-md hover-lift transition-butter overflow-hidden animate-fade-in group"
+              className="elegant-card overflow-hidden animate-fade-in group"
               style={{ animationDelay: `${index * 0.1}s` }}
               data-testid={`card-trip-planner-${tripPlanner.id}`}
             >

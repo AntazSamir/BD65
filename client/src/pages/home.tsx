@@ -32,7 +32,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Navigation />
       <HeroSection />
-      <div className="py-24 bg-gray-50">
+      <div className="py-24 section-bg-cool">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
           <p className="text-xl text-gray-600 mb-8">Explore the world's most breathtaking locations</p>
@@ -43,7 +43,7 @@ export default function Home() {
           )}
           <div className="mt-6">
             <Link href="/destinations">
-              <button className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium">
+              <button className="inline-flex items-center px-8 py-4 bg-primary text-white rounded-2xl hover:bg-primary/90 transition-butter font-medium shadow-lg hover-lift">
                 View All Destinations
                 <ArrowRight className="w-4 h-4 ml-2" />
               </button>

@@ -170,14 +170,14 @@
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
-  /* Hover effects */
+  /* Enhanced Hover effects matching Why Choose Us style */
   .hover-lift {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .hover-lift:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   }
 
   .hover-glow {
@@ -187,6 +187,60 @@
   .hover-glow:hover {
     box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
     transform: scale(1.02);
+  }
+
+  /* Why Choose Us inspired card styles */
+  .elegant-card {
+    @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-butter border border-gray-100;
+  }
+
+  .elegant-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-bg-soft {
+    background: linear-gradient(135deg, #fdf2f8 0%, #fef7ff 50%, #f0f9ff 100%);
+  }
+
+  .section-bg-warm {
+    background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 50%, #fdf2f8 100%);
+  }
+
+  .section-bg-cool {
+    background: linear-gradient(135deg, #f0f9ff 0%, #eff6ff 50%, #fdf2f8 100%);
+  }
+
+  .section-bg-lavender {
+    background: linear-gradient(135deg, #f3e8ff 0%, #fdf4ff 50%, #f0f9ff 100%);
+  }
+
+  .section-bg-mint {
+    background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 50%, #fef7ff 100%);
+  }
+
+  .icon-bg-orange {
+    @apply bg-orange-100 text-orange-600 rounded-xl w-12 h-12 flex items-center justify-center;
+  }
+
+  .icon-bg-blue {
+    @apply bg-blue-100 text-blue-600 rounded-xl w-12 h-12 flex items-center justify-center;
+  }
+
+  .icon-bg-green {
+    @apply bg-green-100 text-green-600 rounded-xl w-12 h-12 flex items-center justify-center;
+  }
+
+  .icon-bg-purple {
+    @apply bg-purple-100 text-purple-600 rounded-xl w-12 h-12 flex items-center justify-center;
+  }
+
+  .icon-bg-red {
+    @apply bg-red-100 text-red-600 rounded-xl w-12 h-12 flex items-center justify-center;
+  }
+
+  .icon-bg-yellow {
+    @apply bg-yellow-100 text-yellow-600 rounded-xl w-12 h-12 flex items-center justify-center;
   }
 
   /* Backdrop blur animations */

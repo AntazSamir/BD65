@@ -9,14 +9,21 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 section-bg-warm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-3xl overflow-hidden relative">
+        <div className="elegant-card bg-gradient-to-r from-pink-50 to-orange-50 rounded-3xl overflow-hidden relative hover-lift transition-butter">
           <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[400px]">
             {/* Left Content */}
             <div className="p-8 lg:p-12">
-              <div className="inline-block bg-yellow-400 text-black px-6 py-3 rounded-full text-sm font-semibold mb-6">
-                Join our newsletter
+              <div className="flex items-center justify-center lg:justify-start mb-6">
+                <div className="icon-bg-yellow mr-3">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 3.26a2 2 0 001.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div className="bg-yellow-400 text-black px-6 py-3 rounded-full text-sm font-semibold">
+                  Join our newsletter
+                </div>
               </div>
               
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">

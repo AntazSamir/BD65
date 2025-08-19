@@ -3,7 +3,7 @@ import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_175536128
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-12">
+    <footer className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
