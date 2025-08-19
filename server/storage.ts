@@ -63,8 +63,10 @@ export class MemStorage implements IStorage {
     this.restaurants = new Map();
     
     // Initialize with sample data
-    // Initialize sample data
-    this.initializeSampleData().catch(console.error);
+    this.initializeSampleData().catch((error) => {
+      console.error('Failed to initialize sample data:', error);
+      // Continue with empty storage if initialization fails
+    });
   }
 
   async getUser(id: string): Promise<User | undefined> {

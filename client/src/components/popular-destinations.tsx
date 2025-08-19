@@ -34,7 +34,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
 
   // Update background when current index changes
   useEffect(() => {
-    if (destinations.length > 0) {
+    if (destinations.length > 0 && currentIndex >= 0 && currentIndex < destinations.length) {
       setSelectedDestination(destinations[currentIndex]);
     }
   }, [currentIndex, destinations, setSelectedDestination]);
@@ -57,11 +57,13 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   };
 
   const goToSlide = (index: number) => {
-    setIsAutoSliding(false);
-    setCurrentIndex(index);
-    setSelectedDestination(destinations[index]);
-    // Resume auto-sliding after 10 seconds
-    setTimeout(() => setIsAutoSliding(true), 10000);
+    if (index >= 0 && index < destinations.length) {
+      setIsAutoSliding(false);
+      setCurrentIndex(index);
+      setSelectedDestination(destinations[index]);
+      // Resume auto-sliding after 10 seconds
+      setTimeout(() => setIsAutoSliding(true), 10000);
+    }
   };
 
   // Get visible cards (7 cards with center one highlighted)
@@ -74,11 +76,15 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     
     for (let i = 0; i < totalCards; i++) {
       const index = (currentIndex - startOffset + i + destinations.length) % destinations.length;
-      visibleCards.push({
-        destination: destinations[index],
-        position: i - startOffset, // -3, -2, -1, 0, 1, 2, 3
-        index: index
-      });
+      
+      // Ensure the index is valid and within bounds
+      if (index >= 0 && index < destinations.length && destinations[index]) {
+        visibleCards.push({
+          destination: destinations[index],
+          position: i - startOffset, // -3, -2, -1, 0, 1, 2, 3
+          index: index
+        });
+      }
     }
     
     return visibleCards;

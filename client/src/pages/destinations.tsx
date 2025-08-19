@@ -7,6 +7,7 @@ import Footer from '../components/footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useLocation } from 'wouter';
 import sundarbansImage from '@assets/বিষ্ময়কর_সুন্দরবন_1755535540494.jpg';
 import valleyImage from '@assets/Tourist-Places-in-Bangladesh_1755535540494.jpg';
 import boatsImage from '@assets/penedo3_1755535540495.png';
@@ -17,6 +18,7 @@ export default function Destinations() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('all');
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
+  const [, setLocation] = useLocation();
   
   const { data: destinations = [], isLoading, error } = useQuery<Destination[]>({
     queryKey: ['/api/destinations'],
@@ -327,7 +329,7 @@ export default function Destinations() {
                     <button 
                       className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-elastic font-medium hover:shadow-xl hover:scale-110 transform hover-glow"
                       data-testid={`button-explore-destination-${destination.id}`}
-                      onClick={() => window.location.href = `/destinations/${destination.id}`}
+                      onClick={() => setLocation(`/destinations/${destination.id}`)}
                     >
                       Explore
                     </button>

@@ -81,7 +81,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/auth/me", isAuthenticated, async (req, res) => {
     try {
-      const user = await storage.getUser(req.session.userId!);
+      const userId = req.session.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "No user session found" });
+      }
+      
+      const user = await storage.getUser(userId);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -95,8 +100,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Profile routes
   app.put("/api/profile", isAuthenticated, async (req, res) => {
     try {
+      const userId = req.session.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "No user session found" });
+      }
+      
       const validatedData = updateUserSchema.parse(req.body);
-      const user = await storage.updateUser(req.session.userId!, validatedData);
+      const user = await storage.updateUser(userId, validatedData);
       
       if (!user) {
         return res.status(404).json({ message: "User not found" });
