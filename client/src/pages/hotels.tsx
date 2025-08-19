@@ -434,12 +434,11 @@ export default function Hotels() {
                             <p className="text-gray-700 text-sm mb-3 line-clamp-2" data-testid={`text-restaurant-description-${restaurant.id}`}>
                               {restaurant.description}
                             </p>
-                            
                           </div>
                         </div>
                         
-                        <div className="pt-3 border-t border-gray-100">
-                          <div className="mb-3">
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div>
                             <span className="text-lg font-bold text-gray-900" data-testid={`text-price-${restaurant.id}`}>
                               {restaurant.priceRange}
                             </span>
@@ -527,12 +526,11 @@ export default function Hotels() {
                                 </div>
                               </div>
                             )}
-                            
                           </div>
                         </div>
                         
-                        <div className="pt-3 border-t border-gray-100">
-                          <div className="mb-3">
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                          <div>
                             <span className="text-2xl font-bold text-gray-900" data-testid={`text-price-${hotel.id}`}>
                               ৳{hotel.pricePerNight.toLocaleString()}
                             </span>
