@@ -12,7 +12,7 @@ export default function Navigation() {
   const { user, isAuthenticated, signOut, isSigningOut } = useAuth();
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100 transition-butter">
+    <nav className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center">
@@ -30,11 +30,11 @@ export default function Navigation() {
           </Link>
           
           <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-neutral hover:text-primary transition-butter hover:scale-105">Home</Link>
-            <Link href="/destinations" className="text-neutral hover:text-primary transition-butter hover:scale-105">Destinations</Link>
+            <Link href="/" className="text-neutral hover:text-primary">Home</Link>
+            <Link href="/destinations" className="text-neutral hover:text-primary">Destinations</Link>
             <a 
               href="#hotels" 
-              className="text-neutral hover:text-primary transition-colors cursor-pointer"
+              className="text-neutral hover:text-primary cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('hotels');
@@ -47,7 +47,7 @@ export default function Navigation() {
             </a>
             <a 
               href="#flights" 
-              className="text-neutral hover:text-primary transition-colors cursor-pointer"
+              className="text-neutral hover:text-primary cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('flights');
@@ -58,7 +58,7 @@ export default function Navigation() {
             >
               Flights
             </a>
-            <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
+            <Link href="/about" className="text-neutral hover:text-primary">About</Link>
           </div>
           
           <div className="flex items-center space-x-4">
@@ -124,11 +124,11 @@ export default function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4">
             <div className="flex flex-col space-y-4">
-              <Link href="/" className="text-neutral hover:text-primary transition-colors">Home</Link>
-              <Link href="/destinations" className="text-neutral hover:text-primary transition-colors">Destinations</Link>
+              <Link href="/" className="text-neutral hover:text-primary">Home</Link>
+              <Link href="/destinations" className="text-neutral hover:text-primary">Destinations</Link>
               <a 
                 href="#hotels" 
-                className="text-neutral hover:text-primary transition-colors cursor-pointer"
+                className="text-neutral hover:text-primary cursor-pointer"
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMenuOpen(false);
@@ -142,7 +142,7 @@ export default function Navigation() {
               </a>
               <a 
                 href="#flights" 
-                className="text-neutral hover:text-primary transition-colors cursor-pointer"
+                className="text-neutral hover:text-primary cursor-pointer"
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMenuOpen(false);
@@ -154,23 +154,23 @@ export default function Navigation() {
               >
                 Flights
               </a>
-              <Link href="/about" className="text-neutral hover:text-primary transition-colors">About</Link>
+              <Link href="/about" className="text-neutral hover:text-primary">About</Link>
               
               {isAuthenticated ? (
                 <>
-                  <Link href="/profile" className="text-neutral hover:text-primary transition-colors">Profile</Link>
+                  <Link href="/profile" className="text-neutral hover:text-primary">Profile</Link>
                   <button 
                     onClick={() => signOut()}
                     disabled={isSigningOut}
-                    className="text-left text-neutral hover:text-primary transition-colors"
+                    className="text-left text-neutral hover:text-primary"
                   >
                     {isSigningOut ? "Signing out..." : "Sign out"}
                   </button>
                 </>
               ) : (
                 <>
-                  <Link href="/sign-in" className="text-neutral hover:text-primary transition-colors">Sign In</Link>
-                  <Link href="/sign-up" className="text-neutral hover:text-primary transition-colors">Sign Up</Link>
+                  <Link href="/sign-in" className="text-neutral hover:text-primary">Sign In</Link>
+                  <Link href="/sign-up" className="text-neutral hover:text-primary">Sign Up</Link>
                 </>
               )}
             </div>
