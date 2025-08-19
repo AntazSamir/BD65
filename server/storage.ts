@@ -311,12 +311,21 @@ export class MemStorage implements IStorage {
       passengers: insertBooking.passengers || null,
       specialRequests: insertBooking.specialRequests || null,
       travelDate: insertBooking.travelDate || null,
+      // Property information
+      propertyName: insertBooking.propertyName || null,
+      propertyLocation: insertBooking.propertyLocation || null,
+      propertyImageUrl: insertBooking.propertyImageUrl || null,
+      propertyPhone: insertBooking.propertyPhone || null,
+      confirmationNumber: insertBooking.confirmationNumber || null,
+      bookingType: insertBooking.bookingType || null,
+      // Hotel specific fields
       roomType: insertBooking.roomType || null,
       checkIn: insertBooking.checkIn || null,
       checkOut: insertBooking.checkOut || null,
       nights: insertBooking.nights || null,
       guests: insertBooking.guests || null,
       totalAmount: insertBooking.totalAmount || null,
+      // Restaurant specific fields
       reservationDate: insertBooking.reservationDate || null,
       reservationTime: insertBooking.reservationTime || null,
       partySize: insertBooking.partySize || null,

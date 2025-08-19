@@ -158,8 +158,8 @@ export default function MyBookings() {
                     <div className="flex items-start justify-between">
                       <div className="flex items-center space-x-3">
                         <img
-                          src={booking.propertyImageUrl}
-                          alt={booking.propertyName}
+                          src={booking.propertyImageUrl || ''}
+                          alt={booking.propertyName || ''}
                           className="w-12 h-12 rounded-lg object-cover"
                         />
                         <div>

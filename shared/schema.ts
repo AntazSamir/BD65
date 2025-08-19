@@ -114,6 +114,13 @@ export const bookings = pgTable("bookings", {
   specialRequests: text("special_requests"),
   travelDate: text("travel_date"),
   status: text("status").notNull().default('confirmed'), // 'confirmed', 'cancelled', 'pending'
+  // Property information
+  propertyName: text("property_name"),
+  propertyLocation: text("property_location"),
+  propertyImageUrl: text("property_image_url"),
+  propertyPhone: text("property_phone"),
+  confirmationNumber: text("confirmation_number"),
+  bookingType: text("booking_type"), // 'hotel', 'restaurant'
   // Hotel specific fields
   roomType: text("room_type"),
   checkIn: text("check_in"),

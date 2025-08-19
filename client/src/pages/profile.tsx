@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { updateUserSchema, type UpdateUser } from "@shared/schema";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateUserSchema, type UpdateUser, type Booking } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,19 +10,72 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
+import { apiRequest } from "@/lib/queryClient";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import { User, Save, LogOut } from "lucide-react";
+import { User, Save, LogOut, Calendar, MapPin, X, CheckCircle, AlertTriangle, Users, Phone, Clock, Utensils } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Profile() {
-  const { user, signOut, isSigningOut } = useAuth();
+  const { user, signOut, isSigningOut, isAuthenticated } = useAuth();
   const { updateProfile, isUpdating } = useProfile();
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [bookingToCancel, setBookingToCancel] = useState<Booking | null>(null);
   const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  // Fetch user's bookings
+  const { data: bookings = [], isLoading: bookingsLoading } = useQuery<Booking[]>({
+    queryKey: ['/api/bookings'],
+    enabled: isAuthenticated,
+  });
+
+  // Cancel booking mutation
+  const cancelBookingMutation = useMutation({
+    mutationFn: async (bookingId: string) => {
+      return await apiRequest('PUT', `/api/bookings/${bookingId}/cancel`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/bookings'] });
+      toast({
+        title: "Booking Cancelled",
+        description: "Your booking has been successfully cancelled.",
+      });
+      setBookingToCancel(null);
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Cancellation Failed",
+        description: error.message || "Failed to cancel booking. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleCancelBooking = async () => {
+    if (bookingToCancel) {
+      await cancelBookingMutation.mutateAsync(bookingToCancel.id);
+    }
+  };
+
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return '';
+    return new Date(dateStr).toLocaleDateString();
+  };
+
+  const formatTime = (timeStr: string | null) => {
+    if (!timeStr) return '';
+    return new Date(`2000-01-01T${timeStr}`).toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+  };
 
   const form = useForm<UpdateUser>({
     resolver: zodResolver(updateUserSchema),
@@ -103,200 +157,370 @@ export default function Profile() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Profile Overview */}
-          <Card className="lg:col-span-1">
-            <CardHeader className="text-center">
-              <Avatar className="w-24 h-24 mx-auto mb-4">
-                <AvatarImage src={user.profileImageUrl || ""} alt={user.firstName} />
-                <AvatarFallback className="text-lg">
-                  {user.firstName?.[0]}{user.lastName?.[0]}
-                </AvatarFallback>
-              </Avatar>
-              <CardTitle className="text-xl" data-testid="text-user-name">
-                {user.firstName} {user.lastName}
-              </CardTitle>
-              <CardDescription data-testid="text-user-email">
-                {user.email}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-sm space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Username:</span>
-                  <span data-testid="text-username">{user.username}</span>
-                </div>
-                {user.phone && (
+        <div className="space-y-8">
+          {/* Profile Overview and Edit Form */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Profile Overview */}
+            <Card className="lg:col-span-1">
+              <CardHeader className="text-center">
+                <Avatar className="w-24 h-24 mx-auto mb-4">
+                  <AvatarImage src={user.profileImageUrl || ""} alt={user.firstName} />
+                  <AvatarFallback className="text-lg">
+                    {user.firstName?.[0]}{user.lastName?.[0]}
+                  </AvatarFallback>
+                </Avatar>
+                <CardTitle className="text-xl" data-testid="text-user-name">
+                  {user.firstName} {user.lastName}
+                </CardTitle>
+                <CardDescription data-testid="text-user-email">
+                  {user.email}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-sm space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Phone:</span>
-                    <span data-testid="text-phone">{user.phone}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Username:</span>
+                    <span data-testid="text-username">{user.username}</span>
                   </div>
-                )}
-                {user.nationality && (
+                  {user.phone && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Phone:</span>
+                      <span data-testid="text-phone">{user.phone}</span>
+                    </div>
+                  )}
+                  {user.nationality && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Nationality:</span>
+                      <span data-testid="text-nationality">{user.nationality}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Nationality:</span>
-                    <span data-testid="text-nationality">{user.nationality}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Member since:</span>
+                    <span data-testid="text-member-since">
+                      {new Date(user.createdAt).toLocaleDateString()}
+                    </span>
                   </div>
-                )}
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Member since:</span>
-                  <span data-testid="text-member-since">
-                    {new Date(user.createdAt).toLocaleDateString()}
-                  </span>
                 </div>
-              </div>
-              
-              <Separator />
-              
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={handleSignOut}
-                disabled={isSigningOut}
-                data-testid="button-signout"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                {isSigningOut ? "Signing out..." : "Sign Out"}
-              </Button>
-            </CardContent>
-          </Card>
+                
+                <Separator />
+                
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={handleSignOut}
+                  disabled={isSigningOut}
+                  data-testid="button-signout"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  {isSigningOut ? "Signing out..." : "Sign Out"}
+                </Button>
+              </CardContent>
+            </Card>
 
-          {/* Edit Profile */}
-          <Card className="lg:col-span-2">
+            {/* Edit Profile */}
+            <Card className="lg:col-span-2">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <User className="w-5 h-5 mr-2" />
+                  Edit Profile
+                </CardTitle>
+                <CardDescription>
+                  Update your personal information and preferences
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                  {success && (
+                    <Alert>
+                      <AlertDescription>{success}</AlertDescription>
+                    </Alert>
+                  )}
+                  
+                  {error && (
+                    <Alert variant="destructive">
+                      <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input
+                        id="firstName"
+                        placeholder="First name"
+                        data-testid="input-firstname"
+                        {...form.register("firstName")}
+                      />
+                      {form.formState.errors.firstName && (
+                        <p className="text-sm text-red-600 dark:text-red-400">
+                          {form.formState.errors.firstName.message}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input
+                        id="lastName"
+                        placeholder="Last name"
+                        data-testid="input-lastname"
+                        {...form.register("lastName")}
+                      />
+                      {form.formState.errors.lastName && (
+                        <p className="text-sm text-red-600 dark:text-red-400">
+                          {form.formState.errors.lastName.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="username">Username</Label>
+                    <Input
+                      id="username"
+                      placeholder="Your username"
+                      data-testid="input-username"
+                      {...form.register("username")}
+                    />
+                    {form.formState.errors.username && (
+                      <p className="text-sm text-red-600 dark:text-red-400">
+                        {form.formState.errors.username.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input
+                        id="phone"
+                        placeholder="Your phone number"
+                        data-testid="input-phone"
+                        {...form.register("phone")}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                      <Input
+                        id="dateOfBirth"
+                        type="date"
+                        data-testid="input-dob"
+                        {...form.register("dateOfBirth")}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="nationality">Nationality</Label>
+                    <Input
+                      id="nationality"
+                      placeholder="Your nationality"
+                      data-testid="input-nationality"
+                      {...form.register("nationality")}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="profileImageUrl">Profile Image URL</Label>
+                    <Input
+                      id="profileImageUrl"
+                      type="url"
+                      placeholder="https://example.com/your-image.jpg"
+                      data-testid="input-profile-image"
+                      {...form.register("profileImageUrl")}
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={isUpdating}
+                    data-testid="button-save-profile"
+                  >
+                    {isUpdating ? (
+                      "Saving..."
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Changes
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* My Bookings Section */}
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <User className="w-5 h-5 mr-2" />
-                Edit Profile
+                <Calendar className="w-5 h-5 mr-2" />
+                My Bookings
               </CardTitle>
               <CardDescription>
-                Update your personal information and preferences
+                Manage your hotel and restaurant reservations
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                {success && (
-                  <Alert>
-                    <AlertDescription>{success}</AlertDescription>
-                  </Alert>
-                )}
-                
-                {error && (
-                  <Alert variant="destructive">
-                    <AlertDescription>{error}</AlertDescription>
-                  </Alert>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input
-                      id="firstName"
-                      placeholder="First name"
-                      data-testid="input-firstname"
-                      {...form.register("firstName")}
-                    />
-                    {form.formState.errors.firstName && (
-                      <p className="text-sm text-red-600 dark:text-red-400">
-                        {form.formState.errors.firstName.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input
-                      id="lastName"
-                      placeholder="Last name"
-                      data-testid="input-lastname"
-                      {...form.register("lastName")}
-                    />
-                    {form.formState.errors.lastName && (
-                      <p className="text-sm text-red-600 dark:text-red-400">
-                        {form.formState.errors.lastName.message}
-                      </p>
-                    )}
-                  </div>
+              {bookingsLoading ? (
+                <div className="text-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                  <p className="mt-2 text-gray-600 dark:text-gray-400">Loading your bookings...</p>
                 </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="username">Username</Label>
-                  <Input
-                    id="username"
-                    placeholder="Your username"
-                    data-testid="input-username"
-                    {...form.register("username")}
-                  />
-                  {form.formState.errors.username && (
-                    <p className="text-sm text-red-600 dark:text-red-400">
-                      {form.formState.errors.username.message}
-                    </p>
+              ) : bookings.length === 0 ? (
+                <div className="text-center py-8">
+                  <Calendar className="w-12 h-12 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">No Bookings Found</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    You haven't made any bookings yet. Start exploring our hotels and restaurants!
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {bookings.slice(0, 3).map((booking) => (
+                    <div key={booking.id} className="border rounded-lg p-4 space-y-3" data-testid={`profile-booking-${booking.id}`}>
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center space-x-3">
+                          <img
+                            src={booking.propertyImageUrl || ''}
+                            alt={booking.propertyName || ''}
+                            className="w-12 h-12 rounded-lg object-cover"
+                          />
+                          <div>
+                            <h4 className="font-medium text-gray-900 dark:text-white" data-testid={`profile-booking-name-${booking.id}`}>
+                              {booking.propertyName}
+                            </h4>
+                            <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                              <MapPin className="w-4 h-4 mr-1" />
+                              <span>{booking.propertyLocation}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Badge 
+                            variant={booking.status === 'confirmed' ? 'default' : 'destructive'}
+                            data-testid={`profile-booking-status-${booking.id}`}
+                          >
+                            {booking.status === 'confirmed' ? (
+                              <CheckCircle className="w-3 h-3 mr-1" />
+                            ) : (
+                              <X className="w-3 h-3 mr-1" />
+                            )}
+                            {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+                          </Badge>
+                          {booking.status === 'confirmed' && (
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => setBookingToCancel(booking)}
+                              data-testid={`profile-cancel-${booking.id}`}
+                            >
+                              <X className="w-4 h-4 mr-1" />
+                              Cancel
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Confirmation:</span>
+                          <span data-testid={`profile-booking-confirmation-${booking.id}`}>{booking.confirmationNumber}</span>
+                        </div>
+                        
+                        {booking.bookingType === 'hotel' && booking.checkIn && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600 dark:text-gray-400">Check-in:</span>
+                            <span data-testid={`profile-booking-checkin-${booking.id}`}>{formatDate(booking.checkIn)}</span>
+                          </div>
+                        )}
+                        
+                        {booking.bookingType === 'restaurant' && booking.reservationDate && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600 dark:text-gray-400">Date:</span>
+                            <span data-testid={`profile-booking-date-${booking.id}`}>{formatDate(booking.reservationDate)}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {bookings.length > 3 && (
+                    <div className="text-center pt-4">
+                      <a href="/my-bookings" className="text-blue-600 dark:text-blue-400 hover:underline">
+                        View all {bookings.length} bookings →
+                      </a>
+                    </div>
                   )}
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      placeholder="Your phone number"
-                      data-testid="input-phone"
-                      {...form.register("phone")}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="dateOfBirth">Date of Birth</Label>
-                    <Input
-                      id="dateOfBirth"
-                      type="date"
-                      data-testid="input-dob"
-                      {...form.register("dateOfBirth")}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="nationality">Nationality</Label>
-                  <Input
-                    id="nationality"
-                    placeholder="Your nationality"
-                    data-testid="input-nationality"
-                    {...form.register("nationality")}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="profileImageUrl">Profile Image URL</Label>
-                  <Input
-                    id="profileImageUrl"
-                    type="url"
-                    placeholder="https://example.com/your-image.jpg"
-                    data-testid="input-profile-image"
-                    {...form.register("profileImageUrl")}
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isUpdating}
-                  data-testid="button-save-profile"
-                >
-                  {isUpdating ? (
-                    "Saving..."
-                  ) : (
-                    <>
-                      <Save className="w-4 h-4 mr-2" />
-                      Save Changes
-                    </>
-                  )}
-                </Button>
-              </form>
+              )}
             </CardContent>
           </Card>
         </div>
         </div>
       </div>
+
+      {/* Cancel Booking Confirmation Dialog */}
+      <Dialog open={!!bookingToCancel} onOpenChange={() => setBookingToCancel(null)}>
+        <DialogContent data-testid="profile-cancel-dialog">
+          <DialogHeader>
+            <DialogTitle className="flex items-center text-red-600">
+              <AlertTriangle className="w-5 h-5 mr-2" />
+              Cancel Booking
+            </DialogTitle>
+            <DialogDescription>
+              Are you sure you want to cancel your booking at {bookingToCancel?.propertyName}? 
+              This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          
+          {bookingToCancel && (
+            <div className="space-y-4">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                <p className="font-medium text-red-800 dark:text-red-200">
+                  Confirmation: {bookingToCancel.confirmationNumber}
+                </p>
+                <p className="text-sm text-red-600 dark:text-red-400 mt-1">
+                  {bookingToCancel.bookingType === 'hotel' ? 'Hotel Reservation' : 'Restaurant Reservation'}
+                </p>
+              </div>
+
+              <div className="flex space-x-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setBookingToCancel(null)}
+                  className="flex-1"
+                  data-testid="profile-cancel-dialog-no"
+                >
+                  Keep Booking
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={handleCancelBooking}
+                  disabled={cancelBookingMutation.isPending}
+                  className="flex-1"
+                  data-testid="profile-cancel-dialog-yes"
+                >
+                  {cancelBookingMutation.isPending ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Cancelling...
+                    </>
+                  ) : (
+                    <>
+                      <X className="w-4 h-4 mr-2" />
+                      Cancel Booking
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <Footer />
     </div>
   );
