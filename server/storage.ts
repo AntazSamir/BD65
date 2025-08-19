@@ -716,6 +716,70 @@ export class MemStorage implements IStorage {
       priceRange: '৳৳',
       reviews: ['Fresh crab and prawns', 'Perfect sunset dining', 'Authentic coastal flavors']
     });
+
+    // Add Bagerhat hotels and restaurants
+    await this.createHotel({
+      name: 'Bagerhat Heritage Hotel',
+      location: 'Bagerhat • Historic City • Heritage Hotel',
+      description: 'Traditional hotel near the famous Sixty Dome Mosque with Islamic architecture',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.1',
+      pricePerNight: 4500,
+      amenities: ['Mosque View', 'Traditional Architecture', 'Cultural Tours', 'Free WiFi'],
+    });
+
+    await this.createHotel({
+      name: 'Khan Jahan Ali Resort',
+      location: 'Bagerhat • Mosque City • Boutique Resort',
+      description: 'Boutique resort inspired by the medieval ruler Khan Jahan Ali with modern amenities',
+      imageUrl: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.3',
+      pricePerNight: 5800,
+      amenities: ['Heritage Tours', 'Restaurant', 'Garden Views', 'Airport Transfer'],
+    });
+
+    await this.createHotel({
+      name: 'Sixty Dome Guest House',
+      location: 'Bagerhat • UNESCO Site • Budget Hotel',
+      description: 'Comfortable budget accommodation within walking distance of UNESCO World Heritage sites',
+      imageUrl: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '3.9',
+      pricePerNight: 2800,
+      amenities: ['Heritage Site Access', 'Local Guide Service', 'Traditional Breakfast', 'Bicycle Rental'],
+    });
+
+    await this.createRestaurant({
+      name: 'Khan Jahan Ali Kitchen',
+      location: 'Bagerhat • Historic Quarter • Traditional',
+      description: 'Traditional Bengali restaurant serving authentic regional dishes near the mosque complex',
+      imageUrl: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.2',
+      cuisine: 'Traditional Bengali',
+      priceRange: '৳৳',
+      reviews: ['Authentic local flavors', 'Historic atmosphere', 'Great traditional fish curry']
+    });
+
+    await this.createRestaurant({
+      name: 'Heritage Spice Restaurant',
+      location: 'Bagerhat • Mosque City • Regional Cuisine',
+      description: 'Family-owned restaurant specializing in Bagerhat regional cuisine and fresh river fish',
+      imageUrl: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.4',
+      cuisine: 'Regional Bengali',
+      priceRange: '৳৳',
+      reviews: ['Amazing river fish preparations', 'Warm hospitality', 'Must-try local specialties']
+    });
+
+    await this.createRestaurant({
+      name: 'Dome View Cafe',
+      location: 'Bagerhat • UNESCO Area • Cafe',
+      description: 'Charming cafe with views of historic domes serving tea, snacks and light meals',
+      imageUrl: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.0',
+      cuisine: 'Cafe & Snacks',
+      priceRange: '৳',
+      reviews: ['Perfect for history lovers', 'Great tea and pastries', 'Beautiful dome views']
+    });
     
     console.log('Storage initialized successfully with sample data');
   }
