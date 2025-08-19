@@ -30,11 +30,11 @@ export default function Navigation() {
           </Link>
           
           <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-neutral hover:text-primary">Home</Link>
-            <Link href="/destinations" className="text-neutral hover:text-primary">Destinations</Link>
+            <Link href="/" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Home</Link>
+            <Link href="/destinations" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Destinations</Link>
             <a 
               href="#hotels" 
-              className="text-neutral hover:text-primary cursor-pointer"
+              className="relative text-neutral hover:text-primary cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('hotels');
@@ -47,7 +47,7 @@ export default function Navigation() {
             </a>
             <a 
               href="#flights" 
-              className="text-neutral hover:text-primary cursor-pointer"
+              className="relative text-neutral hover:text-primary cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('flights');
@@ -58,7 +58,7 @@ export default function Navigation() {
             >
               Flights
             </a>
-            <Link href="/about" className="text-neutral hover:text-primary">About</Link>
+            <Link href="/about" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">About</Link>
           </div>
           
           <div className="flex items-center space-x-4">
@@ -124,11 +124,11 @@ export default function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4">
             <div className="flex flex-col space-y-4">
-              <Link href="/" className="text-neutral hover:text-primary">Home</Link>
-              <Link href="/destinations" className="text-neutral hover:text-primary">Destinations</Link>
+              <Link href="/" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Home</Link>
+              <Link href="/destinations" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Destinations</Link>
               <a 
                 href="#hotels" 
-                className="text-neutral hover:text-primary cursor-pointer"
+                className="relative text-neutral hover:text-primary cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMenuOpen(false);
@@ -142,7 +142,7 @@ export default function Navigation() {
               </a>
               <a 
                 href="#flights" 
-                className="text-neutral hover:text-primary cursor-pointer"
+                className="relative text-neutral hover:text-primary cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMenuOpen(false);
@@ -154,7 +154,7 @@ export default function Navigation() {
               >
                 Flights
               </a>
-              <Link href="/about" className="text-neutral hover:text-primary">About</Link>
+              <Link href="/about" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">About</Link>
               
               {isAuthenticated ? (
                 <>
