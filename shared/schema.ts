@@ -63,6 +63,18 @@ export const travelPackages = pgTable("travel_packages", {
   includes: text("includes").array().notNull().default([]),
 });
 
+export const restaurants = pgTable("restaurants", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  location: text("location").notNull(),
+  description: text("description").notNull(),
+  imageUrl: text("image_url").notNull(),
+  rating: text("rating").notNull(),
+  cuisine: text("cuisine").notNull(),
+  priceRange: text("price_range").notNull(),
+  reviews: text("reviews").array().notNull().default([]),
+});
+
 export const insertUserSchema = createInsertSchema(users).omit({
   id: true,
   createdAt: true,
@@ -98,6 +110,10 @@ export const insertTravelPackageSchema = createInsertSchema(travelPackages).omit
   id: true,
 });
 
+export const insertRestaurantSchema = createInsertSchema(restaurants).omit({
+  id: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type UpdateUser = z.infer<typeof updateUserSchema>;
 export type LoginCredentials = z.infer<typeof loginSchema>;
@@ -105,8 +121,10 @@ export type InsertDestination = z.infer<typeof insertDestinationSchema>;
 export type InsertHotel = z.infer<typeof insertHotelSchema>;
 export type InsertFlight = z.infer<typeof insertFlightSchema>;
 export type InsertTravelPackage = z.infer<typeof insertTravelPackageSchema>;
+export type InsertRestaurant = z.infer<typeof insertRestaurantSchema>;
 export type User = typeof users.$inferSelect;
 export type Destination = typeof destinations.$inferSelect;
 export type Hotel = typeof hotels.$inferSelect;
 export type Flight = typeof flights.$inferSelect;
 export type TravelPackage = typeof travelPackages.$inferSelect;
+export type Restaurant = typeof restaurants.$inferSelect;

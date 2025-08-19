@@ -3,7 +3,8 @@ import {
   type Destination, type InsertDestination,
   type Hotel, type InsertHotel,
   type Flight, type InsertFlight,
-  type TravelPackage, type InsertTravelPackage
+  type TravelPackage, type InsertTravelPackage,
+  type Restaurant, type InsertRestaurant
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -38,6 +39,11 @@ export interface IStorage {
   getTravelPackages(): Promise<TravelPackage[]>;
   getTravelPackage(id: string): Promise<TravelPackage | undefined>;
   createTravelPackage(travelPackage: InsertTravelPackage): Promise<TravelPackage>;
+  
+  // Restaurant operations
+  getRestaurants(): Promise<Restaurant[]>;
+  getRestaurant(id: string): Promise<Restaurant | undefined>;
+  createRestaurant(restaurant: InsertRestaurant): Promise<Restaurant>;
 }
 
 export class MemStorage implements IStorage {
@@ -46,6 +52,7 @@ export class MemStorage implements IStorage {
   private hotels: Map<string, Hotel>;
   private flights: Map<string, Flight>;
   private travelPackages: Map<string, TravelPackage>;
+  private restaurants: Map<string, Restaurant>;
 
   constructor() {
     this.users = new Map();
@@ -53,6 +60,7 @@ export class MemStorage implements IStorage {
     this.hotels = new Map();
     this.flights = new Map();
     this.travelPackages = new Map();
+    this.restaurants = new Map();
     
     // Initialize with sample data
     // Initialize sample data
@@ -191,6 +199,26 @@ export class MemStorage implements IStorage {
     };
     this.travelPackages.set(id, travelPackage);
     return travelPackage;
+  }
+  
+  // Restaurant operations
+  async getRestaurants(): Promise<Restaurant[]> {
+    return Array.from(this.restaurants.values());
+  }
+  
+  async getRestaurant(id: string): Promise<Restaurant | undefined> {
+    return this.restaurants.get(id);
+  }
+  
+  async createRestaurant(insertRestaurant: InsertRestaurant): Promise<Restaurant> {
+    const id = randomUUID();
+    const restaurant: Restaurant = { 
+      ...insertRestaurant, 
+      id,
+      reviews: insertRestaurant.reviews || []
+    };
+    this.restaurants.set(id, restaurant);
+    return restaurant;
   }
   
   private async initializeSampleData() {
@@ -553,6 +581,73 @@ export class MemStorage implements IStorage {
       rating: '4.4',
       price: 12800,
       includes: ['Lake boat rides', 'Tribal museum visits', 'Traditional handicraft shopping'],
+    });
+
+    // Initialize sample restaurants
+    await this.createRestaurant({
+      name: 'Jhau Bon Restaurant',
+      location: "Cox's Bazar • Beachfront • Seafood",
+      description: 'Fresh seafood with panoramic ocean views and traditional Bengali cuisine',
+      imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.6',
+      cuisine: 'Bengali Seafood',
+      priceRange: '৳৳৳',
+      reviews: ['Amazing fresh fish and prawns!', 'Best beachfront dining experience', 'Authentic Bengali flavors with sea view']
+    });
+
+    await this.createRestaurant({
+      name: 'Handi Restaurant',
+      location: 'Dhaka • Dhanmondi • Fine Dining',
+      description: 'Premium dining experience with authentic Bangladeshi and Indian cuisine',
+      imageUrl: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.8',
+      cuisine: 'Bangladeshi & Indian',
+      priceRange: '৳৳৳৳',
+      reviews: ['Excellent biryani and kebabs', 'Elegant atmosphere for special occasions', 'Outstanding service and food quality']
+    });
+
+    await this.createRestaurant({
+      name: 'Mezban Restaurant',
+      location: 'Chittagong • Agrabad • Traditional',
+      description: 'Traditional Chittagonian cuisine including famous mezbani beef',
+      imageUrl: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.5',
+      cuisine: 'Chittagonian',
+      priceRange: '৳৳',
+      reviews: ['Authentic mezbani beef curry', 'Must-try Chittagonian specialties', 'Rich flavors and generous portions']
+    });
+
+    await this.createRestaurant({
+      name: 'Tea Resort Restaurant',
+      location: 'Sylhet • Sreemangal • Garden Dining',
+      description: 'Garden restaurant serving fresh local cuisine amidst tea plantations',
+      imageUrl: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.4',
+      cuisine: 'Local & Continental',
+      priceRange: '৳৳',
+      reviews: ['Beautiful garden setting', 'Fresh organic ingredients', 'Perfect spot for tea lovers']
+    });
+
+    await this.createRestaurant({
+      name: 'Tribal Kitchen',
+      location: 'Bandarban • Hill District • Ethnic',
+      description: 'Authentic tribal cuisine featuring indigenous cooking methods and ingredients',
+      imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.7',
+      cuisine: 'Tribal & Indigenous',
+      priceRange: '৳৳',
+      reviews: ['Unique bamboo shoot dishes', 'Cultural dining experience', 'Incredible hill station atmosphere']
+    });
+
+    await this.createRestaurant({
+      name: 'Mangrove Cafe',
+      location: 'Sundarbans • Eco-Resort • Natural',
+      description: 'Eco-friendly restaurant serving sustainable local cuisine in the heart of mangroves',
+      imageUrl: 'https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+      rating: '4.3',
+      cuisine: 'Eco-Local',
+      priceRange: '৳৳',
+      reviews: ['Sustainable and delicious', 'Beautiful nature views while dining', 'Supporting local communities']
     });
     
     console.log('Storage initialized successfully with sample data');

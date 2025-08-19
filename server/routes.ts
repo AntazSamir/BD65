@@ -9,7 +9,8 @@ import {
   insertDestinationSchema,
   insertHotelSchema,
   insertFlightSchema,
-  insertTravelPackageSchema
+  insertTravelPackageSchema,
+  insertRestaurantSchema
 } from "@shared/schema";
 import { z } from "zod";
 
@@ -249,6 +250,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid data", errors: error.errors });
       }
       res.status(500).json({ message: "Failed to create travel package" });
+    }
+  });
+
+  // Restaurant routes
+  app.get("/api/restaurants", async (req, res) => {
+    try {
+      const restaurants = await storage.getRestaurants();
+      res.json(restaurants);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch restaurants" });
+    }
+  });
+
+  app.get("/api/restaurants/:id", async (req, res) => {
+    try {
+      const restaurant = await storage.getRestaurant(req.params.id);
+      if (!restaurant) {
+        return res.status(404).json({ message: "Restaurant not found" });
+      }
+      res.json(restaurant);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch restaurant" });
+    }
+  });
+
+  app.post("/api/restaurants", async (req, res) => {
+    try {
+      const validatedData = insertRestaurantSchema.parse(req.body);
+      const restaurant = await storage.createRestaurant(validatedData);
+      res.status(201).json(restaurant);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create restaurant" });
     }
   });
 

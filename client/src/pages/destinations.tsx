@@ -325,6 +325,7 @@ export default function Destinations() {
                     <button 
                       className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-elastic font-medium hover:shadow-xl hover:scale-110 transform hover-glow"
                       data-testid={`button-explore-destination-${destination.id}`}
+                      onClick={() => window.location.href = `/destinations/${destination.id}`}
                     >
                       Explore
                     </button>
