@@ -60,6 +60,7 @@ Project Focus: Bangladesh tourism and travel destinations.
 - **Authentication System**: Fixed auth hook to properly handle 401 responses without throwing errors
 - **API Response Handling**: Fixed sign in, sign up, sign out, and profile update functions to properly parse JSON responses
 - **Code Cleanup**: Removed debugging console.log statements from production booking API routes
+- **Hotels Display**: Limited home page Recommended Hotels section to show only 6 hotels (2 rows) with "View All Hotels" button for more options
 - **Trip Planner UI**: Reduced trip planner card image height from h-48 to h-36 for more compact display
 
 ### Design System Overhaul - "Why Choose Us" Styling Applied (August 2025)

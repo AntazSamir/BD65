@@ -21,7 +21,7 @@ export default function RecommendedHotels() {
             <p className="text-xl text-gray-600">Stay at the world's finest accommodations</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(3)].map((_, i) => (
+            {[...Array(6)].map((_, i) => (
               <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse">
                 <div className="w-full h-56 bg-gray-200"></div>
                 <div className="p-6">
@@ -69,7 +69,7 @@ export default function RecommendedHotels() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {hotels.map((hotel, index) => (
+          {hotels.slice(0, 6).map((hotel, index) => (
             <div 
               key={hotel.id}
               className="elegant-card overflow-hidden animate-fade-in group"
@@ -108,6 +108,18 @@ export default function RecommendedHotels() {
             </div>
           ))}
         </div>
+        
+        {/* View All Hotels Button */}
+        {hotels.length > 6 && (
+          <div className="text-center mt-12">
+            <Button 
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg text-lg font-semibold hover-lift"
+              onClick={() => window.location.href = '/hotels'}
+            >
+              View All Hotels
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
