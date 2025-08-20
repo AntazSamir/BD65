@@ -132,15 +132,15 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     return (
       <section id="destinations" className="relative py-24 min-h-[800px] bg-gray-50">
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Popular Destinations</h2>
-            <p className="text-xl text-white/90">Explore the world's most breathtaking locations</p>
+        <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Popular Destinations</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-white/90">Explore the world's most breathtaking locations</p>
           </div>
-          <div className="flex justify-center items-center space-x-4">
+          <div className="flex justify-center items-center space-x-2 sm:space-x-4 overflow-x-auto px-4">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden shadow-lg animate-pulse">
-                <div className="w-48 h-64 bg-gray-300"></div>
+              <div key={i} className="rounded-2xl overflow-hidden shadow-lg animate-pulse flex-shrink-0">
+                <div className="w-32 sm:w-40 md:w-48 h-40 sm:h-48 md:h-64 bg-gray-300"></div>
               </div>
             ))}
           </div>
@@ -153,10 +153,10 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     return (
       <section id="destinations" className="relative py-24 min-h-[800px] bg-gray-50">
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Popular Destinations</h2>
-            <p className="text-xl text-red-300">Failed to load destinations. Please try again later.</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Popular Destinations</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-red-300">Failed to load destinations. Please try again later.</p>
           </div>
         </div>
       </section>
@@ -197,11 +197,11 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       <div className="flex-1"></div>
       {/* Carousel section */}
       <div className="relative z-10 mt-[-134px] mb-[-134px] pt-[34px] pb-[34px] pl-[0px] pr-[0px] ml-[-13px] mr-[-13px]">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4">
 
 
           {/* Cards container */}
-          <div className="flex justify-center items-end space-x-2 px-16 perspective-1000">
+          <div className="flex justify-center items-end space-x-1 sm:space-x-2 px-4 sm:px-8 lg:px-16 perspective-1000 overflow-x-auto">
             {visibleCards.map(({ destination, position, index }) => {
               const isCenterCard = position === 0;
               const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : Math.abs(position) === 2 ? 'scale-85' : 'scale-75';
