@@ -388,7 +388,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Dhaka',
       description: 'Historic Mughal fort complex in Old Dhaka with beautiful architecture',
-      imageUrl: 'https://images.unsplash.com/photo-1568454537842-d933259bb85a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      imageUrl: '/attached_assets/8d4fe0d8-cit8030-164fcc85915_1755669075028.jpg',
       rating: '4.2',
       priceFrom: 500,
     });
