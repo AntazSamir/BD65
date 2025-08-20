@@ -233,29 +233,21 @@ export default function Destinations() {
           </div>
 
           {/* Carousel Indicators */}
-          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-3 bg-black/30 backdrop-blur-lg rounded-full px-6 py-3 shadow-xl border border-white/20">
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-3 bg-black/20 backdrop-blur-md rounded-full px-4 py-2 pt-[2px] pb-[2px] mt-[-170px] mb-[-170px]">
             {heroBackgrounds.map((_, index) => (
               <button
                 key={`hero-indicator-${index}`}
-                className={`relative transition-all duration-500 ease-out hover:scale-125 touch-friendly group ${
+                className={`relative transition-all duration-500 ease-out hover:scale-110 touch-friendly ${
                   index === activeHeroIndex 
-                    ? 'w-10 h-4 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full shadow-lg border-2 border-white/50' 
-                    : 'w-3 h-3 bg-white/40 hover:bg-white/70 rounded-full border border-white/30 hover:border-white/50'
+                    ? 'w-8 h-3 bg-white rounded-full shadow-lg' 
+                    : 'w-3 h-3 bg-white/60 hover:bg-white/80 rounded-full'
                 }`}
                 onClick={() => setActiveHeroIndex(index)}
                 data-testid={`button-hero-indicator-${index}`}
               >
-                {/* Active indicator effects */}
+                {/* Active indicator inner glow */}
                 {index === activeHeroIndex && (
-                  <>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-500 rounded-full animate-pulse opacity-40"></div>
-                    <div className="absolute -inset-1 bg-blue-400/20 rounded-full animate-ping"></div>
-                  </>
-                )}
-                
-                {/* Hover effect for inactive dots */}
-                {index !== activeHeroIndex && (
-                  <div className="absolute inset-0 bg-white rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-white rounded-full animate-pulse opacity-60"></div>
                 )}
               </button>
             ))}
