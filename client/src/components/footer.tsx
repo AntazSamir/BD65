@@ -10,10 +10,10 @@ export default function Footer() {
             <div className="flex items-center text-2xl font-bold mb-4">
               <img 
                 src={logoImage} 
-                alt="Bangladesh Explorer Logo" 
+                alt="BD Explorer Logo" 
                 className="w-8 h-8 mr-3"
               />
-              Bangladesh Explorer
+              BD Explorer
             </div>
             <p className="text-gray-300 mb-4">
               Your trusted partner for discovering Bangladesh's hidden gems and authentic travel experiences.
@@ -66,7 +66,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-          <p>&copy; 2024 Bangladesh Explorer. All rights reserved.</p>
+          <p>&copy; 2024 BD Explorer. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -63,7 +63,7 @@ export default function About() {
             </div>
             
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Bangladesh Explorer</span>
+              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">BD Explorer</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -161,7 +161,7 @@ export default function About() {
                     <Globe className="w-6 h-6 text-primary" />
                   </div>
                   <p>
-                    Bangladesh Explorer was founded in 2009 with a simple mission: to showcase the incredible beauty and rich cultural heritage of Bangladesh to the world. What started as a small local tour company has grown into the country's leading travel platform, helping over 50,000 travelers discover Bangladesh's hidden gems.
+                    BD Explorer was founded in 2009 with a simple mission: to showcase the incredible beauty and rich cultural heritage of Bangladesh to the world. What started as a small local tour company has grown into the country's leading travel platform, helping over 50,000 travelers discover Bangladesh's hidden gems.
                   </p>
                 </div>
               </div>
@@ -342,7 +342,7 @@ export default function About() {
               </div>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Meet Our Team</h2>
-            <p className="text-xl text-gray-600">The passionate people behind Bangladesh Explorer</p>
+            <p className="text-xl text-gray-600">The passionate people behind BD Explorer</p>
           </div>
           
           {/* Creative polaroid-style team layout */}

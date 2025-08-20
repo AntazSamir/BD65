@@ -50,7 +50,7 @@ export default function SignUp() {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
           <CardDescription className="text-center">
-            Join Bangladesh Explorer and start your journey
+            Join BD Explorer and start your journey
           </CardDescription>
         </CardHeader>
         <CardContent>

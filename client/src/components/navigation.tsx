@@ -19,12 +19,12 @@ export default function Navigation() {
             <div className="flex items-center">
               <img 
                 src={logoImage} 
-                alt="Bangladesh Explorer Logo" 
+                alt="BD Explorer Logo" 
                 className="w-10 h-10 mr-3"
                 data-testid="logo-image"
               />
               <div className="text-2xl font-bold text-primary">
-                Bangladesh Explorer
+                BD Explorer
               </div>
             </div>
           </Link>

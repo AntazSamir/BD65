@@ -250,7 +250,7 @@ export default function Booking() {
     if (!bookingDetails) return;
 
     const receiptContent = `
-Bangladesh Explorer - Booking Receipt
+BD Explorer - Booking Receipt
 =====================================
 
 Confirmation Number: ${bookingDetails.confirmationNumber}
@@ -284,7 +284,7 @@ Restaurant Reservation Details:
 - Price Range: ${bookingDetails.restaurant?.priceRange}
 `}
 
-Thank you for choosing Bangladesh Explorer!
+Thank you for choosing BD Explorer!
 For support, contact us at support@bangladeshexplorer.com
 
 =====================================

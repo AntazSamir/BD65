@@ -160,7 +160,7 @@ export default function Profile() {
     // Company name in header
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(24);
-    doc.text('Bangladesh Explorer', pageWidth / 2, 22, { align: 'center' });
+    doc.text('BD Explorer', pageWidth / 2, 22, { align: 'center' });
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(11);
     doc.text('Your Gateway to Beautiful Bangladesh', pageWidth / 2, 32, { align: 'center' });
@@ -334,7 +334,7 @@ export default function Profile() {
     y += 15;
     doc.setTextColor(0, 102, 204);
     doc.setFontSize(12);
-    doc.text('Thank you for choosing Bangladesh Explorer!', pageWidth / 2, y, { align: 'center' });
+    doc.text('Thank you for choosing BD Explorer!', pageWidth / 2, y, { align: 'center' });
     doc.setTextColor(100, 100, 100);
     doc.setFontSize(10);
     doc.text('Discover the beauty and culture of Bangladesh with us.', pageWidth / 2, y + 10, { align: 'center' });
