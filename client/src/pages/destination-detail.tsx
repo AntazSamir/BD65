@@ -112,6 +112,16 @@ export default function DestinationDetail() {
       ];
     }
     
+    // Special case for Sundarbans - use authentic images
+    if (destination.name === 'Sundarbans') {
+      return [
+        destination.imageUrl || fallbackImage, // Main image with deer
+        '/attached_assets/photo-1549300461-11c5b94e8855_1755679381010.jpg', // Peaceful water reflection
+        '/attached_assets/5f0ef1e0eb333-Sundarbans_Travel_1755679381011.jpg', // Mangrove waterway
+        '/attached_assets/tiger-sundarbans_1755679417997.jpg' // Royal Bengal Tiger
+      ];
+    }
+    
     const baseImages = [
       destination.imageUrl || fallbackImage,
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
