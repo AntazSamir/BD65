@@ -41,6 +41,9 @@ Project Focus: Bangladesh tourism and travel destinations.
   - Integrated booking dialogs directly into hotels page for improved user experience
   - Booking now opens in modal instead of navigating to separate page
   - Maintained booking functionality for transportation via existing BookingDialog component
+  - Added authentication requirements for all booking actions
+  - Users must sign in before making any hotel, restaurant, or transportation bookings
+  - Implemented helpful error messages and automatic redirect to sign-in page
 - **Auto-sliding Carousel Implementation (August 2025)**: 
   - Added 9 new destinations with high-quality Unsplash images (total now 18 destinations)
   - Implemented auto-sliding carousel showing 5 cards with center focus
