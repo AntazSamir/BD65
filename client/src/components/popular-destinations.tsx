@@ -22,7 +22,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     if (isAutoSliding && destinations.length > 0) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
-      }, 4500); // Slower timing for smoother experience
+      }, 3000); // Optimized timing for fluid experience
     }
 
     return () => {
@@ -52,8 +52,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   const goToNext = () => {
     setIsAutoSliding(false);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
-    // Resume auto-sliding after 8 seconds
-    setTimeout(() => setIsAutoSliding(true), 8000);
+    // Resume auto-sliding after 6 seconds
+    setTimeout(() => setIsAutoSliding(true), 6000);
   };
 
   const goToSlide = (index: number) => {
@@ -132,13 +132,15 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   return (
     <section 
       id="destinations" 
-      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col will-change-auto transition-all duration-1500 ease-in-out"
+      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col will-change-transform transition-all duration-700 ease-out"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
+        backfaceVisibility: 'hidden', // Prevent flickering
+        perspective: '1000px', // Enable 3D transforms
       }}
     >
       {/* Dark overlay for better text readability */}
@@ -152,27 +154,36 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
 
 
           {/* Cards container */}
-          <div className="flex justify-center items-end space-x-2 px-16">
+          <div className="flex justify-center items-end space-x-2 px-16 perspective-1000">
             {visibleCards.map(({ destination, position, index }) => {
               const isCenterCard = position === 0;
               const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : Math.abs(position) === 2 ? 'scale-85' : 'scale-75';
-              const cardOpacity = isCenterCard ? 'opacity-100' : Math.abs(position) === 1 ? 'opacity-80' : Math.abs(position) === 2 ? 'opacity-60' : 'opacity-40';
+              const cardOpacity = isCenterCard ? 'opacity-100' : Math.abs(position) === 1 ? 'opacity-85' : Math.abs(position) === 2 ? 'opacity-70' : 'opacity-50';
               const cardHeight = isCenterCard ? 'h-56' : Math.abs(position) === 1 ? 'h-48' : Math.abs(position) === 2 ? 'h-40' : 'h-32';
               const cardWidth = isCenterCard ? 'w-40' : Math.abs(position) === 1 ? 'w-32' : Math.abs(position) === 2 ? 'w-28' : 'w-24';
+              const cardBlur = Math.abs(position) > 1 ? 'blur-[1px]' : '';
+              const cardBrightness = isCenterCard ? 'brightness-100' : Math.abs(position) === 1 ? 'brightness-95' : 'brightness-90';
               
               return (
                 <div
                   key={destination.id}
-                  className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer will-change-transform transition-all duration-1000 ease-in-out transform ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${
+                  className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer carousel-card-fast ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${cardBlur} ${cardBrightness} ${
                     isCenterCard ? 'ring-4 ring-white/50 z-10' : 'hover:scale-105 hover:opacity-95'
                   }`}
+                  style={{
+                    transform: 'translate3d(0, 0, 0)',
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden',
+                    transformStyle: 'preserve-3d',
+                    WebkitTransformStyle: 'preserve-3d',
+                  }}
                   onClick={goToNext}
                   data-testid={`card-destination-${destination.id}`}
                 >
                   <img 
                     src={destination.imageUrl} 
                     alt={destination.name} 
-                    className="w-full h-full object-cover will-change-transform transition-all duration-1000 ease-in-out"
+                    className="w-full h-full object-cover smooth-gpu"
                     data-testid={`img-destination-${destination.id}`}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -181,20 +192,20 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                   />
                   
                   {/* Overlay with destination name */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end transition-all duration-1000 ease-in-out">
-                    <div className="p-4 w-full transition-all duration-1000 ease-in-out">
-                      <h3 className="text-white font-semibold text-lg text-center transition-all duration-1000 ease-in-out" data-testid={`text-destination-name-${destination.id}`}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end carousel-card-fast">
+                    <div className="p-4 w-full">
+                      <h3 className="text-white font-semibold text-lg text-center" data-testid={`text-destination-name-${destination.id}`}>
                         {destination.name}
                       </h3>
                       {isCenterCard && (
-                        <p className="text-white/80 text-sm text-center mt-1 transition-all duration-1000 ease-in-out">{destination.district}</p>
+                        <p className="text-white/80 text-sm text-center mt-1">{destination.district}</p>
                       )}
                     </div>
                   </div>
                   
                   {/* Center card indicator */}
                   {isCenterCard && (
-                    <div className="absolute top-4 right-4 w-4 h-4 bg-white rounded-full shadow-lg transition-all duration-1000 ease-in-out"></div>
+                    <div className="absolute top-4 right-4 w-4 h-4 bg-white rounded-full shadow-lg carousel-card-fast"></div>
                   )}
                 </div>
               );
