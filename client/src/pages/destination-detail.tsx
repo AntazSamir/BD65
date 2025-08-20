@@ -132,6 +132,16 @@ export default function DestinationDetail() {
       ];
     }
     
+    // Special case for Saint Martin Island - use authentic images
+    if (destination.name === 'Saint Martin Island') {
+      return [
+        destination.imageUrl || fallbackImage, // Main image with palm tree and boats
+        '/attached_assets/Saint-Martin-Island-Bangladesh-5_1755681418236.jpg', // Single boat on beach
+        '/attached_assets/Saint_Martins_Island_with_boats_in_foreground_1755681418237.jpg', // Multiple boats with beach
+        '/attached_assets/sunset-naf-river-2048x1152_1755681418238.jpg' // Golden sunset over water
+      ];
+    }
+    
     const baseImages = [
       destination.imageUrl || fallbackImage,
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',

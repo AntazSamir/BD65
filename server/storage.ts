@@ -428,7 +428,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: "Cox's Bazar",
       description: 'Small coral island with pristine beaches and clear blue waters',
-      imageUrl: 'https://images.unsplash.com/photo-1582639510494-c80b5de9f148?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      imageUrl: '/attached_assets/R_1755681418237.jpg',
       rating: '4.6',
       priceFrom: 5200,
     });
