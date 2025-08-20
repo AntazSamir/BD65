@@ -158,7 +158,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Currently viewing text in top left */}
       {visibleCards.find(card => card.position === 0) && (
         <div className="absolute top-6 left-6 z-20">
-          <p className="text-white text-lg font-semibold bg-black/50 px-3 py-1 rounded-lg backdrop-blur-sm">
+          <p className="text-white text-lg font-semibold bg-black/50 px-3 py-1 rounded-lg">
             Currently viewing: {visibleCards.find(card => card.position === 0)?.destination.name}
           </p>
         </div>
