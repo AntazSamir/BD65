@@ -7,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import BookingDialog from '@/components/booking-dialog';
@@ -17,6 +19,15 @@ export default function TripPlannerPage() {
   const [destination, setDestination] = useState('');
   const [departureDate, setDepartureDate] = useState('');
   const [passengers, setPassengers] = useState('1');
+  
+  // Flight-specific state
+  const [tripType, setTripType] = useState('oneWay');
+  const [flightFrom, setFlightFrom] = useState('Dhaka');
+  const [flightTo, setFlightTo] = useState('Cox\'s Bazar');
+  const [flightDepartureDate, setFlightDepartureDate] = useState('');
+  const [flightReturnDate, setFlightReturnDate] = useState('');
+  const [flightTravelers, setFlightTravelers] = useState('1');
+  const [flightClass, setFlightClass] = useState('Economy');
   
   // Booking dialog state
   const [bookingDialog, setBookingDialog] = useState<{
@@ -158,6 +169,122 @@ export default function TripPlannerPage() {
 
           {/* Flights Tab */}
           <TabsContent value="flights">
+            {/* Flight Search Form */}
+            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+              <div className="mb-6">
+                <RadioGroup value={tripType} onValueChange={setTripType} className="flex space-x-6">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="oneWay" id="oneWay" />
+                    <Label htmlFor="oneWay" className="font-medium">One Way</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="roundTrip" id="roundTrip" />
+                    <Label htmlFor="roundTrip" className="font-medium">Round Trip</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="multiCity" id="multiCity" />
+                    <Label htmlFor="multiCity" className="font-medium">Multi City</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 ${tripType === 'roundTrip' ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">FROM</Label>
+                  <Select value={flightFrom} onValueChange={setFlightFrom}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Dhaka">Dhaka - DAC, Hazrat Shahjalal International Airport</SelectItem>
+                      <SelectItem value="Chittagong">Chittagong - CGP, Shah Amanat International Airport</SelectItem>
+                      <SelectItem value="Cox's Bazar">Cox's Bazar - CXB, Cox's Bazar Airport</SelectItem>
+                      <SelectItem value="Sylhet">Sylhet - ZYL, Osmani International Airport</SelectItem>
+                      <SelectItem value="Jessore">Jessore - JSR, Jessore Airport</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">TO</Label>
+                  <Select value={flightTo} onValueChange={setFlightTo}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Cox's Bazar">Cox's Bazar - CXB, Cox's Bazar Airport</SelectItem>
+                      <SelectItem value="Dhaka">Dhaka - DAC, Hazrat Shahjalal International Airport</SelectItem>
+                      <SelectItem value="Chittagong">Chittagong - CGP, Shah Amanat International Airport</SelectItem>
+                      <SelectItem value="Sylhet">Sylhet - ZYL, Osmani International Airport</SelectItem>
+                      <SelectItem value="Jessore">Jessore - JSR, Jessore Airport</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">DEPARTURE DATE</Label>
+                  <Input
+                    type="date"
+                    value={flightDepartureDate}
+                    onChange={(e) => setFlightDepartureDate(e.target.value)}
+                    className="h-12"
+                  />
+                </div>
+
+                {tripType === 'roundTrip' && (
+                  <div>
+                    <Label className="text-sm font-medium text-gray-600 mb-1 block">RETURN DATE</Label>
+                    <Input
+                      type="date"
+                      value={flightReturnDate}
+                      onChange={(e) => setFlightReturnDate(e.target.value)}
+                      className="h-12"
+                      placeholder="Save more on return flight"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">TRAVELERS</Label>
+                  <Select value={flightTravelers} onValueChange={setFlightTravelers}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">1 Traveler</SelectItem>
+                      <SelectItem value="2">2 Travelers</SelectItem>
+                      <SelectItem value="3">3 Travelers</SelectItem>
+                      <SelectItem value="4">4 Travelers</SelectItem>
+                      <SelectItem value="5">5+ Travelers</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">CLASS</Label>
+                  <Select value={flightClass} onValueChange={setFlightClass}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Economy">Economy</SelectItem>
+                      <SelectItem value="Business">Business</SelectItem>
+                      <SelectItem value="First">First Class</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <Button 
+                onClick={handleSearch} 
+                className="w-full bg-blue-600 hover:bg-blue-700 h-12 text-lg"
+              >
+                Search Flights
+              </Button>
+            </div>
+
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Flight Options</h2>
               <p className="text-gray-600">Choose from available flights for your journey</p>
