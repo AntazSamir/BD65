@@ -79,25 +79,25 @@ export default function RecommendedHotels() {
               <img 
                 src={hotel.imageUrl} 
                 alt={hotel.name} 
-                className="w-full h-48 sm:h-52 lg:h-56 object-cover transition-butter group-hover:scale-110"
+                className="w-full h-40 md:h-56 object-cover transition-butter group-hover:scale-110"
                 data-testid={`img-hotel-${hotel.id}`}
               />
-              <div className="p-4 sm:p-5 lg:p-6">
+              <div className="p-3 md:p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-lg sm:text-xl font-semibold" data-testid={`text-hotel-name-${hotel.id}`}>{hotel.name}</h3>
+                  <h3 className="text-base md:text-xl font-semibold" data-testid={`text-hotel-name-${hotel.id}`}>{hotel.name}</h3>
                   <div className="flex items-center">
-                    <Star className="w-4 h-4 text-yellow-400 mr-1" />
-                    <span className="text-sm font-medium" data-testid={`text-hotel-rating-${hotel.id}`}>{hotel.rating}</span>
+                    <Star className="w-3 h-3 md:w-4 md:h-4 text-yellow-400 mr-1" />
+                    <span className="text-xs md:text-sm font-medium" data-testid={`text-hotel-rating-${hotel.id}`}>{hotel.rating}</span>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-3 sm:mb-4 text-sm sm:text-base" data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</p>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <div className="text-xl sm:text-2xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
+                <p className="text-gray-600 mb-3 text-xs md:text-base" data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</p>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div className="text-lg md:text-2xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
                     ৳{hotel.pricePerNight}
-                    <span className="text-sm text-gray-600 font-normal">/night</span>
+                    <span className="text-xs md:text-sm text-gray-600 font-normal">/night</span>
                   </div>
                   <Button 
-                    className="bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg transition-colors text-sm w-full sm:w-auto"
+                    className="bg-accent hover:bg-accent/90 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-lg transition-colors text-xs md:text-sm w-full sm:w-auto"
                     onClick={() => handleBooking(hotel.id)}
                     data-testid={`button-book-hotel-${hotel.id}`}
                   >

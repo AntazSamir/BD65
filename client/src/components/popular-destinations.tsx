@@ -179,19 +179,19 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : Math.abs(position) === 2 ? 'scale-85' : 'scale-75';
               const cardOpacity = isCenterCard ? 'opacity-100' : Math.abs(position) === 1 ? 'opacity-85' : Math.abs(position) === 2 ? 'opacity-70' : 'opacity-50';
               const cardHeight = isCenterCard 
-                ? 'h-32 sm:h-40 lg:h-56' 
+                ? 'h-24 sm:h-32 lg:h-48' 
                 : Math.abs(position) === 1 
-                  ? 'h-28 sm:h-32 lg:h-48' 
+                  ? 'h-20 sm:h-28 lg:h-40' 
                   : Math.abs(position) === 2 
-                    ? 'h-24 sm:h-28 lg:h-40' 
-                    : 'h-20 sm:h-24 lg:h-32';
+                    ? 'h-16 sm:h-24 lg:h-32' 
+                    : 'h-12 sm:h-20 lg:h-24';
               const cardWidth = isCenterCard 
-                ? 'w-24 sm:w-32 lg:w-40' 
+                ? 'w-20 sm:w-28 lg:w-36' 
                 : Math.abs(position) === 1 
-                  ? 'w-20 sm:w-24 lg:w-32' 
+                  ? 'w-16 sm:w-20 lg:w-28' 
                   : Math.abs(position) === 2 
-                    ? 'w-16 sm:w-20 lg:w-28' 
-                    : 'w-12 sm:w-16 lg:w-24';
+                    ? 'w-12 sm:w-16 lg:w-24' 
+                    : 'w-10 sm:w-12 lg:w-20';
               const cardBlur = Math.abs(position) > 1 ? 'blur-[1px]' : '';
               const cardBrightness = isCenterCard ? 'brightness-100' : Math.abs(position) === 1 ? 'brightness-95' : 'brightness-90';
               

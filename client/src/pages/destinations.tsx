@@ -248,7 +248,7 @@ export default function Destinations() {
                   <img 
                     src={destination.imageUrl} 
                     alt={destination.name} 
-                    className="w-full h-64 object-cover transition-butter group-hover:scale-110"
+                    className="w-full h-48 md:h-64 object-cover transition-butter group-hover:scale-110"
                     data-testid={`img-destination-${destination.id}`}
                   />
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-full px-3 py-1 transition-butter group-hover:bg-white group-hover:shadow-lg hover-glow">
@@ -261,23 +261,23 @@ export default function Destinations() {
                   </div>
                 </div>
                 
-                <div className="p-6">
+                <div className="p-4 md:p-6">
                   <div className="flex items-center mb-2">
-                    <MapPin className="w-4 h-4 text-gray-400 mr-1" />
-                    <span className="text-sm text-gray-500">{destination.district}, {destination.country}</span>
+                    <MapPin className="w-3 h-3 md:w-4 md:h-4 text-gray-400 mr-1" />
+                    <span className="text-xs md:text-sm text-gray-500">{destination.district}, {destination.country}</span>
                   </div>
                   
-                  <h3 className="text-2xl font-bold mb-3 text-gray-800" data-testid={`text-destination-name-${destination.id}`}>
+                  <h3 className="text-lg md:text-2xl font-bold mb-2 md:mb-3 text-gray-800" data-testid={`text-destination-name-${destination.id}`}>
                     {destination.name}
                   </h3>
                   
-                  <p className="text-gray-600 mb-4 line-clamp-2" data-testid={`text-destination-description-${destination.id}`}>
+                  <p className="text-sm md:text-base text-gray-600 mb-3 md:mb-4 line-clamp-2" data-testid={`text-destination-description-${destination.id}`}>
                     {destination.description}
                   </p>
                   
-                  <div className="flex justify-end items-center pt-4 border-t border-gray-100">
+                  <div className="flex justify-end items-center pt-3 md:pt-4 border-t border-gray-100">
                     <button 
-                      className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-elastic font-medium hover:shadow-xl hover:scale-110 transform hover-glow"
+                      className="bg-primary hover:bg-primary/90 text-white px-4 md:px-6 py-2 rounded-lg transition-elastic font-medium hover:shadow-xl hover:scale-110 transform hover-glow text-sm md:text-base"
                       data-testid={`button-explore-destination-${destination.id}`}
                       onClick={() => setLocation(`/destinations/${destination.id}`)}
                     >
