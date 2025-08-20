@@ -13,10 +13,14 @@ import { Separator } from '@/components/ui/separator';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import PropertyBookingDialog from '@/components/hotel-booking-dialog';
+import { useAuth } from '@/hooks/useAuth';
+import { useToast } from '@/hooks/use-toast';
 import type { Hotel, Restaurant } from '@shared/schema';
 
 export default function Hotels() {
   const [, navigate] = useLocation();
+  const { isAuthenticated } = useAuth();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('rating');
   const [priceRange, setPriceRange] = useState('all');
@@ -146,6 +150,18 @@ export default function Hotels() {
   }, [restaurants, searchQuery, sortBy, priceRange]);
 
   const handleBooking = (itemId: string, type: 'hotel' | 'restaurant') => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign In Required",
+        description: "Please sign in to make a booking. You'll be redirected to the login page.",
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        navigate('/sign-in');
+      }, 1000);
+      return;
+    }
+
     const item = type === 'hotel' 
       ? hotels.find(h => h.id === itemId)
       : restaurants.find(r => r.id === itemId);

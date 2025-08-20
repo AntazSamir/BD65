@@ -12,9 +12,15 @@ import { Label } from '@/components/ui/label';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import BookingDialog from '@/components/booking-dialog';
+import { useAuth } from '@/hooks/useAuth';
+import { useToast } from '@/hooks/use-toast';
+import { useLocation } from 'wouter';
 import type { TripPlanner, Bus as BusType, PrivateCar } from '@shared/schema';
 
 export default function TripPlannerPage() {
+  const { isAuthenticated } = useAuth();
+  const { toast } = useToast();
+  const [, navigate] = useLocation();
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [departureDate, setDepartureDate] = useState('');
@@ -92,6 +98,18 @@ export default function TripPlannerPage() {
   };
 
   const openBookingDialog = (item: TripPlanner | BusType | PrivateCar, type: 'flight' | 'bus' | 'car') => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign In Required",
+        description: "Please sign in to make a booking. You'll be redirected to the login page.",
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        navigate('/sign-in');
+      }, 1000);
+      return;
+    }
+
     setBookingDialog({
       isOpen: true,
       item,

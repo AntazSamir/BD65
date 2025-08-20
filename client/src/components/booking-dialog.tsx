@@ -25,6 +25,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Calendar, Clock, Users, MapPin, CreditCard, User, Mail, Phone, Tag } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/useAuth';
 import { apiRequest } from '@/lib/queryClient';
 import type { TripPlanner, Bus, PrivateCar, Booking } from '@shared/schema';
 
@@ -53,13 +54,14 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
   const [couponDiscount, setCouponDiscount] = useState(0);
   const [couponApplied, setCouponApplied] = useState(false);
   const { toast } = useToast();
+  const { user, isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      customerName: '',
-      email: '',
+      customerName: user?.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : '',
+      email: user?.email || '',
       phone: '',
       passengers: '1',
       couponCode: '',
