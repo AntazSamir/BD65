@@ -33,9 +33,9 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-16" style={{ backgroundColor: '#fdf2f8' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="py-8 sm:py-12 lg:py-16" style={{ backgroundColor: '#fdf2f8' }}>
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Side - Illustrations */}
           <div className="relative h-96">
             {/* Main family/customer circle image */}

@@ -13,23 +13,23 @@ export default function Navigation() {
 
   return (
     <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="flex justify-between items-center py-3 sm:py-4">
           <Link href="/" className="flex items-center">
             <div className="flex items-center">
               <img 
                 src={logoImage} 
                 alt="BD Explorer Logo" 
-                className="w-10 h-10 mr-3"
+                className="w-8 h-8 sm:w-10 sm:h-10 mr-2 sm:mr-3"
                 data-testid="logo-image"
               />
-              <div className="text-2xl font-bold text-primary">
+              <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">
                 BD Explorer
               </div>
             </div>
           </Link>
           
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden lg:flex space-x-6 xl:space-x-8">
             <Link href="/" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Home</Link>
             <Link href="/destinations" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Destinations</Link>
             <Link href="/hotels" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Hotels</Link>
@@ -90,18 +90,19 @@ export default function Navigation() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="hidden md:flex items-center space-x-2">
-                <Button variant="ghost" asChild>
+              <div className="hidden lg:flex items-center space-x-2">
+                <Button variant="ghost" size="sm" asChild>
                   <Link href="/sign-in">Sign In</Link>
                 </Button>
-                <Button asChild>
+                <Button size="sm" asChild>
                   <Link href="/sign-up">Sign Up</Link>
                 </Button>
               </div>
             )}
             <button 
-              className="md:hidden text-neutral"
+              className="lg:hidden text-neutral p-2 hover:bg-gray-100 rounded-md transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              data-testid="button-mobile-menu"
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -110,96 +111,112 @@ export default function Navigation() {
         
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4">
-            <div className="flex flex-col space-y-4">
+          <div className="lg:hidden border-t border-gray-200 py-3 bg-white/95 backdrop-blur-md">
+            <div className="flex flex-col space-y-3">
               <Link 
                 href="/" 
-                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/destinations" 
-                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Destinations
               </Link>
               <Link 
                 href="/hotels" 
-                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Hotels
               </Link>
               <Link 
                 href="/trip-planner" 
-                className="relative text-neutral hover:text-primary cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Trip Planner
               </Link>
               <Link 
                 href="/about" 
-                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/support" 
-                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Support
               </Link>
               
-              {isAuthenticated ? (
-                <>
-                  <Link 
-                    href="/profile" 
-                    className="text-neutral hover:text-primary"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Profile
-                  </Link>
-                  <Link 
-                    href="/my-bookings" 
-                    className="text-neutral hover:text-primary"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    My Bookings
-                  </Link>
-                  <button 
-                    onClick={() => {
-                      signOut();
-                      setIsMenuOpen(false);
-                    }}
-                    disabled={isSigningOut}
-                    className="text-left text-neutral hover:text-primary"
-                  >
-                    {isSigningOut ? "Signing out..." : "Sign out"}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link 
-                    href="/sign-in" 
-                    className="text-neutral hover:text-primary"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Sign In
-                  </Link>
-                  <Link 
-                    href="/sign-up" 
-                    className="text-neutral hover:text-primary"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Sign Up
-                  </Link>
-                </>
-              )}
+              <div className="border-t border-gray-200 mt-3 pt-3">
+                {isAuthenticated ? (
+                  <>
+                    <Link 
+                      href="/profile" 
+                      className="flex items-center px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <UserIcon className="w-4 h-4 mr-2" />
+                      Profile
+                    </Link>
+                    <Link 
+                      href="/my-bookings" 
+                      className="flex items-center px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Calendar className="w-4 h-4 mr-2" />
+                      My Bookings
+                    </Link>
+                    <button 
+                      onClick={() => {
+                        signOut();
+                        setIsMenuOpen(false);
+                      }}
+                      disabled={isSigningOut}
+                      className="flex items-center w-full px-3 py-2 text-sm font-medium text-left text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      {isSigningOut ? "Signing out..." : "Sign out"}
+                    </button>
+                  </>
+                ) : (
+                  <div className="flex flex-col space-y-2">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="justify-start" 
+                      asChild
+                    >
+                      <Link 
+                        href="/sign-in"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Sign In
+                      </Link>
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      className="justify-start"
+                      asChild
+                    >
+                      <Link 
+                        href="/sign-up"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Sign Up
+                      </Link>
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

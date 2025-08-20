@@ -32,15 +32,15 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Navigation />
       <HeroSection />
-      <div className="py-24 section-bg-cool relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
-          <p className="text-xl text-gray-600 mb-8">Explore the world's most breathtaking locations</p>
-          <div className="mt-6">
+      <div className="py-12 sm:py-16 lg:py-24 section-bg-cool relative">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Popular Destinations</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8">Explore the world's most breathtaking locations</p>
+          <div className="mt-4 sm:mt-6">
             <Link href="/destinations">
-              <button className="inline-flex items-center px-8 py-4 bg-primary text-white rounded-2xl hover:bg-primary/90 transition-butter font-medium shadow-lg hover-lift">
+              <button className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-primary text-white rounded-xl sm:rounded-2xl hover:bg-primary/90 transition-butter font-medium shadow-lg hover-lift text-sm sm:text-base">
                 View All Destinations
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 ml-2" />
               </button>
             </Link>
           </div>

@@ -54,21 +54,21 @@ export default function RecommendedHotels() {
   }
 
   return (
-    <section id="hotels" className="py-16 section-bg-soft">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-4">
+    <section id="hotels" className="py-8 sm:py-12 lg:py-16 section-bg-soft">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+          <div className="flex justify-center mb-3 sm:mb-4">
             <div className="icon-bg-blue">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Recommended Hotels</h2>
-          <p className="text-xl text-gray-600">Stay at the world's finest accommodations</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">Recommended Hotels</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600">Stay at the world's finest accommodations</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {hotels.slice(0, 6).map((hotel, index) => (
             <div 
               key={hotel.id}
@@ -79,25 +79,25 @@ export default function RecommendedHotels() {
               <img 
                 src={hotel.imageUrl} 
                 alt={hotel.name} 
-                className="w-full h-56 object-cover transition-butter group-hover:scale-110"
+                className="w-full h-48 sm:h-52 lg:h-56 object-cover transition-butter group-hover:scale-110"
                 data-testid={`img-hotel-${hotel.id}`}
               />
-              <div className="p-6">
+              <div className="p-4 sm:p-5 lg:p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-semibold" data-testid={`text-hotel-name-${hotel.id}`}>{hotel.name}</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold" data-testid={`text-hotel-name-${hotel.id}`}>{hotel.name}</h3>
                   <div className="flex items-center">
                     <Star className="w-4 h-4 text-yellow-400 mr-1" />
                     <span className="text-sm font-medium" data-testid={`text-hotel-rating-${hotel.id}`}>{hotel.rating}</span>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-4" data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</p>
-                <div className="flex items-center justify-between">
-                  <div className="text-2xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
+                <p className="text-gray-600 mb-3 sm:mb-4 text-sm sm:text-base" data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</p>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div className="text-xl sm:text-2xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
                     ৳{hotel.pricePerNight}
                     <span className="text-sm text-gray-600 font-normal">/night</span>
                   </div>
                   <Button 
-                    className="bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg transition-colors"
+                    className="bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg transition-colors text-sm w-full sm:w-auto"
                     onClick={() => handleBooking(hotel.id)}
                     data-testid={`button-book-hotel-${hotel.id}`}
                   >

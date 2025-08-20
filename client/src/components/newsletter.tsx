@@ -9,12 +9,12 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="py-16 section-bg-warm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="elegant-card bg-gradient-to-r from-pink-50 to-orange-50 rounded-3xl overflow-hidden relative hover-lift transition-butter">
-          <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[400px]">
+    <section className="py-8 sm:py-12 lg:py-16 section-bg-warm">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="elegant-card bg-gradient-to-r from-pink-50 to-orange-50 rounded-2xl sm:rounded-3xl overflow-hidden relative hover-lift transition-butter">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center min-h-[300px] sm:min-h-[400px]">
             {/* Left Content */}
-            <div className="p-8 lg:p-12">
+            <div className="p-6 sm:p-8 lg:p-12 text-center lg:text-left">
               <div className="flex items-center justify-center lg:justify-start mb-6">
                 <div className="icon-bg-yellow mr-3">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,21 +26,21 @@ export default function Newsletter() {
                 </div>
               </div>
               
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
                 Subscribe to see secret deals prices drop the moment you sign up!
               </h2>
               
-              <form className="space-y-4 max-w-md" onSubmit={handleSubmit}>
-                <div className="flex gap-3">
+              <form className="space-y-3 sm:space-y-4 max-w-md mx-auto lg:mx-0" onSubmit={handleSubmit}>
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Input 
                     type="email" 
                     placeholder="Your Email" 
-                    className="flex-1 px-4 py-3 rounded-full bg-white border-0 focus:ring-2 focus:ring-blue-500 text-gray-700"
+                    className="flex-1 px-4 py-3 rounded-full bg-white border-0 focus:ring-2 focus:ring-blue-500 text-gray-700 text-sm sm:text-base"
                     required
                   />
                   <Button 
                     type="submit" 
-                    className="bg-black hover:bg-gray-800 text-white px-8 py-3 rounded-full font-medium transition-colors"
+                    className="bg-black hover:bg-gray-800 text-white px-6 sm:px-8 py-3 rounded-full font-medium transition-colors text-sm sm:text-base whitespace-nowrap"
                   >
                     Subscribe
                   </Button>

@@ -41,31 +41,31 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-16 section-bg-soft">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-4">
+    <section className="py-8 sm:py-12 lg:py-16 section-bg-soft">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+          <div className="flex justify-center mb-3 sm:mb-4">
             <div className="icon-bg-purple">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
-          <p className="text-xl text-gray-600">Everything you need to know about traveling to Bangladesh</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">Frequently Asked Questions</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600">Everything you need to know about traveling to Bangladesh</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {faqData.map((faq, index) => (
             <div 
               key={index}
               className="elegant-card overflow-hidden hover-lift transition-butter"
             >
               <button
-                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
                 onClick={() => toggleFAQ(index)}
               >
-                <span className="font-semibold text-gray-800">{faq.question}</span>
+                <span className="font-semibold text-gray-800 text-sm sm:text-base pr-4">{faq.question}</span>
                 {openIndex === index ? (
                   <ChevronUp className="w-5 h-5 text-primary" />
                 ) : (
