@@ -444,7 +444,7 @@ export default function Hotels() {
       </div>
 
       {/* Results Section */}
-      <div className="pb-16">
+      <div className="pt-12 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
 
