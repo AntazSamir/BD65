@@ -23,8 +23,7 @@ export default function Hotels() {
   const [selectedHotel, setSelectedHotel] = useState<Hotel | null>(null);
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedGalleryImage, setSelectedGalleryImage] = useState<string | null>(null);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [currentMainImage, setCurrentMainImage] = useState<string>('');
 
   const { data: hotels = [], isLoading: hotelsLoading, error: hotelsError } = useQuery<Hotel[]>({
     queryKey: ['/api/hotels'],
@@ -146,6 +145,7 @@ export default function Hotels() {
     console.log('Hotel clicked:', hotel.name, hotel.id);
     setSelectedHotel(hotel);
     setSelectedRestaurant(null);
+    setCurrentMainImage(hotel.imageUrl); // Initialize with main hotel image
     setIsDialogOpen(true);
   };
 
@@ -162,13 +162,7 @@ export default function Hotels() {
   };
 
   const handleGalleryImageClick = (imageUrl: string) => {
-    setSelectedGalleryImage(imageUrl);
-    setIsGalleryOpen(true);
-  };
-
-  const handleCloseGallery = () => {
-    setIsGalleryOpen(false);
-    setSelectedGalleryImage(null);
+    setCurrentMainImage(imageUrl);
   };
 
   // Generate room types for the selected hotel
@@ -222,7 +216,7 @@ export default function Hotels() {
     }
   };
 
-  // Generate additional hotel images
+  // Generate additional hotel images including the original hotel image
   const getHotelGalleryImages = (hotel: Hotel) => {
     // Use simpler, more reliable URLs
     const baseImages = [
@@ -235,8 +229,9 @@ export default function Hotels() {
     const seed = hotel.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const selectedIndex = seed % baseImages.length;
     
-    // Return all 3 images in a consistent order based on the hotel
+    // Include the original hotel image first, then additional gallery images
     const result = [
+      hotel.imageUrl, // Original hotel image as first option
       baseImages[selectedIndex],
       baseImages[(selectedIndex + 1) % baseImages.length], 
       baseImages[(selectedIndex + 2) % baseImages.length]
@@ -647,7 +642,7 @@ export default function Hotels() {
                 {/* Hotel Image and Info */}
                 <div className="space-y-4">
                   <img
-                    src={selectedHotel.imageUrl}
+                    src={currentMainImage || selectedHotel.imageUrl}
                     alt={selectedHotel.name}
                     className="w-full h-64 object-cover rounded-lg"
                     data-testid={`dialog-img-${selectedHotel.id}`}
@@ -656,36 +651,50 @@ export default function Hotels() {
                   {/* Hotel Gallery */}
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Photo Gallery</h3>
-                    <div className="grid grid-cols-2 gap-3">
-                      {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => (
-                        <div 
-                          key={`${selectedHotel.id}-gallery-${index}`} 
-                          className="relative cursor-pointer hover:opacity-90 transition-opacity"
-                          onClick={() => handleGalleryImageClick(imageUrl)}
-                        >
-                          <img
-                            src={imageUrl}
-                            alt={`${selectedHotel.name} - Interior view ${index + 1}`}
-                            className="w-full h-32 object-cover rounded-lg border-2 border-blue-200 shadow-sm hover:border-blue-400 transition-colors"
-                            data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
-                            onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
-                            onError={(e) => {
-                              console.log(`Failed to load gallery image ${index + 1} for ${selectedHotel.name}, falling back to main image`);
-                              e.currentTarget.src = selectedHotel.imageUrl;
-                            }}
-                          />
-                          <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                            {index + 1}
-                          </div>
-                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded-lg">
-                            <div className="text-white opacity-0 hover:opacity-100 transition-opacity">
-                              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                              </svg>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => {
+                        const isSelected = currentMainImage === imageUrl;
+                        return (
+                          <div 
+                            key={`${selectedHotel.id}-gallery-${index}`} 
+                            className="relative cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => handleGalleryImageClick(imageUrl)}
+                          >
+                            <img
+                              src={imageUrl}
+                              alt={`${selectedHotel.name} - Interior view ${index + 1}`}
+                              className={`w-full h-32 object-cover rounded-lg border-2 shadow-sm hover:border-blue-400 transition-all ${
+                                isSelected 
+                                  ? 'border-green-500 ring-2 ring-green-200' 
+                                  : 'border-blue-200'
+                              }`}
+                              data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
+                              onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
+                              onError={(e) => {
+                                console.log(`Failed to load gallery image ${index + 1} for ${selectedHotel.name}, falling back to main image`);
+                                e.currentTarget.src = selectedHotel.imageUrl;
+                              }}
+                            />
+                            <div className={`absolute top-2 right-2 text-white text-xs px-2 py-1 rounded ${
+                              isSelected ? 'bg-green-600' : 'bg-black bg-opacity-50'
+                            }`}>
+                              {isSelected ? '✓' : (index === 0 ? 'Main' : `${index}`)}
                             </div>
+                            {!isSelected && (
+                              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded-lg">
+                                <div className="text-white opacity-0 hover:opacity-100 transition-opacity text-sm font-medium">
+                                  Click to view
+                                </div>
+                              </div>
+                            )}
+                            {isSelected && (
+                              <div className="absolute bottom-2 left-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
+                                Current
+                              </div>
+                            )}
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                   
@@ -955,28 +964,7 @@ export default function Hotels() {
         </DialogContent>
       </Dialog>
 
-      {/* Gallery Lightbox Modal */}
-      <Dialog open={isGalleryOpen} onOpenChange={handleCloseGallery}>
-        <DialogContent className="max-w-4xl max-h-[90vh] p-0 overflow-hidden">
-          <div className="relative bg-black">
-            {selectedGalleryImage && (
-              <img
-                src={selectedGalleryImage}
-                alt="Gallery image in full size"
-                className="w-full max-h-[80vh] object-contain"
-              />
-            )}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-40 text-white border-0"
-              onClick={handleCloseGallery}
-            >
-              ✕
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+
 
       <Footer />
     </div>
