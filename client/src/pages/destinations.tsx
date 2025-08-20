@@ -234,14 +234,15 @@ export default function Destinations() {
           </div>
 
           {/* Carousel Indicators */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {heroBackgrounds.map((_, index) => (
               <button
                 key={`hero-indicator-${index}`}
-                className={`w-3 h-3 rounded-full transition-all duration-500 ease-out hover:scale-110 ${
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-500 ease-out hover:scale-110 touch-friendly ${
                   index === activeHeroIndex ? 'bg-white scale-125 shadow-lg' : 'bg-white/50 hover:bg-white/80'
                 }`}
                 onClick={() => setActiveHeroIndex(index)}
+                data-testid={`button-hero-indicator-${index}`}
               />
             ))}
           </div>
@@ -249,14 +250,14 @@ export default function Destinations() {
       </div>
 
       {/* Destinations Grid */}
-      <div className="py-16 section-bg-warm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="py-8 sm:py-12 lg:py-16 section-bg-warm">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               {searchQuery ? 'Search Results' : 'All Destinations'}
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               {searchQuery 
                 ? `Discover amazing places that match your search`
                 : 'Explore our curated collection of amazing destinations across Bangladesh'
@@ -265,8 +266,8 @@ export default function Destinations() {
           </div>
           {/* Search Results Info */}
           {(searchQuery || selectedDistrict !== 'all') && (
-            <div className="mb-8">
-              <p className="text-lg text-gray-600">
+            <div className="mb-6 sm:mb-8">
+              <p className="text-base sm:text-lg text-gray-600 text-center">
                 Found <span className="font-semibold text-primary">{filteredDestinations.length}</span> destinations
                 {searchQuery && (
                   <>
@@ -282,7 +283,7 @@ export default function Destinations() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {filteredDestinations.map((destination, index) => (
               <div 
                 key={destination.id}
@@ -294,7 +295,7 @@ export default function Destinations() {
                   <img 
                     src={destination.imageUrl} 
                     alt={destination.name} 
-                    className="w-full h-64 object-cover transition-butter group-hover:scale-110"
+                    className="w-full h-48 sm:h-56 lg:h-64 object-cover transition-butter group-hover:scale-110"
                     data-testid={`img-destination-${destination.id}`}
                   />
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-full px-3 py-1 transition-butter group-hover:bg-white group-hover:shadow-lg hover-glow">
@@ -307,23 +308,23 @@ export default function Destinations() {
                   </div>
                 </div>
                 
-                <div className="p-6">
+                <div className="p-4 sm:p-5 lg:p-6">
                   <div className="flex items-center mb-2">
-                    <MapPin className="w-4 h-4 text-gray-400 mr-1" />
-                    <span className="text-sm text-gray-500">{destination.district}, {destination.country}</span>
+                    <MapPin className="w-3 sm:w-4 h-3 sm:h-4 text-gray-400 mr-1" />
+                    <span className="text-xs sm:text-sm text-gray-500">{destination.district}, {destination.country}</span>
                   </div>
                   
-                  <h3 className="text-2xl font-bold mb-3 text-gray-800" data-testid={`text-destination-name-${destination.id}`}>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 text-gray-800" data-testid={`text-destination-name-${destination.id}`}>
                     {destination.name}
                   </h3>
                   
-                  <p className="text-gray-600 mb-4 line-clamp-2" data-testid={`text-destination-description-${destination.id}`}>
+                  <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 line-clamp-2" data-testid={`text-destination-description-${destination.id}`}>
                     {destination.description}
                   </p>
                   
-                  <div className="flex justify-end items-center pt-4 border-t border-gray-100">
+                  <div className="flex justify-end items-center pt-3 sm:pt-4 border-t border-gray-100">
                     <button 
-                      className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-elastic font-medium hover:shadow-xl hover:scale-110 transform hover-glow"
+                      className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-elastic font-medium hover:shadow-xl hover:scale-110 transform hover-glow text-sm sm:text-base touch-friendly"
                       data-testid={`button-explore-destination-${destination.id}`}
                       onClick={() => setLocation(`/destinations/${destination.id}`)}
                     >
