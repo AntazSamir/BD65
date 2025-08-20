@@ -255,6 +255,73 @@ export default function TripPlannerPage() {
               </Button>
             </div>
 
+            {/* Hot Deals Section */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-1">🔥 Hot Flight Deals</h2>
+                  <p className="text-gray-600">Limited time offers - book now and save big!</p>
+                </div>
+                <Badge className="bg-red-500 text-white animate-pulse">LIMITED TIME</Badge>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <Card className="border-2 border-red-200 bg-gradient-to-r from-red-50 to-orange-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-red-500 text-white text-xs">SAVE 40%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳8,000</div>
+                        <div className="text-xl font-bold text-red-600">৳4,800</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Dhaka ✈ Cox's Bazar</h3>
+                    <p className="text-sm text-gray-600 mb-2">US-Bangla Airlines • Jan 25-30</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ Free cancellation</span>
+                      <span className="text-red-500 font-medium">3 seats left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-blue-500 text-white text-xs">SAVE 35%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳12,000</div>
+                        <div className="text-xl font-bold text-blue-600">৳7,800</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Dhaka ✈ Chittagong</h3>
+                    <p className="text-sm text-gray-600 mb-2">Biman Bangladesh • Round Trip</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ Meals included</span>
+                      <span className="text-blue-500 font-medium">7 seats left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-green-500 text-white text-xs">SAVE 30%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳15,000</div>
+                        <div className="text-xl font-bold text-green-600">৳10,500</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Dhaka ✈ Sylhet</h3>
+                    <p className="text-sm text-gray-600 mb-2">Novoair • Business Class</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ Lounge access</span>
+                      <span className="text-green-500 font-medium">2 seats left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Flight Options</h2>
               <p className="text-gray-600">Choose from available flights for your journey</p>
@@ -464,6 +531,73 @@ export default function TripPlannerPage() {
               </Button>
             </div>
 
+            {/* Hot Deals Section */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-1">🔥 Hot Bus Deals</h2>
+                  <p className="text-gray-600">Special discounts on popular routes!</p>
+                </div>
+                <Badge className="bg-red-500 text-white animate-pulse">TODAY ONLY</Badge>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <Card className="border-2 border-green-200 bg-gradient-to-r from-green-50 to-lime-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-green-600 text-white text-xs">SAVE 25%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳1,200</div>
+                        <div className="text-xl font-bold text-green-600">৳900</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Dhaka → Cox's Bazar</h3>
+                    <p className="text-sm text-gray-600 mb-2">Green Line AC • Sleeper Coach</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ WiFi & Charging</span>
+                      <span className="text-green-500 font-medium">12 seats left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-orange-200 bg-gradient-to-r from-orange-50 to-yellow-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-orange-500 text-white text-xs">SAVE 20%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳800</div>
+                        <div className="text-xl font-bold text-orange-600">৳640</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Dhaka → Chittagong</h3>
+                    <p className="text-sm text-gray-600 mb-2">Shohag Paribahan • AC Bus</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ Snacks included</span>
+                      <span className="text-orange-500 font-medium">8 seats left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-purple-500 text-white text-xs">SAVE 30%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳1,500</div>
+                        <div className="text-xl font-bold text-purple-600">৳1,050</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Dhaka → Sylhet</h3>
+                    <p className="text-sm text-gray-600 mb-2">Ena Transport • Luxury Coach</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ Reclining seats</span>
+                      <span className="text-purple-500 font-medium">5 seats left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Bus Options</h2>
               <p className="text-gray-600">Comfortable and affordable bus services</p>
@@ -650,6 +784,73 @@ export default function TripPlannerPage() {
               >
                 Search Private Cars
               </Button>
+            </div>
+
+            {/* Hot Deals Section */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-1">🔥 Hot Car Rental Deals</h2>
+                  <p className="text-gray-600">Exclusive offers on premium vehicles!</p>
+                </div>
+                <Badge className="bg-red-500 text-white animate-pulse">WEEKEND SPECIAL</Badge>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <Card className="border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-indigo-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-purple-600 text-white text-xs">SAVE 40%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳5,000</div>
+                        <div className="text-xl font-bold text-purple-600">৳3,000</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Toyota Premio - Sedan</h3>
+                    <p className="text-sm text-gray-600 mb-2">Dhaka to Cox's Bazar • Full Day</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ AC + Driver included</span>
+                      <span className="text-purple-500 font-medium">3 cars left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-sky-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-blue-600 text-white text-xs">SAVE 35%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳8,000</div>
+                        <div className="text-xl font-bold text-blue-600">৳5,200</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Toyota Hiace - Microbus</h3>
+                    <p className="text-sm text-gray-600 mb-2">Airport Transfer • 12 Seats</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ Free waiting time</span>
+                      <span className="text-blue-500 font-medium">2 cars left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="bg-emerald-600 text-white text-xs">SAVE 50%</Badge>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-500 line-through">৳12,000</div>
+                        <div className="text-xl font-bold text-emerald-600">৳6,000</div>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold mb-1">Mercedes E-Class - Luxury</h3>
+                    <p className="text-sm text-gray-600 mb-2">City Tour • Premium Experience</p>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-green-600">✓ Luxury amenities</span>
+                      <span className="text-emerald-500 font-medium">1 car left</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
 
             <div className="mb-6">
