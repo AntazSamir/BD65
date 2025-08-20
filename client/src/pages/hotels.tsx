@@ -652,49 +652,28 @@ export default function Hotels() {
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Photo Gallery</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => {
-                        const isSelected = currentMainImage === imageUrl;
-                        return (
-                          <div 
-                            key={`${selectedHotel.id}-gallery-${index}`} 
-                            className="relative cursor-pointer hover:opacity-90 transition-opacity"
-                            onClick={() => handleGalleryImageClick(imageUrl)}
-                          >
-                            <img
-                              src={imageUrl}
-                              alt={`${selectedHotel.name} - Interior view ${index + 1}`}
-                              className={`w-full h-32 object-cover rounded-lg border-2 shadow-sm hover:border-blue-400 transition-all ${
-                                isSelected 
-                                  ? 'border-green-500 ring-2 ring-green-200' 
-                                  : 'border-blue-200'
-                              }`}
-                              data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
-                              onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
-                              onError={(e) => {
-                                console.log(`Failed to load gallery image ${index + 1} for ${selectedHotel.name}, falling back to main image`);
-                                e.currentTarget.src = selectedHotel.imageUrl;
-                              }}
-                            />
-                            <div className={`absolute top-2 right-2 text-white text-xs px-2 py-1 rounded ${
-                              isSelected ? 'bg-green-600' : 'bg-black bg-opacity-50'
-                            }`}>
-                              {isSelected ? '✓' : (index === 0 ? 'Main' : `${index}`)}
-                            </div>
-                            {!isSelected && (
-                              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded-lg">
-                                <div className="text-white opacity-0 hover:opacity-100 transition-opacity text-sm font-medium">
-                                  Click to view
-                                </div>
-                              </div>
-                            )}
-                            {isSelected && (
-                              <div className="absolute bottom-2 left-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
-                                Current
-                              </div>
-                            )}
+                      {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => (
+                        <div 
+                          key={`${selectedHotel.id}-gallery-${index}`} 
+                          className="relative cursor-pointer hover:opacity-90 transition-opacity"
+                          onClick={() => handleGalleryImageClick(imageUrl)}
+                        >
+                          <img
+                            src={imageUrl}
+                            alt={`${selectedHotel.name} - Interior view ${index + 1}`}
+                            className="w-full h-32 object-cover rounded-lg border-2 border-blue-200 shadow-sm hover:border-blue-400 transition-colors"
+                            data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
+                            onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
+                            onError={(e) => {
+                              console.log(`Failed to load gallery image ${index + 1} for ${selectedHotel.name}, falling back to main image`);
+                              e.currentTarget.src = selectedHotel.imageUrl;
+                            }}
+                          />
+                          <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+                            {index + 1}
                           </div>
-                        );
-                      })}
+                        </div>
+                      ))}
                     </div>
                   </div>
                   
