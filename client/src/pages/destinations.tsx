@@ -234,16 +234,23 @@ export default function Destinations() {
           </div>
 
           {/* Carousel Indicators */}
-          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-3 bg-black/20 backdrop-blur-md rounded-full px-4 py-2">
             {heroBackgrounds.map((_, index) => (
               <button
                 key={`hero-indicator-${index}`}
-                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-500 ease-out hover:scale-110 touch-friendly ${
-                  index === activeHeroIndex ? 'bg-white scale-125 shadow-lg' : 'bg-white/50 hover:bg-white/80'
+                className={`relative transition-all duration-500 ease-out hover:scale-110 touch-friendly ${
+                  index === activeHeroIndex 
+                    ? 'w-8 h-3 bg-white rounded-full shadow-lg' 
+                    : 'w-3 h-3 bg-white/60 hover:bg-white/80 rounded-full'
                 }`}
                 onClick={() => setActiveHeroIndex(index)}
                 data-testid={`button-hero-indicator-${index}`}
-              />
+              >
+                {/* Active indicator inner glow */}
+                {index === activeHeroIndex && (
+                  <div className="absolute inset-0 bg-white rounded-full animate-pulse opacity-60"></div>
+                )}
+              </button>
             ))}
           </div>
         </div>
