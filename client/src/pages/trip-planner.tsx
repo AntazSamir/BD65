@@ -30,9 +30,11 @@ export default function TripPlannerPage() {
   const [flightClass, setFlightClass] = useState('Economy');
 
   // Bus-specific state
+  const [busTripType, setBusTripType] = useState('oneWay');
   const [busFrom, setBusFrom] = useState('Dhaka');
   const [busTo, setBusTo] = useState('Cox\'s Bazar');
   const [busTravelDate, setBusTravelDate] = useState('');
+  const [busReturnDate, setBusReturnDate] = useState('');
   const [busPassengers, setBusPassengers] = useState('1');
   const [busType, setBusType] = useState('AC Bus');
   const [busDepartureTime, setBusDepartureTime] = useState('anytime');
@@ -378,7 +380,20 @@ export default function TripPlannerPage() {
           <TabsContent value="buses">
             {/* Bus Search Form */}
             <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+              <div className="mb-6">
+                <RadioGroup value={busTripType} onValueChange={setBusTripType} className="flex space-x-6">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="oneWay" id="busOneWay" />
+                    <Label htmlFor="busOneWay" className="font-medium">One Way</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="roundTrip" id="busRoundTrip" />
+                    <Label htmlFor="busRoundTrip" className="font-medium">Round Trip</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 ${busTripType === 'roundTrip' ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                 <div>
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">FROM</Label>
                   <Select value={busFrom} onValueChange={setBusFrom}>
@@ -418,7 +433,7 @@ export default function TripPlannerPage() {
                 </div>
 
                 <div>
-                  <Label className="text-sm font-medium text-gray-600 mb-1 block">TRAVEL DATE</Label>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">DEPARTURE DATE</Label>
                   <Input
                     type="date"
                     value={busTravelDate}
@@ -426,6 +441,18 @@ export default function TripPlannerPage() {
                     className="h-12"
                   />
                 </div>
+
+                {busTripType === 'roundTrip' && (
+                  <div>
+                    <Label className="text-sm font-medium text-gray-600 mb-1 block">RETURN DATE</Label>
+                    <Input
+                      type="date"
+                      value={busReturnDate}
+                      onChange={(e) => setBusReturnDate(e.target.value)}
+                      className="h-12"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
