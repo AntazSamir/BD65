@@ -712,6 +712,8 @@ export class MemStorage implements IStorage {
     await this.createBus({
       operator: 'Green Line Paribahan',
       type: 'AC Bus',
+      origin: 'Dhaka',
+      destination: 'Cox\'s Bazar',
       departure: '07:00 AM',
       arrival: '03:00 PM',
       duration: '8h 0m',
@@ -724,6 +726,8 @@ export class MemStorage implements IStorage {
     await this.createBus({
       operator: 'Shohagh Paribahan',
       type: 'Non-AC Bus',
+      origin: 'Dhaka',
+      destination: 'Chittagong',
       departure: '09:30 AM',
       arrival: '05:30 PM',
       duration: '8h 0m',
@@ -736,6 +740,8 @@ export class MemStorage implements IStorage {
     await this.createBus({
       operator: 'Hanif Enterprise',
       type: 'Sleeper Coach',
+      origin: 'Dhaka',
+      destination: 'Sylhet',
       departure: '10:00 PM',
       arrival: '06:00 AM',
       duration: '8h 0m',
@@ -748,6 +754,8 @@ export class MemStorage implements IStorage {
     await this.createBus({
       operator: 'Ena Transport',
       type: 'Deluxe Bus',
+      origin: 'Chittagong',
+      destination: 'Cox\'s Bazar',
       departure: '06:00 AM',
       arrival: '02:00 PM',
       duration: '8h 0m',
@@ -761,6 +769,8 @@ export class MemStorage implements IStorage {
     await this.createPrivateCar({
       type: 'Toyota Premio',
       category: 'Sedan',
+      origin: 'Dhaka',
+      destination: 'Cox\'s Bazar',
       capacity: 4,
       duration: '5h 30m',
       price: 8500,
@@ -772,6 +782,8 @@ export class MemStorage implements IStorage {
     await this.createPrivateCar({
       type: 'Toyota Hiace',
       category: 'Microbus',
+      origin: 'Dhaka',
+      destination: 'Chittagong',
       capacity: 12,
       duration: '6h 0m',
       price: 12000,
@@ -783,6 +795,8 @@ export class MemStorage implements IStorage {
     await this.createPrivateCar({
       type: 'Mitsubishi Pajero',
       category: 'SUV',
+      origin: 'Dhaka',
+      destination: 'Sylhet',
       capacity: 7,
       duration: '5h 45m',
       price: 15000,
@@ -794,6 +808,8 @@ export class MemStorage implements IStorage {
     await this.createPrivateCar({
       type: 'Honda CRV',
       category: 'SUV',
+      origin: 'Chittagong',
+      destination: 'Cox\'s Bazar',
       capacity: 5,
       duration: '5h 15m',
       price: 10500,

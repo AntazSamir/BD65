@@ -71,6 +71,19 @@ export default function TripPlannerPage() {
     queryKey: ['/api/private-cars'],
   });
 
+  // Filter transportation options based on selected routes
+  const filteredFlights = tripPlanners.filter(flight => 
+    flight.origin === flightFrom && flight.destination === flightTo
+  );
+
+  const filteredBuses = buses.filter(bus => 
+    bus.origin === busFrom && bus.destination === busTo
+  );
+
+  const filteredCars = privateCars.filter(car => 
+    car.origin === carPickup && car.destination === carDropoff
+  );
+
   const handleSearch = () => {
     console.log('Searching for:', { origin, destination, departureDate, passengers });
   };
@@ -376,7 +389,7 @@ export default function TripPlannerPage() {
               </div>
             ) : (
               <div className="grid gap-4">
-                {tripPlanners.map((flight) => (
+                {filteredFlights.map((flight) => (
                   <Card key={flight.id} className="elegant-card hover-lift transition-butter">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-4">
@@ -678,7 +691,7 @@ export default function TripPlannerPage() {
             </div>
 
             <div className="grid gap-4">
-              {buses.map((bus) => (
+              {filteredBuses.map((bus) => (
                 <Card key={bus.id} className="elegant-card hover-lift transition-butter">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
@@ -972,7 +985,7 @@ export default function TripPlannerPage() {
             </div>
 
             <div className="grid gap-4">
-              {privateCars.map((car) => (
+              {filteredCars.map((car) => (
                 <Card key={car.id} className="elegant-card hover-lift transition-butter">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
