@@ -67,6 +67,68 @@ export default function Footer() {
         
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
           <p>&copy; 2024 BD Explorer. All rights reserved.</p>
+          
+          {/* Mountain landscape design */}
+          <div className="mt-8 relative overflow-hidden">
+            <svg 
+              viewBox="0 0 1200 200" 
+              className="w-full h-32 opacity-60"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              {/* Background mountains */}
+              <path 
+                d="M0,200 L0,120 C100,80 200,90 300,70 C400,50 500,60 600,40 C700,20 800,30 900,50 C1000,70 1100,60 1200,80 L1200,200 Z" 
+                fill="#4ade80" 
+                opacity="0.3"
+              />
+              <path 
+                d="M0,200 L0,140 C120,100 220,110 320,90 C420,70 520,80 620,60 C720,40 820,50 920,70 C1020,90 1120,80 1200,100 L1200,200 Z" 
+                fill="#22c55e" 
+                opacity="0.4"
+              />
+              
+              {/* Middle layer mountains */}
+              <path 
+                d="M0,200 L0,160 C80,130 180,140 280,120 C380,100 480,110 580,90 C680,70 780,80 880,100 C980,120 1080,110 1200,130 L1200,200 Z" 
+                fill="#16a34a" 
+                opacity="0.6"
+              />
+              
+              {/* Foreground mountains */}
+              <path 
+                d="M0,200 L0,180 C100,150 200,160 300,140 C400,120 500,130 600,110 C700,90 800,100 900,120 C1000,140 1100,130 1200,150 L1200,200 Z" 
+                fill="#15803d" 
+                opacity="0.8"
+              />
+              
+              {/* Trees silhouettes */}
+              <g fill="#166534" opacity="0.9">
+                {/* Tree 1 */}
+                <path d="M50,200 L50,160 L45,160 L50,140 L55,160 L50,160 L50,200 Z" />
+                <path d="M50,165 L42,165 L50,145 L58,165 Z" />
+                
+                {/* Tree 2 */}
+                <path d="M150,200 L150,170 L145,170 L150,150 L155,170 L150,170 L150,200 Z" />
+                <path d="M150,175 L140,175 L150,155 L160,175 Z" />
+                
+                {/* Tree 3 */}
+                <path d="M250,200 L250,165 L245,165 L250,145 L255,165 L250,165 L250,200 Z" />
+                <path d="M250,170 L240,170 L250,150 L260,170 Z" />
+                
+                {/* Tree 4 */}
+                <path d="M800,200 L800,155 L795,155 L800,135 L805,155 L800,155 L800,200 Z" />
+                <path d="M800,160 L790,160 L800,140 L810,160 Z" />
+                
+                {/* Tree 5 */}
+                <path d="M950,200 L950,175 L945,175 L950,155 L955,175 L950,175 L950,200 Z" />
+                <path d="M950,180 L940,180 L950,160 L960,180 Z" />
+                
+                {/* Tree 6 */}
+                <path d="M1100,200 L1100,160 L1095,160 L1100,140 L1105,160 L1100,160 L1100,200 Z" />
+                <path d="M1100,165 L1090,165 L1100,145 L1110,165 Z" />
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
     </footer>
