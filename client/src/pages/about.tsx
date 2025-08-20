@@ -345,57 +345,81 @@ export default function About() {
             <p className="text-xl text-gray-600">The passionate people behind Bangladesh Explorer</p>
           </div>
           
-          {/* Simplified team layout with creative cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {team.map((member, index) => {
-              const bgColors = [
-                'bg-gradient-to-br from-blue-50 to-blue-100',
-                'bg-gradient-to-br from-green-50 to-green-100', 
-                'bg-gradient-to-br from-purple-50 to-purple-100'
-              ];
-              const accentColors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500'];
-              
-              return (
-                <div key={index} className="group hover:scale-105 transition-all duration-500">
-                  {/* Card */}
-                  <div className={`${bgColors[index]} p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 relative overflow-hidden`}>
-                    
-                    {/* Background decoration */}
-                    <div className={`absolute top-0 right-0 w-24 h-24 ${accentColors[index]} opacity-10 rounded-full transform translate-x-8 -translate-y-8`}></div>
-                    
-                    {/* Photo */}
-                    <div className="relative mb-6">
-                      <div className="w-32 h-32 mx-auto">
-                        <img 
-                          src={member.image} 
-                          alt={member.name} 
-                          className="w-full h-full rounded-2xl object-cover shadow-lg border-4 border-white"
-                        />
+          {/* Creative polaroid-style team layout */}
+          <div className="relative">
+            <div className="flex flex-col lg:flex-row items-center justify-center lg:space-x-8 space-y-12 lg:space-y-0">
+              {team.map((member, index) => {
+                const rotations = ['lg:rotate-[-8deg]', 'lg:rotate-[4deg]', 'lg:rotate-[-6deg]'];
+                const translations = ['lg:translate-y-8', 'lg:-translate-y-4', 'lg:translate-y-12'];
+                const bgColors = ['bg-gradient-to-br from-blue-50 to-blue-100', 'bg-gradient-to-br from-green-50 to-green-100', 'bg-gradient-to-br from-purple-50 to-purple-100'];
+                
+                return (
+                  <div 
+                    key={index} 
+                    className={`relative group hover:scale-105 hover:rotate-0 transition-all duration-500 transform ${
+                      rotations[index]
+                    } ${translations[index]}`}
+                  >
+                    {/* Polaroid-style card */}
+                    <div className={`${bgColors[index]} p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-shadow duration-300 max-w-sm`}>
+                      {/* Photo frame */}
+                      <div className="relative mb-6">
+                        <div className="w-full h-48 bg-white rounded-xl p-3 shadow-inner">
+                          <img 
+                            src={member.image} 
+                            alt={member.name} 
+                            className="w-full h-full rounded-lg object-cover"
+                          />
+                        </div>
+                        
+                        {/* Photo corners */}
+                        <div className="absolute -top-1 -left-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                        <div className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                        <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
                       </div>
                       
-                      {/* Role badge */}
-                      <div className={`absolute -bottom-3 left-1/2 transform -translate-x-1/2 ${accentColors[index]} px-4 py-2 rounded-full shadow-lg`}>
-                        <p className="text-white font-semibold text-sm whitespace-nowrap">{member.role}</p>
+                      {/* Text content */}
+                      <div className="text-center space-y-3">
+                        <h3 className="text-2xl font-bold text-gray-800">{member.name}</h3>
+                        <div className="inline-block bg-white px-4 py-2 rounded-full">
+                          <p className="text-primary font-semibold text-sm">{member.role}</p>
+                        </div>
+                        <p className="text-gray-600 text-sm leading-relaxed px-2">{member.bio}</p>
+                      </div>
+                      
+                      {/* Decorative tape */}
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-yellow-200 rounded-sm opacity-80 rotate-12 shadow-sm"></div>
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gradient-to-b from-yellow-300 to-yellow-400 rounded-sm opacity-60 rotate-12"></div>
+                      
+                      {/* Index number */}
+                      <div className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+                        <span className="text-sm font-bold text-gray-600">{index + 1}</span>
                       </div>
                     </div>
                     
-                    {/* Content */}
-                    <div className="text-center space-y-4 pt-4">
-                      <h3 className="text-xl font-bold text-gray-800">{member.name}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
-                    </div>
-                    
-                    {/* Number indicator */}
-                    <div className={`absolute top-4 right-4 w-8 h-8 ${accentColors[index]} rounded-full flex items-center justify-center shadow-lg`}>
-                      <span className="text-white font-bold text-sm">{index + 1}</span>
-                    </div>
-                    
-                    {/* Bottom accent */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 ${accentColors[index]}`}></div>
+                    {/* Connecting lines */}
+                    {index < team.length - 1 && (
+                      <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-1 bg-gradient-to-r from-gray-300 to-transparent transform -translate-y-1/2 z-10"></div>
+                    )}
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            
+            {/* Team connection visualization */}
+            <div className="absolute inset-0 pointer-events-none hidden lg:block">
+              <svg className="w-full h-full" viewBox="0 0 800 400">
+                <defs>
+                  <linearGradient id="teamGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.2" />
+                    <stop offset="50%" stopColor="rgb(16, 185, 129)" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="rgb(139, 69, 19)" stopOpacity="0.2" />
+                  </linearGradient>
+                </defs>
+                <path d="M200,200 Q400,150 600,200" stroke="url(#teamGradient)" strokeWidth="3" fill="none" className="animate-pulse" />
+              </svg>
+            </div>
           </div>
         </div>
       </section>
