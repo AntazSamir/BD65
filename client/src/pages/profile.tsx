@@ -97,9 +97,11 @@ export default function Profile() {
       setSuccess("");
       
       // Remove empty strings to avoid overwriting with empty values
-      const cleanData = Object.fromEntries(
-        Object.entries(data).filter(([_, value]) => value !== "")
-      );
+      const cleanData = data && typeof data === 'object' 
+        ? Object.fromEntries(
+            Object.entries(data).filter(([_, value]) => value !== "")
+          )
+        : {};
 
       await updateProfile(cleanData);
       setSuccess("Profile updated successfully!");
@@ -108,10 +110,13 @@ export default function Profile() {
         description: "Your profile has been updated successfully.",
       });
     } catch (error: any) {
-      setError(error.message || "Failed to update profile");
+      const errorMessage = error && typeof error === 'object' && 'message' in error 
+        ? error.message 
+        : error?.toString?.() || "Failed to update profile";
+      setError(errorMessage);
       toast({
         title: "Error",
-        description: error.message || "Failed to update profile",
+        description: errorMessage,
         variant: "destructive",
       });
     }

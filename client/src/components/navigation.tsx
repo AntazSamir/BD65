@@ -111,8 +111,20 @@ export default function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4">
             <div className="flex flex-col space-y-4">
-              <Link href="/" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Home</Link>
-              <Link href="/destinations" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Destinations</Link>
+              <Link 
+                href="/" 
+                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link 
+                href="/destinations" 
+                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Destinations
+              </Link>
               <Link 
                 href="/hotels" 
                 className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
@@ -127,13 +139,35 @@ export default function Navigation() {
               >
                 Trip Planner
               </Link>
-              <Link href="/about" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">About</Link>
+              <Link 
+                href="/about" 
+                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
               
               {isAuthenticated ? (
                 <>
-                  <Link href="/profile" className="text-neutral hover:text-primary">Profile</Link>
+                  <Link 
+                    href="/profile" 
+                    className="text-neutral hover:text-primary"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Profile
+                  </Link>
+                  <Link 
+                    href="/my-bookings" 
+                    className="text-neutral hover:text-primary"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    My Bookings
+                  </Link>
                   <button 
-                    onClick={() => signOut()}
+                    onClick={() => {
+                      signOut();
+                      setIsMenuOpen(false);
+                    }}
                     disabled={isSigningOut}
                     className="text-left text-neutral hover:text-primary"
                   >
@@ -142,8 +176,20 @@ export default function Navigation() {
                 </>
               ) : (
                 <>
-                  <Link href="/sign-in" className="text-neutral hover:text-primary">Sign In</Link>
-                  <Link href="/sign-up" className="text-neutral hover:text-primary">Sign Up</Link>
+                  <Link 
+                    href="/sign-in" 
+                    className="text-neutral hover:text-primary"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                  <Link 
+                    href="/sign-up" 
+                    className="text-neutral hover:text-primary"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
                 </>
               )}
             </div>

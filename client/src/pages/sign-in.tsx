@@ -31,7 +31,10 @@ export default function SignIn() {
       await signIn(data);
       setLocation("/");
     } catch (error: any) {
-      setError(error.message || "Sign in failed");
+      const errorMessage = error && typeof error === 'object' && 'message' in error 
+        ? error.message 
+        : error?.toString?.() || "Sign in failed";
+      setError(errorMessage);
     }
   };
 

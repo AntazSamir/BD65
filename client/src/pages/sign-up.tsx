@@ -37,7 +37,10 @@ export default function SignUp() {
       await signUp(data);
       setLocation("/");
     } catch (error: any) {
-      setError(error.message || "Sign up failed");
+      const errorMessage = error && typeof error === 'object' && 'message' in error 
+        ? error.message 
+        : error?.toString?.() || "Sign up failed";
+      setError(errorMessage);
     }
   };
 
