@@ -89,6 +89,16 @@ export default function Profile() {
       nationality: user?.nationality || "",
       profileImageUrl: user?.profileImageUrl || "",
     },
+    // Auto-update form when user data loads
+    values: user ? {
+      firstName: user.firstName || "",
+      lastName: user.lastName || "",
+      username: user.username || "",
+      phone: user.phone || "",
+      dateOfBirth: user.dateOfBirth || "",
+      nationality: user.nationality || "",
+      profileImageUrl: user.profileImageUrl || "",
+    } : undefined,
   });
 
   const onSubmit = async (data: UpdateUser) => {
@@ -369,100 +379,141 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <Navigation />
-      <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Profile</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Manage your account settings and personal information
-          </p>
+    <>
+      <div className="min-h-screen section-bg-soft">
+        <Navigation />
+        
+        {/* Hero Section */}
+        <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 text-white py-16">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center space-x-6">
+            <Avatar className="w-20 h-20 border-4 border-white/20 shadow-xl">
+              <AvatarImage src={user.profileImageUrl || ""} alt={user.firstName} />
+              <AvatarFallback className="text-2xl bg-white/10 text-white">
+                {user.firstName?.[0]}{user.lastName?.[0]}
+              </AvatarFallback>
+            </Avatar>
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2" data-testid="text-user-name">
+                Welcome back, <span className="text-accent bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">{user.firstName}</span>!
+              </h1>
+              <p className="text-blue-100 text-lg" data-testid="text-user-email">
+                {user.email}
+              </p>
+              <div className="flex items-center mt-2 text-blue-100">
+                <Calendar className="w-4 h-4 mr-2" />
+                <span>Member since {new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div className="space-y-8">
-          {/* Profile Overview and Edit Form */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Profile Overview */}
-            <Card className="lg:col-span-1">
-              <CardHeader className="text-center">
-                <Avatar className="w-24 h-24 mx-auto mb-4">
-                  <AvatarImage src={user.profileImageUrl || ""} alt={user.firstName} />
-                  <AvatarFallback className="text-lg">
-                    {user.firstName?.[0]}{user.lastName?.[0]}
-                  </AvatarFallback>
-                </Avatar>
-                <CardTitle className="text-xl" data-testid="text-user-name">
-                  {user.firstName} {user.lastName}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Profile Stats & Quick Actions */}
+          <div className="lg:col-span-1 space-y-6">
+            {/* Profile Stats */}
+            <Card className="elegant-card">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Users className="w-5 h-5 mr-2 text-blue-600" />
+                  Profile Stats
                 </CardTitle>
-                <CardDescription data-testid="text-user-email">
-                  {user.email}
-                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-sm space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Username:</span>
-                    <span data-testid="text-username">{user.username}</span>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-4 bg-blue-50 rounded-lg">
+                    <div className="text-2xl font-bold text-blue-600">{bookings.length}</div>
+                    <div className="text-sm text-gray-600">Total Bookings</div>
                   </div>
-                  {user.phone && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">Phone:</span>
-                      <span data-testid="text-phone">{user.phone}</span>
+                  <div className="text-center p-4 bg-green-50 rounded-lg">
+                    <div className="text-2xl font-bold text-green-600">
+                      {bookings.filter(b => b.status === 'confirmed').length}
                     </div>
-                  )}
-                  {user.nationality && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">Nationality:</span>
-                      <span data-testid="text-nationality">{user.nationality}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Member since:</span>
-                    <span data-testid="text-member-since">
-                      {new Date(user.createdAt).toLocaleDateString()}
-                    </span>
+                    <div className="text-sm text-gray-600">Confirmed</div>
                   </div>
                 </div>
                 
                 <Separator />
                 
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-600">Username</span>
+                    <Badge variant="outline" data-testid="text-username">{user.username}</Badge>
+                  </div>
+                  {user.phone && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Phone</span>
+                      <span className="font-medium" data-testid="text-phone">{user.phone}</span>
+                    </div>
+                  )}
+                  {user.nationality && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Nationality</span>
+                      <span className="font-medium" data-testid="text-nationality">{user.nationality}</span>
+                    </div>
+                  )}
+                  {user.dateOfBirth && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Date of Birth</span>
+                      <span className="font-medium">{formatDate(user.dateOfBirth)}</span>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Actions */}
+            <Card className="elegant-card">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Save className="w-5 h-5 mr-2 text-orange-600" />
+                  Quick Actions
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full justify-start"
                   onClick={handleSignOut}
                   disabled={isSigningOut}
                   data-testid="button-signout"
                 >
-                  <LogOut className="w-4 h-4 mr-2" />
+                  <LogOut className="w-4 h-4 mr-3" />
                   {isSigningOut ? "Signing out..." : "Sign Out"}
                 </Button>
               </CardContent>
             </Card>
+          </div>
 
-            {/* Edit Profile */}
-            <Card className="lg:col-span-2">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <User className="w-5 h-5 mr-2" />
-                  Edit Profile
-                </CardTitle>
-                <CardDescription>
-                  Update your personal information and preferences
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                  {success && (
-                    <Alert>
-                      <AlertDescription>{success}</AlertDescription>
-                    </Alert>
-                  )}
-                  
-                  {error && (
-                    <Alert variant="destructive">
-                      <AlertDescription>{error}</AlertDescription>
-                    </Alert>
+          {/* Edit Profile Form */}
+          <Card className="lg:col-span-2 elegant-card">
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl">
+                <User className="w-6 h-6 mr-3 text-blue-600" />
+                Personal Information
+              </CardTitle>
+              <CardDescription className="text-base">
+                Update your personal details and travel preferences. Your email is automatically synced from your account.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                {success && (
+                  <Alert className="border-green-200 bg-green-50">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <AlertDescription className="text-green-800">{success}</AlertDescription>
+                  </Alert>
+                )}
+                
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertTriangle className="w-4 h-4" />
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
                   )}
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -544,15 +595,41 @@ export default function Profile() {
                     />
                   </div>
 
+                  {/* Email Display (Read-only) */}
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email Address</Label>
+                    <div className="flex">
+                      <Input
+                        id="email"
+                        type="email"
+                        value={user.email}
+                        disabled
+                        className="bg-gray-50 border-gray-200 text-gray-500"
+                        data-testid="display-email"
+                      />
+                      <div className="ml-3 flex items-center">
+                        <Badge variant="secondary" className="text-xs">
+                          Auto-synced
+                        </Badge>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      Your email is automatically managed by your account and cannot be changed here.
+                    </p>
+                  </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="profileImageUrl">Profile Image URL</Label>
                     <Input
                       id="profileImageUrl"
                       type="url"
-                      placeholder="https://example.com/your-image.jpg"
+                      placeholder="https://example.com/your-image.jpg (or leave empty for auto-generated avatar)"
                       data-testid="input-profile-image"
                       {...form.register("profileImageUrl")}
                     />
+                    <p className="text-xs text-gray-500">
+                      Leave empty to use an automatically generated avatar based on your initials.
+                    </p>
                   </div>
 
                   <Button
@@ -691,7 +768,8 @@ export default function Profile() {
             </CardContent>
           </Card>
         </div>
-        </div>
+        
+        <Footer />
       </div>
 
       {/* Cancel Booking Confirmation Dialog */}
@@ -724,36 +802,24 @@ export default function Profile() {
                   variant="outline"
                   onClick={() => setBookingToCancel(null)}
                   className="flex-1"
-                  data-testid="profile-cancel-dialog-no"
+                  data-testid="profile-cancel-dialog-cancel"
                 >
-                  Keep Booking
+                  Cancel
                 </Button>
                 <Button
                   variant="destructive"
                   onClick={handleCancelBooking}
                   disabled={cancelBookingMutation.isPending}
                   className="flex-1"
-                  data-testid="profile-cancel-dialog-yes"
+                  data-testid="profile-cancel-dialog-confirm"
                 >
-                  {cancelBookingMutation.isPending ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      Cancelling...
-                    </>
-                  ) : (
-                    <>
-                      <X className="w-4 h-4 mr-2" />
-                      Cancel Booking
-                    </>
-                  )}
+                  {cancelBookingMutation.isPending ? "Cancelling..." : "Confirm Cancel"}
                 </Button>
               </div>
             </div>
           )}
         </DialogContent>
       </Dialog>
-
-      <Footer />
-    </div>
+    </>
   );
 }
