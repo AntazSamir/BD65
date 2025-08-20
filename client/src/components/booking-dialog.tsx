@@ -23,7 +23,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Calendar, Clock, Users, MapPin, CreditCard, User, Mail, Phone } from 'lucide-react';
+import { Calendar, Clock, Users, MapPin, CreditCard, User, Mail, Phone, Tag } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import type { TripPlanner, Bus, PrivateCar, Booking } from '@shared/schema';
@@ -33,6 +33,7 @@ const bookingSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().min(10, 'Phone number must be at least 10 digits'),
   passengers: z.string().min(1, 'Number of passengers is required'),
+  couponCode: z.string().optional(),
   specialRequests: z.string().optional(),
   travelDate: z.string().min(1, 'Travel date is required'),
 });
@@ -49,6 +50,8 @@ interface BookingDialogProps {
 export default function BookingDialog({ isOpen, onClose, item, type }: BookingDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const [couponDiscount, setCouponDiscount] = useState(0);
+  const [couponApplied, setCouponApplied] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -59,6 +62,7 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
       email: '',
       phone: '',
       passengers: '1',
+      couponCode: '',
       specialRequests: '',
       travelDate: '',
     },
@@ -80,6 +84,8 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
   useEffect(() => {
     if (isOpen) {
       setSelectedSeats([]);
+      setCouponDiscount(0);
+      setCouponApplied(false);
     }
   }, [isOpen, item?.id]);
 
@@ -107,6 +113,52 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
     });
   };
 
+  const applyCoupon = () => {
+    const couponCode = form.watch('couponCode')?.toUpperCase();
+    if (!couponCode) return;
+
+    // Define coupon codes and their discounts
+    const coupons: { [key: string]: number } = {
+      'FLIGHT40': 40,
+      'ROUND35': 35,
+      'BIZCLASS30': 30,
+      'BUS25SAVE': 25,
+      'COMFORT20': 20,
+      'LUXURY30': 30,
+      'CAR40OFF': 40,
+      'MICRO35': 35,
+      'LUXURY50': 50,
+    };
+
+    const discount = coupons[couponCode];
+    if (discount) {
+      setCouponDiscount(discount);
+      setCouponApplied(true);
+      toast({
+        title: 'Coupon Applied!',
+        description: `You saved ${discount}% with code ${couponCode}`,
+      });
+    } else {
+      setCouponDiscount(0);
+      setCouponApplied(false);
+      toast({
+        title: 'Invalid Coupon',
+        description: 'The coupon code you entered is not valid.',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const removeCoupon = () => {
+    setCouponDiscount(0);
+    setCouponApplied(false);
+    form.setValue('couponCode', '');
+    toast({
+      title: 'Coupon Removed',
+      description: 'The coupon has been removed from your booking.',
+    });
+  };
+
   const bookingMutation = useMutation({
     mutationFn: async (data: BookingFormData) => {
       const bookingData = {
@@ -116,9 +168,10 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
         email: data.email,
         phone: data.phone,
         passengers: parseInt(data.passengers),
+        couponCode: data.couponCode || '',
         specialRequests: data.specialRequests || '',
         travelDate: data.travelDate,
-        totalAmount: item?.price || 0,
+        totalAmount: Math.round((item?.price || 0) * (1 - couponDiscount / 100)),
         status: 'confirmed',
         confirmationNumber: `BDE${Math.random().toString(36).substr(2, 8).toUpperCase()}`,
         propertyName: type === 'bus' ? (item as Bus)?.operator : (type === 'flight' ? (item as TripPlanner)?.origin + ' → ' + (item as TripPlanner)?.destination : (item as PrivateCar)?.type) || '',
@@ -278,11 +331,29 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
 
             <Separator className="my-4" />
             
-            <div className="flex justify-between items-center">
-              <span className="text-lg font-semibold">Total Amount:</span>
-              <span className="text-2xl font-bold text-green-600">
-                ৳{(item?.price || 0).toLocaleString()}
-              </span>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Original Price:</span>
+                <span className={`text-sm ${couponApplied ? 'line-through text-gray-500' : 'font-semibold'}`}>
+                  ৳{(item?.price || 0).toLocaleString()}
+                </span>
+              </div>
+              
+              {couponApplied && (
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-green-600">Discount ({couponDiscount}%):</span>
+                  <span className="text-sm text-green-600">
+                    -৳{Math.round((item?.price || 0) * (couponDiscount / 100)).toLocaleString()}
+                  </span>
+                </div>
+              )}
+              
+              <div className="flex justify-between items-center border-t pt-2">
+                <span className="text-lg font-semibold">Total Amount:</span>
+                <span className="text-2xl font-bold text-green-600">
+                  ৳{Math.round((item?.price || 0) * (1 - couponDiscount / 100)).toLocaleString()}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -438,6 +509,64 @@ export default function BookingDialog({ isOpen, onClose, item, type }: BookingDi
                   </div>
                 </div>
               )}
+
+              {/* Coupon Code Section */}
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="couponCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex items-center space-x-2">
+                        <Tag className="w-4 h-4" />
+                        <span>Coupon Code (Optional)</span>
+                      </FormLabel>
+                      <div className="flex space-x-2">
+                        <FormControl>
+                          <Input
+                            placeholder="Enter coupon code (e.g., FLIGHT40)"
+                            {...field}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              if (couponApplied) {
+                                setCouponApplied(false);
+                                setCouponDiscount(0);
+                              }
+                            }}
+                            className={couponApplied ? 'border-green-500' : ''}
+                          />
+                        </FormControl>
+                        {!couponApplied ? (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={applyCoupon}
+                            disabled={!field.value}
+                          >
+                            Apply
+                          </Button>
+                        ) : (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={removeCoupon}
+                            className="text-red-600 border-red-200 hover:bg-red-50"
+                          >
+                            Remove
+                          </Button>
+                        )}
+                      </div>
+                      {couponApplied && (
+                        <p className="text-sm text-green-600 flex items-center space-x-1">
+                          <Tag className="w-3 h-3" />
+                          <span>Coupon applied successfully! You saved {couponDiscount}%</span>
+                        </p>
+                      )}
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={form.control}
