@@ -110,7 +110,6 @@ export default function Destinations() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      
       {/* Enhanced Hero Section with Animation */}
       <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Dynamic Background Carousel with Animation */}
@@ -234,7 +233,7 @@ export default function Destinations() {
           </div>
 
           {/* Carousel Indicators */}
-          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-3 bg-black/20 backdrop-blur-md rounded-full px-4 py-2">
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-3 bg-black/20 backdrop-blur-md rounded-full px-4 py-2 pt-[2px] pb-[2px] mt-[-170px] mb-[-170px]">
             {heroBackgrounds.map((_, index) => (
               <button
                 key={`hero-indicator-${index}`}
@@ -255,7 +254,6 @@ export default function Destinations() {
           </div>
         </div>
       </div>
-
       {/* Destinations Grid */}
       <div className="py-8 sm:py-12 lg:py-16 section-bg-warm">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
@@ -344,7 +342,6 @@ export default function Destinations() {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );
