@@ -159,7 +159,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {visibleCards.find(card => card.position === 0) && (
         <div className="absolute top-6 left-6 z-20">
           <p className="text-white text-lg font-semibold bg-black/50 px-3 py-1 rounded-lg backdrop-blur-sm">
-            Currently viewing: {visibleCards.find(card => card.position === 0)?.destination.name}
+            Sajek Valley
           </p>
         </div>
       )}
