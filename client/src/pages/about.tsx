@@ -256,46 +256,67 @@ export default function About() {
             <p className="text-xl text-gray-600">What drives us every day</p>
           </div>
           
-          {/* Simplified values layout with creative design */}
-          <div className="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-8">
+          {/* Creative zigzag values layout */}
+          <div className="space-y-16">
             {values.map((value, index) => {
               const IconComponent = value.icon;
+              const isLeft = index % 2 === 0;
               const colors = [
-                { bg: 'bg-red-500', light: 'bg-red-50', border: 'border-red-200', text: 'text-red-600', accent: 'bg-red-100' },
-                { bg: 'bg-green-500', light: 'bg-green-50', border: 'border-green-200', text: 'text-green-600', accent: 'bg-green-100' },
-                { bg: 'bg-blue-500', light: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-600', accent: 'bg-blue-100' }
+                { primary: 'bg-gradient-to-br from-rose-500 to-pink-600', light: 'bg-rose-50', accent: 'text-rose-600', shadow: 'shadow-rose-200' },
+                { primary: 'bg-gradient-to-br from-emerald-500 to-green-600', light: 'bg-emerald-50', accent: 'text-emerald-600', shadow: 'shadow-emerald-200' },
+                { primary: 'bg-gradient-to-br from-blue-500 to-indigo-600', light: 'bg-blue-50', accent: 'text-blue-600', shadow: 'shadow-blue-200' }
               ];
               
               return (
-                <div key={index} className="relative">
-                  {/* Main value card */}
-                  <div className={`elegant-card p-8 hover-lift transition-all duration-500 transform hover:scale-105 ${
-                    colors[index].light
-                  } ${colors[index].border} border-2 relative overflow-hidden`}>
-                    
-                    {/* Background pattern */}
-                    <div className={`absolute top-0 right-0 w-32 h-32 ${colors[index].accent} rounded-full opacity-20 transform translate-x-16 -translate-y-16`}></div>
-                    
-                    {/* Number badge */}
-                    <div className={`absolute top-4 right-4 w-12 h-12 ${colors[index].bg} rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
-                      {index + 1}
+                <div key={index} className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 ${
+                  !isLeft ? 'lg:flex-row-reverse' : ''
+                }`}>
+                  
+                  {/* Icon Section */}
+                  <div className="flex-shrink-0">
+                    <div className="relative">
+                      {/* Large decorative circle */}
+                      <div className={`w-40 h-40 ${colors[index].primary} rounded-full flex items-center justify-center shadow-2xl ${colors[index].shadow} transform hover:scale-110 transition-all duration-300`}>
+                        <IconComponent className="w-20 h-20 text-white" />
+                      </div>
+                      
+                      {/* Floating elements */}
+                      <div className={`absolute -top-4 -right-4 w-8 h-8 ${colors[index].light} rounded-full border-4 border-white shadow-lg animate-bounce`} style={{ animationDelay: `${index * 0.3}s` }}></div>
+                      <div className={`absolute -bottom-4 -left-4 w-6 h-6 ${colors[index].primary} rounded-full animate-pulse`} style={{ animationDelay: `${index * 0.5}s` }}></div>
+                      
+                      {/* Number indicator */}
+                      <div className="absolute -top-2 -left-2 w-12 h-12 bg-white rounded-full border-4 border-gray-100 flex items-center justify-center shadow-lg">
+                        <span className={`text-2xl font-bold ${colors[index].accent}`}>{index + 1}</span>
+                      </div>
                     </div>
-                    
-                    {/* Icon */}
-                    <div className={`w-20 h-20 ${colors[index].bg} rounded-2xl flex items-center justify-center mb-6 shadow-lg transform hover:rotate-12 transition-transform duration-300 relative z-10`}>
-                      <IconComponent className="w-10 h-10 text-white" />
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4 relative z-10">{value.title}</h3>
-                    <p className="text-gray-600 leading-relaxed relative z-10">{value.description}</p>
-                    
-                    {/* Bottom accent */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-2 ${colors[index].bg}`}></div>
                   </div>
                   
-                  {/* Connecting line to next card */}
+                  {/* Content Section */}
+                  <div className={`flex-1 text-center lg:text-${isLeft ? 'left' : 'right'}`}>
+                    <div className={`elegant-card p-8 lg:p-10 ${colors[index].light} border-l-4 border-${colors[index].primary.split('-')[2]}-500 hover-lift transition-all duration-300`}>
+                      
+                      {/* Title with decorative elements */}
+                      <div className="mb-6">
+                        <h3 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-2">{value.title}</h3>
+                        <div className={`w-24 h-1 ${colors[index].primary} mx-auto lg:mx-0 ${!isLeft ? 'lg:ml-auto lg:mr-0' : ''} rounded-full`}></div>
+                      </div>
+                      
+                      <p className="text-lg text-gray-600 leading-relaxed mb-6">{value.description}</p>
+                      
+                      {/* Feature highlights */}
+                      <div className={`inline-flex items-center space-x-2 ${colors[index].light} px-4 py-2 rounded-full border border-${colors[index].primary.split('-')[2]}-200`}>
+                        <div className={`w-3 h-3 ${colors[index].primary} rounded-full animate-pulse`}></div>
+                        <span className={`text-sm font-medium ${colors[index].accent}`}>Core Value #{index + 1}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Connecting arrow for large screens */}
                   {index < values.length - 1 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-1 bg-gradient-to-r from-gray-300 to-transparent transform -translate-y-1/2 z-10"></div>
+                    <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 mt-32">
+                      <div className={`w-1 h-16 ${colors[index].primary} opacity-30`}></div>
+                      <div className={`w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-${colors[index].primary.split('-')[2]}-400 mx-auto`}></div>
+                    </div>
                   )}
                 </div>
               );
