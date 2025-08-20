@@ -130,7 +130,7 @@ export default function Destinations() {
         {/* Hero Content with Animations */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Main Title with Animation */}
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-fade-in animate-slide-up">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fade-in animate-slide-up">
             <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
               Explore
             </span>

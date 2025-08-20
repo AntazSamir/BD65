@@ -62,7 +62,7 @@ export default function About() {
               <span className="text-primary font-medium">Discover Bangladesh</span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               About <span className="text-accent bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">BD Explorer</span>
             </h1>
             

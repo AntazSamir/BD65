@@ -231,7 +231,7 @@ export default function DestinationDetail() {
             <div className="text-center text-white max-w-4xl px-4">
               <div className="flex items-center justify-center mb-4">
               </div>
-              <h1 className="text-5xl font-bold mb-4" data-testid="text-destination-title">{destination.name}</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4" data-testid="text-destination-title">{destination.name}</h1>
               <div className="flex items-center justify-center mb-4">
                 <MapPin className="w-5 h-5 mr-2" />
                 <span className="text-xl">{destination.district}, {destination.country}</span>
