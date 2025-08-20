@@ -101,42 +101,50 @@ export default function TripPlannerDeals() {
               
               {/* Content Section */}
               <div className="p-4">
-                {/* Date and Route Info */}
-                <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                  <span>📅 {tripPlanner.departureDate}</span>
-                  <span>📅 {tripPlanner.returnDate || '16 Jun 2024'}</span>
+                {/* Route with arrow */}
+                <div className="mb-3">
+                  <h3 className="text-lg font-semibold text-gray-900">{tripPlanner.origin} → {tripPlanner.destination}</h3>
+                  <p className="text-gray-600 text-sm">{tripPlanner.duration || '2h 30m'}</p>
                 </div>
                 
-                {/* Route */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="text-lg font-semibold text-gray-900">{tripPlanner.origin}</div>
-                  <ArrowUpDown className="w-4 h-4 text-gray-400" />
-                  <div className="text-lg font-semibold text-gray-900">{tripPlanner.destination}</div>
+                {/* Details Grid */}
+                <div className="grid grid-cols-1 gap-2 mb-4 text-sm">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-400">📅</span>
+                    <span className="text-gray-600">{tripPlanner.departureDate}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-400">⏱️</span>
+                    <span className="text-gray-600">{tripPlanner.stops || 'Non-stop'}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">{tripPlanner.dealType || 'Best Deal'}</span>
+                  </div>
                 </div>
                 
-                {/* Class and Pricing */}
+                {/* Pricing and Rating */}
                 <div className="flex items-center justify-between mb-4">
-                  <div className="space-y-1">
-                    <div className="text-xs text-gray-500">Standard</div>
-                    <div className="text-lg font-bold text-gray-900">৳{tripPlanner.price}</div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-yellow-400">⭐</span>
+                    <span className="text-sm text-gray-600">4.5</span>
                   </div>
-                  <div className="space-y-1 text-right">
-                    <div className="text-xs text-gray-500">Premium</div>
-                    <div className="text-lg font-bold text-gray-900">৳{tripPlanner.price + 500}</div>
+                  <div className="text-right">
+                    <div className="text-xl font-bold text-green-600">৳{tripPlanner.price}</div>
+                    <p className="text-xs text-gray-600">per person</p>
                   </div>
                 </div>
                 
-                {/* Availability and Book Button */}
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">Limited availability</span>
-                  <Button 
-                    onClick={handleBookNow}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
-                    data-testid={`button-book-trip-planner-${tripPlanner.id}`}
-                  >
-                    Plan Trip
-                  </Button>
-                </div>
+                {/* Book Button - matching trip planner page */}
+                <Button 
+                  onClick={handleBookNow}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                  data-testid={`button-book-trip-planner-${tripPlanner.id}`}
+                >
+                  Select Flight
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Button>
               </div>
             </div>
           ))}
