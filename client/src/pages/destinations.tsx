@@ -188,7 +188,7 @@ export default function Destinations() {
           </div>
 
           {/* Carousel Indicators */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 bg-black/30 backdrop-blur-sm rounded-full px-3 py-2 ml-[0px] mr-[0px] mt-[-134px] mb-[-134px]">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 bg-black/30 backdrop-blur-sm rounded-full px-3 py-2">
             {heroBackgrounds.map((_, index) => (
               <button
                 key={`hero-indicator-${index}`}

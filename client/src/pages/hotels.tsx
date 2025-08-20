@@ -107,13 +107,13 @@ export default function Hotels() {
         const price = restaurant.priceRange.toLowerCase();
         switch (priceRange) {
           case 'budget':
-            matchesPrice = price.includes('$') && !price.includes('$$');
+            matchesPrice = price.includes('৳') && !price.includes('৳৳');
             break;
           case 'mid':
-            matchesPrice = price.includes('$$') && !price.includes('$$$');
+            matchesPrice = price.includes('৳৳') && !price.includes('৳৳৳');
             break;
           case 'luxury':
-            matchesPrice = price.includes('$$$');
+            matchesPrice = price.includes('৳৳৳');
             break;
         }
       }
@@ -132,8 +132,8 @@ export default function Hotels() {
         case 'price-high':
           // For restaurants, sort by price range string
           const getPriceLevel = (priceRange: string) => {
-            if (priceRange.includes('$$$')) return 3;
-            if (priceRange.includes('$$')) return 2;
+            if (priceRange.includes('৳৳৳')) return 3;
+            if (priceRange.includes('৳৳')) return 2;
             return 1;
           };
           const aLevel = getPriceLevel(a.priceRange);
@@ -443,9 +443,9 @@ export default function Hotels() {
                     <SelectItem value="all">All Prices</SelectItem>
                     {showRestaurants ? (
                       <>
-                        <SelectItem value="budget">Budget ($)</SelectItem>
-                        <SelectItem value="mid">Mid-range ($$)</SelectItem>
-                        <SelectItem value="luxury">Fine Dining ($$$)</SelectItem>
+                        <SelectItem value="budget">Budget (৳)</SelectItem>
+                        <SelectItem value="mid">Mid-range (৳৳)</SelectItem>
+                        <SelectItem value="luxury">Fine Dining (৳৳৳)</SelectItem>
                       </>
                     ) : (
                       <>
