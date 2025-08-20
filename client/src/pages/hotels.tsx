@@ -649,30 +649,21 @@ export default function Hotels() {
                   />
 
                   {/* Hotel Gallery */}
-                  <div className="bg-gray-50 p-4 rounded-lg">
+                  <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Photo Gallery</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-2 gap-3">
                       {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => (
-                        <div 
-                          key={`${selectedHotel.id}-gallery-${index}`} 
-                          className="relative cursor-pointer hover:opacity-90 transition-opacity"
+                        <img
+                          key={`${selectedHotel.id}-gallery-${index}`}
+                          src={imageUrl}
+                          alt={`${selectedHotel.name} - Interior view ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg border border-gray-200 cursor-pointer hover:border-gray-300 transition-colors"
+                          data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
                           onClick={() => handleGalleryImageClick(imageUrl)}
-                        >
-                          <img
-                            src={imageUrl}
-                            alt={`${selectedHotel.name} - Interior view ${index + 1}`}
-                            className="w-full h-32 object-cover rounded-lg border-2 border-blue-200 shadow-sm hover:border-blue-400 transition-colors"
-                            data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
-                            onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
-                            onError={(e) => {
-                              console.log(`Failed to load gallery image ${index + 1} for ${selectedHotel.name}, falling back to main image`);
-                              e.currentTarget.src = selectedHotel.imageUrl;
-                            }}
-                          />
-                          <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                            {index + 1}
-                          </div>
-                        </div>
+                          onError={(e) => {
+                            e.currentTarget.src = selectedHotel.imageUrl;
+                          }}
+                        />
                       ))}
                     </div>
                   </div>
