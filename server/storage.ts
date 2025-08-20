@@ -408,7 +408,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Khulna',
       description: 'Largest mangrove forest and Royal Bengal Tiger habitat',
-      imageUrl: 'https://images.unsplash.com/photo-1587502537147-2ba64a75e7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      imageUrl: '/attached_assets/বিষ্ময়কর_সুন্দরবন_1755679381011.jpg',
       rating: '4.9',
       priceFrom: 4500,
     });
