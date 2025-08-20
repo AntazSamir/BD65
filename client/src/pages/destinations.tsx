@@ -324,13 +324,7 @@ export default function Destinations() {
                     {destination.description}
                   </p>
                   
-                  <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <div>
-                      <p className="text-sm text-gray-500 mb-1">Starting from</p>
-                      <p className="text-2xl font-bold text-primary" data-testid={`text-destination-price-${destination.id}`}>
-                        ৳{destination.priceFrom}
-                      </p>
-                    </div>
+                  <div className="flex justify-end items-center pt-4 border-t border-gray-100">
                     <button 
                       className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-elastic font-medium hover:shadow-xl hover:scale-110 transform hover-glow"
                       data-testid={`button-explore-destination-${destination.id}`}
