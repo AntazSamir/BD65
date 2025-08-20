@@ -7,10 +7,13 @@ import {
   type PrivateCar, type InsertPrivateCar,
   type TravelPackage, type InsertTravelPackage,
   type Restaurant, type InsertRestaurant,
-  type Booking, type InsertBooking
+  type Booking, type InsertBooking,
+  users, destinations, hotels, tripPlanners, buses, privateCars, travelPackages, restaurants, bookings
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import bcrypt from "bcrypt";
+import { eq, and } from "drizzle-orm";
+import { db } from "./db";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -372,7 +375,7 @@ export class MemStorage implements IStorage {
     );
     
     const bookedSeats: string[] = [];
-    busBookings.forEach(booking => {
+    busBookings.forEach((booking: any) => {
       if (booking.selectedSeats) {
         bookedSeats.push(...booking.selectedSeats);
       }
@@ -1077,4 +1080,199 @@ export class MemStorage implements IStorage {
   }
 }
 
+export class DbStorage implements IStorage {
+  // User operations
+  async getUser(id: string): Promise<User | undefined> {
+    const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
+    return result[0];
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const result = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    return result[0];
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const result = await db.select().from(users).where(eq(users.username, username)).limit(1);
+    return result[0];
+  }
+
+  async createUser(user: InsertUser): Promise<User> {
+    // Hash the password before storing
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+    
+    const result = await db.insert(users).values({
+      ...user,
+      password: hashedPassword,
+    }).returning();
+    return result[0];
+  }
+
+  async updateUser(id: string, user: UpdateUser): Promise<User | undefined> {
+    const result = await db.update(users).set(user).where(eq(users.id, id)).returning();
+    return result[0];
+  }
+
+  async validateUser(email: string, password: string): Promise<User | undefined> {
+    const user = await this.getUserByEmail(email);
+    if (user) {
+      const isValid = await bcrypt.compare(password, user.password);
+      if (isValid) {
+        return user;
+      }
+    }
+    return undefined;
+  }
+
+  // Destination operations
+  async getDestinations(): Promise<Destination[]> {
+    return db.select().from(destinations);
+  }
+
+  async getDestination(id: string): Promise<Destination | undefined> {
+    const result = await db.select().from(destinations).where(eq(destinations.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createDestination(destination: InsertDestination): Promise<Destination> {
+    const result = await db.insert(destinations).values(destination).returning();
+    return result[0];
+  }
+
+  // Hotel operations
+  async getHotels(): Promise<Hotel[]> {
+    return db.select().from(hotels);
+  }
+
+  async getHotel(id: string): Promise<Hotel | undefined> {
+    const result = await db.select().from(hotels).where(eq(hotels.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createHotel(hotel: InsertHotel): Promise<Hotel> {
+    const result = await db.insert(hotels).values(hotel).returning();
+    return result[0];
+  }
+
+  // Trip Planner operations
+  async getTripPlanners(): Promise<TripPlanner[]> {
+    return db.select().from(tripPlanners);
+  }
+
+  async getTripPlanner(id: string): Promise<TripPlanner | undefined> {
+    const result = await db.select().from(tripPlanners).where(eq(tripPlanners.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createTripPlanner(tripPlanner: InsertTripPlanner): Promise<TripPlanner> {
+    const result = await db.insert(tripPlanners).values(tripPlanner).returning();
+    return result[0];
+  }
+
+  // Bus operations
+  async getBuses(): Promise<Bus[]> {
+    return db.select().from(buses);
+  }
+
+  async getBus(id: string): Promise<Bus | undefined> {
+    const result = await db.select().from(buses).where(eq(buses.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createBus(bus: InsertBus): Promise<Bus> {
+    const result = await db.insert(buses).values(bus).returning();
+    return result[0];
+  }
+
+  // Private Car operations
+  async getPrivateCars(): Promise<PrivateCar[]> {
+    return db.select().from(privateCars);
+  }
+
+  async getPrivateCar(id: string): Promise<PrivateCar | undefined> {
+    const result = await db.select().from(privateCars).where(eq(privateCars.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createPrivateCar(privateCar: InsertPrivateCar): Promise<PrivateCar> {
+    const result = await db.insert(privateCars).values(privateCar).returning();
+    return result[0];
+  }
+
+  // Travel Package operations
+  async getTravelPackages(): Promise<TravelPackage[]> {
+    return db.select().from(travelPackages);
+  }
+
+  async getTravelPackage(id: string): Promise<TravelPackage | undefined> {
+    const result = await db.select().from(travelPackages).where(eq(travelPackages.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createTravelPackage(travelPackage: InsertTravelPackage): Promise<TravelPackage> {
+    const result = await db.insert(travelPackages).values(travelPackage).returning();
+    return result[0];
+  }
+
+  // Restaurant operations
+  async getRestaurants(): Promise<Restaurant[]> {
+    return db.select().from(restaurants);
+  }
+
+  async getRestaurant(id: string): Promise<Restaurant | undefined> {
+    const result = await db.select().from(restaurants).where(eq(restaurants.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createRestaurant(restaurant: InsertRestaurant): Promise<Restaurant> {
+    const result = await db.insert(restaurants).values(restaurant).returning();
+    return result[0];
+  }
+
+  // Booking operations
+  async getBookings(userId: string): Promise<Booking[]> {
+    return db.select().from(bookings).where(eq(bookings.userId, userId));
+  }
+
+  async getBooking(id: string): Promise<Booking | undefined> {
+    const result = await db.select().from(bookings).where(eq(bookings.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createBooking(booking: InsertBooking): Promise<Booking> {
+    const result = await db.insert(bookings).values(booking).returning();
+    return result[0];
+  }
+
+  async updateBookingStatus(id: string, status: string): Promise<Booking | undefined> {
+    const result = await db.update(bookings)
+      .set({ status })
+      .where(eq(bookings.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async getBookedSeats(busId: string, travelDate: string): Promise<string[]> {
+    const busBookings = await db.select()
+      .from(bookings)
+      .where(and(
+        eq(bookings.itemId, busId),
+        eq(bookings.travelDate, travelDate),
+        eq(bookings.status, 'confirmed')
+      ));
+    
+    const bookedSeats: string[] = [];
+    busBookings.forEach((booking: any) => {
+      if (booking.selectedSeats) {
+        bookedSeats.push(...booking.selectedSeats);
+      }
+    });
+    
+    return bookedSeats;
+  }
+}
+
+// Temporarily use MemStorage until DATABASE_URL is properly configured
+// Once DATABASE_URL is set up, change this to: export const storage = new DbStorage();
 export const storage = new MemStorage();
