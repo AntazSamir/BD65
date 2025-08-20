@@ -11,7 +11,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
-import BookingDialog from '@/components/booking-dialog';
+
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import { useLocation } from 'wouter';
@@ -54,16 +54,7 @@ export default function TripPlannerPage() {
   const [carType, setCarType] = useState('');
   const [carTripType, setCarTripType] = useState('');
   
-  // Booking dialog state
-  const [bookingDialog, setBookingDialog] = useState<{
-    isOpen: boolean;
-    item: TripPlanner | BusType | PrivateCar | null;
-    type: 'flight' | 'bus' | 'car';
-  }>({
-    isOpen: false,
-    item: null,
-    type: 'flight',
-  });
+
 
   const { data: tripPlanners = [], isLoading } = useQuery<TripPlanner[]>({
     queryKey: ['/api/trip-planners'],
@@ -110,19 +101,8 @@ export default function TripPlannerPage() {
       return;
     }
 
-    setBookingDialog({
-      isOpen: true,
-      item,
-      type,
-    });
-  };
-
-  const closeBookingDialog = () => {
-    setBookingDialog({
-      isOpen: false,
-      item: null,
-      type: 'flight',
-    });
+    // Navigate to transport booking page
+    navigate(`/transport-booking/${type}/${item.id}`);
   };
 
   return (
@@ -1073,14 +1053,6 @@ export default function TripPlannerPage() {
       </div>
 
       <Footer />
-      
-      {/* Booking Dialog */}
-      <BookingDialog
-        isOpen={bookingDialog.isOpen}
-        onClose={closeBookingDialog}
-        item={bookingDialog.item}
-        type={bookingDialog.type}
-      />
     </div>
   );
 }

@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
-import PropertyBookingDialog from '@/components/hotel-booking-dialog';
+
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import type { Hotel, Restaurant } from '@shared/schema';
@@ -29,9 +29,7 @@ export default function Hotels() {
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentMainImage, setCurrentMainImage] = useState<string>('');
-  const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
-  const [bookingItem, setBookingItem] = useState<Hotel | Restaurant | null>(null);
-  const [bookingType, setBookingType] = useState<'hotel' | 'restaurant'>('hotel');
+
 
   const { data: hotels = [], isLoading: hotelsLoading, error: hotelsError } = useQuery<Hotel[]>({
     queryKey: ['/api/hotels'],
@@ -162,14 +160,11 @@ export default function Hotels() {
       return;
     }
 
-    const item = type === 'hotel' 
-      ? hotels.find(h => h.id === itemId)
-      : restaurants.find(r => r.id === itemId);
-    
-    if (item) {
-      setBookingItem(item);
-      setBookingType(type);
-      setBookingDialogOpen(true);
+    // Navigate to booking page instead of opening dialog
+    if (type === 'hotel') {
+      navigate(`/hotel-booking/${itemId}`);
+    } else {
+      navigate(`/restaurant-booking/${itemId}`);
     }
   };
 
@@ -1164,13 +1159,6 @@ export default function Hotels() {
           )}
         </DialogContent>
       </Dialog>
-
-      <PropertyBookingDialog
-        isOpen={bookingDialogOpen}
-        onClose={() => setBookingDialogOpen(false)}
-        item={bookingItem}
-        type={bookingType}
-      />
 
       <Footer />
     </div>

@@ -10,6 +10,9 @@ import DestinationDetail from "@/pages/destination-detail";
 import Hotels from "@/pages/hotels";
 import TripPlanner from "@/pages/trip-planner";
 import MyBookings from "@/pages/my-bookings";
+import HotelBooking from "@/pages/hotel-booking";
+import RestaurantBooking from "@/pages/restaurant-booking";
+import TransportBooking from "@/pages/transport-booking";
 import Support from "@/pages/support";
 import SignIn from "@/pages/sign-in";
 import SignUp from "@/pages/sign-up";
@@ -26,6 +29,9 @@ function Router() {
       <Route path="/trip-planner" component={TripPlanner} />
 
       <Route path="/my-bookings" component={MyBookings} />
+      <Route path="/hotel-booking/:id" component={HotelBooking} />
+      <Route path="/restaurant-booking/:id" component={RestaurantBooking} />
+      <Route path="/transport-booking/:type/:id" component={TransportBooking} />
       <Route path="/about" component={About} />
       <Route path="/support" component={Support} />
       <Route path="/sign-in" component={SignIn} />
