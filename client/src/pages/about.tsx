@@ -63,7 +63,7 @@ export default function About() {
             </div>
             
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">BD Explorer</span>
+              About <span className="text-accent bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">BD Explorer</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
