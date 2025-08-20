@@ -360,6 +360,7 @@ export default function Hotels() {
                 checked={showRestaurants}
                 onCheckedChange={setShowRestaurants}
                 data-testid="toggle-restaurants"
+                className="data-[state=checked]:bg-orange-400/70 data-[state=unchecked]:bg-blue-400/50 border border-white/30"
               />
               <Label className="flex items-center space-x-2 cursor-pointer">
                 <Utensils className="w-5 h-5 text-orange-400" />
