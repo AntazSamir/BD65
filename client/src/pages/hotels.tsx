@@ -396,7 +396,7 @@ export default function Hotels() {
                 filteredAndSortedRestaurants.map((restaurant) => (
                   <div
                     key={restaurant.id}
-                    className="elegant-card p-6 group cursor-pointer hover-lift transition-butter"
+                    className="elegant-card p-6 cursor-pointer"
                     onClick={() => handleRestaurantClick(restaurant)}
                     data-testid={`card-restaurant-${restaurant.id}`}
                   >
@@ -405,7 +405,7 @@ export default function Hotels() {
                         <img
                           src={restaurant.imageUrl}
                           alt={restaurant.name}
-                          className="w-48 h-36 md:w-56 md:h-40 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                          className="w-48 h-36 md:w-56 md:h-40 object-cover rounded-lg"
                           data-testid={`img-restaurant-${restaurant.id}`}
                         />
                       </div>
@@ -468,7 +468,7 @@ export default function Hotels() {
                 filteredAndSortedHotels.map((hotel) => (
                   <div
                     key={hotel.id}
-                    className="elegant-card p-6 group cursor-pointer hover-lift transition-butter"
+                    className="elegant-card p-6 cursor-pointer"
                     onClick={() => handleHotelClick(hotel)}
                     data-testid={`card-hotel-${hotel.id}`}
                   >
@@ -477,7 +477,7 @@ export default function Hotels() {
                         <img
                           src={hotel.imageUrl}
                           alt={hotel.name}
-                          className="w-48 h-36 md:w-56 md:h-40 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                          className="w-48 h-36 md:w-56 md:h-40 object-cover rounded-lg"
                           data-testid={`img-hotel-${hotel.id}`}
                         />
                       </div>
