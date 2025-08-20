@@ -35,7 +35,7 @@ export default function TripPlannerPage() {
   const [busTravelDate, setBusTravelDate] = useState('');
   const [busPassengers, setBusPassengers] = useState('1');
   const [busType, setBusType] = useState('AC Bus');
-  const [busDepartureTime, setBusDepartureTime] = useState('');
+  const [busDepartureTime, setBusDepartureTime] = useState('anytime');
 
   // Car-specific state
   const [carPickup, setCarPickup] = useState('Dhaka');
@@ -468,7 +468,7 @@ export default function TripPlannerPage() {
                       <SelectValue placeholder="Any time" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Any time</SelectItem>
+                      <SelectItem value="anytime">Any time</SelectItem>
                       <SelectItem value="morning">Morning (6AM - 12PM)</SelectItem>
                       <SelectItem value="afternoon">Afternoon (12PM - 6PM)</SelectItem>
                       <SelectItem value="evening">Evening (6PM - 10PM)</SelectItem>
