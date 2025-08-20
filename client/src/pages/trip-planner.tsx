@@ -151,10 +151,6 @@ export default function TripPlannerPage() {
                     <RadioGroupItem value="roundTrip" id="roundTrip" />
                     <Label htmlFor="roundTrip" className="font-medium">Round Trip</Label>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="multiCity" id="multiCity" />
-                    <Label htmlFor="multiCity" className="font-medium">Multi City</Label>
-                  </div>
                 </RadioGroup>
               </div>
 
