@@ -187,21 +187,22 @@ export default function Destinations() {
             </div>
           </div>
 
-          {/* Carousel Indicators */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 bg-black/30 backdrop-blur-sm rounded-full px-3 py-2">
-            {heroBackgrounds.map((_, index) => (
-              <button
-                key={`hero-indicator-${index}`}
-                className={`transition-all duration-300 ${
-                  index === activeHeroIndex 
-                    ? 'w-6 h-2 bg-white rounded-full' 
-                    : 'w-2 h-2 bg-white/60 hover:bg-white/80 rounded-full'
-                }`}
-                onClick={() => setActiveHeroIndex(index)}
-                data-testid={`button-hero-indicator-${index}`}
-              />
-            ))}
-          </div>
+        </div>
+
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 bg-black/30 backdrop-blur-sm rounded-full px-3 py-2">
+          {heroBackgrounds.map((_, index) => (
+            <button
+              key={`hero-indicator-${index}`}
+              className={`transition-all duration-300 ${
+                index === activeHeroIndex 
+                  ? 'w-6 h-2 bg-white rounded-full' 
+                  : 'w-2 h-2 bg-white/60 hover:bg-white/80 rounded-full'
+              }`}
+              onClick={() => setActiveHeroIndex(index)}
+              data-testid={`button-hero-indicator-${index}`}
+            />
+          ))}
         </div>
       </div>
       {/* Destinations Grid */}
