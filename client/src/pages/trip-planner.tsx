@@ -18,35 +18,35 @@ export default function TripPlannerPage() {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [departureDate, setDepartureDate] = useState('');
-  const [passengers, setPassengers] = useState('1');
+  const [passengers, setPassengers] = useState('');
   
   // Flight-specific state
-  const [tripType, setTripType] = useState('oneWay');
-  const [flightFrom, setFlightFrom] = useState('Dhaka');
-  const [flightTo, setFlightTo] = useState('Cox\'s Bazar');
+  const [tripType, setTripType] = useState('');
+  const [flightFrom, setFlightFrom] = useState('');
+  const [flightTo, setFlightTo] = useState('');
   const [flightDepartureDate, setFlightDepartureDate] = useState('');
   const [flightReturnDate, setFlightReturnDate] = useState('');
-  const [flightTravelers, setFlightTravelers] = useState('1');
-  const [flightClass, setFlightClass] = useState('Economy');
+  const [flightTravelers, setFlightTravelers] = useState('');
+  const [flightClass, setFlightClass] = useState('');
 
   // Bus-specific state
-  const [busTripType, setBusTripType] = useState('oneWay');
-  const [busFrom, setBusFrom] = useState('Dhaka');
-  const [busTo, setBusTo] = useState('Cox\'s Bazar');
+  const [busTripType, setBusTripType] = useState('');
+  const [busFrom, setBusFrom] = useState('');
+  const [busTo, setBusTo] = useState('');
   const [busTravelDate, setBusTravelDate] = useState('');
   const [busReturnDate, setBusReturnDate] = useState('');
-  const [busPassengers, setBusPassengers] = useState('1');
-  const [busType, setBusType] = useState('AC Bus');
-  const [busDepartureTime, setBusDepartureTime] = useState('anytime');
+  const [busPassengers, setBusPassengers] = useState('');
+  const [busType, setBusType] = useState('');
+  const [busDepartureTime, setBusDepartureTime] = useState('');
 
   // Car-specific state
-  const [carPickup, setCarPickup] = useState('Dhaka');
-  const [carDropoff, setCarDropoff] = useState('Cox\'s Bazar');
+  const [carPickup, setCarPickup] = useState('');
+  const [carDropoff, setCarDropoff] = useState('');
   const [carDate, setCarDate] = useState('');
   const [carTime, setCarTime] = useState('');
-  const [carPassengers, setCarPassengers] = useState('1');
-  const [carType, setCarType] = useState('Sedan');
-  const [carTripType, setCarTripType] = useState('oneWay');
+  const [carPassengers, setCarPassengers] = useState('');
+  const [carType, setCarType] = useState('');
+  const [carTripType, setCarTripType] = useState('');
   
   // Booking dialog state
   const [bookingDialog, setBookingDialog] = useState<{
@@ -172,7 +172,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">FROM</Label>
                   <Select value={flightFrom} onValueChange={setFlightFrom}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select departure city" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Dhaka">Dhaka - DAC, Hazrat Shahjalal International Airport</SelectItem>
@@ -188,7 +188,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">TO</Label>
                   <Select value={flightTo} onValueChange={setFlightTo}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select destination" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Cox's Bazar">Cox's Bazar - CXB, Cox's Bazar Airport</SelectItem>
@@ -229,7 +229,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">TRAVELERS</Label>
                   <Select value={flightTravelers} onValueChange={setFlightTravelers}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select travelers" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="1">1 Traveler</SelectItem>
@@ -245,7 +245,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">CLASS</Label>
                   <Select value={flightClass} onValueChange={setFlightClass}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select class" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Economy">Economy</SelectItem>
@@ -464,7 +464,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">FROM</Label>
                   <Select value={busFrom} onValueChange={setBusFrom}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select departure city" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Dhaka">Dhaka</SelectItem>
@@ -483,7 +483,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">TO</Label>
                   <Select value={busTo} onValueChange={setBusTo}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select destination" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Cox's Bazar">Cox's Bazar</SelectItem>
@@ -526,7 +526,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">PASSENGERS</Label>
                   <Select value={busPassengers} onValueChange={setBusPassengers}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select passengers" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="1">1 Passenger</SelectItem>
@@ -542,7 +542,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">BUS TYPE</Label>
                   <Select value={busType} onValueChange={setBusType}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select bus type" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="AC Bus">AC Bus</SelectItem>
@@ -558,7 +558,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">PREFERRED TIME</Label>
                   <Select value={busDepartureTime} onValueChange={setBusDepartureTime}>
                     <SelectTrigger className="h-12">
-                      <SelectValue placeholder="Any time" />
+                      <SelectValue placeholder="Select preferred time" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="anytime">Any time</SelectItem>
@@ -775,7 +775,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">PICKUP LOCATION</Label>
                   <Select value={carPickup} onValueChange={setCarPickup}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select pickup location" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Dhaka">Dhaka City</SelectItem>
@@ -794,7 +794,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">DROP-OFF LOCATION</Label>
                   <Select value={carDropoff} onValueChange={setCarDropoff}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select drop-off location" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Cox's Bazar">Cox's Bazar</SelectItem>
@@ -835,7 +835,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">PASSENGERS</Label>
                   <Select value={carPassengers} onValueChange={setCarPassengers}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select passengers" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="1">1 Passenger</SelectItem>
@@ -852,7 +852,7 @@ export default function TripPlannerPage() {
                   <Label className="text-sm font-medium text-gray-600 mb-1 block">CAR TYPE</Label>
                   <Select value={carType} onValueChange={setCarType}>
                     <SelectTrigger className="h-12">
-                      <SelectValue />
+                      <SelectValue placeholder="Select car type" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Sedan">Sedan (4 seats)</SelectItem>
