@@ -111,46 +111,46 @@ export default function Navigation() {
         
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-4 bg-white/95 backdrop-blur-md">
-            <div className="flex flex-col space-y-1">
+          <div className="lg:hidden border-t border-gray-100 bg-white">
+            <div className="px-4 py-3 space-y-1">
               <Link 
                 href="/" 
-                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/destinations" 
-                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Destinations
               </Link>
               <Link 
                 href="/hotels" 
-                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Hotels
               </Link>
               <Link 
                 href="/trip-planner" 
-                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Trip Planner
+                Flights
               </Link>
               <Link 
                 href="/about" 
-                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/support" 
-                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Support

@@ -284,6 +284,47 @@
   .backdrop-animate:hover {
     backdrop-filter: blur(20px);
   }
+
+  /* ShareTrip-style mobile optimizations */
+  @media (max-width: 768px) {
+    .mobile-compact-card {
+      @apply rounded-lg shadow-sm bg-white;
+    }
+    
+    .mobile-compact-padding {
+      @apply p-3;
+    }
+    
+    .mobile-compact-text {
+      @apply text-sm;
+    }
+    
+    .mobile-compact-title {
+      @apply text-base font-semibold;
+    }
+    
+    .mobile-compact-button {
+      @apply px-3 py-1.5 text-xs rounded-md;
+    }
+    
+    .mobile-compact-grid {
+      @apply gap-3;
+    }
+    
+    .mobile-clean-shadow {
+      @apply shadow-sm hover:shadow-md transition-shadow duration-200;
+    }
+    
+    /* Override elegant-card for mobile */
+    .elegant-card {
+      @apply bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border-0;
+    }
+    
+    .elegant-card:hover {
+      transform: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
 }
 
 @keyframes float {

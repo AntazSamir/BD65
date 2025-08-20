@@ -80,11 +80,11 @@ export default function TripPlannerDeals() {
           <p className="text-base sm:text-lg text-gray-600">Plan your perfect journey with our curated travel packages.</p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 max-w-4xl mx-auto mb-6 md:mb-8">
           {tripPlanners.slice(0, 4).map((tripPlanner, index) => (
             <div 
               key={tripPlanner.id}
-              className="elegant-card overflow-hidden animate-fade-in group"
+              className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm md:shadow-lg transition-shadow duration-300 hover:shadow-md"
               style={{ animationDelay: `${index * 0.1}s` }}
               data-testid={`card-trip-planner-${tripPlanner.id}`}
             >
@@ -93,59 +93,44 @@ export default function TripPlannerDeals() {
                 <img 
                   src={getDestinationImage(tripPlanner.destination)} 
                   alt={tripPlanner.destination}
-                  className="w-full h-32 sm:h-36 object-cover transition-butter group-hover:scale-110"
+                  className="w-full h-32 md:h-40 object-cover"
                 />
-                <button className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-butter hover-glow">
-                  <Heart className="w-4 h-4 text-gray-600 transition-elastic hover:scale-110 hover:text-red-500" />
-                </button>
               </div>
               
               {/* Content Section */}
-              <div className="p-3 sm:p-4">
+              <div className="p-3 md:p-4">
                 {/* Route with arrow */}
-                <div className="mb-2 sm:mb-3">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">{tripPlanner.origin} → {tripPlanner.destination}</h3>
-                  <p className="text-gray-600 text-xs sm:text-sm">{tripPlanner.duration || '2h 30m'}</p>
+                <div className="mb-3">
+                  <h3 className="text-sm md:text-lg font-semibold text-gray-900">{tripPlanner.origin} → {tripPlanner.destination}</h3>
+                  <p className="text-gray-600 text-xs md:text-sm">{tripPlanner.duration || '2h 30m'}</p>
                 </div>
                 
-                {/* Details Grid */}
-                <div className="grid grid-cols-1 gap-2 mb-4 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-400">📅</span>
-                    <span className="text-gray-600">{tripPlanner.departureDate}</span>
+                {/* Flight Details */}
+                <div className="space-y-2 mb-3">
+                  <div className="flex items-center justify-between text-xs md:text-sm">
+                    <span className="text-gray-500">Departure</span>
+                    <span className="font-medium">{tripPlanner.departureDate}</span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-400">⏱️</span>
-                    <span className="text-gray-600">{tripPlanner.stops || 'Non-stop'}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">{tripPlanner.dealType || 'Best Deal'}</span>
+                  <div className="flex items-center justify-between text-xs md:text-sm">
+                    <span className="text-gray-500">Flight</span>
+                    <span className="text-blue-600 font-medium">{tripPlanner.stops || 'Non-stop'}</span>
                   </div>
                 </div>
                 
-                {/* Pricing and Rating */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400">⭐</span>
-                    <span className="text-sm text-gray-600">4.5</span>
+                {/* Pricing and Button */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-lg md:text-xl font-bold text-primary">৳{tripPlanner.price}</div>
+                    <div className="text-xs text-gray-500">per person</div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-xl font-bold text-green-600">৳{tripPlanner.price}</div>
-                    <p className="text-xs text-gray-600">per person</p>
-                  </div>
+                  <Button 
+                    onClick={handleBookNow}
+                    className="bg-primary text-white px-3 py-1.5 md:px-4 md:py-2 rounded-md text-xs md:text-sm font-medium transition-colors hover:bg-primary/90"
+                    data-testid={`button-book-trip-planner-${tripPlanner.id}`}
+                  >
+                    Select Flight
+                  </Button>
                 </div>
-                
-                {/* Book Button - matching trip planner page */}
-                <Button 
-                  onClick={handleBookNow}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                  data-testid={`button-book-trip-planner-${tripPlanner.id}`}
-                >
-                  Select Flight
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Button>
               </div>
             </div>
           ))}

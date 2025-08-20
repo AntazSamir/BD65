@@ -68,36 +68,40 @@ export default function RecommendedHotels() {
           <p className="text-base sm:text-lg lg:text-xl text-gray-600">Stay at the world's finest accommodations</p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {hotels.slice(0, 6).map((hotel, index) => (
             <div 
               key={hotel.id}
-              className="elegant-card overflow-hidden animate-fade-in group"
+              className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm md:shadow-lg transition-shadow duration-300 hover:shadow-md"
               style={{ animationDelay: `${index * 0.1}s` }}
               data-testid={`card-hotel-${hotel.id}`}
             >
-              <img 
-                src={hotel.imageUrl} 
-                alt={hotel.name} 
-                className="w-full h-40 md:h-56 object-cover transition-butter group-hover:scale-110"
-                data-testid={`img-hotel-${hotel.id}`}
-              />
-              <div className="p-3 md:p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-base md:text-xl font-semibold" data-testid={`text-hotel-name-${hotel.id}`}>{hotel.name}</h3>
+              <div className="relative">
+                <img 
+                  src={hotel.imageUrl} 
+                  alt={hotel.name} 
+                  className="w-full h-40 md:h-48 object-cover"
+                  data-testid={`img-hotel-${hotel.id}`}
+                />
+                <div className="absolute top-2 right-2 bg-white rounded-full px-2 py-1 shadow-sm">
                   <div className="flex items-center">
-                    <Star className="w-3 h-3 md:w-4 md:h-4 text-yellow-400 mr-1" />
-                    <span className="text-xs md:text-sm font-medium" data-testid={`text-hotel-rating-${hotel.id}`}>{hotel.rating}</span>
+                    <Star className="w-3 h-3 text-yellow-500 mr-1" />
+                    <span className="text-xs font-medium text-gray-800" data-testid={`text-hotel-rating-${hotel.id}`}>{hotel.rating}</span>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-3 text-xs md:text-base" data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</p>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <div className="text-lg md:text-2xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
-                    ৳{hotel.pricePerNight}
-                    <span className="text-xs md:text-sm text-gray-600 font-normal">/night</span>
+              </div>
+              <div className="p-3 md:p-4">
+                <h3 className="text-sm md:text-lg font-semibold mb-1 text-gray-900 line-clamp-1" data-testid={`text-hotel-name-${hotel.id}`}>{hotel.name}</h3>
+                <p className="text-xs md:text-sm text-gray-600 mb-3 line-clamp-1" data-testid={`text-hotel-location-${hotel.id}`}>{hotel.location}</p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-lg md:text-xl font-bold text-primary" data-testid={`text-hotel-price-${hotel.id}`}>
+                      ৳{hotel.pricePerNight}
+                    </div>
+                    <div className="text-xs text-gray-500">per night</div>
                   </div>
                   <Button 
-                    className="bg-accent hover:bg-accent/90 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-lg transition-colors text-xs md:text-sm w-full sm:w-auto"
+                    className="bg-primary text-white px-3 py-1.5 md:px-4 md:py-2 rounded-md text-xs md:text-sm font-medium transition-colors hover:bg-primary/90"
                     onClick={() => handleBooking(hotel.id)}
                     data-testid={`button-book-hotel-${hotel.id}`}
                   >
