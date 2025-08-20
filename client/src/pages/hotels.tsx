@@ -912,7 +912,7 @@ export default function Hotels() {
                       Menu & Prices
                     </h3>
                     <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-lg p-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Popular Dishes */}
                         <div>
                           <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
@@ -935,6 +935,18 @@ export default function Hotels() {
                             <div className="flex justify-between items-center">
                               <span className="text-gray-700">Prawn Malaikari</span>
                               <span className="font-medium text-gray-900">৳520</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Mutton Rezala</span>
+                              <span className="font-medium text-gray-900">৳420</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Fish Fry (Rui)</span>
+                              <span className="font-medium text-gray-900">৳280</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Chicken Roast</span>
+                              <span className="font-medium text-gray-900">৳350</span>
                             </div>
                           </div>
                         </div>
@@ -961,6 +973,81 @@ export default function Hotels() {
                             <div className="flex justify-between items-center">
                               <span className="text-gray-700">Mixed Vegetable</span>
                               <span className="font-medium text-gray-900">৳150</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Begun Bhaja</span>
+                              <span className="font-medium text-gray-900">৳120</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Aloo Posto</span>
+                              <span className="font-medium text-gray-900">৳140</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Shorshe Maach</span>
+                              <span className="font-medium text-gray-900">৳390</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Additional Categories */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 pt-4 border-t border-orange-200">
+                        {/* Rice & Bread */}
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                            <Coffee className="w-4 h-4 mr-1 text-green-500" />
+                            Rice & Bread
+                          </h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Kacchi Biryani</span>
+                              <span className="font-medium text-gray-900">৳450</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Polao with Chicken</span>
+                              <span className="font-medium text-gray-900">৳280</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Plain Rice</span>
+                              <span className="font-medium text-gray-900">৳60</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Naan</span>
+                              <span className="font-medium text-gray-900">৳45</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Paratha</span>
+                              <span className="font-medium text-gray-900">৳35</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Desserts & Drinks */}
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                            <Star className="w-4 h-4 mr-1 text-pink-500" />
+                            Desserts & Drinks
+                          </h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Mishti Doi</span>
+                              <span className="font-medium text-gray-900">৳80</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Rasgulla</span>
+                              <span className="font-medium text-gray-900">৳90</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Kheer</span>
+                              <span className="font-medium text-gray-900">৳70</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Cha (Tea)</span>
+                              <span className="font-medium text-gray-900">৳25</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Lassi</span>
+                              <span className="font-medium text-gray-900">৳65</span>
                             </div>
                           </div>
                         </div>
