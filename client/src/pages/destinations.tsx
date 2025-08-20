@@ -111,137 +111,122 @@ export default function Destinations() {
     <div className="min-h-screen bg-white">
       <Navigation />
       
-      {/* Enhanced Animated Hero Section */}
-      <section className="relative bg-black text-white py-32 min-h-screen flex items-center overflow-hidden">
-        {/* Dynamic Background Carousel */}
+      {/* Enhanced Hero Section with Animation */}
+      <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Dynamic Background Carousel with Animation */}
         <div className="absolute inset-0">
           {heroBackgrounds.map((bg, index) => (
             <div
               key={`hero-bg-${index}`}
               className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out ${
-                index === activeHeroIndex ? 'opacity-70 scale-105' : 'opacity-0 scale-100'
+                index === activeHeroIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
               }`}
               style={{ backgroundImage: `url(${bg})` }}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
 
-        {/* Hero Content */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
-              {/* Main Title with Animation */}
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight animate-slide-up">
-                Explore Beautiful <br />
-                <span className="text-accent bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent animate-bounce-subtle">Bangladesh</span>
-              </h1>
-              
-              <p className="text-xl mb-8 opacity-90 animate-fade-in" style={{animationDelay: '0.2s'}}>
-                Discover the natural beauty, rich culture, and historic treasures of Bangladesh. 
-                From pristine beaches to ancient ruins, adventure awaits at every corner.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{animationDelay: '0.4s'}}>
-                <div className="flex items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-3 hover-glow transition-butter border border-white/20">
-                  <Star className="w-5 h-5 text-yellow-400 mr-2 animate-bounce-subtle" />
-                  <span className="font-medium">{destinations.length}+ Destinations</span>
-                </div>
-                <div className="flex items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-3 hover-glow transition-butter border border-white/20">
-                  <MapPin className="w-5 h-5 text-green-400 mr-2 animate-bounce-subtle" style={{animationDelay: '1s'}} />
-                  <span className="font-medium">All Districts Covered</span>
-                </div>
-              </div>
-            </div>
-            
-            {/* Search & Filter Form */}
-            <div className="bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl text-white border border-white/30 glass-form animate-scale-in transition-all duration-300 hover:shadow-3xl">
-              <h3 className="text-2xl font-bold mb-6 text-center">Find Your Perfect Destination</h3>
+        {/* Hero Content with Animations */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Main Title with Animation */}
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-fade-in animate-slide-up">
+            <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+              Explore
+            </span>
+            <br />
+            <span className="text-accent bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent animate-bounce-subtle">Bangladesh</span>
+          </h1>
 
-              <div className="space-y-4">
-                {/* Search Bar */}
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 text-white/60" />
-                  </div>
-                  <Input
-                    type="text"
-                    placeholder="Search destinations..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 focus:scale-[1.02] hover:bg-white/25 rounded-xl"
-                    data-testid="input-search-destinations"
-                  />
+          <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in" style={{animationDelay: '0.2s'}}>
+            Discover the natural beauty, rich culture, and historic treasures of Bangladesh. 
+            From pristine beaches to ancient ruins, adventure awaits at every corner.
+          </p>
+
+          {/* Interactive Search and Filter Row */}
+          <div className="max-w-5xl mx-auto mb-8 animate-fade-in" style={{animationDelay: '0.4s'}}>
+            <div className="flex gap-4 items-center">
+              {/* Search Bar */}
+              <div className="relative flex-1">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-white/60" />
                 </div>
-                
-                {/* District Filter */}
-                <div>
-                  <label className="block text-sm font-medium text-white mb-2">Filter by District</label>
-                  <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
-                    <SelectTrigger 
-                      className="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white focus:ring-2 focus:ring-primary py-3 rounded-xl transition-all duration-300 hover:bg-white/25"
-                      data-testid="select-district-filter"
-                    >
-                      <SelectValue placeholder="All Districts" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-xl">
-                      <SelectItem value="all" className="text-gray-800 hover:bg-gray-100">All Districts</SelectItem>
-                      {uniqueDistricts.map(district => (
-                        <SelectItem key={district} value={district} className="text-gray-800 hover:bg-gray-100">
-                          {district}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                {/* Explore Button */}
-                <Button 
-                  className="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105 shadow-lg"
-                  onClick={() => {
-                    const firstDestination = filteredDestinations[0];
-                    if (firstDestination) {
-                      setLocation(`/destinations/${firstDestination.id}`);
-                    }
-                  }}
-                  data-testid="button-explore-destinations"
-                >
-                  <MapPin className="w-4 h-4 mr-2" />
-                  Explore Destinations
-                </Button>
+                <Input
+                  type="text"
+                  placeholder="Search destinations, experiences, or activities..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white placeholder:text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent !text-white transition-all duration-300 hover:bg-white/15"
+                  style={{ 
+                    color: 'white',
+                    '--tw-placeholder-color': 'rgba(255, 255, 255, 0.8)'
+                  } as React.CSSProperties}
+                />
               </div>
+              
+              {/* District Filter */}
+              <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
+                <SelectTrigger 
+                  className="w-56 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full focus:ring-2 focus:ring-blue-400 py-4 transition-all duration-300 hover:bg-white/15"
+                  style={{
+                    color: 'white'
+                  } as React.CSSProperties}
+                >
+                  <div className="flex items-center text-white">
+                    <Filter className="h-4 w-4 mr-2 text-white/60" />
+                    <SelectValue 
+                      placeholder="Filter by District" 
+                      style={{ color: 'white' } as React.CSSProperties}
+                    />
+                  </div>
+                </SelectTrigger>
+                <SelectContent className="bg-white/95 backdrop-blur-md border border-gray-200">
+                  <SelectItem value="all">All Districts</SelectItem>
+                  {uniqueDistricts.map((district) => (
+                    <SelectItem key={district} value={district}>
+                      {district}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Filter Button */}
+              <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-6 py-4 h-auto whitespace-nowrap transition-all duration-300 ease-out hover:shadow-lg hover:scale-105 transform">
+                <Filter className="h-4 w-4 mr-2 transition-transform duration-300 hover:rotate-180" />
+                Filter
+              </Button>
             </div>
           </div>
-          
+
           {/* Stats Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12 animate-fade-in" style={{animationDelay: '0.6s'}}>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover-glow transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center mb-3">
-                <MapPin className="w-8 h-8 text-blue-400" />
+                <MapPin className="w-8 h-8 text-blue-400 animate-bounce-subtle" />
               </div>
               <div className="text-3xl font-bold text-white mb-1">{destinations.length}</div>
               <div className="text-sm text-gray-300">Destinations</div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover-glow transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center mb-3">
-                <Users className="w-8 h-8 text-green-400" />
+                <Users className="w-8 h-8 text-green-400 animate-bounce-subtle" style={{animationDelay: '0.2s'}} />
               </div>
               <div className="text-3xl font-bold text-white mb-1">50K+</div>
               <div className="text-sm text-gray-300">Happy Travelers</div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover-glow transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center mb-3">
-                <Camera className="w-8 h-8 text-yellow-400" />
+                <Camera className="w-8 h-8 text-yellow-400 animate-bounce-subtle" style={{animationDelay: '0.4s'}} />
               </div>
               <div className="text-3xl font-bold text-white mb-1">500+</div>
               <div className="text-sm text-gray-300">Experiences</div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover-glow transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center mb-3">
-                <Heart className="w-8 h-8 text-red-400" />
+                <Heart className="w-8 h-8 text-red-400 animate-bounce-subtle" style={{animationDelay: '0.6s'}} />
               </div>
               <div className="text-3xl font-bold text-white mb-1">4.8/5</div>
               <div className="text-sm text-gray-300">Rating</div>
@@ -261,7 +246,7 @@ export default function Destinations() {
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Destinations Grid */}
       <div className="py-16 section-bg-warm">
