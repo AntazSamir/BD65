@@ -116,55 +116,6 @@ export default function TripPlannerPage() {
             <p className="text-xl opacity-90 drop-shadow-lg">Compare and choose the best transportation option for your journey</p>
           </div>
 
-          {/* Search Form */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-6 max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-5 h-5 text-gray-400" />
-                <Input
-                  placeholder="From"
-                  value={origin}
-                  onChange={(e) => setOrigin(e.target.value)}
-                  className="text-gray-900"
-                />
-              </div>
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-5 h-5 text-gray-400" />
-                <Input
-                  placeholder="To"
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  className="text-gray-900"
-                />
-              </div>
-              <div className="flex items-center space-x-2">
-                <Calendar className="w-5 h-5 text-gray-400" />
-                <Input
-                  type="date"
-                  value={departureDate}
-                  onChange={(e) => setDepartureDate(e.target.value)}
-                  className="text-gray-900"
-                />
-              </div>
-              <div className="flex items-center space-x-2">
-                <Users className="w-5 h-5 text-gray-400" />
-                <Select value={passengers} onValueChange={setPassengers}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Passengers" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1">1 Passenger</SelectItem>
-                    <SelectItem value="2">2 Passengers</SelectItem>
-                    <SelectItem value="3">3 Passengers</SelectItem>
-                    <SelectItem value="4">4+ Passengers</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button onClick={handleSearch} className="bg-blue-600 hover:bg-blue-700">
-                Search
-              </Button>
-            </div>
-          </div>
         </div>
       </div>
 
