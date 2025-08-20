@@ -221,8 +221,95 @@ export default function Support() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* FAQ Section */}
+          {/* Main Content */}
           <div className="lg:col-span-2">
+            {/* Privacy Policy & Terms Section */}
+            <div className="mb-12">
+              <div className="flex justify-center mb-4">
+                <div className="icon-bg-purple">
+                  <Info className="w-6 h-6" />
+                </div>
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
+                Legal Information
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {/* Privacy Policy Card */}
+                <Card className="elegant-card hover-lift">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                      <div className="icon-bg-blue mr-3">
+                        <Info className="w-5 h-5" />
+                      </div>
+                      Privacy Policy
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      Your privacy is important to us. Learn how we collect, use, and protect your personal information.
+                    </p>
+                    <div className="space-y-3 text-sm text-gray-600">
+                      <div className="flex items-start space-x-2">
+                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <span>We encrypt all personal data</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <span>No data sharing with third parties</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <span>Secure payment processing</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <span>GDPR compliant data handling</span>
+                      </div>
+                    </div>
+                    <Button variant="outline" className="w-full mt-4" data-testid="button-privacy-policy">
+                      Read Full Privacy Policy
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Terms of Service Card */}
+                <Card className="elegant-card hover-lift">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                      <div className="icon-bg-orange mr-3">
+                        <Info className="w-5 h-5" />
+                      </div>
+                      Terms of Service
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      Understand the terms and conditions that govern your use of BD Explorer services.
+                    </p>
+                    <div className="space-y-3 text-sm text-gray-600">
+                      <div className="flex items-start space-x-2">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span>Fair booking and cancellation policies</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span>User rights and responsibilities</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span>Service availability and limitations</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span>Dispute resolution process</span>
+                      </div>
+                    </div>
+                    <Button variant="outline" className="w-full mt-4" data-testid="button-terms-service">
+                      Read Full Terms of Service
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* FAQ Section */}
             <div className="mb-8">
               <div className="flex justify-center mb-4">
                 <div className="icon-bg-blue">
