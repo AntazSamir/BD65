@@ -212,29 +212,26 @@ export default function Hotels() {
 
   // Generate additional hotel images
   const getHotelGalleryImages = (hotel: Hotel) => {
-    // Use high-quality hotel images
+    // Use simpler, more reliable URLs
     const baseImages = [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&h=400&fit=crop&crop=center", 
-      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600&h=400&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=400&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop&crop=center"
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", 
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
     ];
     
     // Use hotel ID to get consistent images (deterministic selection)
     const seed = hotel.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const shuffled = [...baseImages];
+    const selectedIndex = seed % baseImages.length;
     
-    // Simple deterministic shuffle based on hotel ID
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = (seed + i) % (i + 1);
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
+    // Return all 3 images in a consistent order based on the hotel
+    const result = [
+      baseImages[selectedIndex],
+      baseImages[(selectedIndex + 1) % baseImages.length], 
+      baseImages[(selectedIndex + 2) % baseImages.length]
+    ];
     
-    const selectedImages = shuffled.slice(0, 3);
-    console.log('Gallery images for', hotel.name, ':', selectedImages);
-    return selectedImages;
+    console.log('Gallery images for', hotel.name, ':', result);
+    return result;
   };
 
   if (isLoading) {
@@ -614,6 +611,7 @@ export default function Hotels() {
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           {selectedHotel && (
             <>
+              {console.log('Dialog rendering for hotel:', selectedHotel.name, 'Dialog open:', isDialogOpen)}
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold flex items-start justify-between">
                   <div>
@@ -644,21 +642,26 @@ export default function Hotels() {
                   />
 
                   {/* Hotel Gallery */}
-                  <div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Photo Gallery</h3>
                     <div className="grid grid-cols-2 gap-3">
                       {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => (
-                        <img
-                          key={`${selectedHotel.id}-gallery-${index}`}
-                          src={imageUrl}
-                          alt={`${selectedHotel.name} - Interior view ${index + 1}`}
-                          className="w-full h-32 object-cover rounded-lg border border-gray-200"
-                          data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
-                          onError={(e) => {
-                            console.log(`Failed to load gallery image ${index + 1} for ${selectedHotel.name}`);
-                            e.currentTarget.src = selectedHotel.imageUrl;
-                          }}
-                        />
+                        <div key={`${selectedHotel.id}-gallery-${index}`} className="relative">
+                          <img
+                            src={imageUrl}
+                            alt={`${selectedHotel.name} - Interior view ${index + 1}`}
+                            className="w-full h-32 object-cover rounded-lg border-2 border-blue-200 shadow-sm"
+                            data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
+                            onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
+                            onError={(e) => {
+                              console.log(`Failed to load gallery image ${index + 1} for ${selectedHotel.name}, falling back to main image`);
+                              e.currentTarget.src = selectedHotel.imageUrl;
+                            }}
+                          />
+                          <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+                            {index + 1}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
