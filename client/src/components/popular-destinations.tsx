@@ -22,7 +22,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     if (isAutoSliding && destinations.length > 0) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
-      }, 3000); // Change slide every 3 seconds
+      }, 4500); // Slower timing for smoother experience
     }
 
     return () => {
@@ -132,12 +132,13 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   return (
     <section 
       id="destinations" 
-      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col transition-all duration-1000 ease-in-out"
+      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col will-change-auto transition-all duration-1500 ease-in-out"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+        transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
       }}
     >
       {/* Dark overlay for better text readability */}
@@ -162,7 +163,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               return (
                 <div
                   key={destination.id}
-                  className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-700 transform ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${
+                  className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer will-change-transform transition-all duration-1000 ease-in-out transform ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${
                     isCenterCard ? 'ring-4 ring-white/50 z-10' : 'hover:scale-100 hover:opacity-90'
                   }`}
                   onClick={() => goToSlide(index)}
@@ -171,7 +172,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                   <img 
                     src={destination.imageUrl} 
                     alt={destination.name} 
-                    className="w-full h-full object-cover transition-transform duration-700"
+                    className="w-full h-full object-cover will-change-transform transition-all duration-1000 ease-in-out"
                     data-testid={`img-destination-${destination.id}`}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -180,20 +181,20 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                   />
                   
                   {/* Overlay with destination name */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end">
-                    <div className="p-4 w-full">
-                      <h3 className="text-white font-semibold text-lg text-center" data-testid={`text-destination-name-${destination.id}`}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end transition-all duration-1000 ease-in-out">
+                    <div className="p-4 w-full transition-all duration-1000 ease-in-out">
+                      <h3 className="text-white font-semibold text-lg text-center transition-all duration-1000 ease-in-out" data-testid={`text-destination-name-${destination.id}`}>
                         {destination.name}
                       </h3>
                       {isCenterCard && (
-                        <p className="text-white/80 text-sm text-center mt-1">{destination.district}</p>
+                        <p className="text-white/80 text-sm text-center mt-1 transition-all duration-1000 ease-in-out">{destination.district}</p>
                       )}
                     </div>
                   </div>
                   
                   {/* Center card indicator */}
                   {isCenterCard && (
-                    <div className="absolute top-4 right-4 w-4 h-4 bg-white rounded-full shadow-lg"></div>
+                    <div className="absolute top-4 right-4 w-4 h-4 bg-white rounded-full shadow-lg transition-all duration-1000 ease-in-out"></div>
                   )}
                 </div>
               );
@@ -206,7 +207,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full will-change-transform transition-all duration-500 ease-in-out ${
                   index === currentIndex 
                     ? 'bg-white scale-125' 
                     : 'bg-white/40 hover:bg-white/60'
