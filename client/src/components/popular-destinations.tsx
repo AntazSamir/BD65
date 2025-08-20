@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
 import type { Destination } from '@shared/schema';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 
 interface PopularDestinationsProps {
   selectedDestination: Destination | null;
@@ -52,8 +52,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   const goToNext = () => {
     setIsAutoSliding(false);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
-    // Resume auto-sliding after 10 seconds
-    setTimeout(() => setIsAutoSliding(true), 10000);
+    // Resume auto-sliding after 8 seconds
+    setTimeout(() => setIsAutoSliding(true), 8000);
   };
 
   const goToSlide = (index: number) => {
@@ -149,25 +149,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Carousel section */}
       <div className="relative z-10 mt-[-134px] mb-[-134px] pt-[34px] pb-[34px] pl-[0px] pr-[0px] ml-[-13px] mr-[-13px]">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Navigation Arrows */}
-          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
-            <button
-              onClick={goToPrevious}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300"
-              data-testid="button-prev"
-            >
-              <ChevronLeft className="w-6 h-6 text-white" />
-            </button>
-          </div>
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
-            <button
-              onClick={goToNext}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300"
-              data-testid="button-next"
-            >
-              <ChevronRight className="w-6 h-6 text-white" />
-            </button>
-          </div>
+
 
           {/* Cards container */}
           <div className="flex justify-center items-end space-x-2 px-16">
@@ -182,9 +164,9 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                 <div
                   key={destination.id}
                   className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer will-change-transform transition-all duration-1000 ease-in-out transform ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${
-                    isCenterCard ? 'ring-4 ring-white/50 z-10' : 'hover:scale-100 hover:opacity-90'
+                    isCenterCard ? 'ring-4 ring-white/50 z-10' : 'hover:scale-105 hover:opacity-95'
                   }`}
-                  onClick={() => goToSlide(index)}
+                  onClick={goToNext}
                   data-testid={`card-destination-${destination.id}`}
                 >
                   <img 
@@ -224,7 +206,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
             {destinations.slice(0, Math.min(10, destinations.length)).map((_, index) => (
               <button
                 key={index}
-                onClick={() => goToSlide(index)}
+                onClick={goToNext}
                 className={`w-3 h-3 rounded-full will-change-transform transition-all duration-500 ease-in-out ${
                   index === currentIndex 
                     ? 'bg-white scale-125' 
