@@ -273,9 +273,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Dhaka ✈ Cox's Bazar</h3>
                     <p className="text-sm text-gray-600 mb-2">US-Bangla Airlines • Jan 25-30</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ Free cancellation</span>
                       <span className="text-red-500 font-medium">3 seats left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-red-100 border border-red-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-red-600 font-mono font-bold">FLIGHT40</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-red-600 hover:bg-red-200"
+                          onClick={() => navigator.clipboard.writeText('FLIGHT40')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -291,9 +304,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Dhaka ✈ Chittagong</h3>
                     <p className="text-sm text-gray-600 mb-2">Biman Bangladesh • Round Trip</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ Meals included</span>
                       <span className="text-blue-500 font-medium">7 seats left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-blue-100 border border-blue-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-blue-600 font-mono font-bold">ROUND35</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-blue-600 hover:bg-blue-200"
+                          onClick={() => navigator.clipboard.writeText('ROUND35')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -309,9 +335,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Dhaka ✈ Sylhet</h3>
                     <p className="text-sm text-gray-600 mb-2">Novoair • Business Class</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ Lounge access</span>
                       <span className="text-green-500 font-medium">2 seats left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-green-100 border border-green-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-green-600 font-mono font-bold">BIZCLASS30</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-green-600 hover:bg-green-200"
+                          onClick={() => navigator.clipboard.writeText('BIZCLASS30')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -549,9 +588,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Dhaka → Cox's Bazar</h3>
                     <p className="text-sm text-gray-600 mb-2">Green Line AC • Sleeper Coach</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ WiFi & Charging</span>
                       <span className="text-green-500 font-medium">12 seats left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-green-100 border border-green-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-green-600 font-mono font-bold">BUS25SAVE</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-green-600 hover:bg-green-200"
+                          onClick={() => navigator.clipboard.writeText('BUS25SAVE')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -567,9 +619,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Dhaka → Chittagong</h3>
                     <p className="text-sm text-gray-600 mb-2">Shohag Paribahan • AC Bus</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ Snacks included</span>
                       <span className="text-orange-500 font-medium">8 seats left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-orange-100 border border-orange-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-orange-600 font-mono font-bold">COMFORT20</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-orange-600 hover:bg-orange-200"
+                          onClick={() => navigator.clipboard.writeText('COMFORT20')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -585,9 +650,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Dhaka → Sylhet</h3>
                     <p className="text-sm text-gray-600 mb-2">Ena Transport • Luxury Coach</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ Reclining seats</span>
                       <span className="text-purple-500 font-medium">5 seats left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-purple-100 border border-purple-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-purple-600 font-mono font-bold">LUXURY30</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-purple-600 hover:bg-purple-200"
+                          onClick={() => navigator.clipboard.writeText('LUXURY30')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -804,9 +882,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Toyota Premio - Sedan</h3>
                     <p className="text-sm text-gray-600 mb-2">Dhaka to Cox's Bazar • Full Day</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ AC + Driver included</span>
                       <span className="text-purple-500 font-medium">3 cars left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-purple-100 border border-purple-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-purple-600 font-mono font-bold">CAR40OFF</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-purple-600 hover:bg-purple-200"
+                          onClick={() => navigator.clipboard.writeText('CAR40OFF')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -822,9 +913,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Toyota Hiace - Microbus</h3>
                     <p className="text-sm text-gray-600 mb-2">Airport Transfer • 12 Seats</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ Free waiting time</span>
                       <span className="text-blue-500 font-medium">2 cars left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-blue-100 border border-blue-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-blue-600 font-mono font-bold">MICRO35</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-blue-600 hover:bg-blue-200"
+                          onClick={() => navigator.clipboard.writeText('MICRO35')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -840,9 +944,22 @@ export default function TripPlannerPage() {
                     </div>
                     <h3 className="font-semibold mb-1">Mercedes E-Class - Luxury</h3>
                     <p className="text-sm text-gray-600 mb-2">City Tour • Premium Experience</p>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-xs mb-2">
                       <span className="text-green-600">✓ Luxury amenities</span>
                       <span className="text-emerald-500 font-medium">1 car left</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="bg-emerald-100 border border-emerald-300 rounded px-2 py-1 flex items-center space-x-1">
+                        <span className="text-xs text-emerald-600 font-mono font-bold">LUXURY50</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-4 w-4 p-0 text-emerald-600 hover:bg-emerald-200"
+                          onClick={() => navigator.clipboard.writeText('LUXURY50')}
+                        >
+                          📋
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
