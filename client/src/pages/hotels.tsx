@@ -23,6 +23,8 @@ export default function Hotels() {
   const [selectedHotel, setSelectedHotel] = useState<Hotel | null>(null);
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState<string | null>(null);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   const { data: hotels = [], isLoading: hotelsLoading, error: hotelsError } = useQuery<Hotel[]>({
     queryKey: ['/api/hotels'],
@@ -157,6 +159,16 @@ export default function Hotels() {
     setIsDialogOpen(false);
     setSelectedHotel(null);
     setSelectedRestaurant(null);
+  };
+
+  const handleGalleryImageClick = (imageUrl: string) => {
+    setSelectedGalleryImage(imageUrl);
+    setIsGalleryOpen(true);
+  };
+
+  const handleCloseGallery = () => {
+    setIsGalleryOpen(false);
+    setSelectedGalleryImage(null);
   };
 
   // Generate room types for the selected hotel
@@ -646,11 +658,15 @@ export default function Hotels() {
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Photo Gallery</h3>
                     <div className="grid grid-cols-2 gap-3">
                       {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => (
-                        <div key={`${selectedHotel.id}-gallery-${index}`} className="relative">
+                        <div 
+                          key={`${selectedHotel.id}-gallery-${index}`} 
+                          className="relative cursor-pointer hover:opacity-90 transition-opacity"
+                          onClick={() => handleGalleryImageClick(imageUrl)}
+                        >
                           <img
                             src={imageUrl}
                             alt={`${selectedHotel.name} - Interior view ${index + 1}`}
-                            className="w-full h-32 object-cover rounded-lg border-2 border-blue-200 shadow-sm"
+                            className="w-full h-32 object-cover rounded-lg border-2 border-blue-200 shadow-sm hover:border-blue-400 transition-colors"
                             data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
                             onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
                             onError={(e) => {
@@ -660,6 +676,13 @@ export default function Hotels() {
                           />
                           <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
                             {index + 1}
+                          </div>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded-lg">
+                            <div className="text-white opacity-0 hover:opacity-100 transition-opacity">
+                              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                              </svg>
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -929,6 +952,29 @@ export default function Hotels() {
               </div>
             </>
           )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Gallery Lightbox Modal */}
+      <Dialog open={isGalleryOpen} onOpenChange={handleCloseGallery}>
+        <DialogContent className="max-w-4xl max-h-[90vh] p-0 overflow-hidden">
+          <div className="relative bg-black">
+            {selectedGalleryImage && (
+              <img
+                src={selectedGalleryImage}
+                alt="Gallery image in full size"
+                className="w-full max-h-[80vh] object-contain"
+              />
+            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-40 text-white border-0"
+              onClick={handleCloseGallery}
+            >
+              ✕
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
 
