@@ -24,6 +24,7 @@ export const destinations = pgTable("destinations", {
   country: text("country").notNull(),
   district: text("district").notNull(),
   description: text("description").notNull(),
+  history: text("history").notNull().default(''),
   imageUrl: text("image_url").notNull(),
   rating: text("rating").notNull(),
   priceFrom: integer("price_from").notNull(),
