@@ -5,7 +5,7 @@ export const destinations = [
     country: 'Bangladesh',
     district: "Cox's Bazar",
     description: "World's longest natural sandy sea beach",
-    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+    imageUrl: '/assets/coxs-bazar-beach-umbrellas.jpg',
     rating: '4.8',
     priceFrom: 3500,
   },

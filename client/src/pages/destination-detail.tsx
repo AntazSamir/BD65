@@ -91,6 +91,17 @@ export default function DestinationDetail() {
   const getDestinationImages = (destination: Destination) => {
     const fallbackImage = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600';
     
+    // Special case for Cox's Bazar - use authentic images
+    if (destination.name === "Cox's Bazar") {
+      return [
+        destination.imageUrl || fallbackImage,
+        '/assets/coxs-bazar-sunset.jpg',
+        '/assets/coxs-bazar-aerial.jpg',
+        '/assets/coxs-bazar-coastline.webp',
+        '/assets/coxs-bazar-crabs.jpg'
+      ];
+    }
+    
     // Special case for Lalbagh Fort - use authentic images
     if (destination.name === 'Lalbagh Fort') {
       return [
