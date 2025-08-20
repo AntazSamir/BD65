@@ -35,6 +35,12 @@ Project Focus: Bangladesh tourism and travel destinations.
 - Completely redesigned destinations page hero section with dynamic carousel backgrounds, interactive search, stats display, and engaging CTAs (August 2025)
 - Added functional search and filtering capabilities for destinations with real-time results
 - Enhanced visual hierarchy with backdrop blur effects, gradient text, and animated elements
+- **Streamlined Booking System (August 2025)**: 
+  - Removed separate booking page (/booking/:type/:id route) to eliminate redundancy
+  - Created unified PropertyBookingDialog component for hotels and restaurants
+  - Integrated booking dialogs directly into hotels page for improved user experience
+  - Booking now opens in modal instead of navigating to separate page
+  - Maintained booking functionality for transportation via existing BookingDialog component
 - **Auto-sliding Carousel Implementation (August 2025)**: 
   - Added 9 new destinations with high-quality Unsplash images (total now 18 destinations)
   - Implemented auto-sliding carousel showing 5 cards with center focus
