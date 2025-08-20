@@ -170,7 +170,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   return (
     <section 
       id="destinations" 
-      className="relative py-12 sm:py-16 lg:py-24 min-h-[500px] sm:min-h-[600px] lg:min-h-[800px] bg-gray-900 flex flex-col will-change-transform transition-all duration-700 ease-out"
+      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col will-change-transform transition-all duration-700 ease-out"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -186,10 +186,9 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       
       {/* Currently viewing text in top left */}
       {visibleCards.find(card => card.position === 0) && (
-        <div className="absolute top-3 sm:top-4 lg:top-6 left-3 sm:left-4 lg:left-6 z-20">
-          <p className="text-white text-sm sm:text-base lg:text-lg font-semibold bg-black/50 px-2 sm:px-3 py-1 rounded-lg">
-            <span className="hidden sm:inline">Currently viewing: </span>
-            {visibleCards.find(card => card.position === 0)?.destination.name}
+        <div className="absolute top-6 left-6 z-20">
+          <p className="text-white text-lg font-semibold bg-black/50 px-3 py-1 rounded-lg">
+            Currently viewing: {visibleCards.find(card => card.position === 0)?.destination.name}
           </p>
         </div>
       )}
@@ -202,25 +201,25 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
 
 
           {/* Cards container */}
-          <div className="flex justify-center items-end space-x-1 sm:space-x-2 px-2 sm:px-8 lg:px-16 perspective-1000">
+          <div className="flex justify-center items-end space-x-2 px-16 perspective-1000">
             {visibleCards.map(({ destination, position, index }) => {
               const isCenterCard = position === 0;
               const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : Math.abs(position) === 2 ? 'scale-85' : 'scale-75';
               const cardOpacity = isCenterCard ? 'opacity-100' : Math.abs(position) === 1 ? 'opacity-85' : Math.abs(position) === 2 ? 'opacity-70' : 'opacity-50';
               const cardHeight = isCenterCard 
-                ? 'h-24 sm:h-32 lg:h-48' 
+                ? 'h-48' 
                 : Math.abs(position) === 1 
-                  ? 'h-20 sm:h-28 lg:h-40' 
+                  ? 'h-40' 
                   : Math.abs(position) === 2 
-                    ? 'h-16 sm:h-24 lg:h-32' 
-                    : 'h-12 sm:h-20 lg:h-24';
+                    ? 'h-32' 
+                    : 'h-24';
               const cardWidth = isCenterCard 
-                ? 'w-20 sm:w-28 lg:w-36' 
+                ? 'w-36' 
                 : Math.abs(position) === 1 
-                  ? 'w-16 sm:w-20 lg:w-28' 
+                  ? 'w-28' 
                   : Math.abs(position) === 2 
-                    ? 'w-12 sm:w-16 lg:w-24' 
-                    : 'w-10 sm:w-12 lg:w-20';
+                    ? 'w-24' 
+                    : 'w-20';
               const cardBlur = Math.abs(position) > 1 ? 'blur-[1px]' : '';
               const cardBrightness = isCenterCard ? 'brightness-100' : Math.abs(position) === 1 ? 'brightness-95' : 'brightness-90';
               
@@ -255,12 +254,12 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                   
                   {/* Overlay with destination name */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end carousel-card-fast">
-                    <div className="p-2 sm:p-3 lg:p-4 w-full">
-                      <h3 className="text-white font-semibold text-xs sm:text-sm lg:text-lg text-center" data-testid={`text-destination-name-${destination.id}`}>
+                    <div className="p-4 w-full">
+                      <h3 className="text-white font-semibold text-lg text-center" data-testid={`text-destination-name-${destination.id}`}>
                         {destination.name}
                       </h3>
                       {isCenterCard && (
-                        <p className="text-white/80 text-xs sm:text-sm text-center mt-1">{destination.district}</p>
+                        <p className="text-white/80 text-sm text-center mt-1">{destination.district}</p>
                       )}
                     </div>
                   </div>

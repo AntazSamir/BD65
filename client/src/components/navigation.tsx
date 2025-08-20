@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { Link } from 'wouter';
-import { User, Menu, X, LogOut, UserIcon, Calendar } from 'lucide-react';
+import { LogOut, UserIcon, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -8,12 +7,11 @@ import { useAuth } from '@/hooks/useAuth';
 import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 
 export default function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, isAuthenticated, signOut, isSigningOut } = useAuth();
 
   return (
     <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center">
             <div className="flex items-center">
@@ -29,7 +27,7 @@ export default function Navigation() {
             </div>
           </Link>
           
-          <div className="hidden lg:flex space-x-6 xl:space-x-8">
+          <div className="flex space-x-8">
             <Link href="/" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Home</Link>
             <Link href="/destinations" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Destinations</Link>
             <Link href="/hotels" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Hotels</Link>
@@ -90,7 +88,7 @@ export default function Navigation() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="hidden lg:flex items-center space-x-2">
+              <div className="flex items-center space-x-2">
                 <Button variant="ghost" size="sm" asChild>
                   <Link href="/sign-in">Sign In</Link>
                 </Button>
@@ -99,127 +97,8 @@ export default function Navigation() {
                 </Button>
               </div>
             )}
-            <button 
-              className="lg:hidden text-neutral p-2 hover:bg-gray-100 rounded-md transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              data-testid="button-mobile-menu"
-            >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
           </div>
         </div>
-        
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-100 bg-white">
-            <div className="px-4 py-3 space-y-1">
-              <Link 
-                href="/" 
-                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                href="/destinations" 
-                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Destinations
-              </Link>
-              <Link 
-                href="/hotels" 
-                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Hotels
-              </Link>
-              <Link 
-                href="/trip-planner" 
-                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Flights
-              </Link>
-              <Link 
-                href="/about" 
-                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link 
-                href="/support" 
-                className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Support
-              </Link>
-              
-              <div className="border-t border-gray-200 mt-4 pt-4">
-                {isAuthenticated ? (
-                  <>
-                    <Link 
-                      href="/profile" 
-                      className="flex items-center px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <UserIcon className="w-5 h-5 mr-3" />
-                      Profile
-                    </Link>
-                    <Link 
-                      href="/my-bookings" 
-                      className="flex items-center px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <Calendar className="w-5 h-5 mr-3" />
-                      My Bookings
-                    </Link>
-                    <button 
-                      onClick={() => {
-                        signOut();
-                        setIsMenuOpen(false);
-                      }}
-                      disabled={isSigningOut}
-                      className="flex items-center w-full px-4 py-3 text-base font-medium text-left text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                    >
-                      <LogOut className="w-5 h-5 mr-3" />
-                      {isSigningOut ? "Signing out..." : "Sign out"}
-                    </button>
-                  </>
-                ) : (
-                  <div className="flex flex-col space-y-2">
-                    <Button 
-                      variant="outline" 
-                      size="lg" 
-                      className="w-full justify-center" 
-                      asChild
-                    >
-                      <Link 
-                        href="/sign-in"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Sign In
-                      </Link>
-                    </Button>
-                    <Button 
-                      size="lg" 
-                      className="w-full justify-center"
-                      asChild
-                    >
-                      <Link 
-                        href="/sign-up"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Sign Up
-                      </Link>
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );

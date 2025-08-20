@@ -3,15 +3,15 @@ import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_175536128
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 text-white py-8 sm:py-12 lg:py-16">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+    <footer className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 text-white py-16">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="grid grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
+            <div className="flex items-center text-2xl font-bold mb-4">
               <img 
                 src={logoImage} 
                 alt="BD Explorer Logo" 
-                className="w-7 sm:w-8 h-7 sm:h-8 mr-2 sm:mr-3"
+                className="w-8 h-8 mr-3"
               />
               BD Explorer
             </div>
