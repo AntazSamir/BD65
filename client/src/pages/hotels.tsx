@@ -369,7 +369,7 @@ export default function Hotels() {
           </div>
 
           {/* Search and Filter Section */}
-          <div className="backdrop-blur-md bg-white/20 border border-white/30 rounded-lg shadow-lg p-6">
+          <div className="backdrop-blur-sm bg-white/30 border border-white/40 rounded-lg shadow-lg p-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
               {/* Search Input */}
               <div className="md:col-span-2">
