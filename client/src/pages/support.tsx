@@ -336,9 +336,7 @@ export default function Support() {
                         </div>
                       </div>
                     </div>
-                    <Button variant="outline" className="w-full mt-4" data-testid="button-privacy-policy">
-                      Read Full Privacy Policy
-                    </Button>
+
                   </CardContent>
                 </Card>
 
@@ -465,9 +463,7 @@ export default function Support() {
                         </div>
                       </div>
                     </div>
-                    <Button variant="outline" className="w-full mt-4" data-testid="button-terms-service">
-                      Read Full Terms of Service
-                    </Button>
+
                   </CardContent>
                 </Card>
               </div>
