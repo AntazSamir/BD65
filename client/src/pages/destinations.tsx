@@ -111,7 +111,7 @@ export default function Destinations() {
     <div className="min-h-screen bg-white">
       <Navigation />
       {/* Hero Section */}
-      <div className="relative py-16 flex items-center justify-center overflow-hidden">
+      <div className="relative py-24 sm:py-32 lg:py-40 flex items-center justify-center overflow-hidden">
         {/* Background Carousel */}
         <div className="absolute inset-0">
           {heroBackgrounds.map((bg, index) => (
