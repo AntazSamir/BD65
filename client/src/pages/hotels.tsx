@@ -324,8 +324,15 @@ export default function Hotels() {
     <div className="min-h-screen section-bg-soft">
       <Navigation />
       
-      {/* Header Section */}
-      <div className="pt-24 pb-8 section-bg-cool">
+      {/* Hero Section with Dynamic Background */}
+      <div 
+        className="relative pt-24 pb-8 bg-cover bg-center bg-no-repeat transition-all duration-500"
+        style={{
+          backgroundImage: showRestaurants 
+            ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/restaurant-hero.jpg')`
+            : `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/hotel-hero.jpg')`
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
@@ -333,10 +340,10 @@ export default function Hotels() {
                 {showRestaurants ? <Utensils className="w-6 h-6" /> : <Building2 className="w-6 h-6" />}
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
               {showRestaurants ? 'Find Amazing Restaurants' : 'Find Your Perfect Stay'}
             </h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-200">
               {showRestaurants 
                 ? 'Discover delicious dining experiences and local cuisine'
                 : 'Discover amazing hotels and accommodations for your next trip'
@@ -346,8 +353,8 @@ export default function Hotels() {
             {/* Toggle between Hotels and Restaurants */}
             <div className="flex items-center justify-center space-x-4 mt-6">
               <Label className="flex items-center space-x-2 cursor-pointer">
-                <Building2 className="w-5 h-5 text-blue-600" />
-                <span className={`font-medium ${!showRestaurants ? 'text-blue-600' : 'text-gray-500'}`}>Hotels</span>
+                <Building2 className="w-5 h-5 text-blue-400" />
+                <span className={`font-medium ${!showRestaurants ? 'text-blue-400' : 'text-gray-300'}`}>Hotels</span>
               </Label>
               <Switch 
                 checked={showRestaurants}
@@ -355,8 +362,8 @@ export default function Hotels() {
                 data-testid="toggle-restaurants"
               />
               <Label className="flex items-center space-x-2 cursor-pointer">
-                <Utensils className="w-5 h-5 text-orange-600" />
-                <span className={`font-medium ${showRestaurants ? 'text-orange-600' : 'text-gray-500'}`}>Restaurants</span>
+                <Utensils className="w-5 h-5 text-orange-400" />
+                <span className={`font-medium ${showRestaurants ? 'text-orange-400' : 'text-gray-300'}`}>Restaurants</span>
               </Label>
             </div>
           </div>
