@@ -128,7 +128,9 @@ export default function TripPlannerPage() {
                 <Plane className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Trip Planner</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+              <span className="text-accent bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">Trip Planner</span>
+            </h1>
             <p className="text-xl opacity-90 drop-shadow-lg">Compare and choose the best transportation option for your journey</p>
           </div>
 
