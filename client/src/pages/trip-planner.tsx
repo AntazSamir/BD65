@@ -73,15 +73,18 @@ export default function TripPlannerPage() {
 
   // Filter transportation options based on selected routes
   const filteredFlights = tripPlanners.filter(flight => 
-    flight.origin === flightFrom && flight.destination === flightTo
+    (!flightFrom || flight.origin === flightFrom) && 
+    (!flightTo || flight.destination === flightTo)
   );
 
   const filteredBuses = buses.filter(bus => 
-    bus.origin === busFrom && bus.destination === busTo
+    (!busFrom || bus.origin === busFrom) && 
+    (!busTo || bus.destination === busTo)
   );
 
   const filteredCars = privateCars.filter(car => 
-    car.origin === carPickup && car.destination === carDropoff
+    (!carPickup || car.origin === carPickup) && 
+    (!carDropoff || car.destination === carDropoff)
   );
 
   const handleSearch = () => {
