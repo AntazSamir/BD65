@@ -36,11 +36,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
           <p className="text-xl text-gray-600 mb-8">Explore the world's most breathtaking locations</p>
-          {selectedDestination && (
-            <p className="text-gray-700 mb-4 text-[22px] font-semibold">
-              {selectedDestination.name}
-            </p>
-          )}
           <div className="mt-6">
             <Link href="/destinations">
               <button className="inline-flex items-center px-8 py-4 bg-primary text-white rounded-2xl hover:bg-primary/90 transition-butter font-medium shadow-lg hover-lift">
