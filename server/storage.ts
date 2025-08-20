@@ -1273,6 +1273,5 @@ export class DbStorage implements IStorage {
   }
 }
 
-// Temporarily use MemStorage until DATABASE_URL is properly configured
-// Once DATABASE_URL is set up, change this to: export const storage = new DbStorage();
-export const storage = new MemStorage();
+// Using DbStorage with Supabase database
+export const storage = new DbStorage();
