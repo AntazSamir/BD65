@@ -40,6 +40,8 @@ export default function Hotels() {
   // Filter and sort hotels based on search criteria
   const filteredAndSortedHotels = useMemo(() => {
     let filtered = hotels.filter(hotel => {
+      if (!hotel?.name || !hotel?.location || !hotel?.description) return false;
+      
       const matchesSearch = 
         hotel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         hotel.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -86,6 +88,8 @@ export default function Hotels() {
   // Filter and sort restaurants based on search criteria
   const filteredAndSortedRestaurants = useMemo(() => {
     let filtered = restaurants.filter(restaurant => {
+      if (!restaurant?.name || !restaurant?.location || !restaurant?.description || !restaurant?.cuisine) return false;
+      
       const matchesSearch = 
         restaurant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         restaurant.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -142,7 +146,7 @@ export default function Hotels() {
   };
 
   const handleHotelClick = (hotel: Hotel) => {
-    console.log('Hotel clicked:', hotel.name, hotel.id);
+
     setSelectedHotel(hotel);
     setSelectedRestaurant(null);
     setCurrentMainImage(hotel.imageUrl); // Initialize with main hotel image
@@ -150,7 +154,7 @@ export default function Hotels() {
   };
 
   const handleRestaurantClick = (restaurant: Restaurant) => {
-    console.log('Restaurant clicked:', restaurant.name, restaurant.id);
+
     setSelectedRestaurant(restaurant);
     setSelectedHotel(null);
     setCurrentMainImage(restaurant.imageUrl); // Initialize with main restaurant image
@@ -239,7 +243,7 @@ export default function Hotels() {
       baseImages[(selectedIndex + 2) % baseImages.length]
     ];
     
-    console.log('Gallery images for', hotel.name, ':', result);
+
     return result;
   };
 
@@ -264,7 +268,7 @@ export default function Hotels() {
       baseImages[(selectedIndex + 2) % baseImages.length]
     ];
     
-    console.log('Gallery images for', restaurant.name, ':', result);
+
     return result;
   };
 
@@ -645,7 +649,7 @@ export default function Hotels() {
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           {selectedHotel && (
             <>
-              {console.log('Dialog rendering for hotel:', selectedHotel.name, 'Dialog open:', isDialogOpen)}
+
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold flex items-start justify-between">
                   <div>

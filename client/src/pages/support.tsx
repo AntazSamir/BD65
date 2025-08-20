@@ -140,7 +140,7 @@ export default function Support() {
   });
 
   const onSubmit = async (data: SupportFormData) => {
-    console.log('Support form submitted:', data);
+
     // Here you would typically send the data to your API
     setFormSubmitted(true);
     form.reset();

@@ -66,25 +66,33 @@ export default function DestinationDetail() {
 
   // Filter hotels and restaurants relevant to this destination
   const relevantHotels = hotels.filter(hotel => {
+    if (!hotel?.location || !destination?.district || !destination?.name) return false;
+    
     const hotelLocation = hotel.location.toLowerCase();
     const destinationDistrict = destination.district.toLowerCase();
     const destinationName = destination.name.toLowerCase();
+    const hotelLocationParts = hotelLocation.split(' •');
+    const hotelMainLocation = hotelLocationParts[0]?.toLowerCase() || '';
     
     return hotelLocation.includes(destinationDistrict) ||
            hotelLocation.includes(destinationName) ||
-           destinationDistrict.includes(hotelLocation.split(' •')[0]?.toLowerCase() || '') ||
-           destinationName.includes(hotelLocation.split(' •')[0]?.toLowerCase() || '');
+           destinationDistrict.includes(hotelMainLocation) ||
+           destinationName.includes(hotelMainLocation);
   }).slice(0, 6);
 
   const relevantRestaurants = restaurants.filter(restaurant => {
+    if (!restaurant?.location || !destination?.district || !destination?.name) return false;
+    
     const restaurantLocation = restaurant.location.toLowerCase();
     const destinationDistrict = destination.district.toLowerCase();
     const destinationName = destination.name.toLowerCase();
+    const restaurantLocationParts = restaurantLocation.split(' •');
+    const restaurantMainLocation = restaurantLocationParts[0]?.toLowerCase() || '';
     
     return restaurantLocation.includes(destinationDistrict) ||
            restaurantLocation.includes(destinationName) ||
-           destinationDistrict.includes(restaurantLocation.split(' •')[0]?.toLowerCase() || '') ||
-           destinationName.includes(restaurantLocation.split(' •')[0]?.toLowerCase() || '');
+           destinationDistrict.includes(restaurantMainLocation) ||
+           destinationName.includes(restaurantMainLocation);
   }).slice(0, 6);
 
   // Generate additional images for gallery based on destination type

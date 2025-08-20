@@ -1073,7 +1073,7 @@ export class MemStorage implements IStorage {
       reviews: ['Perfect for history lovers', 'Great tea and pastries', 'Beautiful dome views']
     });
     
-    console.log('Storage initialized successfully with sample data');
+    // Storage initialized successfully with sample data
   }
 }
 

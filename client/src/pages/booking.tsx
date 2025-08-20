@@ -230,7 +230,7 @@ export default function Booking() {
       if (room) {
         const checkInDate = new Date(checkIn);
         const checkOutDate = new Date(checkOut);
-        const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+        const nights = Math.max(Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24)), 1);
         return room.price * nights;
       }
     }
@@ -241,9 +241,10 @@ export default function Booking() {
     if (checkIn && checkOut) {
       const checkInDate = new Date(checkIn);
       const checkOutDate = new Date(checkOut);
-      return Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+      const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+      return Math.max(nights, 1); // Ensure at least 1 night
     }
-    return 0;
+    return 1;
   };
 
   const downloadReceipt = () => {

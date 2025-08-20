@@ -66,7 +66,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   };
 
   const goToSlide = (index: number) => {
-    if (index >= 0 && index < destinations.length) {
+    if (index >= 0 && index < destinations.length && destinations[index]) {
       setIsAutoSliding(false);
       setCurrentIndex(index);
       setSelectedDestination(destinations[index]);

@@ -88,7 +88,7 @@ export default function MyBookings() {
     doc.text(`Confirmation: ${booking.confirmationNumber}`, 25, y + 10);
     doc.text(`Status: ${booking.status.toUpperCase()}`, 25, y + 20);
     doc.text(`Booking Type: ${booking.bookingType ? booking.bookingType.charAt(0).toUpperCase() + booking.bookingType.slice(1) : 'N/A'}`, pageWidth / 2 + 10, y + 10);
-    doc.text(`Date: ${new Date(booking.createdAt).toLocaleDateString('en-GB')}`, pageWidth / 2 + 10, y + 20);
+    doc.text(`Date: ${booking.createdAt ? new Date(booking.createdAt).toLocaleDateString('en-GB') : 'N/A'}`, pageWidth / 2 + 10, y + 20);
     
     y += 40;
     

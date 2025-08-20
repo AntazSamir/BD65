@@ -88,7 +88,7 @@ export default function TripPlannerPage() {
   );
 
   const handleSearch = () => {
-    console.log('Searching for:', { origin, destination, departureDate, passengers });
+
   };
 
   const openBookingDialog = (item: TripPlanner | BusType | PrivateCar, type: 'flight' | 'bus' | 'car') => {
