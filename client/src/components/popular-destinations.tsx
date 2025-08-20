@@ -18,9 +18,16 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   const [currentIndex, setCurrentIndex] = useState(0); // Start with the first destination
   const [isAutoSliding, setIsAutoSliding] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Auto-sliding functionality
   useEffect(() => {
+    // Clear any existing interval first
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
     if (isAutoSliding && destinations.length > 0) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prevIndex) => {
@@ -33,9 +40,22 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     };
   }, [isAutoSliding, destinations.length]);
+
+  // Cleanup function for component unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   // Update background when current index changes
   useEffect(() => {
@@ -51,8 +71,11 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       if (destinations.length === 0) return 0;
       return prevIndex === 0 ? destinations.length - 1 : prevIndex - 1;
     });
-    // Resume auto-sliding after 10 seconds
-    setTimeout(() => setIsAutoSliding(true), 10000);
+    // Clear existing timeout and set new one
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => setIsAutoSliding(true), 10000);
   };
 
   const goToNext = () => {
@@ -61,8 +84,11 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       if (destinations.length === 0) return 0;
       return (prevIndex + 1) % destinations.length;
     });
-    // Resume auto-sliding after 6 seconds
-    setTimeout(() => setIsAutoSliding(true), 6000);
+    // Clear existing timeout and set new one
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => setIsAutoSliding(true), 6000);
   };
 
   const goToSlide = (index: number) => {
@@ -70,8 +96,11 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       setIsAutoSliding(false);
       setCurrentIndex(index);
       setSelectedDestination(destinations[index]);
-      // Resume auto-sliding after 10 seconds
-      setTimeout(() => setIsAutoSliding(true), 10000);
+      // Clear existing timeout and set new one
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(() => setIsAutoSliding(true), 10000);
     }
   };
 

@@ -11,8 +11,15 @@ let db: any = null;
 if (!process.env.DATABASE_URL) {
   console.warn("DATABASE_URL not set - database operations will be disabled");
 } else {
-  pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  db = drizzle({ client: pool, schema });
+  try {
+    pool = new Pool({ connectionString: process.env.DATABASE_URL });
+    db = drizzle({ client: pool, schema });
+    console.log("Database connected successfully");
+  } catch (error) {
+    console.error("Failed to connect to database:", error);
+    pool = null;
+    db = null;
+  }
 }
 
 export { pool, db };
