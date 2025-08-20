@@ -245,24 +245,95 @@ export default function Support() {
                       Privacy Policy
                     </h3>
                     <p className="text-gray-600 mb-4">
-                      Your privacy is important to us. Learn how we collect, use, and protect your personal information.
+                      BD Explorer is committed to protecting your privacy and ensuring transparent data practices. This policy outlines how we collect, use, store, and protect your personal information.
                     </p>
-                    <div className="space-y-3 text-sm text-gray-600">
-                      <div className="flex items-start space-x-2">
-                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span>We encrypt all personal data</span>
+                    <div className="space-y-4 text-sm text-gray-600">
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Information We Collect:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Personal details (name, email, phone) for bookings</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Payment information (encrypted via secure gateways)</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Travel preferences and booking history</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Website usage data for service improvement</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-start space-x-2">
-                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span>No data sharing with third parties</span>
+                      
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Data Protection:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>256-bit SSL encryption for all data transmission</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Secure servers with regular security audits</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Limited access to authorized personnel only</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Regular data backup and recovery procedures</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-start space-x-2">
-                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span>Secure payment processing</span>
+
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Your Rights:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Access and download your personal data</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Request data correction or deletion</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Opt-out of marketing communications</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Data portability to other services</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-start space-x-2">
-                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span>GDPR compliant data handling</span>
+
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Third-Party Sharing:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>No selling or sharing personal data</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Partners limited to booking fulfillment only</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Payment processors for secure transactions</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>Legal compliance when required by law</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <Button variant="outline" className="w-full mt-4" data-testid="button-privacy-policy">
@@ -281,24 +352,117 @@ export default function Support() {
                       Terms of Service
                     </h3>
                     <p className="text-gray-600 mb-4">
-                      Understand the terms and conditions that govern your use of BD Explorer services.
+                      These terms govern your use of BD Explorer services. By using our platform, you agree to these terms and conditions. Last updated: August 2025.
                     </p>
-                    <div className="space-y-3 text-sm text-gray-600">
-                      <div className="flex items-start space-x-2">
-                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span>Fair booking and cancellation policies</span>
+                    <div className="space-y-4 text-sm text-gray-600">
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Booking Terms:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Bookings confirmed upon payment processing</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Prices subject to availability and may change</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Valid identification required for all travelers</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Special requests subject to supplier approval</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-start space-x-2">
-                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span>User rights and responsibilities</span>
+
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Cancellation Policy:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Free cancellation within 24 hours of booking</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Cancellation fees apply based on provider terms</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Refunds processed within 5-7 business days</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Travel insurance recommended for protection</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-start space-x-2">
-                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span>Service availability and limitations</span>
+
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">User Responsibilities:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Provide accurate and complete information</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Maintain account security and confidentiality</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Comply with destination laws and regulations</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Respect local customs and communities</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-start space-x-2">
-                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span>Dispute resolution process</span>
+
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Service Limitations:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Services subject to third-party provider terms</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>No liability for force majeure events</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Customer support available 24/7</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Dispute resolution through mediation first</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-2">Payment & Refunds:</h4>
+                        <div className="space-y-2 ml-4">
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Secure payment processing with PCI compliance</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Multiple payment methods accepted</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Transparent pricing with no hidden fees</span>
+                          </div>
+                          <div className="flex items-start space-x-2">
+                            <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Refund eligibility based on booking terms</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <Button variant="outline" className="w-full mt-4" data-testid="button-terms-service">
