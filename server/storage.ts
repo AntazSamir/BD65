@@ -438,7 +438,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Chittagong Hill Tracts',
       description: 'Mountainous region with tribal culture, waterfalls and scenic beauty',
-      imageUrl: 'https://images.unsplash.com/photo-1464822759844-d150baec4ba5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      imageUrl: '/attached_assets/rsz_chittagong_hill_tracts_bangladesh_13817459523_1755682005508.jpg',
       rating: '4.8',
       priceFrom: 3200,
     });

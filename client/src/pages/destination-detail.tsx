@@ -143,6 +143,17 @@ export default function DestinationDetail() {
       ];
     }
     
+    // Special case for Chittagong Hill Tracts - use authentic images
+    if (destination.name === 'Chittagong Hill Tracts') {
+      return [
+        destination.imageUrl || fallbackImage, // Main image with misty hills and banana trees
+        '/attached_assets/png_16x9_1755682005506.jpg', // Golden mountain landscape with mist
+        '/attached_assets/R_1755682005507.jpg', // Green hills with lush vegetation
+        '/attached_assets/Rt_1755682005507.jpg', // Lake view surrounded by hills
+        '/attached_assets/24497019445_a47d640307_b_1755682005508.jpg' // Golden sunrise over hills with trees
+      ];
+    }
+    
     const baseImages = [
       destination.imageUrl || fallbackImage,
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
