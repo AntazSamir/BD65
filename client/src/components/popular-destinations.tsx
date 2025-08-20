@@ -66,25 +66,6 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     }
   };
 
-  // Handle mouse wheel navigation
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    if (e.deltaY > 0) {
-      goToNext();
-    } else {
-      goToPrevious();
-    }
-  };
-
-  // Handle mouse enter/leave for pause functionality
-  const handleMouseEnter = () => {
-    setIsAutoSliding(false);
-  };
-
-  const handleMouseLeave = () => {
-    setTimeout(() => setIsAutoSliding(true), 1000);
-  };
-
   // Get visible cards (7 cards with center one highlighted)
   const getVisibleCards = () => {
     if (destinations.length === 0) return [];
@@ -170,34 +151,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
         <div className="max-w-7xl mx-auto px-4">
           
 
-          {/* Navigation arrows */}
-          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
-            <button
-              onClick={goToPrevious}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group"
-              data-testid="button-prev-destination"
-            >
-              <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-            </button>
-          </div>
-          
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
-            <button
-              onClick={goToNext}
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group"
-              data-testid="button-next-destination"
-            >
-              <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-            </button>
-          </div>
-
           {/* Cards container */}
-          <div 
-            className="flex justify-center items-end space-x-2 px-16"
-            onWheel={handleWheel}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className="flex justify-center items-end space-x-2 px-16">
             {visibleCards.map(({ destination, position, index }) => {
               const isCenterCard = position === 0;
               const cardScale = isCenterCard ? 'scale-110' : Math.abs(position) === 1 ? 'scale-95' : Math.abs(position) === 2 ? 'scale-85' : 'scale-75';
