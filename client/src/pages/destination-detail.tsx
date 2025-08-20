@@ -122,6 +122,16 @@ export default function DestinationDetail() {
       ];
     }
     
+    // Special case for Sylhet Tea Gardens - use authentic images
+    if (destination.name === 'Sylhet Tea Gardens') {
+      return [
+        destination.imageUrl || fallbackImage, // Main image with tea workers
+        '/attached_assets/maxresdefault_1755680607560.jpg', // Close-up tea plants with trees
+        '/attached_assets/283-2834105_sylhet-tea-garden-bangladesh_1755680607560.jpg', // Aerial view with small house
+        '/attached_assets/sylhet-a-tranquil-oasis-of-tea-gardens-waterfalls-and-spiritual-serenity-in-northeast-bangladesh_1755680607561.jpg' // Path through tea garden
+      ];
+    }
+    
     const baseImages = [
       destination.imageUrl || fallbackImage,
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',

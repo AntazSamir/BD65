@@ -418,7 +418,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: 'Sylhet',
       description: 'Rolling green hills covered with tea plantations',
-      imageUrl: 'https://images.unsplash.com/photo-1563906267088-b029e7101114?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
+      imageUrl: '/attached_assets/R_1755680607561.jpg',
       rating: '4.7',
       priceFrom: 2800,
     });
