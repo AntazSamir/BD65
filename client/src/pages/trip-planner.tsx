@@ -28,6 +28,23 @@ export default function TripPlannerPage() {
   const [flightReturnDate, setFlightReturnDate] = useState('');
   const [flightTravelers, setFlightTravelers] = useState('1');
   const [flightClass, setFlightClass] = useState('Economy');
+
+  // Bus-specific state
+  const [busFrom, setBusFrom] = useState('Dhaka');
+  const [busTo, setBusTo] = useState('Cox\'s Bazar');
+  const [busTravelDate, setBusTravelDate] = useState('');
+  const [busPassengers, setBusPassengers] = useState('1');
+  const [busType, setBusType] = useState('AC Bus');
+  const [busDepartureTime, setBusDepartureTime] = useState('');
+
+  // Car-specific state
+  const [carPickup, setCarPickup] = useState('Dhaka');
+  const [carDropoff, setCarDropoff] = useState('Cox\'s Bazar');
+  const [carDate, setCarDate] = useState('');
+  const [carTime, setCarTime] = useState('');
+  const [carPassengers, setCarPassengers] = useState('1');
+  const [carType, setCarType] = useState('Sedan');
+  const [carTripType, setCarTripType] = useState('oneWay');
   
   // Booking dialog state
   const [bookingDialog, setBookingDialog] = useState<{
@@ -359,6 +376,116 @@ export default function TripPlannerPage() {
 
           {/* Buses Tab */}
           <TabsContent value="buses">
+            {/* Bus Search Form */}
+            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">FROM</Label>
+                  <Select value={busFrom} onValueChange={setBusFrom}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Dhaka">Dhaka</SelectItem>
+                      <SelectItem value="Chittagong">Chittagong</SelectItem>
+                      <SelectItem value="Cox's Bazar">Cox's Bazar</SelectItem>
+                      <SelectItem value="Sylhet">Sylhet</SelectItem>
+                      <SelectItem value="Rangpur">Rangpur</SelectItem>
+                      <SelectItem value="Rajshahi">Rajshahi</SelectItem>
+                      <SelectItem value="Khulna">Khulna</SelectItem>
+                      <SelectItem value="Barisal">Barisal</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">TO</Label>
+                  <Select value={busTo} onValueChange={setBusTo}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Cox's Bazar">Cox's Bazar</SelectItem>
+                      <SelectItem value="Dhaka">Dhaka</SelectItem>
+                      <SelectItem value="Chittagong">Chittagong</SelectItem>
+                      <SelectItem value="Sylhet">Sylhet</SelectItem>
+                      <SelectItem value="Rangpur">Rangpur</SelectItem>
+                      <SelectItem value="Rajshahi">Rajshahi</SelectItem>
+                      <SelectItem value="Khulna">Khulna</SelectItem>
+                      <SelectItem value="Barisal">Barisal</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">TRAVEL DATE</Label>
+                  <Input
+                    type="date"
+                    value={busTravelDate}
+                    onChange={(e) => setBusTravelDate(e.target.value)}
+                    className="h-12"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">PASSENGERS</Label>
+                  <Select value={busPassengers} onValueChange={setBusPassengers}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">1 Passenger</SelectItem>
+                      <SelectItem value="2">2 Passengers</SelectItem>
+                      <SelectItem value="3">3 Passengers</SelectItem>
+                      <SelectItem value="4">4 Passengers</SelectItem>
+                      <SelectItem value="5">5+ Passengers</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">BUS TYPE</Label>
+                  <Select value={busType} onValueChange={setBusType}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="AC Bus">AC Bus</SelectItem>
+                      <SelectItem value="Non-AC Bus">Non-AC Bus</SelectItem>
+                      <SelectItem value="Sleeper Coach">Sleeper Coach</SelectItem>
+                      <SelectItem value="Double Decker">Double Decker</SelectItem>
+                      <SelectItem value="Luxury Coach">Luxury Coach</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">PREFERRED TIME</Label>
+                  <Select value={busDepartureTime} onValueChange={setBusDepartureTime}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue placeholder="Any time" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="">Any time</SelectItem>
+                      <SelectItem value="morning">Morning (6AM - 12PM)</SelectItem>
+                      <SelectItem value="afternoon">Afternoon (12PM - 6PM)</SelectItem>
+                      <SelectItem value="evening">Evening (6PM - 10PM)</SelectItem>
+                      <SelectItem value="night">Night (10PM - 6AM)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <Button 
+                onClick={handleSearch} 
+                className="w-full bg-green-600 hover:bg-green-700 h-12 text-lg"
+              >
+                Search Buses
+              </Button>
+            </div>
+
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Bus Options</h2>
               <p className="text-gray-600">Comfortable and affordable bus services</p>
@@ -429,6 +556,124 @@ export default function TripPlannerPage() {
 
           {/* Private Cars Tab */}
           <TabsContent value="cars">
+            {/* Car Search Form */}
+            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+              <div className="mb-6">
+                <RadioGroup value={carTripType} onValueChange={setCarTripType} className="flex space-x-6">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="oneWay" id="carOneWay" />
+                    <Label htmlFor="carOneWay" className="font-medium">One Way</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="roundTrip" id="carRoundTrip" />
+                    <Label htmlFor="carRoundTrip" className="font-medium">Round Trip</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">PICKUP LOCATION</Label>
+                  <Select value={carPickup} onValueChange={setCarPickup}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Dhaka">Dhaka City</SelectItem>
+                      <SelectItem value="Dhaka Airport">Dhaka Airport</SelectItem>
+                      <SelectItem value="Chittagong">Chittagong City</SelectItem>
+                      <SelectItem value="Cox's Bazar">Cox's Bazar</SelectItem>
+                      <SelectItem value="Sylhet">Sylhet City</SelectItem>
+                      <SelectItem value="Rangpur">Rangpur</SelectItem>
+                      <SelectItem value="Rajshahi">Rajshahi</SelectItem>
+                      <SelectItem value="Khulna">Khulna</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">DROP-OFF LOCATION</Label>
+                  <Select value={carDropoff} onValueChange={setCarDropoff}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Cox's Bazar">Cox's Bazar</SelectItem>
+                      <SelectItem value="Dhaka">Dhaka City</SelectItem>
+                      <SelectItem value="Dhaka Airport">Dhaka Airport</SelectItem>
+                      <SelectItem value="Chittagong">Chittagong City</SelectItem>
+                      <SelectItem value="Sylhet">Sylhet City</SelectItem>
+                      <SelectItem value="Rangpur">Rangpur</SelectItem>
+                      <SelectItem value="Rajshahi">Rajshahi</SelectItem>
+                      <SelectItem value="Khulna">Khulna</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">PICKUP DATE</Label>
+                  <Input
+                    type="date"
+                    value={carDate}
+                    onChange={(e) => setCarDate(e.target.value)}
+                    className="h-12"
+                  />
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">PICKUP TIME</Label>
+                  <Input
+                    type="time"
+                    value={carTime}
+                    onChange={(e) => setCarTime(e.target.value)}
+                    className="h-12"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">PASSENGERS</Label>
+                  <Select value={carPassengers} onValueChange={setCarPassengers}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">1 Passenger</SelectItem>
+                      <SelectItem value="2">2 Passengers</SelectItem>
+                      <SelectItem value="3">3 Passengers</SelectItem>
+                      <SelectItem value="4">4 Passengers</SelectItem>
+                      <SelectItem value="5">5 Passengers</SelectItem>
+                      <SelectItem value="6">6+ Passengers</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-gray-600 mb-1 block">CAR TYPE</Label>
+                  <Select value={carType} onValueChange={setCarType}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Sedan">Sedan (4 seats)</SelectItem>
+                      <SelectItem value="SUV">SUV (6-7 seats)</SelectItem>
+                      <SelectItem value="Microbus">Microbus (8-12 seats)</SelectItem>
+                      <SelectItem value="Luxury">Luxury Car</SelectItem>
+                      <SelectItem value="Mini Van">Mini Van (10+ seats)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <Button 
+                onClick={handleSearch} 
+                className="w-full bg-purple-600 hover:bg-purple-700 h-12 text-lg"
+              >
+                Search Private Cars
+              </Button>
+            </div>
+
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Private Car Options</h2>
               <p className="text-gray-600">Comfortable private transportation with professional drivers</p>
