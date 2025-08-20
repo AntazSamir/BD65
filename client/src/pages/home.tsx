@@ -38,7 +38,7 @@ export default function Home() {
           <p className="text-xl text-gray-600 mb-8">Explore the world's most breathtaking locations</p>
           {selectedDestination && (
             <p className="text-gray-700 mb-4 text-[22px] font-semibold">
-              Currently viewing: {selectedDestination.name}
+              {selectedDestination.name}
             </p>
           )}
           <div className="mt-6">
