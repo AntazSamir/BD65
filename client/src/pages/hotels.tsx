@@ -445,15 +445,7 @@ export default function Hotels() {
       {/* Results Section */}
       <div className="pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Results Count */}
-          <div className="mb-6">
-            <p className="text-gray-600" data-testid="text-results-count">
-              {showRestaurants 
-                ? `Showing ${filteredAndSortedRestaurants.length} of ${restaurants.length} restaurants`
-                : `Showing ${filteredAndSortedHotels.length} of ${hotels.length} hotels`
-              }
-            </p>
-          </div>
+          
 
           {/* Hotels/Restaurants List */}
           {(showRestaurants ? filteredAndSortedRestaurants.length > 0 : filteredAndSortedHotels.length > 0) ? (
