@@ -232,21 +232,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
             })}
           </div>
 
-          {/* Dots indicator */}
-          <div className="flex justify-center space-x-2 mt-8">
-            {destinations.slice(0, Math.min(10, destinations.length)).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full will-change-transform transition-all duration-500 ease-in-out ${
-                  index === currentIndex 
-                    ? 'bg-white scale-125' 
-                    : 'bg-white/40 hover:bg-white/60'
-                }`}
-                data-testid={`dot-indicator-${index}`}
-              />
-            ))}
-          </div>
+          
         </div>
       </div>
     </section>
