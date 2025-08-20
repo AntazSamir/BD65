@@ -94,7 +94,7 @@ export default function DestinationDetail() {
     // Special case for Cox's Bazar - use authentic images
     if (destination.name === "Cox's Bazar") {
       return [
-        destination.imageUrl || fallbackImage,
+        '/assets/coxs-bazar-main.jpg',
         '/assets/coxs-bazar-sunset.jpg',
         '/assets/coxs-bazar-aerial.jpg',
         '/assets/coxs-bazar-coastline.webp',
