@@ -27,6 +27,7 @@ export default function Destinations() {
   });
 
   const filteredDestinations = destinations.filter(destination => {
+    if (!destination?.name || !destination?.description || !destination?.district) return false;
     const matchesSearch = destination.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       destination.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesDistrict = selectedDistrict === 'all' || destination.district === selectedDistrict;
@@ -34,7 +35,7 @@ export default function Destinations() {
   });
 
   // Get unique districts for filter dropdown
-  const uniqueDistricts = Array.from(new Set(destinations.map(d => d.district))).sort();
+  const uniqueDistricts = Array.from(new Set(destinations.filter(d => d?.district).map(d => d.district))).sort();
 
   // Hero background carousel with authentic Bangladesh images
   const heroBackgrounds = [

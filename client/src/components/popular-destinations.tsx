@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'wouter';
 import type { Destination } from '@shared/schema';
 
 
@@ -9,11 +10,12 @@ interface PopularDestinationsProps {
 }
 
 export default function PopularDestinations({ selectedDestination, setSelectedDestination }: PopularDestinationsProps) {
+  const [, setLocation] = useLocation();
   const { data: destinations = [], isLoading, error } = useQuery<Destination[]>({
     queryKey: ['/api/destinations'],
   });
 
-  const [currentIndex, setCurrentIndex] = useState(7); // Start with Kuakata Beach (index 7)
+  const [currentIndex, setCurrentIndex] = useState(0); // Start with the first destination
   const [isAutoSliding, setIsAutoSliding] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -21,7 +23,10 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   useEffect(() => {
     if (isAutoSliding && destinations.length > 0) {
       intervalRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
+        setCurrentIndex((prevIndex) => {
+          if (destinations.length === 0) return 0;
+          return (prevIndex + 1) % destinations.length;
+        });
       }, 3000); // Optimized timing for fluid experience
     }
 
@@ -42,16 +47,20 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   // Manual navigation functions
   const goToPrevious = () => {
     setIsAutoSliding(false);
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? destinations.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => {
+      if (destinations.length === 0) return 0;
+      return prevIndex === 0 ? destinations.length - 1 : prevIndex - 1;
+    });
     // Resume auto-sliding after 10 seconds
     setTimeout(() => setIsAutoSliding(true), 10000);
   };
 
   const goToNext = () => {
     setIsAutoSliding(false);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
+    setCurrentIndex((prevIndex) => {
+      if (destinations.length === 0) return 0;
+      return (prevIndex + 1) % destinations.length;
+    });
     // Resume auto-sliding after 6 seconds
     setTimeout(() => setIsAutoSliding(true), 6000);
   };
@@ -177,7 +186,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                     transformStyle: 'preserve-3d',
                     WebkitTransformStyle: 'preserve-3d',
                   }}
-                  onClick={goToNext}
+                  onClick={() => setLocation(`/destinations/${destination.id}`)}
                   data-testid={`card-destination-${destination.id}`}
                 >
                   <img 
@@ -187,7 +196,9 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                     data-testid={`img-destination-${destination.id}`}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080';
+                      if (!target.src.includes('placeholder')) {
+                        target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600';
+                      }
                     }}
                   />
                   
@@ -217,7 +228,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
             {destinations.slice(0, Math.min(10, destinations.length)).map((_, index) => (
               <button
                 key={index}
-                onClick={goToNext}
+                onClick={() => goToSlide(index)}
                 className={`w-3 h-3 rounded-full will-change-transform transition-all duration-500 ease-in-out ${
                   index === currentIndex 
                     ? 'bg-white scale-125' 
