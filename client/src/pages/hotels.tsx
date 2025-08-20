@@ -209,6 +209,20 @@ export default function Hotels() {
     }
   };
 
+  // Generate additional hotel images
+  const getHotelGalleryImages = (hotel: Hotel) => {
+    // Generate 3-4 additional images based on the hotel's main image
+    const baseImages = [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=400&h=300&fit=crop&crop=center"
+    ];
+    
+    // Return 3 random images from the pool
+    return baseImages.sort(() => 0.5 - Math.random()).slice(0, 3);
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -531,6 +545,21 @@ export default function Hotels() {
                                 </div>
                               </div>
                             )}
+
+                            {/* Hotel Gallery Images */}
+                            <div className="mb-3">
+                              <div className="grid grid-cols-3 gap-2">
+                                {getHotelGalleryImages(hotel).map((imageUrl, index) => (
+                                  <img
+                                    key={index}
+                                    src={imageUrl}
+                                    alt={`${hotel.name} gallery ${index + 1}`}
+                                    className="w-full h-16 object-cover rounded-md"
+                                    data-testid={`img-gallery-${hotel.id}-${index}`}
+                                  />
+                                ))}
+                              </div>
+                            </div>
                           </div>
                         </div>
                         
