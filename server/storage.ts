@@ -398,7 +398,7 @@ export class MemStorage implements IStorage {
       country: 'Bangladesh',
       district: "Cox's Bazar",
       description: "World's longest natural sandy sea beach",
-      imageUrl: '/attached_assets/805b015deaf7c5448b86de1f09100343_1755679085271.jpg',
+      imageUrl: '/attached_assets/coxs-bazar-beach.jpg',
       rating: '4.8',
       priceFrom: 3500,
     });
