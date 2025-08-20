@@ -151,20 +151,71 @@ export default function Support() {
       <Navigation />
       
       {/* Hero Section */}
-      <div className="relative pt-24 pb-16 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
+      <div 
+        className="relative pt-24 pb-16 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800"
+        style={{
+          backgroundImage: `linear-gradient(rgba(37, 99, 235, 0.85), rgba(29, 78, 216, 0.85)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="icon-bg-blue">
-              <Headphones className="w-8 h-8" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left content */}
+            <div className="text-center lg:text-left">
+              <div className="flex justify-center lg:justify-start mb-6">
+                <div className="icon-bg-blue">
+                  <Headphones className="w-8 h-8" />
+                </div>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                How Can We Help You?
+              </h1>
+              <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto lg:mx-0">
+                Get instant support for your travel needs. Our expert team is here to assist you 24/7 with bookings, payments, and travel guidance.
+              </p>
+              
+              {/* Quick stats */}
+              <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto lg:mx-0">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">24/7</div>
+                  <div className="text-blue-200 text-sm">Support</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">2 min</div>
+                  <div className="text-blue-200 text-sm">Response Time</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">98%</div>
+                  <div className="text-blue-200 text-sm">Satisfaction</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right side - Support illustration */}
+            <div className="hidden lg:block">
+              <div className="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1553484771-371a605b060b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Customer support team helping travelers"
+                  className="rounded-xl shadow-2xl w-full max-w-md ml-auto"
+                />
+                <div className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-lg p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                      <CheckCircle className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900">Issue Resolved!</div>
+                      <div className="text-sm text-gray-600">Your booking is confirmed</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            How Can We Help You?
-          </h1>
-          <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-            Get instant support for your travel needs. Our expert team is here to assist you 24/7 with bookings, payments, and travel guidance.
-          </p>
         </div>
       </div>
 
