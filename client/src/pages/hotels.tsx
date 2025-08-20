@@ -903,28 +903,8 @@ export default function Hotels() {
                   </div>
                 </div>
 
-                {/* Reviews and Booking */}
+                {/* Features and Reviews */}
                 <div className="space-y-6">
-                  {/* Reviews */}
-                  {selectedRestaurant.reviews && selectedRestaurant.reviews.length > 0 && (
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Customer Reviews</h3>
-                      <div className="space-y-3 max-h-64 overflow-y-auto">
-                        {selectedRestaurant.reviews.map((review, index) => (
-                          <div 
-                            key={index} 
-                            className="bg-gray-50 rounded-lg p-3"
-                            data-testid={`dialog-review-${selectedRestaurant.id}-${index}`}
-                          >
-                            <p className="text-sm text-gray-700 italic">"{review}"</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  <Separator />
-
                   {/* Special Features */}
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
@@ -953,6 +933,26 @@ export default function Hotels() {
                       </div>
                     </div>
                   </div>
+
+                  <Separator />
+
+                  {/* Reviews */}
+                  {selectedRestaurant.reviews && selectedRestaurant.reviews.length > 0 && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Customer Reviews</h3>
+                      <div className="space-y-3 max-h-64 overflow-y-auto">
+                        {selectedRestaurant.reviews.map((review, index) => (
+                          <div 
+                            key={index} 
+                            className="bg-gray-50 rounded-lg p-3"
+                            data-testid={`dialog-review-${selectedRestaurant.id}-${index}`}
+                          >
+                            <p className="text-sm text-gray-700 italic">"{review}"</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Booking Actions */}
                   <div className="pt-4 border-t">
