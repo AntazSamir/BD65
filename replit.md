@@ -22,6 +22,7 @@ Project Focus: Bangladesh tourism and travel destinations.
 - Removed travel packages section from home page per user request
 - Created comprehensive About page with company story, team, values, mission, and statistics
 - Updated navigation to link to the new About page (/about route)
+- Created comprehensive Support page (/support route) with contact information, FAQ section, support ticket form, and help resources (August 2025)
 
 ### Layout and Visual Improvements (August 2025)
 - Enhanced Popular Destinations section layout with increased spacing between hero and destinations

@@ -40,6 +40,7 @@ export default function Navigation() {
               Trip Planner
             </Link>
             <Link href="/about" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">About</Link>
+            <Link href="/support" className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300">Support</Link>
           </div>
           
           <div className="flex items-center space-x-4">
@@ -145,6 +146,13 @@ export default function Navigation() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
+              </Link>
+              <Link 
+                href="/support" 
+                className="relative text-neutral hover:text-primary after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-primary after:transition-all after:duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Support
               </Link>
               
               {isAuthenticated ? (

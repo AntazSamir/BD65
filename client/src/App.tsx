@@ -11,6 +11,7 @@ import Hotels from "@/pages/hotels";
 import TripPlanner from "@/pages/trip-planner";
 import Booking from "@/pages/booking";
 import MyBookings from "@/pages/my-bookings";
+import Support from "@/pages/support";
 import SignIn from "@/pages/sign-in";
 import SignUp from "@/pages/sign-up";
 import Profile from "@/pages/profile";
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/booking/:type/:id" component={Booking} />
       <Route path="/my-bookings" component={MyBookings} />
       <Route path="/about" component={About} />
+      <Route path="/support" component={Support} />
       <Route path="/sign-in" component={SignIn} />
       <Route path="/sign-up" component={SignUp} />
       <Route path="/profile" component={Profile} />
