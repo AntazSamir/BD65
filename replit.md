@@ -44,6 +44,7 @@ Project Focus: Bangladesh tourism and travel destinations.
   - Added seat selection functionality for bus bookings
   - Implemented booking confirmation screens with receipt download capability
   - Enhanced booking receipts to include NID information for compliance
+  - Added "Couple Room" option to hotel booking room types
 - **Auto-sliding Carousel Implementation (August 2025)**: 
   - Added 9 new destinations with high-quality Unsplash images (total now 18 destinations)
   - Implemented auto-sliding carousel showing 5 cards with center focus

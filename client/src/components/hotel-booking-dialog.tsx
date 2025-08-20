@@ -400,6 +400,7 @@ Contact: +880-2-123-4567
                               <SelectContent>
                                 <SelectItem value="standard">Standard Room</SelectItem>
                                 <SelectItem value="deluxe">Deluxe Room</SelectItem>
+                                <SelectItem value="couple">Couple Room</SelectItem>
                                 <SelectItem value="suite">Suite</SelectItem>
                                 <SelectItem value="family">Family Room</SelectItem>
                               </SelectContent>
