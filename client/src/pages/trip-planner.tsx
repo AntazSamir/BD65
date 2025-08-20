@@ -66,20 +66,28 @@ export default function TripPlannerPage() {
       <Navigation />
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div 
+        className="relative text-white py-16 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/attached_assets/penedo3_1755684327033.png')`
+        }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">
-              <div className="bg-white/20 rounded-xl w-12 h-12 flex items-center justify-center">
+              <div className="bg-white/20 backdrop-blur-sm rounded-xl w-12 h-12 flex items-center justify-center">
                 <Plane className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Trip Planner</h1>
-            <p className="text-xl opacity-90">Compare and choose the best transportation option for your journey</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Trip Planner</h1>
+            <p className="text-xl opacity-90 drop-shadow-lg">Compare and choose the best transportation option for your journey</p>
           </div>
 
           {/* Search Form */}
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto">
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-6 max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-5 h-5 text-gray-400" />
