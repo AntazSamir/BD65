@@ -27,6 +27,7 @@ export default function HotelBooking() {
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
+  const [customerNid, setCustomerNid] = useState('');
   const [roomType, setRoomType] = useState('');
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
@@ -101,6 +102,7 @@ export default function HotelBooking() {
         customerName,
         email: customerEmail,
         phone: customerPhone,
+        nid: customerNid,
         propertyName: selectedHotel.name,
         propertyLocation: selectedHotel.location,
         propertyImageUrl: selectedHotel.imageUrl,
@@ -134,6 +136,7 @@ Location: ${bookingDetails.propertyLocation}
 Customer: ${bookingDetails.customerName}
 Email: ${bookingDetails.email}
 Phone: ${bookingDetails.phone}
+National ID: ${bookingDetails.nid}
 
 Room Type: ${bookingDetails.roomType}
 Check-in: ${bookingDetails.checkIn}
@@ -220,6 +223,10 @@ Contact: +880-2-123-4567
                   <div className="flex justify-between">
                     <span>Check-out:</span>
                     <span>{bookingDetails?.checkOut}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>National ID:</span>
+                    <span>{bookingDetails?.nid}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Total Amount:</span>
@@ -350,6 +357,17 @@ Contact: +880-2-123-4567
                       type="email"
                       value={customerEmail}
                       onChange={(e) => setCustomerEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="customerNid">National ID (NID) *</Label>
+                    <Input
+                      id="customerNid"
+                      value={customerNid}
+                      onChange={(e) => setCustomerNid(e.target.value)}
+                      placeholder="Enter your National ID number"
                       required
                     />
                   </div>
