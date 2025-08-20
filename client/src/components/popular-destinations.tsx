@@ -185,8 +185,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               return (
                 <div
                   key={destination.id}
-                  className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer carousel-card-fast ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${cardBlur} ${cardBrightness} ${
-                    isCenterCard ? 'ring-4 ring-white/50 z-10' : 'hover:scale-105 hover:opacity-95'
+                  className={`relative rounded-2xl overflow-hidden shadow-2xl carousel-card-fast ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${cardBlur} ${cardBrightness} ${
+                    isCenterCard ? 'ring-4 ring-white/50 z-10' : ''
                   }`}
                   style={{
                     transform: 'translate3d(0, 0, 0)',
@@ -195,7 +195,6 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                     transformStyle: 'preserve-3d',
                     WebkitTransformStyle: 'preserve-3d',
                   }}
-                  onClick={() => setLocation(`/destinations/${destination.id}`)}
                   data-testid={`card-destination-${destination.id}`}
                 >
                   <img 
