@@ -33,11 +33,6 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <div className="py-24 section-bg-cool relative">
-        {selectedDestination && (
-          <p className="absolute top-4 left-4 text-white text-lg font-semibold bg-black/50 px-3 py-1 rounded-lg backdrop-blur-sm">
-            Currently viewing: {selectedDestination.name}
-          </p>
-        )}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
           <p className="text-xl text-gray-600 mb-8">Explore the world's most breathtaking locations</p>
