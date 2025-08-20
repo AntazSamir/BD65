@@ -50,17 +50,18 @@ export default function HeroSection() {
           </div>
           
           {/* Booking Form */}
-          <div className="bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl text-white border border-white/30 glass-form animate-scale-in hover-lift transition-butter">
+          <div className="bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl text-white border border-white/30 glass-form animate-scale-in transition-all duration-300 hover:shadow-3xl">
             <div className="flex space-x-2 mb-6">
               <Button
                 type="button"
                 variant={activeTab === 'flights' ? 'default' : 'outline'}
-                className={`flex-1 py-3 px-4 rounded-xl font-medium transition-elastic hover:scale-105 ${
+                className={`group flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 hover:scale-105 ${
                   activeTab === 'flights' 
                     ? 'bg-primary text-white hover:bg-primary/90 shadow-lg' 
-                    : 'bg-white/20 text-white hover:bg-white/30 border border-white/30 hover-glow'
+                    : 'bg-white/20 text-white hover:bg-white/30 border border-white/30 hover:shadow-lg'
                 }`}
                 onClick={() => setActiveTab('flights')}
+                data-testid="button-flights-tab"
               >
                 <Plane className="w-4 h-4 mr-2 transition-transform group-hover:rotate-12" />
                 Flights
@@ -68,12 +69,13 @@ export default function HeroSection() {
               <Button
                 type="button"
                 variant={activeTab === 'hotels' ? 'default' : 'outline'}
-                className={`flex-1 py-3 px-4 rounded-xl font-medium transition-elastic hover:scale-105 ${
+                className={`group flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 hover:scale-105 ${
                   activeTab === 'hotels' 
                     ? 'bg-primary text-white hover:bg-primary/90 shadow-lg' 
-                    : 'bg-white/20 text-white hover:bg-white/30 border border-white/30 hover-glow'
+                    : 'bg-white/20 text-white hover:bg-white/30 border border-white/30 hover:shadow-lg'
                 }`}
                 onClick={() => setActiveTab('hotels')}
+                data-testid="button-hotels-tab"
               >
                 <Hotel className="w-4 h-4 mr-2 transition-transform group-hover:scale-110" />
                 Hotels
@@ -81,12 +83,13 @@ export default function HeroSection() {
               <Button
                 type="button"
                 variant={activeTab === 'cars' ? 'default' : 'outline'}
-                className={`flex-1 py-3 px-4 rounded-xl font-medium transition-elastic hover:scale-105 ${
+                className={`group flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 hover:scale-105 ${
                   activeTab === 'cars' 
                     ? 'bg-primary text-white hover:bg-primary/90 shadow-lg' 
-                    : 'bg-white/20 text-white hover:bg-white/30 border border-white/30 hover-glow'
+                    : 'bg-white/20 text-white hover:bg-white/30 border border-white/30 hover:shadow-lg'
                 }`}
                 onClick={() => setActiveTab('cars')}
+                data-testid="button-cars-tab"
               >
                 <Car className="w-4 h-4 mr-2 transition-transform group-hover:translate-x-1" />
                 Cars
@@ -102,7 +105,8 @@ export default function HeroSection() {
                     <Input 
                       type="text" 
                       placeholder="Dhaka" 
-                      className="pl-10 bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-primary focus:border-transparent transition-butter focus:scale-[1.02] hover:bg-white/25"
+                      className="pl-10 bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 focus:scale-[1.02] hover:bg-white/25"
+                      data-testid="input-from-location"
                     />
                   </div>
                 </div>
@@ -113,7 +117,8 @@ export default function HeroSection() {
                     <Input 
                       type="text" 
                       placeholder="Cox's Bazar" 
-                      className="pl-10 bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-primary focus:border-transparent transition-butter focus:scale-[1.02] hover:bg-white/25"
+                      className="pl-10 bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 focus:scale-[1.02] hover:bg-white/25"
+                      data-testid="input-to-location"
                     />
                   </div>
                 </div>
@@ -124,14 +129,16 @@ export default function HeroSection() {
                   <label className="block text-sm font-medium text-white mb-2">Departure</label>
                   <Input 
                     type="date" 
-                    className="bg-white/20 backdrop-blur-md border border-white/30 text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-butter focus:scale-[1.02] hover:bg-white/25"
+                    className="bg-white/20 backdrop-blur-md border border-white/30 text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 focus:scale-[1.02] hover:bg-white/25"
+                    data-testid="input-departure-date"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-white mb-2">Return</label>
                   <Input 
                     type="date" 
-                    className="bg-white/20 backdrop-blur-md border border-white/30 text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-butter focus:scale-[1.02] hover:bg-white/25"
+                    className="bg-white/20 backdrop-blur-md border border-white/30 text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 focus:scale-[1.02] hover:bg-white/25"
+                    data-testid="input-return-date"
                   />
                 </div>
               </div>
@@ -139,7 +146,10 @@ export default function HeroSection() {
               <div>
                 <label className="block text-sm font-medium text-white mb-2">Passengers</label>
                 <Select>
-                  <SelectTrigger className="bg-white/20 backdrop-blur-md border border-white/30 text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-butter focus:scale-[1.02] hover:bg-white/25">
+                  <SelectTrigger 
+                    className="bg-white/20 backdrop-blur-md border border-white/30 text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 focus:scale-[1.02] hover:bg-white/25"
+                    data-testid="select-passengers"
+                  >
                     <SelectValue placeholder="1 Adult" className="text-white placeholder:text-white placeholder:opacity-70" />
                   </SelectTrigger>
                   <SelectContent>
@@ -153,10 +163,11 @@ export default function HeroSection() {
               
               <Button 
                 type="submit" 
-                className="w-full bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-6 rounded-lg transition-elastic hover:scale-105 hover:shadow-xl hover-glow group"
+                className="w-full bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl group"
+                data-testid="button-search-flights"
               >
                 <Search className="w-4 h-4 mr-2 transition-transform group-hover:rotate-12" />
-                Search Flights
+                Search {activeTab === 'flights' ? 'Flights' : activeTab === 'hotels' ? 'Hotels' : 'Cars'}
               </Button>
             </form>
           </div>
