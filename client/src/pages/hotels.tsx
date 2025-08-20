@@ -545,21 +545,6 @@ export default function Hotels() {
                                 </div>
                               </div>
                             )}
-
-                            {/* Hotel Gallery Images */}
-                            <div className="mb-3">
-                              <div className="grid grid-cols-3 gap-2">
-                                {getHotelGalleryImages(hotel).map((imageUrl, index) => (
-                                  <img
-                                    key={index}
-                                    src={imageUrl}
-                                    alt={`${hotel.name} gallery ${index + 1}`}
-                                    className="w-full h-16 object-cover rounded-md"
-                                    data-testid={`img-gallery-${hotel.id}-${index}`}
-                                  />
-                                ))}
-                              </div>
-                            </div>
                           </div>
                         </div>
                         
@@ -643,6 +628,22 @@ export default function Hotels() {
                     className="w-full h-64 object-cover rounded-lg"
                     data-testid={`dialog-img-${selectedHotel.id}`}
                   />
+
+                  {/* Hotel Gallery */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Photo Gallery</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => (
+                        <img
+                          key={index}
+                          src={imageUrl}
+                          alt={`${selectedHotel.name} gallery ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg"
+                          data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                   
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">About This Hotel</h3>
