@@ -150,8 +150,10 @@ export default function Hotels() {
   };
 
   const handleRestaurantClick = (restaurant: Restaurant) => {
+    console.log('Restaurant clicked:', restaurant.name, restaurant.id);
     setSelectedRestaurant(restaurant);
     setSelectedHotel(null);
+    setCurrentMainImage(restaurant.imageUrl); // Initialize with main restaurant image
     setIsDialogOpen(true);
   };
 
@@ -238,6 +240,31 @@ export default function Hotels() {
     ];
     
     console.log('Gallery images for', hotel.name, ':', result);
+    return result;
+  };
+
+  // Generate restaurant gallery images
+  const getRestaurantGalleryImages = (restaurant: Restaurant) => {
+    // Restaurant-specific images
+    const baseImages = [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1552566618-dcd3ec399fb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    ];
+    
+    // Use restaurant ID to get consistent images
+    const seed = restaurant.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const selectedIndex = seed % baseImages.length;
+    
+    // Include the original restaurant image first, then additional gallery images
+    const result = [
+      restaurant.imageUrl, // Original restaurant image as first option
+      baseImages[selectedIndex],
+      baseImages[(selectedIndex + 1) % baseImages.length], 
+      baseImages[(selectedIndex + 2) % baseImages.length]
+    ];
+    
+    console.log('Gallery images for', restaurant.name, ':', result);
     return result;
   };
 
@@ -827,11 +854,31 @@ export default function Hotels() {
                 {/* Restaurant Image and Info */}
                 <div className="space-y-4">
                   <img
-                    src={selectedRestaurant.imageUrl}
+                    src={currentMainImage || selectedRestaurant.imageUrl}
                     alt={selectedRestaurant.name}
                     className="w-full h-64 object-cover rounded-lg"
                     data-testid={`dialog-img-${selectedRestaurant.id}`}
                   />
+
+                  {/* Restaurant Gallery */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Photo Gallery</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      {getRestaurantGalleryImages(selectedRestaurant).map((imageUrl, index) => (
+                        <img
+                          key={`${selectedRestaurant.id}-gallery-${index}`}
+                          src={imageUrl}
+                          alt={`${selectedRestaurant.name} - Interior view ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg border border-gray-200 cursor-pointer hover:border-gray-300 transition-colors"
+                          data-testid={`dialog-gallery-${selectedRestaurant.id}-${index}`}
+                          onClick={() => handleGalleryImageClick(imageUrl)}
+                          onError={(e) => {
+                            e.currentTarget.src = selectedRestaurant.imageUrl;
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
                   
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">About This Restaurant</h3>
