@@ -90,6 +90,17 @@ export default function DestinationDetail() {
   // Generate additional images for gallery based on destination type
   const getDestinationImages = (destination: Destination) => {
     const fallbackImage = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600';
+    
+    // Special case for Lalbagh Fort - use authentic images
+    if (destination.name === 'Lalbagh Fort') {
+      return [
+        destination.imageUrl || fallbackImage,
+        '/assets/lalbagh-fort-sunset.webp',
+        '/assets/lalbagh-fort-archway.webp',
+        '/assets/lalbagh-fort-aerial.jpg'
+      ];
+    }
+    
     const baseImages = [
       destination.imageUrl || fallbackImage,
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
