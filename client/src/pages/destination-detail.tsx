@@ -138,7 +138,8 @@ export default function DestinationDetail() {
         destination.imageUrl || fallbackImage, // Main image with palm tree and boats
         '/attached_assets/Saint-Martin-Island-Bangladesh-5_1755681418236.jpg', // Single boat on beach
         '/attached_assets/Saint_Martins_Island_with_boats_in_foreground_1755681418237.jpg', // Multiple boats with beach
-        '/attached_assets/sunset-naf-river-2048x1152_1755681418238.jpg' // Golden sunset over water
+        '/attached_assets/sunset-naf-river-2048x1152_1755681418238.jpg', // Golden sunset over water
+        '/attached_assets/boat-saint-martins-island-1920x1080_1755681560767.jpg' // Traditional boat in crystal blue water
       ];
     }
     
