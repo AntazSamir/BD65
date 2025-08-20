@@ -141,6 +141,7 @@ export default function Hotels() {
   };
 
   const handleHotelClick = (hotel: Hotel) => {
+    console.log('Hotel clicked:', hotel.name, hotel.id);
     setSelectedHotel(hotel);
     setSelectedRestaurant(null);
     setIsDialogOpen(true);
@@ -211,16 +212,29 @@ export default function Hotels() {
 
   // Generate additional hotel images
   const getHotelGalleryImages = (hotel: Hotel) => {
-    // Generate 3-4 additional images based on the hotel's main image
+    // Use high-quality hotel images
     const baseImages = [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=400&h=300&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=400&h=300&fit=crop&crop=center"
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&h=400&fit=crop&crop=center", 
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600&h=400&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=400&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop&crop=center"
     ];
     
-    // Return 3 random images from the pool
-    return baseImages.sort(() => 0.5 - Math.random()).slice(0, 3);
+    // Use hotel ID to get consistent images (deterministic selection)
+    const seed = hotel.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const shuffled = [...baseImages];
+    
+    // Simple deterministic shuffle based on hotel ID
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = (seed + i) % (i + 1);
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    
+    const selectedImages = shuffled.slice(0, 3);
+    console.log('Gallery images for', hotel.name, ':', selectedImages);
+    return selectedImages;
   };
 
   if (isLoading) {
@@ -635,11 +649,15 @@ export default function Hotels() {
                     <div className="grid grid-cols-2 gap-3">
                       {getHotelGalleryImages(selectedHotel).map((imageUrl, index) => (
                         <img
-                          key={index}
+                          key={`${selectedHotel.id}-gallery-${index}`}
                           src={imageUrl}
-                          alt={`${selectedHotel.name} gallery ${index + 1}`}
-                          className="w-full h-32 object-cover rounded-lg"
+                          alt={`${selectedHotel.name} - Interior view ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg border border-gray-200"
                           data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
+                          onError={(e) => {
+                            console.log(`Failed to load gallery image ${index + 1} for ${selectedHotel.name}`);
+                            e.currentTarget.src = selectedHotel.imageUrl;
+                          }}
                         />
                       ))}
                     </div>
