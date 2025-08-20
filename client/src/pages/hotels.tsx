@@ -903,8 +903,73 @@ export default function Hotels() {
                   </div>
                 </div>
 
-                {/* Features and Reviews */}
+                {/* Menu and Features */}
                 <div className="space-y-6">
+                  {/* Menu Section */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                      <Utensils className="w-5 h-5 mr-2 text-orange-600" />
+                      Menu & Prices
+                    </h3>
+                    <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-lg p-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Popular Dishes */}
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                            <Star className="w-4 h-4 mr-1 text-yellow-500" />
+                            Popular Dishes
+                          </h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Hilsha Fish Curry</span>
+                              <span className="font-medium text-gray-900">৳450</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Beef Bhuna</span>
+                              <span className="font-medium text-gray-900">৳380</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Chicken Biryani</span>
+                              <span className="font-medium text-gray-900">৳320</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Prawn Malaikari</span>
+                              <span className="font-medium text-gray-900">৳520</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Traditional Items */}
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                            <Coffee className="w-4 h-4 mr-1 text-orange-500" />
+                            Traditional Items
+                          </h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Dal with Rice</span>
+                              <span className="font-medium text-gray-900">৳180</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Shutki Bhorta</span>
+                              <span className="font-medium text-gray-900">৳220</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Panta Ilish</span>
+                              <span className="font-medium text-gray-900">৳580</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">Mixed Vegetable</span>
+                              <span className="font-medium text-gray-900">৳150</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Separator />
+
                   {/* Special Features */}
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
