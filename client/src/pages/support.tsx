@@ -154,7 +154,7 @@ export default function Support() {
       <div 
         className="relative pt-24 pb-16 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800"
         style={{
-          backgroundImage: `linear-gradient(rgba(37, 99, 235, 0.85), rgba(29, 78, 216, 0.85)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80')`,
+          backgroundImage: `linear-gradient(rgba(37, 99, 235, 0.85), rgba(29, 78, 216, 0.85)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -198,8 +198,8 @@ export default function Support() {
             <div className="hidden lg:block">
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1553484771-371a605b060b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                  alt="Customer support team helping travelers"
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Customer support representative helping with travel booking"
                   className="rounded-xl shadow-2xl w-full max-w-md ml-auto"
                 />
                 <div className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-lg p-4">
