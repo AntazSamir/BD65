@@ -198,8 +198,8 @@ export default function Support() {
             <div className="hidden lg:block">
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                  alt="Customer support representative helping with travel booking"
+                  src="/attached_assets/support_1755695837052.jpg"
+                  alt="Customer support - Get help and assistance"
                   className="rounded-xl shadow-2xl w-full max-w-md ml-auto"
                 />
                 <div className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-lg p-4">
