@@ -22,7 +22,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     if (isAutoSliding && destinations.length > 0) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
-      }, 2500); // Ultra-fast timing for seamless experience
+      }, 3000); // Optimized timing for fluid experience
     }
 
     return () => {
@@ -52,8 +52,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   const goToNext = () => {
     setIsAutoSliding(false);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
-    // Resume auto-sliding after 5 seconds
-    setTimeout(() => setIsAutoSliding(true), 5000);
+    // Resume auto-sliding after 6 seconds
+    setTimeout(() => setIsAutoSliding(true), 6000);
   };
 
   const goToSlide = (index: number) => {
@@ -132,7 +132,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
   return (
     <section 
       id="destinations" 
-      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col will-change-transform transition-all duration-500 ease-out"
+      className="relative py-24 min-h-[800px] bg-gray-900 flex flex-col will-change-transform transition-all duration-700 ease-out"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -141,8 +141,6 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
         transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
         backfaceVisibility: 'hidden', // Prevent flickering
         perspective: '1000px', // Enable 3D transforms
-        WebkitTransform: 'translate3d(0, 0, 0)',
-        WebkitBackfaceVisibility: 'hidden',
       }}
     >
       {/* Dark overlay for better text readability */}
@@ -169,7 +167,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               return (
                 <div
                   key={destination.id}
-                  className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer carousel-ultra-smooth ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${cardBlur} ${cardBrightness} ${
+                  className={`relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer carousel-card-fast ${cardScale} ${cardOpacity} ${cardHeight} ${cardWidth} ${cardBlur} ${cardBrightness} ${
                     isCenterCard ? 'ring-4 ring-white/50 z-10' : 'hover:scale-105 hover:opacity-95'
                   }`}
                   style={{
@@ -178,8 +176,6 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                     WebkitBackfaceVisibility: 'hidden',
                     transformStyle: 'preserve-3d',
                     WebkitTransformStyle: 'preserve-3d',
-                    WebkitTransform: 'translate3d(0, 0, 0)',
-                    willChange: 'transform, opacity, filter',
                   }}
                   onClick={goToNext}
                   data-testid={`card-destination-${destination.id}`}
@@ -196,7 +192,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                   />
                   
                   {/* Overlay with destination name */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end carousel-ultra-smooth">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end carousel-card-fast">
                     <div className="p-4 w-full">
                       <h3 className="text-white font-semibold text-lg text-center" data-testid={`text-destination-name-${destination.id}`}>
                         {destination.name}
@@ -209,7 +205,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
                   
                   {/* Center card indicator */}
                   {isCenterCard && (
-                    <div className="absolute top-4 right-4 w-4 h-4 bg-white rounded-full shadow-lg carousel-ultra-smooth"></div>
+                    <div className="absolute top-4 right-4 w-4 h-4 bg-white rounded-full shadow-lg carousel-card-fast"></div>
                   )}
                 </div>
               );
