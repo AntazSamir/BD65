@@ -54,32 +54,48 @@ export default function About() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary to-secondary text-white overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20" 
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=600')"
-          }}
-        />
-        {/* Decorative floating icons */}
-        <div className="absolute inset-0 overflow-hidden">
-          <Globe className="absolute top-20 left-10 w-12 h-12 text-white/20 animate-bounce" style={{ animationDelay: '0s' }} />
-          <Camera className="absolute top-32 right-20 w-10 h-10 text-white/15 animate-pulse" style={{ animationDelay: '1s' }} />
-          <Mountain className="absolute bottom-20 left-20 w-14 h-14 text-white/10" />
-          <Waves className="absolute bottom-32 right-10 w-16 h-16 text-white/15" />
-          <Plane className="absolute top-40 left-1/3 w-8 h-8 text-white/20 animate-bounce" style={{ animationDelay: '2s' }} />
-          <Star className="absolute top-16 right-1/3 w-6 h-6 text-white/25 animate-pulse" style={{ animationDelay: '0.5s' }} />
-        </div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-              <Globe className="w-10 h-10 text-white" />
+      <section className="relative py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="inline-flex items-center space-x-3 bg-primary/10 px-6 py-3 rounded-full mb-8">
+              <MapPin className="w-5 h-5 text-primary" />
+              <span className="text-primary font-medium">Discover Bangladesh</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Bangladesh Explorer</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Your trusted partner in discovering the beauty, culture, and heritage of Bangladesh through authentic travel experiences.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+              <div className="elegant-card p-8 text-center hover-lift transition-butter">
+                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Globe className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">Authentic Experiences</h3>
+                <p className="text-gray-600">Discover the real Bangladesh through local insights and hidden gems</p>
+              </div>
+              
+              <div className="elegant-card p-8 text-center hover-lift transition-butter">
+                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Shield className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">Safe & Reliable</h3>
+                <p className="text-gray-600">Travel with confidence knowing you're in experienced hands</p>
+              </div>
+              
+              <div className="elegant-card p-8 text-center hover-lift transition-butter">
+                <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Heart className="w-8 h-8 text-purple-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">Passionate Service</h3>
+                <p className="text-gray-600">Dedicated team committed to making your journey unforgettable</p>
+              </div>
             </div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">About Bangladesh Explorer</h1>
-          <p className="text-xl md:text-2xl opacity-90 leading-relaxed">
-            Your trusted partner in discovering the beauty, culture, and heritage of Bangladesh through authentic travel experiences.
-          </p>
         </div>
       </section>
 
