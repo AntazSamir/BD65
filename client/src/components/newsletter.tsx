@@ -5,7 +5,7 @@ import buddhaImage from '@assets/Buddha_Dhatu_Jadi_06_1755534311265.jpg';
 export default function Newsletter() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for subscribing! This is a demo form.');
+    // Form submitted successfully - in production, this would be sent to a backend
   };
 
   return (

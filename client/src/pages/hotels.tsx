@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useLocation } from 'wouter';
+import { useQuery } from '@tanstack/react-query';
 import { Search, MapPin, Star, Wifi, Car, Coffee, Users, X, Calendar, CreditCard, Utensils, Building2, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,7 +28,7 @@ export default function Hotels() {
   const [selectedHotel, setSelectedHotel] = useState<Hotel | null>(null);
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [currentMainImage, setCurrentMainImage] = useState<string>('');
+
 
 
   const { data: hotels = [], isLoading: hotelsLoading, error: hotelsError } = useQuery<Hotel[]>({
@@ -169,18 +169,14 @@ export default function Hotels() {
   };
 
   const handleHotelClick = (hotel: Hotel) => {
-
     setSelectedHotel(hotel);
     setSelectedRestaurant(null);
-    setCurrentMainImage(hotel.imageUrl); // Initialize with main hotel image
     setIsDialogOpen(true);
   };
 
   const handleRestaurantClick = (restaurant: Restaurant) => {
-
     setSelectedRestaurant(restaurant);
     setSelectedHotel(null);
-    setCurrentMainImage(restaurant.imageUrl); // Initialize with main restaurant image
     setIsDialogOpen(true);
   };
 
@@ -188,10 +184,6 @@ export default function Hotels() {
     setIsDialogOpen(false);
     setSelectedHotel(null);
     setSelectedRestaurant(null);
-  };
-
-  const handleGalleryImageClick = (imageUrl: string) => {
-    setCurrentMainImage(imageUrl);
   };
 
   // Generate room types for the selected hotel
@@ -696,7 +688,7 @@ export default function Hotels() {
                 {/* Hotel Image and Info */}
                 <div className="space-y-4">
                   <img
-                    src={currentMainImage || selectedHotel.imageUrl}
+                    src={selectedHotel.imageUrl}
                     alt={selectedHotel.name}
                     className="w-full h-64 object-cover rounded-lg"
                     data-testid={`dialog-img-${selectedHotel.id}`}
@@ -711,9 +703,8 @@ export default function Hotels() {
                           key={`${selectedHotel.id}-gallery-${index}`}
                           src={imageUrl}
                           alt={`${selectedHotel.name} - Interior view ${index + 1}`}
-                          className="w-full h-32 object-cover rounded-lg border border-gray-200 cursor-pointer hover:border-gray-300 transition-colors"
+                          className="w-full h-32 object-cover rounded-lg border border-gray-200"
                           data-testid={`dialog-gallery-${selectedHotel.id}-${index}`}
-                          onClick={() => handleGalleryImageClick(imageUrl)}
                           onError={(e) => {
                             e.currentTarget.src = selectedHotel.imageUrl;
                           }}
@@ -881,7 +872,7 @@ export default function Hotels() {
                 {/* Restaurant Image and Info */}
                 <div className="space-y-4">
                   <img
-                    src={currentMainImage || selectedRestaurant.imageUrl}
+                    src={selectedRestaurant.imageUrl}
                     alt={selectedRestaurant.name}
                     className="w-full h-64 object-cover rounded-lg"
                     data-testid={`dialog-img-${selectedRestaurant.id}`}
@@ -896,9 +887,8 @@ export default function Hotels() {
                           key={`${selectedRestaurant.id}-gallery-${index}`}
                           src={imageUrl}
                           alt={`${selectedRestaurant.name} - Interior view ${index + 1}`}
-                          className="w-full h-32 object-cover rounded-lg border border-gray-200 cursor-pointer hover:border-gray-300 transition-colors"
+                          className="w-full h-32 object-cover rounded-lg border border-gray-200"
                           data-testid={`dialog-gallery-${selectedRestaurant.id}-${index}`}
-                          onClick={() => handleGalleryImageClick(imageUrl)}
                           onError={(e) => {
                             e.currentTarget.src = selectedRestaurant.imageUrl;
                           }}

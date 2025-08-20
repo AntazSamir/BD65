@@ -11,8 +11,7 @@ export default function HeroSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock form submission
-    alert('This is a demo form. In a real application, this would submit the data.');
+    window.location.href = '/destinations';
   };
 
   return (

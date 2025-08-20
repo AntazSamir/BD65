@@ -10,7 +10,7 @@ export default function TravelPackages() {
   });
 
   const handleBooking = () => {
-    alert('This would navigate to the booking page in a real application.');
+    window.location.href = '/trip-planner';
   };
 
   const getIncludeIcon = (include: string) => {

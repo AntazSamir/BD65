@@ -8,8 +8,8 @@ export default function RecommendedHotels() {
     queryKey: ['/api/hotels'],
   });
 
-  const handleBooking = () => {
-    alert('This would navigate to the booking page in a real application.');
+  const handleBooking = (hotelId: string) => {
+    window.location.href = `/hotel-booking/${hotelId}`;
   };
 
   if (isLoading) {
@@ -98,7 +98,7 @@ export default function RecommendedHotels() {
                   </div>
                   <Button 
                     className="bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg transition-colors"
-                    onClick={handleBooking}
+                    onClick={() => handleBooking(hotel.id)}
                     data-testid={`button-book-hotel-${hotel.id}`}
                   >
                     Book Now

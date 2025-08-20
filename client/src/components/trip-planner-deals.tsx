@@ -9,7 +9,8 @@ export default function TripPlannerDeals() {
   });
 
   const handleBookNow = () => {
-    alert('This would navigate to the booking page in a real application.');
+    // Navigate to trip planner page for booking
+    window.location.href = '/trip-planner';
   };
 
   // Map trip planners to destination images
