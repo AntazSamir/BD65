@@ -13,17 +13,17 @@ export default function Navigation() {
 
   return (
     <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100/50">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-        <div className="flex justify-between items-center py-3 sm:py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center">
             <div className="flex items-center">
               <img 
                 src={logoImage} 
                 alt="BD Explorer Logo" 
-                className="w-8 h-8 sm:w-10 sm:h-10 mr-2 sm:mr-3"
+                className="w-10 h-10 mr-3"
                 data-testid="logo-image"
               />
-              <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">
+              <div className="text-2xl font-bold text-primary">
                 BD Explorer
               </div>
             </div>
@@ -111,68 +111,68 @@ export default function Navigation() {
         
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-3 bg-white/95 backdrop-blur-md">
-            <div className="flex flex-col space-y-3">
+          <div className="lg:hidden border-t border-gray-200 py-4 bg-white/95 backdrop-blur-md">
+            <div className="flex flex-col space-y-1">
               <Link 
                 href="/" 
-                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/destinations" 
-                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Destinations
               </Link>
               <Link 
                 href="/hotels" 
-                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Hotels
               </Link>
               <Link 
                 href="/trip-planner" 
-                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Trip Planner
               </Link>
               <Link 
                 href="/about" 
-                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/support" 
-                className="px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                className="block px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Support
               </Link>
               
-              <div className="border-t border-gray-200 mt-3 pt-3">
+              <div className="border-t border-gray-200 mt-4 pt-4">
                 {isAuthenticated ? (
                   <>
                     <Link 
                       href="/profile" 
-                      className="flex items-center px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                      className="flex items-center px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <UserIcon className="w-4 h-4 mr-2" />
+                      <UserIcon className="w-5 h-5 mr-3" />
                       Profile
                     </Link>
                     <Link 
                       href="/my-bookings" 
-                      className="flex items-center px-3 py-2 text-sm font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                      className="flex items-center px-4 py-3 text-base font-medium text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <Calendar className="w-4 h-4 mr-2" />
+                      <Calendar className="w-5 h-5 mr-3" />
                       My Bookings
                     </Link>
                     <button 
@@ -181,18 +181,18 @@ export default function Navigation() {
                         setIsMenuOpen(false);
                       }}
                       disabled={isSigningOut}
-                      className="flex items-center w-full px-3 py-2 text-sm font-medium text-left text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-all duration-200"
+                      className="flex items-center w-full px-4 py-3 text-base font-medium text-left text-neutral hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                     >
-                      <LogOut className="w-4 h-4 mr-2" />
+                      <LogOut className="w-5 h-5 mr-3" />
                       {isSigningOut ? "Signing out..." : "Sign out"}
                     </button>
                   </>
                 ) : (
                   <div className="flex flex-col space-y-2">
                     <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="justify-start" 
+                      variant="outline" 
+                      size="lg" 
+                      className="w-full justify-center" 
                       asChild
                     >
                       <Link 
@@ -203,8 +203,8 @@ export default function Navigation() {
                       </Link>
                     </Button>
                     <Button 
-                      size="sm" 
-                      className="justify-start"
+                      size="lg" 
+                      className="w-full justify-center"
                       asChild
                     >
                       <Link 
