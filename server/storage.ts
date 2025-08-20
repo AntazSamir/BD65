@@ -10,6 +10,7 @@ import {
   type Booking, type InsertBooking
 } from "@shared/schema";
 import { randomUUID } from "crypto";
+import bcrypt from "bcrypt";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -114,8 +115,14 @@ export class MemStorage implements IStorage {
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
     const now = new Date().toISOString();
+    
+    // Hash the password before storing
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(insertUser.password, saltRounds);
+    
     const user: User = { 
-      ...insertUser, 
+      ...insertUser,
+      password: hashedPassword, // Store the hashed password instead of plain text
       id,
       phone: insertUser.phone || null,
       dateOfBirth: insertUser.dateOfBirth || null,
@@ -143,8 +150,12 @@ export class MemStorage implements IStorage {
 
   async validateUser(email: string, password: string): Promise<User | undefined> {
     const user = await this.getUserByEmail(email);
-    if (user && user.password === password) {
-      return user;
+    if (user) {
+      // Use bcrypt to compare the provided password with the hashed password
+      const isValid = await bcrypt.compare(password, user.password);
+      if (isValid) {
+        return user;
+      }
     }
     return undefined;
   }
