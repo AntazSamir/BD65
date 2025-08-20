@@ -155,14 +155,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
       
-      {/* Currently viewing text in top left */}
-      {visibleCards.find(card => card.position === 0) && (
-        <div className="absolute top-6 left-6 z-20">
-          <p className="text-white text-lg font-semibold bg-black/50 px-3 py-1 rounded-lg backdrop-blur-sm">
-            Sajek Valley
-          </p>
-        </div>
-      )}
+      
       
       {/* Spacer to push cards to bottom */}
       <div className="flex-1"></div>
