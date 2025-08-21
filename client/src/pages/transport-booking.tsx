@@ -395,11 +395,11 @@ Contact: +880-2-123-4567
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Route:</span>
-                        <span>{(selectedTransport as BusType).route}</span>
+                        <span>{(selectedTransport as BusType).origin} → {(selectedTransport as BusType).destination}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Departure:</span>
-                        <span>{(selectedTransport as BusType).departureTime}</span>
+                        <span>{(selectedTransport as BusType).departure}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Price per seat:</span>
@@ -424,7 +424,7 @@ Contact: +880-2-123-4567
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Price per day:</span>
-                        <span className="font-semibold text-lg">৳{(selectedTransport as PrivateCar).pricePerDay}</span>
+                        <span className="font-semibold text-lg">৳{(selectedTransport as PrivateCar).price}</span>
                       </div>
                     </>
                   )}

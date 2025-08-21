@@ -296,18 +296,7 @@ Contact: +880-2-123-4567
                     <Badge variant="outline">{selectedRestaurant.priceRange}</Badge>
                   </div>
 
-                  {selectedRestaurant.specialties && selectedRestaurant.specialties.length > 0 && (
-                    <div>
-                      <h4 className="font-semibold mb-2">Specialties</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedRestaurant.specialties.map((specialty, index) => (
-                          <Badge key={index} variant="secondary">
-                            {specialty}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  {/* Specialties field removed: not present on Restaurant type */}
                 </div>
               </CardContent>
             </Card>
