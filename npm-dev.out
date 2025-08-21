@@ -13,3 +13,5 @@
 9:35:59 PM [express] GET /api/auth/me 401 in 1ms :: {"message":"Unauthorized"}
 9:35:59 PM [express] GET /api/destinations 304 in 1ms :: [{"name":"Lalbagh Fort","country":"Banglade…
 9:35:59 PM [express] GET /api/hotels 304 in 1ms :: [{"name":"Sea Palace Hotel","location":"Cox's Baz…
+[2m9:37:33 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/transport-booking.tsx, /src/index.css?v=_dkAITt2_Dm_dBsu-S3o7[22m
+[2m9:37:33 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/restaurant-booking.tsx, /src/index.css?v=_dkAITt2_Dm_dBsu-S3o7[22m
