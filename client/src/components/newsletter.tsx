@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import buddhaImage from '@assets/Buddha_Dhatu_Jadi_06_1755534311265.jpg';
+import buddhaImage from '/assets/Buddha_Dhatu_Jadi_06_1755534311265.jpg';
 
 export default function Newsletter() {
   const handleSubmit = (e: React.FormEvent) => {

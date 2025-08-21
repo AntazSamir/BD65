@@ -1,5 +1,5 @@
 import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
-import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
+import logoImage from '/assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 
 export default function Footer() {
   return (

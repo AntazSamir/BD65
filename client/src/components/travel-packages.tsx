@@ -1,5 +1,5 @@
 import { Star, Plane, Hotel, Utensils, MapPin, Train, Camera, Mountain, TreePine, Tent } from 'lucide-react';
-import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
+import logoImage from '/assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import type { TravelPackage } from '@shared/schema';

@@ -8,11 +8,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useLocation } from 'wouter';
-import sundarbansImage from '@assets/বিষ্ময়কর_সুন্দরবন_1755535540494.jpg';
-import valleyImage from '@assets/Tourist-Places-in-Bangladesh_1755535540494.jpg';
-import boatsImage from '@assets/penedo3_1755535540495.png';
-import aerialImage from '@assets/2_1755535540495.jpg';
-import sajekImage from '@assets/Sajek_Valley_1755535989228.jpg';
+import sundarbansImage from '/assets/sundarbans.jpg';
+import valleyImage from '/assets/Tourist-Places-in-Bangladesh_1755535540494.jpg';
+import boatsImage from '/assets/penedo3_1755535540495.png';
+import aerialImage from '/assets/2_1755535540495.jpg';
+import sajekImage from '/assets/Sajek_Valley_1755535989228.jpg';
 
 export default function Destinations() {
   const [searchQuery, setSearchQuery] = useState('');

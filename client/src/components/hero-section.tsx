@@ -3,8 +3,8 @@ import { Hotel, Car, MapPin, Search, Star, Users, Plane } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import heroImage from '@assets/1781002652_1755358586408.jpg';
-import logoImage from '@assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
+import heroImage from '/assets/1781002652_1755358586408.jpg';
+import logoImage from '/assets/ChatGPT Image Aug 14, 2025, 10_54_35 PM_1755361280936.png';
 
 export default function HeroSection() {
   const [activeTab, setActiveTab] = useState('flights');
