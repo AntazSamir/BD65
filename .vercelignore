@@ -11,8 +11,3 @@ bd67-*/
 .config/
 .replit
 .git
-dist/
-client/
-README.md
-SUPABASE_SETUP.md
-migrations/
