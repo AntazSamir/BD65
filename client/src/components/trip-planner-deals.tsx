@@ -1,12 +1,57 @@
 import { Heart, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useQuery } from '@tanstack/react-query';
 import type { TripPlanner } from '@shared/schema';
 
+// Embedded sample data as fallback
+const FALLBACK_TRIP_PLANNERS: TripPlanner[] = [
+  {
+    id: '1',
+    origin: 'Dhaka',
+    destination: "Cox's Bazar",
+    price: 4500,
+    duration: 'Round trip \u2022 Direct',
+    stops: 'Direct',
+    departureDate: 'Dec 15 - Dec 22',
+    returnDate: 'Dec 22',
+    dealType: 'Save 20%',
+  },
+  {
+    id: '2',
+    origin: 'Dhaka',
+    destination: 'Sylhet',
+    price: 3800,
+    duration: 'Round trip \u2022 Direct',
+    stops: 'Direct',
+    departureDate: 'Jan 10 - Jan 20',
+    returnDate: 'Jan 20',
+    dealType: 'Hot Deal',
+  },
+  {
+    id: '3',
+    origin: 'Dhaka',
+    destination: 'Chittagong',
+    price: 4200,
+    duration: 'Round trip \u2022 Direct',
+    stops: 'Direct',
+    departureDate: 'Feb 5 - Feb 15',
+    returnDate: 'Feb 15',
+    dealType: 'Limited Seats',
+  },
+  {
+    id: '4',
+    origin: 'Chittagong',
+    destination: "Cox's Bazar",
+    price: 2800,
+    duration: 'Round trip \u2022 Direct',
+    stops: 'Direct',
+    departureDate: 'Mar 1 - Mar 10',
+    returnDate: 'Mar 10',
+    dealType: 'Best Price',
+  },
+];
+
 export default function TripPlannerDeals() {
-  const { data: tripPlanners = [], isLoading, error } = useQuery<TripPlanner[]>({
-    queryKey: ['/api/trip-planners'],
-  });
+  const tripPlanners = FALLBACK_TRIP_PLANNERS; // Use embedded data directly
 
   const handleBookNow = () => {
     // Navigate to trip planner page for booking
@@ -23,47 +68,6 @@ export default function TripPlannerDeals() {
     };
     return imageMap[destination] || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300";
   };
-
-  if (isLoading) {
-    return (
-      <section id="trip-planners" className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trip Planner Deals</h2>
-            <p className="text-gray-600">Plan your perfect journey with our curated travel packages.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-md animate-pulse">
-                <div className="w-full h-48 bg-gray-200 rounded-t-xl"></div>
-                <div className="p-4">
-                  <div className="h-6 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-4"></div>
-                  <div className="flex justify-between items-center">
-                    <div className="h-8 bg-gray-200 rounded w-24"></div>
-                    <div className="h-10 bg-gray-200 rounded w-20"></div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section id="trip-planners" className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trip Planner Deals</h2>
-            <p className="text-red-600">Failed to load trip planner deals. Please try again later.</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="trip-planners" className="py-8 sm:py-12 lg:py-16 section-bg-warm">

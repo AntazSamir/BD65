@@ -1,70 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
 import type { Destination } from '@shared/schema';
 
-// Embedded sample data as fallback
-const FALLBACK_DESTINATIONS: Destination[] = [
-  {
-    id: '1',
-    name: "Cox's Bazar",
-    country: 'Bangladesh',
-    district: "Cox's Bazar",
-    description: "World's longest natural sandy sea beach",
-    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.8',
-    priceFrom: 3500,
-  },
-  {
-    id: '2',
-    name: 'Sundarbans',
-    country: 'Bangladesh',
-    district: 'Khulna',
-    description: 'Largest mangrove forest and Royal Bengal Tiger habitat',
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.9',
-    priceFrom: 4500,
-  },
-  {
-    id: '3',
-    name: 'Sylhet Tea Gardens',
-    country: 'Bangladesh',
-    district: 'Sylhet',
-    description: 'Rolling green hills covered with tea plantations',
-    imageUrl: 'https://images.unsplash.com/photo-1627813303514-4e6a628b3bce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.7',
-    priceFrom: 2800,
-  },
-  {
-    id: '4',
-    name: 'Bandarban',
-    country: 'Bangladesh',
-    district: 'Bandarban',
-    description: 'Hill district with tribal culture, natural beauty and adventure activities',
-    imageUrl: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.7',
-    priceFrom: 3500,
-  },
-  {
-    id: '5',
-    name: 'Saint Martin Island',
-    country: 'Bangladesh',
-    district: "Cox's Bazar",
-    description: 'Small coral island with pristine beaches and clear blue waters',
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.6',
-    priceFrom: 5200,
-  },
-  {
-    id: '6',
-    name: 'Srimangal',
-    country: 'Bangladesh',
-    district: 'Moulvibazar',
-    description: 'Tea capital of Bangladesh with seven-layer tea and rainforest',
-    imageUrl: 'https://images.unsplash.com/photo-1627813303514-4e6a628b3bce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.6',
-    priceFrom: 2600,
-  }
-];
 
 interface PopularDestinationsProps {
   selectedDestination: Destination | null;
@@ -73,15 +11,18 @@ interface PopularDestinationsProps {
 
 export default function PopularDestinations({ selectedDestination, setSelectedDestination }: PopularDestinationsProps) {
   const [, setLocation] = useLocation();
-  const destinations = FALLBACK_DESTINATIONS; // Use embedded data directly
+  const { data: destinations = [], isLoading, error } = useQuery<Destination[]>({
+    queryKey: ['/api/destinations'],
+  });
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0); // Start with the first destination
   const [isAutoSliding, setIsAutoSliding] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Auto-sliding functionality
   useEffect(() => {
+    // Clear any existing interval first
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
@@ -93,7 +34,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
           if (destinations.length === 0) return 0;
           return (prevIndex + 1) % destinations.length;
         });
-      }, 3000);
+      }, 3000); // Optimized timing for fluid experience
     }
 
     return () => {
@@ -130,6 +71,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       if (destinations.length === 0) return 0;
       return prevIndex === 0 ? destinations.length - 1 : prevIndex - 1;
     });
+    // Clear existing timeout and set new one
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -142,6 +84,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       if (destinations.length === 0) return 0;
       return (prevIndex + 1) % destinations.length;
     });
+    // Clear existing timeout and set new one
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -153,6 +96,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       setIsAutoSliding(false);
       setCurrentIndex(index);
       setSelectedDestination(destinations[index]);
+      // Clear existing timeout and set new one
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
@@ -171,6 +115,7 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     for (let i = 0; i < totalCards; i++) {
       const index = (currentIndex - startOffset + i + destinations.length) % destinations.length;
       
+      // Ensure the index is valid and within bounds
       if (index >= 0 && index < destinations.length && destinations[index]) {
         visibleCards.push({
           destination: destinations[index],
@@ -182,6 +127,41 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
     
     return visibleCards;
   };
+
+  if (isLoading) {
+    return (
+      <section id="destinations" className="relative py-24 min-h-[800px] bg-gray-50">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30"></div>
+        <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Popular Destinations</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-white/90">Explore the world's most breathtaking locations</p>
+          </div>
+          <div className="flex justify-center items-center space-x-2 sm:space-x-4 overflow-x-auto px-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="rounded-2xl overflow-hidden shadow-lg animate-pulse flex-shrink-0">
+                <div className="w-32 sm:w-40 md:w-48 h-40 sm:h-48 md:h-64 bg-gray-300"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="destinations" className="relative py-24 min-h-[800px] bg-gray-50">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30"></div>
+        <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Popular Destinations</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-red-300">Failed to load destinations. Please try again later.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   // Set background image from the center card
   const backgroundImage = selectedDestination?.imageUrl || destinations[0]?.imageUrl || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080';
@@ -196,9 +176,9 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        transform: 'translate3d(0, 0, 0)',
-        backfaceVisibility: 'hidden',
-        perspective: '1000px',
+        transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
+        backfaceVisibility: 'hidden', // Prevent flickering
+        perspective: '1000px', // Enable 3D transforms
       }}
     >
       {/* Dark overlay for better text readability */}
@@ -215,10 +195,11 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
       
       {/* Spacer to push cards to bottom */}
       <div className="flex-1"></div>
-      
       {/* Carousel section */}
       <div className="relative z-10 mt-[-134px] mb-[-134px] pt-[34px] pb-[34px] pl-[0px] pr-[0px] ml-[-13px] mr-[-13px]">
         <div className="max-w-7xl mx-auto px-3 sm:px-4">
+
+
           {/* Cards container */}
           <div className="flex justify-center items-end space-x-1 sm:space-x-2 px-4 sm:px-8 lg:px-16 perspective-1000 overflow-x-auto">
             {visibleCards.map(({ destination, position, index }) => {
@@ -291,6 +272,8 @@ export default function PopularDestinations({ selectedDestination, setSelectedDe
               );
             })}
           </div>
+
+          
         </div>
       </div>
     </section>
