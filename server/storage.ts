@@ -80,6 +80,7 @@ export class MemStorage implements IStorage {
   private travelPackages: Map<string, TravelPackage>;
   private restaurants: Map<string, Restaurant>;
   private bookings: Map<string, Booking>;
+  private isInitialized: boolean = false;
 
   constructor() {
     this.users = new Map();
@@ -92,11 +93,11 @@ export class MemStorage implements IStorage {
     this.restaurants = new Map();
     this.bookings = new Map();
     
-    // Initialize with sample data
-    this.initializeSampleData().catch((error) => {
-      console.error('Failed to initialize sample data:', error);
-      // Continue with empty storage if initialization fails
-    });
+    console.log("🎨 [STORAGE] Initializing MemStorage...");
+    // Initialize with sample data synchronously
+    this.initializeSampleDataSync();
+    this.isInitialized = true;
+    console.log("✅ [STORAGE] MemStorage initialized with sample data");
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -384,6 +385,142 @@ export class MemStorage implements IStorage {
     return bookedSeats;
   }
   
+  private initializeSampleDataSync() {
+    // Initialize sample destinations synchronously
+    const destinations = [
+      {
+        name: "Cox's Bazar",
+        country: 'Bangladesh',
+        district: "Cox's Bazar",
+        description: "World's longest natural sandy sea beach",
+        imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+        rating: '4.8',
+        priceFrom: 3500,
+      },
+      {
+        name: 'Sundarbans',
+        country: 'Bangladesh',
+        district: 'Khulna',
+        description: 'Largest mangrove forest and Royal Bengal Tiger habitat',
+        imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+        rating: '4.9',
+        priceFrom: 4500,
+      },
+      {
+        name: 'Sylhet Tea Gardens',
+        country: 'Bangladesh',
+        district: 'Sylhet',
+        description: 'Rolling green hills covered with tea plantations',
+        imageUrl: 'https://images.unsplash.com/photo-1627813303514-4e6a628b3bce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+        rating: '4.7',
+        priceFrom: 2800,
+      },
+      {
+        name: 'Bandarban',
+        country: 'Bangladesh',
+        district: 'Bandarban',
+        description: 'Hill district with tribal culture, natural beauty and adventure activities',
+        imageUrl: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+        rating: '4.7',
+        priceFrom: 3500,
+      },
+      {
+        name: 'Saint Martin Island',
+        country: 'Bangladesh',
+        district: "Cox's Bazar",
+        description: 'Small coral island with pristine beaches and clear blue waters',
+        imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+        rating: '4.6',
+        priceFrom: 5200,
+      }
+    ];
+
+    destinations.forEach(dest => {
+      const id = randomUUID();
+      this.destinations.set(id, { ...dest, id });
+    });
+
+    // Initialize sample hotels synchronously
+    const hotels = [
+      {
+        name: 'Sea Palace Hotel',
+        location: "Cox's Bazar • Sea View • Premium Resort",
+        description: 'Luxury beachfront hotel overlooking the Bay of Bengal',
+        imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+        rating: '4.7',
+        pricePerNight: 8500,
+        phone: '+880-341-64521',
+        amenities: ['Sea View', 'Pool', 'Spa', 'Restaurant'],
+      },
+      {
+        name: 'Pan Pacific Sonargaon',
+        location: 'Dhaka • Business District • 5-Star',
+        description: 'Premier luxury hotel in the heart of Dhaka',
+        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+        rating: '4.8',
+        pricePerNight: 12500,
+        phone: '+880-2-8833221',
+        amenities: ['Business Center', 'Gym', 'Pool', 'Multiple Restaurants'],
+      },
+      {
+        name: 'Dhaka Regency Hotel',
+        location: 'Dhaka • Gulshan • Business District',
+        description: 'Modern business hotel in the heart of Dhaka with executive facilities',
+        imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+        rating: '4.5',
+        pricePerNight: 9500,
+        phone: '+880-2-8821456',
+        amenities: ['Business Center', 'Rooftop Pool', 'Airport Transfer', 'Conference Rooms'],
+      }
+    ];
+
+    hotels.forEach(hotel => {
+      const id = randomUUID();
+      this.hotels.set(id, { ...hotel, id });
+    });
+
+    // Initialize sample trip planners synchronously
+    const tripPlanners = [
+      {
+        origin: 'Dhaka',
+        destination: "Cox's Bazar",
+        price: 4500,
+        duration: 'Round trip • Direct',
+        stops: 'Direct',
+        departureDate: 'Dec 15 - Dec 22',
+        returnDate: 'Dec 22',
+        dealType: 'Save 20%',
+      },
+      {
+        origin: 'Dhaka',
+        destination: 'Sylhet',
+        price: 3800,
+        duration: 'Round trip • Direct',
+        stops: 'Direct',
+        departureDate: 'Jan 10 - Jan 20',
+        returnDate: 'Jan 20',
+        dealType: 'Hot Deal',
+      },
+      {
+        origin: 'Dhaka',
+        destination: 'Chittagong',
+        price: 4200,
+        duration: 'Round trip • Direct',
+        stops: 'Direct',
+        departureDate: 'Feb 5 - Feb 15',
+        returnDate: 'Feb 15',
+        dealType: 'Limited Seats',
+      }
+    ];
+
+    tripPlanners.forEach(trip => {
+      const id = randomUUID();
+      this.tripPlanners.set(id, { ...trip, id });
+    });
+
+    console.log(`🎮 [STORAGE] Loaded ${this.destinations.size} destinations, ${this.hotels.size} hotels, ${this.tripPlanners.size} trip planners`);
+  }
+
   private async initializeSampleData() {
     // Initialize sample destinations
     await this.createDestination({

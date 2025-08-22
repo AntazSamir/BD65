@@ -129,9 +129,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Destinations routes
   app.get("/api/destinations", async (req, res) => {
     try {
+      console.log("🎯 [API] Fetching destinations...");
       const destinations = await storage.getDestinations();
+      console.log(`✅ [API] Found ${destinations.length} destinations`);
       res.json(destinations);
     } catch (error) {
+      console.error("❌ [API] Error fetching destinations:", error);
       res.status(500).json({ message: "Failed to fetch destinations" });
     }
   });
