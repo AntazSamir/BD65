@@ -1,8 +1,12 @@
 node_modules
 .next
-dist
 *.log
 .env.local
 .env.*.local
-server/
-attached_assets/
+BD65/
+BD65-*/
+bd67/
+bd67-*/
+.local/
+.config/
+.replit
