@@ -70,7 +70,7 @@ const SAMPLE_TRIP_PLANNERS = [
   }
 ];
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -104,3 +104,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   }
 }
+
+export default handler;
+module.exports = handler;
