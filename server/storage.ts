@@ -1273,12 +1273,8 @@ export class DbStorage implements IStorage {
   }
 }
 
-// Use DbStorage if database is available, otherwise fallback to MemStorage
-export const storage = db ? new DbStorage() : new MemStorage();
+// Force use of MemStorage for demo purposes
+export const storage = new MemStorage();
 
 // Log which storage implementation is being used
-if (db) {
-  console.log("Using Supabase database storage (DbStorage)");
-} else {
-  console.log("Database not available, using in-memory storage (MemStorage) with sample data");
-}
+console.log("🎭 Using in-memory storage (MemStorage) with sample data for demo");

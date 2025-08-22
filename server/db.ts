@@ -7,8 +7,11 @@ let supabase: any = null;
 let db: any = null;
 let client: any = null;
 
-// Check for Supabase environment variables
-if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
+// Temporarily disable database to use sample data in memory storage
+console.log("🔄 Using in-memory storage with sample data for demo purposes");
+if (false) {
+  // Database code disabled
+} else if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
   console.warn("Supabase credentials not set - database operations will be disabled");
   console.warn("Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables");
 } else {
