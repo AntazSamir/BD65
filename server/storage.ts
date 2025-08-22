@@ -1273,8 +1273,9 @@ export class DbStorage implements IStorage {
   }
 }
 
-// Force use of MemStorage for demo purposes
+// Force use of MemStorage for demo purposes - works without database setup
 export const storage = new MemStorage();
 
 // Log which storage implementation is being used
-console.log("🎭 Using in-memory storage (MemStorage) with sample data for demo");
+console.log("🎭 [STORAGE] Using MemStorage with comprehensive sample data");
+console.log("🚀 [STORAGE] No database connection required - ready for Vercel deployment");
