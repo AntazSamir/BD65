@@ -3,37 +3,39 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-export default defineConfig({
-  plugins: [
-    react(),
-    runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
-      ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
-          ),
-        ]
-      : []),
-  ],
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
+export default defineConfig(async () => {
+  const plugins = [react(), runtimeErrorOverlay()];
+
+  if (process.env.NODE_ENV !== "production" && process.env.REPL_ID !== undefined) {
+    try {
+      const { cartographer } = await import("@replit/vite-plugin-cartographer");
+      plugins.push(cartographer());
+    } catch (err) {
+      console.warn("Cartographer plugin not available:", err);
+    }
+  }
+
+  return {
+    plugins,
+    resolve: {
+      alias: {
+        "@": path.resolve(import.meta.dirname, "client", "src"),
+        "@shared": path.resolve(import.meta.dirname, "shared"),
+      },
     },
-  },
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-  server: {
-    proxy: {
-      '/api': 'http://localhost:3001',
+    root: path.resolve(import.meta.dirname, "client"),
+    build: {
+      outDir: path.resolve(import.meta.dirname, "dist/public"),
+      emptyOutDir: true,
     },
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+    server: {
+      proxy: {
+        '/api': 'http://localhost:3001',
+      },
+      fs: {
+        strict: true,
+        deny: ["**/.*"],
+      },
     },
-  },
+  };
 });
