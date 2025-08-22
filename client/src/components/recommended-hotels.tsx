@@ -1,68 +1,71 @@
 import { Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useQuery } from '@tanstack/react-query';
 import type { Hotel } from '@shared/schema';
 
-// Embedded sample data as fallback
-const FALLBACK_HOTELS: Hotel[] = [
-  {
-    id: '1',
-    name: 'Sea Palace Hotel',
-    location: "Cox's Bazar • Sea View • Premium Resort",
-    description: 'Luxury beachfront hotel overlooking the Bay of Bengal',
-    imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.7',
-    pricePerNight: 8500,
-    phone: '+880-341-64521',
-    amenities: ['Sea View', 'Pool', 'Spa', 'Restaurant'],
-  },
-  {
-    id: '2',
-    name: 'Pan Pacific Sonargaon',
-    location: 'Dhaka • Business District • 5-Star',
-    description: 'Premier luxury hotel in the heart of Dhaka',
-    imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.8',
-    pricePerNight: 12500,
-    phone: '+880-2-8833221',
-    amenities: ['Business Center', 'Gym', 'Pool', 'Multiple Restaurants'],
-  },
-  {
-    id: '3',
-    name: 'Tea Resort Sreemangal',
-    location: 'Sreemangal • Tea Garden • Eco Resort',
-    description: 'Eco-friendly resort surrounded by lush tea gardens',
-    imageUrl: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.5',
-    pricePerNight: 6500,
-    phone: '+880-861-71234',
-    amenities: ['Garden View', 'Organic Restaurant', 'Nature Walks', 'Tea Tasting'],
-  },
-  {
-    id: '4',
-    name: 'Dhaka Regency Hotel',
-    location: 'Dhaka • Gulshan • 5-Star',
-    description: 'Modern luxury hotel in diplomatic zone',
-    imageUrl: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.6',
-    pricePerNight: 9500,
-    phone: '+880-2-8881234',
-    amenities: ['City View', 'Business Center', 'Spa', 'Fine Dining'],
-  },
-  {
-    id: '5',
-    name: 'Hill View Resort Bandarban',
-    location: 'Bandarban • Hilltop • Mountain Resort',
-    description: 'Mountain resort with panoramic hill views',
-    imageUrl: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
-    rating: '4.4',
-    pricePerNight: 5500,
-    phone: '+880-361-62345',
-    amenities: ['Mountain View', 'Hiking Trails', 'Tribal Culture', 'Adventure Sports'],
-  }
-];
-
 export default function RecommendedHotels() {
-  const hotels = FALLBACK_HOTELS; // Use embedded data directly
+  const { data: hotels = [], isLoading, error } = useQuery<Hotel[]>({
+    queryKey: ['/api/hotels'],
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnWindowFocus: false,
+  });
+
+  if (isLoading) {
+    return (
+      <section id="hotels" className="py-8 sm:py-12 lg:py-16 section-bg-soft">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+            <div className="flex justify-center mb-3 sm:mb-4">
+              <div className="icon-bg-blue">
+                <svg className="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">Recommended Hotels</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600">Stay at the world's finest accommodations</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm md:shadow-lg animate-pulse">
+                <div className="w-full h-40 md:h-48 bg-gray-200"></div>
+                <div className="p-3 md:p-4">
+                  <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-3"></div>
+                  <div className="flex justify-between items-center">
+                    <div className="h-6 bg-gray-200 rounded w-20"></div>
+                    <div className="h-8 bg-gray-200 rounded w-16"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="hotels" className="py-8 sm:py-12 lg:py-16 section-bg-soft">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+            <div className="flex justify-center mb-3 sm:mb-4">
+              <div className="icon-bg-blue">
+                <svg className="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">Recommended Hotels</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-red-600">Failed to load hotels. Please try again later.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   const handleBooking = (hotelId: string) => {
     window.location.href = `/hotel-booking/${hotelId}`;

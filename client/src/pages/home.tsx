@@ -1,6 +1,6 @@
 import Navigation from '../components/navigation';
 import HeroSection from '../components/hero-section';
-import PopularDestinations from '../components/popular-destinations';
+import PopularDestinations from '../components/popular-destinations-original';
 import RecommendedHotels from '../components/recommended-hotels';
 import TripPlannerDeals from '../components/trip-planner-deals';
 import WhyChooseUs from '../components/why-choose-us';
