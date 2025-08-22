@@ -1,5 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
+import { registerVercelRoutes } from "./vercel-routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
@@ -43,7 +43,17 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  const httpServer = await registerRoutes(app);
+  // Always use consolidated routes for Vercel deployment
+  const isVercel = !!process.env.VERCEL;
+  let httpServer;
+  
+  if (isVercel) {
+    registerVercelRoutes(app);
+  } else {
+    // For local development, import routes dynamically to avoid Vercel detection
+    const { registerRoutes } = await import('./routes');
+    httpServer = await registerRoutes(app);
+  }
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
@@ -56,7 +66,6 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  const isVercel = !!process.env.VERCEL;
   if (!isVercel) {
     if (app.get("env") === "development") {
       await setupVite(app, httpServer);
