@@ -1,25 +1,45 @@
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import ws from "ws";
+import { createClient } from '@supabase/supabase-js';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from "@shared/schema";
 
-neonConfig.webSocketConstructor = ws;
-
-let pool: Pool | null = null;
+let supabase: any = null;
 let db: any = null;
+let client: any = null;
 
-if (!process.env.DATABASE_URL) {
-  console.warn("DATABASE_URL not set - database operations will be disabled");
+// Check for Supabase environment variables
+if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
+  console.warn("Supabase credentials not set - database operations will be disabled");
+  console.warn("Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables");
 } else {
   try {
-    pool = new Pool({ connectionString: process.env.DATABASE_URL });
-    db = drizzle({ client: pool, schema });
-    console.log("Database connected successfully");
+    // Create Supabase client for auth and realtime features
+    supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+    
+    // For Drizzle, we need to use the database connection string
+    // Supabase connection string format: postgresql://postgres:[password]@[host]:5432/postgres
+    const databaseUrl = process.env.DATABASE_URL;
+    if (databaseUrl) {
+      client = postgres(databaseUrl, { prepare: false });
+      db = drizzle(client, { schema });
+      console.log("Supabase database connected successfully");
+    } else {
+      console.warn("DATABASE_URL not set - using fallback connection");
+      // Fallback: construct connection string from Supabase URL
+      const supabaseUrl = new URL(process.env.SUPABASE_URL);
+      const fallbackUrl = `postgresql://postgres:${process.env.SUPABASE_DB_PASSWORD}@${supabaseUrl.hostname}:5432/postgres`;
+      if (process.env.SUPABASE_DB_PASSWORD) {
+        client = postgres(fallbackUrl, { prepare: false });
+        db = drizzle(client, { schema });
+        console.log("Supabase database connected with fallback URL");
+      }
+    }
   } catch (error) {
-    console.error("Failed to connect to database:", error);
-    pool = null;
+    console.error("Failed to connect to Supabase:", error);
+    supabase = null;
     db = null;
+    client = null;
   }
 }
 
-export { pool, db };
+export { supabase, db, client };

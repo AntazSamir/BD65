@@ -1,5 +1,5 @@
+import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
-import { registerVercelRoutes } from "./vercel-routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
@@ -43,17 +43,9 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Always use consolidated routes for Vercel deployment
-  const isVercel = !!process.env.VERCEL;
-  let httpServer;
-  
-  if (isVercel) {
-    registerVercelRoutes(app);
-  } else {
-    // For local development, import routes dynamically to avoid Vercel detection
-    const { registerRoutes } = await import('./routes');
-    httpServer = await registerRoutes(app);
-  }
+  // Register API routes
+  const { registerRoutes } = await import('./routes');
+  const httpServer = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
@@ -63,23 +55,14 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (!isVercel) {
-    if (app.get("env") === "development") {
-      await setupVite(app, httpServer);
-    } else {
-      // For non-serverless production, serve static assets directly
-      serveStatic(app);
-    }
+  // Setup Vite in development or serve static files in production
+  if (app.get("env") === "development") {
+    await setupVite(app, httpServer);
+  } else {
+    serveStatic(app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  // Do not listen on a port in serverless environments like Vercel
+  // Start server (not in serverless environments)
   if (!process.env.VERCEL) {
     const port = parseInt(process.env.PORT || '5000', 10);
     const listenOptions: { port: number; host: string; reusePort?: boolean } = {

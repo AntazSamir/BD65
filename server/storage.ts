@@ -13,7 +13,7 @@ import {
 import { randomUUID } from "crypto";
 import bcrypt from "bcrypt";
 import { eq, and } from "drizzle-orm";
-import { db } from "./db";
+import { db, supabase } from "./db";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -1273,6 +1273,12 @@ export class DbStorage implements IStorage {
   }
 }
 
-// Temporarily use MemStorage while fixing database connection
-// TODO: Switch to DbStorage once Supabase connection is resolved
-export const storage = new MemStorage();
+// Use DbStorage if database is available, otherwise fallback to MemStorage
+export const storage = db ? new DbStorage() : new MemStorage();
+
+// Log which storage implementation is being used
+if (db) {
+  console.log("Using Supabase database storage (DbStorage)");
+} else {
+  console.log("Database not available, using in-memory storage (MemStorage) with sample data");
+}

@@ -10,3 +10,9 @@ bd67-*/
 .local/
 .config/
 .replit
+.git
+dist/
+client/
+README.md
+SUPABASE_SETUP.md
+migrations/
